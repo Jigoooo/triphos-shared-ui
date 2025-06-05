@@ -1,5 +1,3 @@
-import Resizer from 'react-image-file-resizer';
-
 export function convertBlobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -14,38 +12,6 @@ export function convertBlobToBase64(blob: Blob): Promise<string> {
     reader.readAsDataURL(blob);
   });
 }
-export const resizeImage = ({
-  file,
-  maxWidth = 1000,
-  maxHeight = 1000,
-  compressFormat = 'JPEG',
-  quality = 80,
-  rotation = 0,
-  outputType = 'file',
-}: {
-  file: File;
-  maxWidth?: number;
-  maxHeight?: number;
-  compressFormat?: 'JPEG' | 'PNG' | 'WEBP';
-  quality?: number;
-  rotation?: number;
-  outputType?: 'base64' | 'blob' | 'file';
-}) => {
-  if (!isImageFile(file) || file.size / 1024 < 512) return file;
-
-  return new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      maxWidth,
-      maxHeight,
-      compressFormat,
-      quality,
-      rotation,
-      (uri) => resolve(uri),
-      outputType,
-    );
-  });
-};
 
 export const isImageFile = (file: File): boolean => {
   const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];

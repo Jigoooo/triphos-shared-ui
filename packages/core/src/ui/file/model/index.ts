@@ -8,7 +8,6 @@ export {
   extractBase64ImageSrc,
   getImageBlobToFetch,
   isImageFile,
-  resizeImage,
   getExtensionFromMimeType,
   isExtensionAllowed,
   isExtensionNotAllowed,
