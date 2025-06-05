@@ -38,6 +38,8 @@
     "test": "pnpm --filter './packages/*' test",
     "dev": "pnpm --filter ./packages/playground dev",
     "dev:lib": "pnpm --filter ./packages/core dev",
+    "storybook": "pnpm --filter ./packages/core storybook",
+    "build-storybook": "pnpm --filter ./packages/core storybook build",
     "build": "pnpm --filter ./packages/core build",
     "build:watch": "pnpm --filter ./packages/core build:watch",
     "preview": "pnpm --filter ./packages/playground preview",
@@ -51,15 +53,9 @@
     "lint:playground": "pnpm --filter ./packages/playground lint",
     "clean": "pnpm --filter core clean && pnpm --filter ./packages/playground clean",
     "clean:deps": "rm -rf node_modules ./packages/*/node_modules",
-    "clean:build": "tsc --build --clean",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "clean:build": "tsc --build --clean"
   },
   "devDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.5",
     "@chromatic-com/storybook": "^4.0.0",
     "@eslint/js": "^9.28.0",
     "@storybook/addon-a11y": "^9.0.4",

@@ -29,12 +29,6 @@ importers:
       '@storybook/react-vite':
         specifier: ^9.0.4
         version: 9.0.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.41.1)(storybook@9.0.4(@testing-library/dom@10.4.0)(prettier@3.5.3))(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.29)(jiti@1.21.7)(terser@5.40.0)(yaml@2.8.0))
-      '@types/react':
-        specifier: ^19.1.6
-        version: 19.1.6
-      '@types/react-dom':
-        specifier: ^19.1.5
-        version: 19.1.6(@types/react@19.1.6)
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.33.1
         version: 8.33.1(@typescript-eslint/parser@8.33.1(eslint@9.28.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.28.0(jiti@1.21.7))(typescript@5.8.3)
@@ -83,12 +77,6 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
-      react:
-        specifier: ^19.1.0
-        version: 19.1.0
-      react-dom:
-        specifier: ^19.1.0
-        version: 19.1.0(react@19.1.0)
       storybook:
         specifier: ^9.0.4
         version: 9.0.4(@testing-library/dom@10.4.0)(prettier@3.5.3)
