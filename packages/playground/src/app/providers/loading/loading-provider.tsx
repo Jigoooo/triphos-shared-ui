@@ -3,7 +3,7 @@ import '@/shared/assets/css/loader.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
-import { Typography, useLoading } from '@triphos/shared-ui';
+import { Typography, useLoading } from '@jigoooo/shared-ui';
 import { zIndex } from '@/shared/constants';
 
 export function LoadingProvider() {

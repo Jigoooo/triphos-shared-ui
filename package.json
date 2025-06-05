@@ -42,7 +42,7 @@
     "build-storybook": "pnpm --filter ./packages/core storybook build",
     "build": "pnpm --filter ./packages/core build",
     "build:watch": "pnpm --filter ./packages/core build:watch",
-    "publishs": "pnpm --filter ./packages/core publish --access public",
+    "publish:core": "pnpm --filter ./packages/core publish --access public",
     "preview": "pnpm --filter ./packages/playground preview",
     "type-check": "tsc --build",
     "type-check:watch": "tsc --build --watch",

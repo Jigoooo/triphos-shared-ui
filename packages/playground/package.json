@@ -12,7 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@triphos/shared-ui": "workspace:*",
+    "@jigoooo/shared-ui": "workspace:*",
     "@floating-ui/react": "^0.27.12",
     "@mui/icons-material": "^7.1.1",
     "@tanstack/react-virtual": "^3.13.9",

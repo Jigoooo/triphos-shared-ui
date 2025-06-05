@@ -1,4 +1,4 @@
-import { FlexRow, Typography } from '@triphos/shared-ui';
+import { FlexRow, Typography } from '@jigoooo/shared-ui';
 
 export function Main() {
   return (

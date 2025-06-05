@@ -297,15 +297,15 @@ importers:
       '@floating-ui/react':
         specifier: ^0.27.12
         version: 0.27.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@jigoooo/shared-ui':
+        specifier: workspace:*
+        version: link:../core
       '@mui/icons-material':
         specifier: ^7.1.1
         version: 7.1.1(@mui/material@7.1.1(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.6)(react@19.1.0)
       '@tanstack/react-virtual':
         specifier: ^3.13.9
         version: 3.13.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@triphos/shared-ui':
-        specifier: workspace:*
-        version: link:../core
       '@uiw/react-color':
         specifier: ^2.5.5
         version: 2.5.5(@babel/runtime@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
