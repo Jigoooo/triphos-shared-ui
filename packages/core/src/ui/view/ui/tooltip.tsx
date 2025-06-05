@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { offset, useFloating, useHover, useInteractions } from '@floating-ui/react';
 
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import type { TooltipProps } from '../model/view-type.ts';
 
 export function Tooltip({ style, placement, children, content, disabled = false }: TooltipProps) {

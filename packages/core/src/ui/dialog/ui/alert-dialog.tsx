@@ -15,7 +15,7 @@ import {
   Typography,
   useModalController,
 } from '@/ui';
-import { colors, zIndex } from 'constants';
+import { colors, zIndex } from '@/constants';
 import type { DialogInfoStates } from '../model/dialog-type.ts';
 
 const dialogColors: Record<DialogType, string> = {

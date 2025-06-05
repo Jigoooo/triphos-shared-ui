@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import { useKeepAliveLenisScrollHistory } from 'hooks';
 import type Lenis from 'lenis';
 

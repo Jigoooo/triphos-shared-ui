@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { LuX } from 'react-icons/lu';
 
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import { useDraggable } from '@/hooks/common/use-draggable.ts';
 import { Button, FlexRow, Tooltip, Typography } from '@/ui';
 import type { TMobileModal } from '../model/modal-type.ts';

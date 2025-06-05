@@ -1,4 +1,4 @@
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 
 export const loadingStyles = {
   loader: {

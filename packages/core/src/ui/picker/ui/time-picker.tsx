@@ -15,7 +15,7 @@ import { format, parse, setHours, setMinutes, setSeconds } from 'date-fns';
 
 import { MdOutlineAccessTime } from 'react-icons/md';
 
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import { FlexColumn, FlexRow, Input } from '@/ui';
 import type { TimePart } from '../model/picker-type.ts';
 

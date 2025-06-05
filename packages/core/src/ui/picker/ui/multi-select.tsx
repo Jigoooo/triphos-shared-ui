@@ -17,7 +17,7 @@ import { HiChevronUpDown } from 'react-icons/hi2';
 import { LuX } from 'react-icons/lu';
 import { FiSearch } from 'react-icons/fi';
 
-import { colors, zIndex } from 'constants';
+import { colors, zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
 import { Checkbox, FlexRow, Input, InputStyle, Typography } from '@/ui';
 import type { MultiSelectOption } from '../model';

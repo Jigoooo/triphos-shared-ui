@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 import { useWindowsStyle } from 'hooks';
 import { Typography, useRadioGroupContext } from '@/ui';
-import { colors } from 'constants';
+import { colors } from '@/constants';
 
 export function Radio({
   label,

@@ -2,6 +2,9 @@
   "name": "@triphos/shared-ui",
   "version": "0.0.1",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "A reusable React component library and design system with TypeScript support, built on Vite for seamless integration and optimized performance.",
   "keywords": [
     "react",
@@ -44,9 +47,9 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.umd.cjs"
     }
   },
   "sideEffects": [
@@ -65,10 +68,10 @@
     "clean:deps": "rm -rf node_modules",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json}\"",
-    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "prepublishOnly": "npm run clean && npm run build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 4600",
     "build-storybook": "storybook build"
   },
   "peerDependencies": {

@@ -5,7 +5,7 @@ import { isMobile } from 'react-device-detect';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
 import { FlexRow, ModalContext, useModalController } from '@/ui';
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import type {
   TModalRenderProps,
   TModalItem,

@@ -3,7 +3,7 @@ import type { CSSProperties, InputHTMLAttributes, MouseEventHandler } from 'reac
 
 import CheckSolid from '../../../../public/images/check-solid.svg?react';
 
-import { colors } from 'constants';
+import { colors } from '@/constants';
 import { FlexRow, Typography } from '@/ui';
 
 export function Checkbox({

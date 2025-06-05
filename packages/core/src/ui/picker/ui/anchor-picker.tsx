@@ -12,7 +12,7 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 
 export function AnchorPicker({
   strategy = 'absolute',

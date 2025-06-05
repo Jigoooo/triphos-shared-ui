@@ -3,7 +3,7 @@ import type { CompositionEvent, KeyboardEvent, CSSProperties } from 'react';
 import { useRef } from 'react';
 
 import type { ExtendedTextareaProps } from '../model/input-type.ts';
-import { colors } from 'constants';
+import { colors } from '@/constants';
 import { useWindowsStyle } from 'hooks';
 
 const defaultTextareaStyle: CSSProperties = {

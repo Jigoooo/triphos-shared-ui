@@ -1,6 +1,6 @@
 import { LayoutGroup, motion } from 'framer-motion';
 
-import { colors } from 'constants';
+import { colors } from '@/constants';
 import { Typography } from '@/ui';
 import type { SwitchProps } from '../model/toggle-type.ts';
 

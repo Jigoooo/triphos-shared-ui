@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 
 import { Button, FlexColumn, FlexRow, snackbarActions, Typography, useSnackbarInfos } from '@/ui';
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import type { SnackBarInfo } from '../model/snackbar-type.ts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';

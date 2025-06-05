@@ -12,7 +12,7 @@ import {
   Typography,
   NoData,
 } from '@/ui';
-import { colors } from 'constants';
+import { colors } from '@/constants';
 import type { EditType, TableBodyRowProps, TDataWithIndex, THeader } from '../model/table-type.ts';
 import { useTableContext } from '../model/table-context.ts';
 import { validateTableDataList } from '../model/validate-table-data-list.ts';

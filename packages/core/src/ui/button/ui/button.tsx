@@ -4,10 +4,10 @@ import { useRef, useState } from 'react';
 import { darken, lighten } from 'polished';
 
 import { isLightColor } from '@/lib';
-import { colors } from 'constants';
 import { useWindowsStyle } from 'hooks';
 import type { ButtonProps } from '../model/button-type.ts';
 import { ButtonStyle } from '../model/button-type.ts';
+import { colors } from '@/constants';
 
 const defaultButtonStyle: CSSProperties = {
   display: 'flex',

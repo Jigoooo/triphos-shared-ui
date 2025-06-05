@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
-import { colors, zIndex } from 'constants';
+import { colors, zIndex } from '@/constants';
 import { useWindowsStyle } from 'hooks';
 import type { ExtendedInputProps } from '../model/input-type.ts';
 import { InputStyle } from '../model/input-type.ts';

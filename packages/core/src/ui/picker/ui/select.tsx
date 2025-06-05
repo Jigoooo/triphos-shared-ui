@@ -17,7 +17,7 @@ import { HiChevronUpDown } from 'react-icons/hi2';
 import { IoMdCheckmark } from 'react-icons/io';
 import { FiSearch } from 'react-icons/fi';
 
-import { zIndex } from 'constants';
+import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
 import { FlexRow, Input, Typography } from '@/ui';
 import type { SelectOption } from '../model';

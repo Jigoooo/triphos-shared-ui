@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { LuFileUp } from 'react-icons/lu';
 
-import { colors } from 'constants';
+import { colors } from '@/constants';
 import { FlexRow, Link } from '@/ui';
 
 export function DropZone({
