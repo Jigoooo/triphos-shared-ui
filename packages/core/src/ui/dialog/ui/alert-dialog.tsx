@@ -1,39 +1,25 @@
-import type { ReactNode } from 'react';
 import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
-import {
-  Button,
-  dialog,
-  DialogType,
-  useDialogInfos,
-  useDialogOpen,
-  FlexColumn,
-  FlexRow,
-  Typography,
-  useModalController,
-} from '@/ui';
-import { colors, zIndex } from '@/constants';
-import type { DialogInfoStates } from '../model/dialog-type.ts';
+import { zIndex } from '@/constants';
 import { detectDeviceTypeAndOS } from '@/lib';
+import { dialog, useDialogConfig, useDialogOpen } from '../model/dialog-store.ts';
+import { useModalController } from '@/ui/modal';
+import { FlexColumn } from '@/ui/view';
+import { AlertDialogHeader } from './alert-dialog-header.tsx';
+import { AlertDialogContents } from './alert-dialog-contents.tsx';
+import { AlertDialogActions } from './alert-dialog-actions.tsx';
 
 const { isMobile } = detectDeviceTypeAndOS();
 
-const dialogColors: Record<DialogType, string> = {
-  [DialogType.INFO]: colors.primary[400],
-  [DialogType.SUCCESS]: colors.success[400],
-  [DialogType.WARNING]: colors.warning[500],
-  [DialogType.ERROR]: colors.error[400],
-} as const;
-
 export function AlertDialog() {
   const dialogOpen = useDialogOpen();
-  const dialogInfos = useDialogInfos();
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  const dialogConfig = useDialogConfig();
+  const dialogRef = useRef<HTMLDivElement | null>(null);
 
   useModalController({
-    modalRef,
+    modalRef: dialogRef,
     isOpen: dialogOpen,
     onClose: dialog.close,
   });
@@ -58,8 +44,8 @@ export function AlertDialog() {
       if (e.key === 'Escape') {
         dialog.close();
       }
-      if (e.key === 'Enter' && dialogInfos.onConfirm && !ignoreEnterRef.current) {
-        dialogInfos.onConfirm();
+      if (e.key === 'Enter' && dialogConfig.onConfirm && !ignoreEnterRef.current) {
+        dialogConfig.onConfirm();
       }
     };
 
@@ -67,11 +53,11 @@ export function AlertDialog() {
     return () => {
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [dialogOpen, dialogInfos]);
+  }, [dialogOpen, dialogConfig]);
 
   return (
     <FloatingPortal>
-      <div ref={modalRef} tabIndex={-1} />
+      <div ref={dialogRef} tabIndex={-1} />
 
       <AnimatePresence initial={false}>
         {dialogOpen && (
@@ -100,11 +86,11 @@ export function AlertDialog() {
               }}
             >
               <AlertDialogHeader
-                title={dialogInfos.title}
-                isEmptyContents={!dialogInfos.contents}
+                title={dialogConfig.title}
+                isEmptyContents={!dialogConfig.contents}
               />
-              <AlertDialogContents contents={dialogInfos.contents} />
-              <AlertDialogActions dialogInfos={dialogInfos} />
+              <AlertDialogContents contents={dialogConfig.contents} />
+              <AlertDialogActions dialogInfos={dialogConfig} />
             </FlexColumn>
 
             <motion.div
@@ -137,107 +123,5 @@ export function AlertDialog() {
         )}
       </AnimatePresence>
     </FloatingPortal>
-  );
-}
-
-function AlertDialogHeader({
-  title,
-  isEmptyContents,
-}: {
-  title?: string;
-  isEmptyContents: boolean;
-}) {
-  return (
-    <FlexRow
-      style={{
-        justifyContent: 'space-between',
-        width: '100%',
-        alignItems: 'center',
-        marginBottom: isEmptyContents ? '0.5rem' : 0,
-      }}
-    >
-      <Typography style={{ fontSize: '1rem', fontWeight: 700, whiteSpace: 'pre-line' }}>
-        {title}
-      </Typography>
-    </FlexRow>
-  );
-}
-
-function AlertDialogContents({ contents }: { contents?: ReactNode }) {
-  return (
-    <>
-      {contents ? (
-        <FlexColumn
-          style={{
-            paddingTop: 8,
-            paddingBottom: 24,
-            whiteSpace: 'pre-line',
-            overflowY: 'auto',
-            marginBottom: 10,
-          }}
-        >
-          {typeof contents === 'string' ? (
-            <Typography style={{ fontSize: '0.92rem', paddingRight: 12 }}>{contents}</Typography>
-          ) : (
-            contents
-          )}
-        </FlexColumn>
-      ) : (
-        <div style={{ height: 10 }}></div>
-      )}
-    </>
-  );
-}
-
-function AlertDialogActions({ dialogInfos }: { dialogInfos: DialogInfoStates }) {
-  const dialogColor = dialogColors[dialogInfos.dialogType as DialogType];
-
-  return (
-    <FlexRow
-      style={{
-        gap: 8,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-      }}
-    >
-      {dialogInfos.withCancel && (
-        <Button.Outlined
-          style={{
-            minWidth: '4rem',
-            color: '#bbbbbb',
-            borderColor: '#bbbbbb',
-          }}
-          onClick={() => {
-            dialogInfos?.onCancel?.();
-
-            if (isMobile) {
-              window.history.back();
-            }
-          }}
-        >
-          <Typography style={{ color: '#555555', fontSize: '0.9rem', fontWeight: 500 }}>
-            {dialogInfos.cancelText}
-          </Typography>
-        </Button.Outlined>
-      )}
-      <Button.Solid
-        style={{
-          minWidth: '4rem',
-          fontSize: '0.9rem',
-          fontWeight: 500,
-          backgroundColor: dialogColor,
-        }}
-        onClick={() => {
-          if (isMobile) {
-            window.history.back();
-          }
-
-          setTimeout(() => dialogInfos?.onConfirm?.(), 10);
-        }}
-      >
-        {dialogInfos.confirmText}
-      </Button.Solid>
-    </FlexRow>
   );
 }

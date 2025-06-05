@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
-import { colors, zIndex } from '@/constants';
 import type { ExtendedInputProps } from '../model/input-type.ts';
+import { useCompositionRef } from '@/hooks';
 import { InputStyle } from '../model/input-type.ts';
 
 const defaultInputStyle: CSSProperties = {
@@ -63,7 +63,10 @@ function BaseInput({
   onClick,
   ...props
 }: ExtendedInputProps) {
+  const { handleCompositionStart, handleCompositionEnd } = useCompositionRef();
+
   const extraPadding = '2rem';
+
   return (
     <div
       style={{
@@ -114,6 +117,8 @@ function BaseInput({
           ...style,
           ...(props.disabled ? inputDisabledStyles[inputStyle] : {}),
         }}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
         onClick={(event) => {
           event.stopPropagation();
           onClick?.(event);

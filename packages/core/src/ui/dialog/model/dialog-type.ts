@@ -13,7 +13,7 @@ export type DialogInfoStates = {
 };
 export type DialogStates = {
   dialogOpen: boolean;
-  dialogInfos: DialogInfoStates;
+  dialogConfig: DialogInfoStates;
 };
 
 type DialogActions = {
@@ -21,9 +21,13 @@ type DialogActions = {
   openAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
   close: () => void;
   success: (openDialog: DialogInfoStates) => void;
+  successAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
   error: (openDialog: DialogInfoStates) => void;
+  errorAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
   warning: (openDialog: DialogInfoStates) => void;
+  warningAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
   info: (openDialog: DialogInfoStates) => void;
+  infoAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
 };
 
 export type DialogStoreInterface = DialogStates & {

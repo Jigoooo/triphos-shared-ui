@@ -1,24 +1,14 @@
-import type { CSSProperties, ReactNode } from 'react';
-
-import { FlexColumn } from '@/ui';
+import { FlexColumn } from '@/ui/view';
 import { AccordionGroupContext } from '../model/accordion-group-context.ts';
-import type { TAccordionType } from '../model/accordion-type.ts';
+import type { AccordionGroupProps } from '../model/accordion-type.ts';
 
-export function AccordionGroup({
-  type = 'single',
-  style,
-  children,
-}: {
-  type?: TAccordionType;
-  style?: CSSProperties;
-  children: ReactNode;
-}) {
+export function AccordionGroup({ type = 'single', style, children }: AccordionGroupProps) {
   return (
     <AccordionGroupContext value={{ type }}>
       <FlexColumn
         style={{
           userSelect: 'none',
-          gap: 16,
+          gap: '1rem',
           ...style,
         }}
       >

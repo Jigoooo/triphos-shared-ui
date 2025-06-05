@@ -7,3 +7,4 @@ export { useMediaQueryWidth } from './style/use-media-query-width.ts';
 export { useElementSize } from './style/use-element-size.ts';
 export { useCanHover } from './style/use-can-hover.ts';
 export { useMeasureRef } from './style/use-measure-ref.ts';
+export { useCompositionRef } from './style/use-composition-ref.ts';

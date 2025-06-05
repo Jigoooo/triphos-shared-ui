@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import type { TDataWithIndex, THeader, TValidationRuleWithHeaderId } from '@/ui';
+import { Button } from '@/ui';
 import {
   dialog,
   ExcelExportButton,
   FlexColumn,
   FlexRow,
   Input,
-  SaveButton,
   Table,
   Typography,
   useTableData,
@@ -128,7 +128,7 @@ export function ExcelEditModal<TData extends TDataWithIndex>({
           <Typography style={{ fontSize: '0.9rem' }}>엑셀명: </Typography>
           <Input.Outlined value={name} onChange={(event) => setName(event.target.value)} />
         </FlexRow>
-        <SaveButton onClick={saveExcel} />
+        <Button onClick={saveExcel}>저장</Button>
         <ExcelExportButton onClick={exportExcelFile} />
       </FlexRow>
     </FlexColumn>

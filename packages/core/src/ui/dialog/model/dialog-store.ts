@@ -6,7 +6,7 @@ import { DialogType } from './dialog-type.ts';
 
 const dialogInitialState: DialogStates = {
   dialogOpen: false,
-  dialogInfos: {
+  dialogConfig: {
     title: '',
     contents: '',
     confirmText: '확인',
@@ -19,7 +19,7 @@ const dialogInitialState: DialogStates = {
   },
 };
 
-const useDialog = create<DialogStoreInterface>()((setState, getState) => {
+const useDialogStore = create<DialogStoreInterface>()((setState, getState) => {
   return {
     ...dialogInitialState,
     actions: {
@@ -27,8 +27,8 @@ const useDialog = create<DialogStoreInterface>()((setState, getState) => {
         setState((state) => ({
           ...state,
           dialogOpen: true,
-          dialogInfos: {
-            ...dialogInitialState.dialogInfos,
+          dialogConfig: {
+            ...dialogInitialState.dialogConfig,
             ...dialogInfos,
             withCancel: dialogInfos.cancelText !== undefined ? true : !!dialogInfos.withCancel,
             onConfirm: () => {
@@ -47,8 +47,8 @@ const useDialog = create<DialogStoreInterface>()((setState, getState) => {
           setState((state) => ({
             ...state,
             dialogOpen: true,
-            dialogInfos: {
-              ...dialogInitialState.dialogInfos,
+            dialogConfig: {
+              ...dialogInitialState.dialogConfig,
               ...dialogInfos,
               withCancel: dialogInfos.cancelText !== undefined ? true : !!dialogInfos.withCancel,
               onConfirm: () => {
@@ -65,24 +65,36 @@ const useDialog = create<DialogStoreInterface>()((setState, getState) => {
           }));
         }),
       close: () => {
-        setState(() => ({ ...dialogInitialState.dialogInfos, dialogOpen: false }));
+        setState(() => ({ ...dialogInitialState.dialogConfig, dialogOpen: false }));
       },
       success: (dialogInfos) => {
         getState().actions.open({ ...dialogInfos, dialogType: DialogType.SUCCESS });
       },
+      successAsync: (dialogInfos) => {
+        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.SUCCESS });
+      },
       error: (dialogInfos) => {
         getState().actions.open({ ...dialogInfos, dialogType: DialogType.ERROR });
+      },
+      errorAsync: (dialogInfos) => {
+        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.ERROR });
       },
       warning: (dialogInfos) => {
         getState().actions.open({ ...dialogInfos, dialogType: DialogType.WARNING });
       },
+      warningAsync: (dialogInfos) => {
+        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.WARNING });
+      },
       info: (dialogInfos) => {
         getState().actions.open({ ...dialogInfos, dialogType: DialogType.INFO });
+      },
+      infoAsync: (dialogInfos) => {
+        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.INFO });
       },
     },
   };
 });
 
-export const useDialogOpen = () => useDialog((state) => state.dialogOpen);
-export const useDialogInfos = () => useDialog(useShallow((state) => state.dialogInfos));
-export const dialog = useDialog.getState().actions;
+export const useDialogOpen = () => useDialogStore((state) => state.dialogOpen);
+export const useDialogConfig = () => useDialogStore(useShallow((state) => state.dialogConfig));
+export const dialog = useDialogStore.getState().actions;
