@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import {
   Checkbox,
-  CustomHorizontalScrollbar,
-  CustomVerticalScrollbar,
+  // CustomHorizontalScrollbar,
+  // CustomVerticalScrollbar,
   FlexRow,
   Input,
   Typography,
@@ -31,26 +31,26 @@ export const TableBody = memo(function TableBody<TData extends TDataWithIndex>({
   const viewHeaders = useMemo(() => {
     return headers.filter((header) => header.pin === 'view');
   }, [headers]);
-  const viewHeight = useMemo(() => {
-    return tableStyle.tableBodyHeight * dataList.length;
-  }, [tableStyle.tableBodyHeight, dataList.length]);
-  const viewWidth = useMemo(() => {
-    return viewHeaders.reduce((acc, cur) => acc + (cur?.width ?? 0), 0);
-  }, [viewHeaders]);
+  // const viewHeight = useMemo(() => {
+  //   return tableStyle.tableBodyHeight * dataList.length;
+  // }, [tableStyle.tableBodyHeight, dataList.length]);
+  // const viewWidth = useMemo(() => {
+  //   return viewHeaders.reduce((acc, cur) => acc + (cur?.width ?? 0), 0);
+  // }, [viewHeaders]);
 
   const leftPinHeaders = useMemo(() => {
     return headers.filter((header) => header.pin === 'left');
   }, [headers]);
-  const scrollLeftOffset = useMemo(() => {
-    return leftPinHeaders.reduce((acc, cur) => acc + (cur?.width ?? 0), 0);
-  }, [leftPinHeaders]);
+  // const scrollLeftOffset = useMemo(() => {
+  //   return leftPinHeaders.reduce((acc, cur) => acc + (cur?.width ?? 0), 0);
+  // }, [leftPinHeaders]);
 
   const rightPinHeaders = useMemo(() => {
     return headers.filter((header) => header.pin === 'right');
   }, [headers]);
-  const scrollRightOffset = useMemo(() => {
-    return rightPinHeaders.reduce((acc, cur) => acc + (cur?.width ?? 0), 0);
-  }, [rightPinHeaders]);
+  // const scrollRightOffset = useMemo(() => {
+  //   return rightPinHeaders.reduce((acc, cur) => acc + (cur?.width ?? 0), 0);
+  // }, [rightPinHeaders]);
 
   const requiredKeys = useMemo(() => {
     return headers.map((header) => header.id) as (keyof TData)[];
@@ -157,14 +157,14 @@ export const TableBody = memo(function TableBody<TData extends TDataWithIndex>({
       <AnimatePresence initial={false}>
         {memoizedItems.length > 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <CustomVerticalScrollbar ref={bodyYRef} totalContentHeight={viewHeight} />
-            <CustomHorizontalScrollbar
-              ref={bodyXRef}
-              totalContentWidth={viewWidth}
-              leftOffset={scrollLeftOffset}
-              rightOffset={scrollRightOffset}
-              border={tableStyle.tableBorder}
-            />
+            {/*<CustomVerticalScrollbar ref={bodyYRef} totalContentHeight={viewHeight} />*/}
+            {/*<CustomHorizontalScrollbar*/}
+            {/*  ref={bodyXRef}*/}
+            {/*  totalContentWidth={viewWidth}*/}
+            {/*  leftOffset={scrollLeftOffset}*/}
+            {/*  rightOffset={scrollRightOffset}*/}
+            {/*  border={tableStyle.tableBorder}*/}
+            {/*/>*/}
           </motion.div>
         )}
       </AnimatePresence>
