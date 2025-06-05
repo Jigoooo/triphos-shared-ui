@@ -25,3 +25,6 @@ dist-ssr
 /shared-ui.iml
 /dev-dist/
 /.idea/
+
+*storybook.log
+storybook-static
