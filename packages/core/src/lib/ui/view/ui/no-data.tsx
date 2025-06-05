@@ -1,4 +1,4 @@
-import NoDataIcon from '@/lib/assets/images/no-data-icon.svg?react';
+import NoDataIcon from '../../../../../public/images/no-data-icon.svg?react';
 
 import { FlexColumn, Typography } from '@/lib/ui';
 

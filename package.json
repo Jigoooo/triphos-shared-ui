@@ -20,6 +20,8 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky",
+    "test": "pnpm --filter './packages/*' test",
     "dev": "pnpm --filter ./packages/playground dev",
     "dev:lib": "pnpm --filter ./packages/core dev",
     "build": "pnpm --filter ./packages/core build",
@@ -48,6 +50,8 @@
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.33.1"

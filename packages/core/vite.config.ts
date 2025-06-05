@@ -21,13 +21,9 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       lib: {
-        // 실제 라이브러리 진입점 파일 경로로 수정하세요.
         entry: path.resolve(__dirname, 'src/index.tsx'),
-        // 번들링 시 전역(Global)으로 노출될 이름
         name: 'TriphosMessenger',
-        // 출력 파일명 템플릿 (format별로 변경)
         fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`,
-        // 필요한 포맷 선택(예: es, cjs, umd)
         formats: ['es', 'cjs', 'umd'],
       },
       rollupOptions: {

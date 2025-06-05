@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 /shared-ui.iml
 /dev-dist/
+/.idea/
+/.husky/

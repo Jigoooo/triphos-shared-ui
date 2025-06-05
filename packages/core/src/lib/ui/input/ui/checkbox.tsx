@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import type { CSSProperties, InputHTMLAttributes, MouseEventHandler } from 'react';
 
-import CheckSolid from '@/lib/assets/images/check-solid.svg?react';
+import CheckSolid from '../../../../../public/images/check-solid.svg?react';
 
 import { colors } from '@/lib/constants';
 import { FlexRow, Typography } from '@/lib/ui';
