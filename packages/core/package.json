@@ -108,6 +108,7 @@
     "rehype-prism-plus": "^2.0.1",
     "rehype-rewrite": "^4.0.2",
     "sonner": "^2.0.5",
+    "uuid": "^11.1.0",
     "xlsx-js-style": "^1.2.0",
     "zustand": "^5.0.5"
   },
@@ -132,7 +133,7 @@
     "vite": "^6.3.5",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-image-optimizer": "^1.1.8",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vite-plugin-svgr": "^4.3.0"
+    "vite-plugin-svgr": "^4.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
