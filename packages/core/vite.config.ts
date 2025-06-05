@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
         entry: path.resolve(__dirname, 'src/index.tsx'),
         name: 'TriphosMessenger',
         fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`,
-        formats: ['es', 'cjs', 'umd'],
+        formats: ['es'],
       },
       rollupOptions: {
         external: ['react', 'react-dom', 'react/jsx-runtime'],
