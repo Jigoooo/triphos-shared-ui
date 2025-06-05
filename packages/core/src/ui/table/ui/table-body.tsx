@@ -94,7 +94,8 @@ export const TableBody = memo(function TableBody<TData extends TDataWithIndex>({
     <FlexRow style={{ position: 'relative', width: '100%' }}>
       <FlexRow
         ref={bodyYRef}
-        className={'table-body no-scrollbar'}
+        // className={'table-body no-scrollbar'}
+        className={'table-body'}
         style={{
           backgroundColor: tableStyle.tableBodyBackgroundColor,
           overflowY: 'auto',
