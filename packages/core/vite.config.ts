@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
         },
       },
       cssCodeSplit: false,
-      sourcemap: true,
+      sourcemap: false,
       emptyOutDir: true,
     },
     plugins: [
