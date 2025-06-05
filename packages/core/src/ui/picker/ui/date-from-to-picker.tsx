@@ -32,7 +32,7 @@ import { LuCalendar, LuMoveLeft, LuMoveRight } from 'react-icons/lu';
 
 import { FlexRow, Input, Button, FlexColumn, Typography } from '@/ui';
 import { colors, zIndex } from '@/constants';
-import { useHandleClickOutsideRef, useWindowsStyle } from 'hooks';
+import { useHandleClickOutsideRef } from 'hooks';
 import { DateInputField } from './date-input-field.tsx';
 
 type FromToDateString = {
@@ -312,8 +312,6 @@ function FromToPicker({
   minDate,
   maxDate,
 }: FromToPickerProps) {
-  const windowsStyle = useWindowsStyle();
-
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const days = generateDaysArray(year, month);
@@ -424,7 +422,6 @@ function FromToPicker({
                     position: 'relative',
                     fontSize: '0.9rem',
                   },
-                  ...windowsStyle,
                 }}
               >
                 {day ? format(day, 'd') : ''}

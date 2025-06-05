@@ -1,16 +1,12 @@
 import type { AnchorHTMLAttributes } from 'react';
 import { useState } from 'react';
 
-import { useWindowsStyle } from 'hooks';
-
 export function Link({
   style,
   children,
   disabled = false,
   ...props
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { disabled?: boolean; children: string }) {
-  const windowsStyle = useWindowsStyle();
-
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -30,7 +26,6 @@ export function Link({
         setIsHovered(false);
       }}
       style={{
-        ...windowsStyle,
         ...{
           userSelect: 'none',
           borderBottom: isHovered ? '1px solid currentColor' : '1px solid transparent',

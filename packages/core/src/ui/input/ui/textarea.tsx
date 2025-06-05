@@ -4,7 +4,6 @@ import { useRef } from 'react';
 
 import type { ExtendedTextareaProps } from '../model/input-type.ts';
 import { colors } from '@/constants';
-import { useWindowsStyle } from 'hooks';
 
 const defaultTextareaStyle: CSSProperties = {
   resize: 'vertical',
@@ -32,8 +31,6 @@ export function Textarea({
   onKeyDown,
   ...props
 }: Readonly<ExtendedTextareaProps>) {
-  const windowsStyle = useWindowsStyle();
-
   const isComposing = useRef(false);
 
   const handleCompositionStart = (_e: CompositionEvent<HTMLTextAreaElement>) => {
@@ -64,7 +61,6 @@ export function Textarea({
       onCompositionStart={handleCompositionStart}
       onCompositionEnd={handleCompositionEnd}
       style={{
-        ...windowsStyle,
         ...defaultTextareaStyle,
         ...(props.disabled ? textareaDisabledStyle : {}),
         ...style,

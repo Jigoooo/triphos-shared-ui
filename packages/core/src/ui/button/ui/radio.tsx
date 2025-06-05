@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 
-import { useWindowsStyle } from 'hooks';
 import { Typography, useRadioGroupContext } from '@/ui';
 import { colors } from '@/constants';
 
@@ -13,8 +12,6 @@ export function Radio({
   value: string;
   disabled?: boolean;
 }) {
-  const windowsStyle = useWindowsStyle();
-
   const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext();
 
   const disabledValue = disabled || groupDisabled;
@@ -29,7 +26,6 @@ export function Radio({
           gap: 8,
           cursor: disabledValue ? 'not-allowed' : 'pointer',
         },
-        ...windowsStyle,
       }}
     >
       <input

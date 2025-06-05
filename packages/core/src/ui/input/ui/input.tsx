@@ -2,7 +2,6 @@ import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
 import { colors, zIndex } from '@/constants';
-import { useWindowsStyle } from 'hooks';
 import type { ExtendedInputProps } from '../model/input-type.ts';
 import { InputStyle } from '../model/input-type.ts';
 
@@ -64,8 +63,6 @@ function BaseInput({
   onClick,
   ...props
 }: ExtendedInputProps) {
-  const windowsStyle = useWindowsStyle();
-
   const extraPadding = '2rem';
   return (
     <div
@@ -110,7 +107,6 @@ function BaseInput({
         }
         transition={{ duration: 0.14 }}
         style={{
-          ...windowsStyle,
           ...defaultInputStyle,
           ...inputStyles[inputStyle],
           paddingLeft: startDecorator ? extraPadding : defaultInputStyle.paddingInline,

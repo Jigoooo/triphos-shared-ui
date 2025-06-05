@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import { darken, lighten } from 'polished';
 
 import { isLightColor } from '@/lib';
-import { useWindowsStyle } from 'hooks';
 import type { ButtonProps } from '../model/button-type.ts';
 import { ButtonStyle } from '../model/button-type.ts';
 import { colors } from '@/constants';
@@ -89,7 +88,6 @@ function BaseButton({
   ...props
 }: ButtonProps) {
   const [isPressed, setIsPressed] = useState(false);
-  const windowsStyle = useWindowsStyle();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -148,7 +146,6 @@ function BaseButton({
         ...defaultButtonStyle,
         ...buttonStyles[buttonStyle],
         ...(props.disabled ? buttonDisabledStyle[buttonStyle] : {}),
-        ...windowsStyle,
         ...style,
       }}
       variants={{

@@ -1,4 +1,3 @@
-import { useWindowsStyle } from 'hooks';
 import type { HTMLAttributes, ReactNode, RefObject } from 'react';
 
 export function Typography({
@@ -10,13 +9,10 @@ export function Typography({
   ref?: RefObject<HTMLSpanElement | null>;
   children?: ReactNode;
 }) {
-  const windowsStyle = useWindowsStyle();
-
   return (
     <span
       ref={ref}
       style={{
-        ...windowsStyle,
         ...style,
       }}
       {...props}
