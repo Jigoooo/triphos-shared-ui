@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     build: {
       lib: {
         entry: path.resolve(__dirname, 'src/index.tsx'),
-        name: 'TriphosMessenger',
+        name: 'JigooooUi',
         fileName: (format) => `index.${format === 'es' ? 'js' : 'umd.cjs'}`,
         formats: ['es'],
       },
