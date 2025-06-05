@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { isMobile } from 'react-device-detect';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
 import {
@@ -17,6 +16,9 @@ import {
 } from '@/ui';
 import { colors, zIndex } from '@/constants';
 import type { DialogInfoStates } from '../model/dialog-type.ts';
+import { detectDeviceTypeAndOS } from '@/lib';
+
+const { isMobile } = detectDeviceTypeAndOS();
 
 const dialogColors: Record<DialogType, string> = {
   [DialogType.INFO]: colors.primary[400],

@@ -1,6 +1,9 @@
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
-import { isMobile } from 'react-device-detect';
+
+import { detectDeviceTypeAndOS } from '@/lib';
+
+const { isMobile } = detectDeviceTypeAndOS();
 
 export function useModalController({
   modalRef,

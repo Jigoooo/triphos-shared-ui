@@ -104,42 +104,21 @@ importers:
       '@tanstack/table-core':
         specifier: ^8.21.3
         version: 8.21.3
-      '@uiw/react-color':
-        specifier: ^2.5.5
-        version: 2.5.5(@babel/runtime@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@uiw/react-color-circle':
-        specifier: ^2.5.5
-        version: 2.5.5(@babel/runtime@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@uiw/react-textarea-code-editor':
         specifier: ^3.1.1
         version: 3.1.1(@babel/runtime@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      axios:
-        specifier: ^1.9.0
-        version: 1.9.0
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
       emoji-picker-react:
         specifier: ^4.12.2
         version: 4.12.2(react@19.1.0)
-      file-saver:
-        specifier: ^2.0.5
-        version: 2.0.5
       framer-motion:
         specifier: ^12.16.0
         version: 12.16.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      lucide-react:
-        specifier: ^0.513.0
-        version: 0.513.0(react@19.1.0)
       polished:
         specifier: ^4.3.1
         version: 4.3.1
-      react-daum-postcode:
-        specifier: ^3.2.0
-        version: 3.2.0(react@19.1.0)
-      react-device-detect:
-        specifier: ^2.2.3
-        version: 2.2.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.0)

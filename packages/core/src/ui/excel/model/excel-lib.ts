@@ -1,37 +1,8 @@
-import type { BookType, Sheet2JSONOpts } from 'xlsx-js-style';
+import type { Sheet2JSONOpts } from 'xlsx-js-style';
 import XLSX from 'xlsx-js-style';
-import { saveAs } from 'file-saver';
 import { toast } from 'sonner';
 
 import type { WriteExcelFileParams } from './excel-type.ts';
-
-export function downloadExcel({
-  workBook,
-  excelFileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
-  excelFileName = 'excel',
-  excelFileExtension = 'xlsx',
-}: {
-  workBook: any;
-  excelFileType?: string;
-  excelFileName?: string;
-  excelFileExtension?: BookType;
-}) {
-  const excelBuffer = XLSX.write(workBook, { bookType: excelFileExtension, type: 'array' });
-  const excelFile = new Blob([excelBuffer], { type: excelFileType });
-  const fileName = `${excelFileName}.${excelFileExtension}`;
-
-  saveAs(excelFile, fileName);
-
-  // const { isMobile } = detectDeviceTypeAndOS();
-  //
-  // if (isMobile) {
-  //   convertBlobToBase64(excelFile).then((base64String: string) => {
-  //     sendPostMessage({ type: 'fileDownload', payload: { base64String, fileName: excelFileName } });
-  //   });
-  // } else {
-  //   saveAs(excelFile, fileName);
-  // }
-}
 
 export function fitToColumn<T>(headerRow: T[], bodyRow: T[], minWidth = 0) {
   const maxCols = Math.max(headerRow.length, bodyRow.length);

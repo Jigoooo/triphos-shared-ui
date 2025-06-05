@@ -55,17 +55,28 @@ export function generateRandomNumber(a: number) {
 export function detectDeviceTypeAndOS() {
   const ua = navigator.userAgent;
 
-  const isAndroid = () => /Android/i.test(ua);
-  const isIOS = () => /iPhone|iPad|iPod/i.test(ua);
+  // OS 체크
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isMac = /Macintosh|Mac OS X/i.test(ua);
+  const isWindows = /Windows NT/i.test(ua);
 
-  const isTablet = /iPad|Tablet|PlayBook/i.test(ua) || (isAndroid() && !/(Mobile)/i.test(ua));
+  const isTablet = /iPad|Tablet|PlayBook/i.test(ua) || (isAndroid && !/Mobile/i.test(ua));
   const isMobile =
     /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/i.test(
       ua,
     ) && !isTablet;
   const isDesktop = !isTablet && !isMobile;
 
-  return { isDesktop, isAndroid: isAndroid(), isIOS: isIOS(), isMobile, isTablet };
+  return {
+    isDesktop,
+    isAndroid,
+    isIOS,
+    isMac,
+    isWindows,
+    isMobile,
+    isTablet,
+  };
 }
 
 export function scrollToTop() {

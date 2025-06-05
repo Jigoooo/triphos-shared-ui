@@ -2,7 +2,6 @@ export * from './snackbar';
 export * from './modal';
 export * from './dialog';
 export * from './loading';
-export * from './address';
 export * from './table';
 export * from './button';
 export * from './input';

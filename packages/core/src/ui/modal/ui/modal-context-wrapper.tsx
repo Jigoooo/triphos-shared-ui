@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { isMobile } from 'react-device-detect';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
 import { FlexRow, ModalContext, useModalController } from '@/ui';
@@ -11,6 +10,9 @@ import type {
   TModalItem,
   TIsPossibleOverlayClose,
 } from '../model/modal-type.ts';
+import { detectDeviceTypeAndOS } from '@/lib';
+
+const { isMobile } = detectDeviceTypeAndOS();
 
 export function ModalContextWrapper({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
