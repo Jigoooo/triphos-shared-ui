@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { useState } from 'react';
 
 import { FlexRow, Typography } from '@/ui/view';
@@ -8,7 +8,10 @@ export function ContextMenuItem({
   style,
   icon,
   onClick,
-}: {
+  onMouseEnter,
+  onMouseLeave,
+  ...props
+}: HTMLAttributes<HTMLElement> & {
   title: string;
   style?: CSSProperties;
   icon?: ReactNode;
@@ -35,8 +38,15 @@ export function ContextMenuItem({
         e.stopPropagation();
         onClick?.();
       }}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      onMouseEnter={(event) => {
+        onMouseEnter?.(event);
+        setIsHover(true);
+      }}
+      onMouseLeave={(event) => {
+        onMouseLeave?.(event);
+        setIsHover(false);
+      }}
+      {...props}
     >
       {Icon && Icon}
       <Typography style={{ textAlign: 'left' }}>{title}</Typography>
