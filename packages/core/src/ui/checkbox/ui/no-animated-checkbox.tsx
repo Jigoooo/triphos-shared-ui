@@ -1,4 +1,4 @@
-import CheckSolid from '/images/check-solid.svg?react';
+import CheckSolid from '../../../../public/images/check-solid.svg?react';
 
 import { FlexRow } from '@/ui/view';
 
