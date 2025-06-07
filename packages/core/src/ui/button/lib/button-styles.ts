@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 
 import { ButtonStyle } from '../model/button-type.ts';
-import { colors } from '@/constants';
+import type { Theme } from '@/theme';
 
 export const defaultButtonStyle: CSSProperties = {
   display: 'flex',
@@ -17,18 +17,20 @@ export const defaultButtonStyle: CSSProperties = {
   width: 'auto',
 } as const;
 
-export const buttonWithTypeStyles: Record<ButtonStyle, CSSProperties> = {
-  [ButtonStyle.SOLID]: {
-    backgroundColor: colors.primary[400],
-    color: 'white',
-    border: 'none',
-  },
-  [ButtonStyle.OUTLINED]: {
-    backgroundColor: '#ffffff',
-    color: colors.primary[400],
-    border: `1px solid ${colors.primary[400]}`,
-  },
-} as const;
+export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSProperties> {
+  return {
+    [ButtonStyle.SOLID]: {
+      backgroundColor: theme.colors.primaryColor,
+      color: 'white',
+      border: 'none',
+    },
+    [ButtonStyle.OUTLINED]: {
+      backgroundColor: '#ffffff',
+      color: theme.colors.primaryColor,
+      border: `1px solid ${theme.colors.primaryColor}`,
+    },
+  };
+}
 
 export const buttonDisabledStyle: Record<ButtonStyle, CSSProperties> = {
   [ButtonStyle.SOLID]: {

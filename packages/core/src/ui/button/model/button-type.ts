@@ -9,5 +9,10 @@ export enum ButtonStyle {
 export type ButtonProps = MotionProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     buttonStyle?: ButtonStyle;
+    animationColor?: string;
+    customVariants?: {
+      hover?: any;
+      tap?: any;
+    };
     children: ReactNode;
   };
