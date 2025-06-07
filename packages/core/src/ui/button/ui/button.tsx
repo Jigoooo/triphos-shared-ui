@@ -43,8 +43,8 @@ export function BaseButton({
         ...style,
       }}
       variants={{
-        hover: { backgroundColor: animationBackgroundColor.hoverBackgroundColor, scale: 1.01 },
-        tap: { backgroundColor: animationBackgroundColor.tapBackgroundColor, scale: 0.99 },
+        hover: { backgroundColor: animationBackgroundColor.hoverBackgroundColor },
+        tap: { backgroundColor: animationBackgroundColor.tapBackgroundColor, scale: 0.98 },
         none: {},
       }}
       whileHover={props.disabled ? 'none' : 'hover'}
