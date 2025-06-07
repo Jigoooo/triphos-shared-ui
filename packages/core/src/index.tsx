@@ -17,7 +17,7 @@ export {
   NoData,
   ActionAnimatedWrapper,
 } from './ui/view';
-export { useModalController, ModalContextProvider, ModalLayout } from './ui/modal';
+export { ModalContextProvider, ModalLayout, useModal } from './ui/modal';
 export {
   Select,
   MultiSelect,
