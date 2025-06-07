@@ -6,7 +6,8 @@ import { LuX } from 'react-icons/lu';
 
 import { zIndex } from '@/constants';
 import { useDraggable } from '@/hooks/common/use-draggable.ts';
-import { Button, FlexRow, Tooltip, Typography } from '@/ui';
+import { FlexRow, Tooltip, Typography } from '@/ui/view';
+import { Button } from '@/ui/button';
 import type { TMobileModal } from '../model/modal-type.ts';
 
 const modalHeaderHeight = 80;

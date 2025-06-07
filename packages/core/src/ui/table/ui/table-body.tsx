@@ -4,20 +4,21 @@ import type { VirtualItem } from '@tanstack/react-virtual';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import {
-  Checkbox,
   // CustomHorizontalScrollbar,
   // CustomVerticalScrollbar,
   FlexRow,
-  Input,
   Typography,
   NoData,
-} from '@/ui';
+} from '@/ui/view';
 import { colors } from '@/constants';
 import type { EditType, TableBodyRowProps, TDataWithIndex, THeader } from '../model/table-type.ts';
 import { useTableContext } from '../model/table-context.ts';
 import { validateTableDataList } from '../model/validate-table-data-list.ts';
-import { useTableScrollToFn, useVirtualRow } from '../model';
+import { useTableScrollToFn } from '../model/use-table-scroll-to-fn.ts';
+import { useVirtualRow } from '../model/use-virtual-row.ts';
 import { useHandleClickOutsideRef } from 'hooks';
+import { Input } from '@/ui/input';
+import { Checkbox } from '@/ui/checkbox';
 
 export const TableBody = memo(function TableBody<TData extends TDataWithIndex>({
   bodyXRef,

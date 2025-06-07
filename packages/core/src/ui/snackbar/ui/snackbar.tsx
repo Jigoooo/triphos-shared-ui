@@ -1,10 +1,12 @@
 import { createPortal } from 'react-dom';
 
-import { Button, FlexColumn, FlexRow, snackbarActions, Typography, useSnackbarInfos } from '@/ui';
 import { zIndex } from '@/constants';
 import type { SnackBarInfo } from '../model/snackbar-type.ts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { snackbarActions, useSnackbarInfos } from '../model/snackbar-store.ts';
+import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { Button } from '@/ui/button';
 
 const MAX_VISIBLE_SNACKBAR_COUNT = 3;
 const SNACKBAR_HEIGHT = 80;

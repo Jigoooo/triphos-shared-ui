@@ -2,8 +2,10 @@ import type { RefObject } from 'react';
 
 import { LuMoveUp, LuMoveDown } from 'react-icons/lu';
 
-import type { THeader } from '@/ui';
-import { Checkbox, FlexRow, Input, Typography } from '@/ui';
+import type { THeader } from '../model/table-type.ts';
+import { FlexRow, Typography } from '@/ui/view';
+import { Input } from '@/ui/input';
+import { Checkbox } from '@/ui/checkbox';
 import { useTableContext } from '../model/table-context.ts';
 
 export function TableHeader({ ref }: { ref: RefObject<HTMLDivElement | null> }) {

@@ -19,7 +19,9 @@ import { FiSearch } from 'react-icons/fi';
 
 import { colors, zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import { Checkbox, FlexRow, Input, InputStyle, Typography } from '@/ui';
+import { FlexRow, Typography } from '@/ui/view';
+import { Input } from '@/ui/input';
+import { Checkbox } from '@/ui/checkbox';
 import type { MultiSelectOption } from '../model';
 
 export function MultiSelect<ValuesType extends (string | number)[]>({
@@ -464,10 +466,9 @@ function SelectItems<ValuesType extends (string | number)[]>({
       {...getFloatingProps()}
     >
       {isAutocomplete && (
-        <Input.Outlined
+        <Input.Underline
           onKeyDown={handleKeyDown}
           startDecorator={<FiSearch style={{ color: '#999999', fontSize: '1.1rem' }} />}
-          inputStyle={InputStyle.UNDERLINE}
           value={filterText}
           onChange={(event) => {
             handleFilterText(event.target.value);

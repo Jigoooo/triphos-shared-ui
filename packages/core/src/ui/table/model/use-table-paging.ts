@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { TTablePagination } from '@/ui';
+import type { TTablePagination } from './table-type-legacy.ts';
 
 export function useTablePaging<T>({
   dataList = [],

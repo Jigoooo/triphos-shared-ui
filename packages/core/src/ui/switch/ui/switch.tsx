@@ -1,8 +1,8 @@
 import { LayoutGroup, motion } from 'framer-motion';
 
 import { colors } from '@/constants';
-import { Typography } from '@/ui';
-import type { SwitchProps } from '../model/toggle-type.ts';
+import { Typography } from '@/ui/view';
+import type { SwitchProps } from '../model/switch-type.ts';
 
 export function Switch({
   containerStyle,

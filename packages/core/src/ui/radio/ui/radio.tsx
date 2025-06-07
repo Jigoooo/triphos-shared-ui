@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { Typography, useRadioGroupContext } from '@/ui';
+import { Typography } from '@/ui/view';
+import { useRadioGroupContext } from '../model/radio-group-context.ts';
 import { colors } from '@/constants';
 
 export function Radio({

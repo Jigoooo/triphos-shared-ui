@@ -19,7 +19,8 @@ import { FiSearch } from 'react-icons/fi';
 
 import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import { FlexRow, Input, Typography } from '@/ui';
+import { FlexRow, Typography } from '@/ui/view';
+import { Input } from '@/ui/input';
 import type { SelectOption } from '../model';
 
 export function Select<ValueType extends string | number>({

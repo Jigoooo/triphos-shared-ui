@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 import { useLayoutEffect, useState } from 'react';
 import { motion, useDragControls } from 'framer-motion';
 
-import { CloseIcon, FlexColumn, FlexRow, Typography } from '@/ui';
+import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { CloseIcon } from '@/ui/icon';
 
 const modalContainerDefaultStyle: CSSProperties = {
   backgroundColor: '#ffffff',

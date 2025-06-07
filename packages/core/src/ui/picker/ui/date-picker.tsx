@@ -30,7 +30,9 @@ import {
 
 import { LuCalendar, LuMoveLeft, LuMoveRight } from 'react-icons/lu';
 
-import { Button, FlexColumn, FlexRow, Input, Typography } from '@/ui';
+import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { Input } from '@/ui/input';
+import { Button } from '@/ui/button';
 import { colors, zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
 import { DateInputField } from './date-input-field.tsx';

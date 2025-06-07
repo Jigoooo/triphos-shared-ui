@@ -1,5 +1,6 @@
 import type { CSSProperties, SVGProps } from 'react';
-import { FlexRow } from '@/ui';
+
+import { FlexRow } from './flex-row.tsx';
 
 export function DashedDivider({
   style,

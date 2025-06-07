@@ -1,6 +1,7 @@
 import NoDataIcon from '../../../../public/images/no-data-icon.svg?react';
 
-import { FlexColumn, Typography } from '@/ui';
+import { FlexColumn } from './flex-column.tsx';
+import { Typography } from './typography.tsx';
 
 export function NoData({ emptyMessage }: { emptyMessage: string }) {
   return (

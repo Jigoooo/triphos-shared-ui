@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { RadioGroupContext } from '@/ui';
+import { RadioGroupContext } from '../model/radio-group-context.ts';
 
 export function RadioGroup({
   name,

@@ -1,14 +1,15 @@
 import type { JSX, RefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import type { TDataWithIndex } from '@/ui';
-import { FlexRow, Typography } from '@/ui';
+import type { TDataWithIndex } from '../model/table-type.ts';
+import { FlexRow, Typography } from '@/ui/view';
 import { TableHeader } from './table-header.tsx';
 import { TableBody } from './table-body.tsx';
 import { useElementSize } from 'hooks';
 import type { THeaderGroup, THeader, TTableContext, TTableStyle } from '../model/table-type.ts';
 import { TableContext } from '../model/table-context.ts';
-import { useTableChecked, useTableSorting } from '../model';
+import { useTableChecked } from '../model/use-table-checked.ts';
+import { useTableSorting } from '../model/use-table-sorting.ts';
 
 /*
  * - 하단 페이징

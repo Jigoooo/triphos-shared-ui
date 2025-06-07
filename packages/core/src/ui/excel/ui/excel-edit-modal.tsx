@@ -1,18 +1,13 @@
 import { useState } from 'react';
 
-import type { TDataWithIndex, THeader, TValidationRuleWithHeaderId } from '@/ui';
-import { Button } from '@/ui';
-import {
-  dialog,
-  ExcelExportButton,
-  FlexColumn,
-  FlexRow,
-  Input,
-  Table,
-  Typography,
-  useTableData,
-  writeExcelFile,
-} from '@/ui';
+import type { TDataWithIndex, THeader } from '@/ui/table';
+import { Table, useTableData } from '@/ui/table';
+import { Button, ExcelExportButton } from '@/ui/button';
+import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { Input } from '@/ui/input';
+import { dialog } from '@/ui/dialog';
+import type { TValidationRuleWithHeaderId } from '@/ui/excel';
+import { writeExcelFile } from '@/ui/excel';
 
 export function ExcelEditModal<TData extends TDataWithIndex>({
   excelNm,

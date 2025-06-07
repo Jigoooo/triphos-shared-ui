@@ -3,7 +3,8 @@ import React, { useRef, useState } from 'react';
 import { LuFileUp } from 'react-icons/lu';
 
 import { colors } from '@/constants';
-import { FlexRow, Link } from '@/ui';
+import { FlexRow } from '@/ui/view';
+import { Link } from '@/ui/link';
 
 export function DropZone({
   accept,

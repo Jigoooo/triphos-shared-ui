@@ -1,6 +1,7 @@
-import type { TDataWithIndex } from '@/ui';
 import type { BookType, WritingOptions } from 'xlsx-js-style';
 import type XLSX from 'xlsx-js-style';
+
+import type { TDataWithIndex } from '@/ui/table';
 
 export type RData<TData extends TDataWithIndex> = Omit<TData, 'index'>;
 

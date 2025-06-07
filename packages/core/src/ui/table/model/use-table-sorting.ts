@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { THeader } from '@/ui';
+import type { THeader } from './table-type.ts';
 
 export function useTableSorting<TData>({
   headers,

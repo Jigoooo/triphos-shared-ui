@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { TDataWithIndex } from '@/ui';
+import type { TDataWithIndex } from './table-type.ts';
 
 export function useTableData<TData extends TDataWithIndex>(tableDataList: TData[]) {
   const [dataList, setDataList] = useState(tableDataList);

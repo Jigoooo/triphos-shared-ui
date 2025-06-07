@@ -1,4 +1,4 @@
-import type { THeader } from './index.ts';
+import type { THeader } from './table-type';
 
 export const createHeader = <TData>(
   id: 'index' | 'check' | 'button' | Extract<keyof TData, string>,

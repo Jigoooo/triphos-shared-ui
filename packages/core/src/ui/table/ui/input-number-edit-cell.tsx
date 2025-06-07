@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import type { TEditCell } from '../model/table-type.ts';
 import { createValidator } from '@/lib';
-import { Input } from '@/ui';
+import { Input } from '@/ui/input';
 
 export function InputNumberEditCell<TData>({
   inputRef,

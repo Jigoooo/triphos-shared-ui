@@ -5,7 +5,7 @@ import type { ButtonProps } from '../model/button-type.ts';
 import { ButtonStyle } from '../model/button-type.ts';
 import {
   buttonDisabledStyle,
-  buttonStyles,
+  buttonWithTypeStyles,
   defaultButtonStyle,
 } from '@/ui/button/lib/button-styles.ts';
 import { getAnimationBackgroundColor } from '@/ui/button/lib/get-animation-background-color.ts';
@@ -38,7 +38,7 @@ export function BaseButton({
       className='selection-none'
       style={{
         ...defaultButtonStyle,
-        ...buttonStyles[buttonStyle],
+        ...buttonWithTypeStyles[buttonStyle],
         ...(props.disabled ? buttonDisabledStyle[buttonStyle] : {}),
         ...style,
       }}

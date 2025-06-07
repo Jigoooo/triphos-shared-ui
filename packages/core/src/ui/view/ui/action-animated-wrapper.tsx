@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
-import { FlexRow } from '@/ui';
+import { FlexRow } from './flex-row.tsx';
 
 export function ActionAnimatedWrapper({
   padding = '0.5rem',

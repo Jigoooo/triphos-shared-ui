@@ -17,7 +17,7 @@ export const defaultButtonStyle: CSSProperties = {
   width: 'auto',
 } as const;
 
-export const buttonStyles: Record<ButtonStyle, CSSProperties> = {
+export const buttonWithTypeStyles: Record<ButtonStyle, CSSProperties> = {
   [ButtonStyle.SOLID]: {
     backgroundColor: colors.primary[400],
     color: 'white',

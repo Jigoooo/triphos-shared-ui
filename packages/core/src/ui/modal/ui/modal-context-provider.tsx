@@ -3,7 +3,9 @@ import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
-import { FlexRow, ModalContext, useModalController } from '@/ui';
+import { FlexRow } from '@/ui/view';
+import { ModalContext } from '../model/modal-context.ts';
+import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import type {
   TModalRenderProps,
@@ -14,7 +16,7 @@ import { detectDeviceTypeAndOS } from '@/lib';
 
 const { isMobile } = detectDeviceTypeAndOS();
 
-export function ModalContextWrapper({ children }: { children: ReactNode }) {
+export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 

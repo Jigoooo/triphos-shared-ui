@@ -1,4 +1,4 @@
-import type { THeader } from '@/ui';
+import type { THeader } from './table-type.ts';
 import { createHeader } from './create-header.ts';
 
 export function createHeaderFromId<TData, K extends Extract<keyof TData, string>>(

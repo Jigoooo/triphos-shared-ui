@@ -1,58 +1,21 @@
-import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
 import type { ExtendedInputProps } from '../model/input-type.ts';
 import { useCompositionRef } from '@/hooks';
 import { InputStyle } from '../model/input-type.ts';
+import { colors, zIndex } from '@/constants';
+import { SoftInput } from '../variant/soft-input.tsx';
+import { OutlinedInput } from '../variant/outlined-input.tsx';
+import { UnderlineInput } from '../variant/underline-input.tsx';
+import {
+  defaultInputStyle,
+  inputWithTypeStyles,
+  inputDisabledStyles,
+} from '../lib/input-styles.ts';
 
-const defaultInputStyle: CSSProperties = {
-  width: 'auto',
-  paddingInline: '0.5rem',
-  paddingBlock: '0.625rem',
-  borderRadius: '0.25rem',
-  fontSize: '0.9rem',
-  fontWeight: 500,
-  height: '2rem',
-  outline: 'none',
-} as const;
+const EXTRA_PADDING = '2rem';
 
-const inputStyles: Record<InputStyle, CSSProperties> = {
-  [InputStyle.SOFT]: {
-    backgroundColor: '#eaeaea',
-    border: 'none',
-  },
-  [InputStyle.OUTLINED]: {
-    backgroundColor: '#ffffff',
-    boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.24)`,
-    border: 'none',
-  },
-  [InputStyle.UNDERLINE]: {
-    backgroundColor: '#ffffff',
-    borderRadius: 0,
-    borderTop: 'none',
-    borderLeft: 'none',
-    borderRight: 'none',
-    // borderBottom: `1.4px solid #c4c4c4`,
-    border: 'none',
-    boxShadow: 'inset 0 -1.4px 0 0 #c4c4c4',
-  },
-} as const;
-
-const inputDisabledStyles: Record<InputStyle, CSSProperties> = {
-  [InputStyle.SOFT]: {
-    backgroundColor: '#f3f3f3',
-  },
-  [InputStyle.OUTLINED]: {
-    boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.3)`,
-    backgroundColor: '#eaeaea',
-  },
-  [InputStyle.UNDERLINE]: {
-    // borderBottom: `2px solid #e1e1e1`,
-    boxShadow: 'inset 0 -2px 0 0 #e1e1e1',
-  },
-} as const;
-
-function BaseInput({
+export function BaseInput({
   ref,
   style,
   type = 'text',
@@ -64,8 +27,6 @@ function BaseInput({
   ...props
 }: ExtendedInputProps) {
   const { handleCompositionStart, handleCompositionEnd } = useCompositionRef();
-
-  const extraPadding = '2rem';
 
   return (
     <div
@@ -111,9 +72,9 @@ function BaseInput({
         transition={{ duration: 0.14 }}
         style={{
           ...defaultInputStyle,
-          ...inputStyles[inputStyle],
-          paddingLeft: startDecorator ? extraPadding : defaultInputStyle.paddingInline,
-          paddingRight: endDecorator ? extraPadding : defaultInputStyle.paddingInline,
+          ...inputWithTypeStyles[inputStyle],
+          paddingLeft: startDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
+          paddingRight: endDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
           ...style,
           ...(props.disabled ? inputDisabledStyles[inputStyle] : {}),
         }}
@@ -142,18 +103,6 @@ function BaseInput({
       )}
     </div>
   );
-}
-
-function SoftInput(props: ExtendedInputProps) {
-  return <BaseInput {...props} inputStyle={InputStyle.SOFT} />;
-}
-
-function OutlinedInput(props: ExtendedInputProps) {
-  return <BaseInput {...props} inputStyle={InputStyle.OUTLINED} />;
-}
-
-function UnderlineInput(props: ExtendedInputProps) {
-  return <BaseInput {...props} inputStyle={InputStyle.UNDERLINE} />;
 }
 
 export const Input = Object.assign(BaseInput, {
