@@ -54,7 +54,6 @@ export function BaseInput({
       )}
       <motion.input
         ref={ref}
-        className='selection-none'
         type={type}
         variants={{
           focus: {

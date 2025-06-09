@@ -2,12 +2,13 @@ import { useState } from 'react';
 
 import type { TDataWithIndex, THeader } from '@/ui/table';
 import { Table, useTableData } from '@/ui/table';
-import { Button, ExcelExportButton } from '@/ui/button';
+import { OutlinedButton, SolidButton } from '@/ui/button';
 import { FlexColumn, FlexRow, Typography } from '@/ui/view';
 import { Input } from '@/ui/input';
 import { dialog } from '@/ui/dialog';
 import type { TValidationRuleWithHeaderId } from '@/ui/excel';
 import { writeExcelFile } from '@/ui/excel';
+import { MdOutlineFileDownload } from 'react-icons/md';
 
 export function ExcelEditModal<TData extends TDataWithIndex>({
   excelNm,
@@ -123,8 +124,16 @@ export function ExcelEditModal<TData extends TDataWithIndex>({
           <Typography style={{ fontSize: '0.9rem' }}>엑셀명: </Typography>
           <Input.Outlined value={name} onChange={(event) => setName(event.target.value)} />
         </FlexRow>
-        <Button onClick={saveExcel}>저장</Button>
-        <ExcelExportButton onClick={exportExcelFile} />
+        <SolidButton onClick={saveExcel}>저장</SolidButton>
+        <OutlinedButton
+          style={{ color: '#666666', borderColor: '#333333' }}
+          onClick={exportExcelFile}
+        >
+          <FlexRow style={{ alignItems: 'center', gap: 4 }}>
+            <MdOutlineFileDownload style={{ fontSize: '1.2rem', color: '#333333' }} />
+            <Typography style={{ fontSize: '0.82rem', color: '#333333' }}>Excel Export</Typography>
+          </FlexRow>
+        </OutlinedButton>
       </FlexRow>
     </FlexColumn>
   );

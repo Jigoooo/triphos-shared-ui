@@ -9,7 +9,7 @@ import { useCompositionRef } from '@/hooks';
 export function Textarea({
   ref,
   style,
-  isFocusEffect,
+  isFocusEffect = true,
   onEnter,
   onKeyDown,
   ...props
