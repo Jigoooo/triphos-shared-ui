@@ -16,13 +16,6 @@ export function Switch({
 }: SwitchProps) {
   const dimensions = useResponsiveSize(width, height);
 
-  const [hasInteracted, setHasInteracted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setHasInteracted(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div
       style={{
@@ -52,7 +45,7 @@ export function Switch({
       )}
       <LayoutGroup>
         <motion.div
-          layout={hasInteracted}
+          layout
           onClick={(event) => {
             event.stopPropagation();
             if (!disabled) {
@@ -72,11 +65,8 @@ export function Switch({
           }}
         >
           <motion.div
-            layoutId={hasInteracted ? 'switch-thumb' : undefined}
-            layout={hasInteracted}
-            transition={
-              hasInteracted ? { type: 'spring', stiffness: 700, damping: 35 } : { duration: 0 }
-            }
+            layoutId={'switch-thumb'}
+            transition={{ type: 'spring', stiffness: 700, damping: 35 }}
             style={{
               width: dimensions.circleSize,
               height: dimensions.circleSize,

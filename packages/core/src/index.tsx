@@ -33,6 +33,7 @@ export {
 } from './ui/picker';
 export type { SelectOption } from './ui/picker';
 export { Switch } from './ui/switch';
+export type { SwitchProps } from './ui/switch';
 export { zIndex } from './constants/z-index';
 export { colors } from './constants/colors';
 /*
