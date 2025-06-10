@@ -5,13 +5,14 @@ import { Typography } from '@/ui/view';
 import type { SwitchProps } from '../model/switch-type.ts';
 
 export function Switch({
+  isActiveAnimation = true,
   containerStyle,
   label,
   labelStyle,
   isOn,
   onClick,
-  width = 34,
-  height = 18,
+  width = '2.125rem',
+  height = '1.125rem',
   disabled = false,
 }: SwitchProps) {
   const dimensions = useResponsiveSize(width, height);
@@ -45,7 +46,8 @@ export function Switch({
       )}
       <LayoutGroup>
         <motion.div
-          layout
+          key={isActiveAnimation ? 'switch' : 'no-switch'}
+          layout={isActiveAnimation}
           onClick={(event) => {
             event.stopPropagation();
             if (!disabled) {
@@ -65,7 +67,7 @@ export function Switch({
           }}
         >
           <motion.div
-            layoutId={'switch-thumb'}
+            layoutId={isActiveAnimation ? 'switch-thumb' : 'no-switch-thumb'}
             transition={{ type: 'spring', stiffness: 700, damping: 35 }}
             style={{
               width: dimensions.circleSize,

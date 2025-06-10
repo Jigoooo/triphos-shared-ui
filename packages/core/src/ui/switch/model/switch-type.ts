@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 
 export type SwitchProps = {
+  isActiveAnimation?: boolean;
   containerStyle?: CSSProperties;
   label?: string;
   labelStyle?: CSSProperties;
