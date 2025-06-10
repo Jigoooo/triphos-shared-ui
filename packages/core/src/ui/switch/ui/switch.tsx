@@ -68,7 +68,9 @@ export function Switch({
         >
           <motion.div
             layoutId={isActiveAnimation ? 'switch-thumb' : 'no-switch-thumb'}
-            transition={{ type: 'spring', stiffness: 700, damping: 35 }}
+            transition={
+              isActiveAnimation ? { type: 'spring', stiffness: 700, damping: 35 } : { duration: 0 }
+            }
             style={{
               width: dimensions.circleSize,
               height: dimensions.circleSize,
