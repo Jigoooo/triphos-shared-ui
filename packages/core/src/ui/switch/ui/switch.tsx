@@ -19,7 +19,7 @@ export function Switch({
   const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setHasInteracted(true), 300);
+    const timer = setTimeout(() => setHasInteracted(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -72,8 +72,11 @@ export function Switch({
           }}
         >
           <motion.div
-            layoutId='switch-thumb'
-            transition={{ type: 'spring', stiffness: 700, damping: 35 }}
+            layoutId={hasInteracted ? 'switch-thumb' : undefined}
+            layout={hasInteracted}
+            transition={
+              hasInteracted ? { type: 'spring', stiffness: 700, damping: 35 } : { duration: 0 }
+            }
             style={{
               width: dimensions.circleSize,
               height: dimensions.circleSize,
