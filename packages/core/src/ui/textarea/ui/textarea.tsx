@@ -31,7 +31,6 @@ export function Textarea({
   return (
     <motion.textarea
       ref={ref}
-      className='selection-none'
       onKeyDown={handleKeyDown}
       onCompositionStart={handleCompositionStart}
       onCompositionEnd={handleCompositionEnd}

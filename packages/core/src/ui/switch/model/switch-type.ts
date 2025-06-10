@@ -6,7 +6,7 @@ export type SwitchProps = {
   labelStyle?: CSSProperties;
   isOn: boolean;
   onClick: () => void;
-  width?: number;
-  height?: number;
+  width?: string | number;
+  height?: string | number;
   disabled?: boolean;
 };

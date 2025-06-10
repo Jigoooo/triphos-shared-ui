@@ -121,19 +121,19 @@ export function ModalLayout({
         style={{
           width: '100%',
           justifyContent: 'space-between',
-          alignItems: 'center',
           cursor: 'grab',
         }}
         as={motion.div}
         onPointerDown={(e) => dragControls.start(e)}
       >
         <FlexColumn style={{ gap: '0.2rem', userSelect: 'none' }}>
+          {/*todo 아이콘 추가 할 수 있게 */}
           <Typography style={{ fontSize: '1.2rem', fontWeight: 700, ...titleStyle }}>
             {title}
           </Typography>
           <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
         </FlexColumn>
-        <FlexColumn style={{ height: '100%', justifyContent: 'flex-start' }}>
+        <FlexColumn style={{ height: '100%', justifyContent: 'flex-start', paddingTop: '0.4rem' }}>
           <CloseIcon close={close} />
         </FlexColumn>
       </FlexRow>
