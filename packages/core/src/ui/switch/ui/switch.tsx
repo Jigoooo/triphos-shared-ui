@@ -16,6 +16,13 @@ export function Switch({
 }: SwitchProps) {
   const dimensions = useResponsiveSize(width, height);
 
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHasInteracted(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div
       style={{
@@ -45,7 +52,7 @@ export function Switch({
       )}
       <LayoutGroup>
         <motion.div
-          layout
+          layout={hasInteracted}
           onClick={(event) => {
             event.stopPropagation();
             if (!disabled) {
