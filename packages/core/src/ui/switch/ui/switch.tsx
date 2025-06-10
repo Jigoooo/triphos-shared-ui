@@ -17,6 +17,16 @@ export function Switch({
 }: SwitchProps) {
   const dimensions = useResponsiveSize(width, height);
 
+  const [isInit, setIsInit] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInit(true);
+    }, 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div
       style={{
@@ -46,8 +56,8 @@ export function Switch({
       )}
       <LayoutGroup>
         <motion.div
-          key={isActiveAnimation ? 'switch' : 'no-switch'}
-          layout={isActiveAnimation}
+          key={isInit && isActiveAnimation ? 'switch' : 'no-switch'}
+          layout={isInit && isActiveAnimation}
           onClick={(event) => {
             event.stopPropagation();
             if (!disabled) {
@@ -67,9 +77,11 @@ export function Switch({
           }}
         >
           <motion.div
-            layoutId={isActiveAnimation ? 'switch-thumb' : 'no-switch-thumb'}
+            layoutId={isInit && isActiveAnimation ? 'switch-thumb' : 'no-switch-thumb'}
             transition={
-              isActiveAnimation ? { type: 'spring', stiffness: 700, damping: 35 } : { duration: 0 }
+              isInit && isActiveAnimation
+                ? { type: 'spring', stiffness: 700, damping: 35 }
+                : { duration: 0 }
             }
             style={{
               width: dimensions.circleSize,
