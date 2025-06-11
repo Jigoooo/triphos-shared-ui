@@ -23,6 +23,10 @@ export function ActionAnimatedWrapper({
         alignItems: 'center',
         padding,
         borderRadius: '50%',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none',
       }}
       initial={{ backgroundColor: 'rgba(255, 255, 255, 0)' }}
       whileHover={{ backgroundColor: '#efefef' }}

@@ -42,7 +42,6 @@ export function BaseButton({
   return (
     <motion.button
       ref={buttonRef}
-      className='selection-none'
       style={{
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[buttonStyle],

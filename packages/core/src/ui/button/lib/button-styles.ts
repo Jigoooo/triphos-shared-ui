@@ -15,6 +15,10 @@ export const defaultButtonStyle: CSSProperties = {
   height: '2rem',
   lineHeight: 0,
   width: 'auto',
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
 } as const;
 
 export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSProperties> {
