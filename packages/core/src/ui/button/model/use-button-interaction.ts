@@ -2,11 +2,13 @@ import { type MouseEvent, useRef, useState } from 'react';
 
 export function useButtonInteraction({
   onClick,
+  onDoubleClick,
   onMouseDown,
   onMouseLeave,
   onMouseUp,
 }: {
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onDoubleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   onMouseDown?: (e: MouseEvent<HTMLButtonElement>) => void;
   onMouseLeave?: (e: MouseEvent<HTMLButtonElement>) => void;
   onMouseUp?: (e: MouseEvent<HTMLButtonElement>) => void;
@@ -28,7 +30,18 @@ export function useButtonInteraction({
     return false;
   };
 
+  const handleDoubleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (onDoubleClick) {
+      onDoubleClick(e);
+    }
+  };
+
   const handleMouseDown = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsPressed(true);
 
     if (onMouseDown) {
@@ -58,6 +71,7 @@ export function useButtonInteraction({
   return {
     buttonRef,
     isPressed,
+    handleDoubleClick,
     handleMouseDown,
     handleMouseLeave,
     handleMouseUp,

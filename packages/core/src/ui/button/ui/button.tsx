@@ -32,12 +32,14 @@ export function BaseButton({
     animationColor ?? defaultAnimationColor,
   );
 
-  const { buttonRef, handleMouseDown, handleMouseUp, handleMouseLeave } = useButtonInteraction({
-    onClick,
-    onMouseDown: props.onMouseDown,
-    onMouseLeave: props.onMouseLeave,
-    onMouseUp: props.onMouseUp,
-  });
+  const { buttonRef, handleDoubleClick, handleMouseDown, handleMouseUp, handleMouseLeave } =
+    useButtonInteraction({
+      onClick,
+      onDoubleClick: props.onDoubleClick,
+      onMouseDown: props.onMouseDown,
+      onMouseLeave: props.onMouseLeave,
+      onMouseUp: props.onMouseUp,
+    });
 
   return (
     <motion.button
@@ -59,6 +61,7 @@ export function BaseButton({
       }
       whileHover={props.disabled ? 'none' : 'hover'}
       whileTap={props.disabled ? 'none' : 'tap'}
+      onDoubleClick={handleDoubleClick}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
