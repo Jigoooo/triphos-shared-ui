@@ -19,6 +19,7 @@ export function BaseButton({
   animationColor,
   children,
   style,
+  disabledStyle,
   onClick,
   ...props
 }: ButtonProps) {
@@ -47,7 +48,7 @@ export function BaseButton({
       style={{
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[buttonStyle],
-        ...(props.disabled ? buttonDisabledStyle[buttonStyle] : {}),
+        ...(props.disabled ? { ...buttonDisabledStyle[buttonStyle], ...disabledStyle } : {}),
         ...style,
       }}
       variants={

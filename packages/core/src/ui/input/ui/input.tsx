@@ -20,6 +20,7 @@ export function BaseInput({
   style,
   type = 'text',
   inputStyle = InputStyle.OUTLINED,
+  disabledStyle,
   startDecorator,
   endDecorator,
   isFocusEffect = true,
@@ -75,7 +76,7 @@ export function BaseInput({
           paddingLeft: startDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
           paddingRight: endDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
           ...style,
-          ...(props.disabled ? inputDisabledStyles[inputStyle] : {}),
+          ...(props.disabled ? { ...inputDisabledStyles[inputStyle], ...disabledStyle } : {}),
         }}
         onCompositionStart={handleCompositionStart}
         onCompositionEnd={handleCompositionEnd}

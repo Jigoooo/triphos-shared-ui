@@ -1,5 +1,5 @@
 import type { MotionProps } from 'framer-motion';
-import type { InputHTMLAttributes, ReactNode, Ref } from 'react';
+import type { CSSProperties, InputHTMLAttributes, ReactNode, Ref } from 'react';
 
 export enum InputStyle {
   SOFT = 'soft',
@@ -11,6 +11,7 @@ export type InputProps = MotionProps &
   InputHTMLAttributes<HTMLInputElement> & {
     ref?: Ref<HTMLInputElement> | null;
     inputStyle?: InputStyle;
+    disabledStyle?: CSSProperties;
     startDecorator?: ReactNode;
     endDecorator?: ReactNode;
     isFocusEffect?: boolean;

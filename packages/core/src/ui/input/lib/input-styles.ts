@@ -39,8 +39,8 @@ export const inputDisabledStyles: Record<InputStyle, CSSProperties> = {
     backgroundColor: '#f3f3f3',
   },
   [InputStyle.OUTLINED]: {
-    boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.3)`,
-    backgroundColor: '#eaeaea',
+    boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.24)`,
+    backgroundColor: '#f2f2f2',
   },
   [InputStyle.UNDERLINE]: {
     // borderBottom: `2px solid #e1e1e1`,
