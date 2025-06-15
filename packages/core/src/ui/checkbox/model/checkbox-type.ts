@@ -29,3 +29,8 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   disabled?: boolean;
   isActiveAnimation?: boolean;
 };
+
+export type CheckboxIconProps = {
+  checkIconSize?: string | number;
+  disabled?: boolean;
+};

@@ -1,9 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-import CheckSolid from '../../../../public/images/check-solid.svg?react';
-
 import { FlexRow } from '@/ui/layout';
 import type { AnimatedCheckboxProps } from '../model/checkbox-type.ts';
+import { CheckIcon } from './check-icon.tsx';
 
 export function AnimatedCheckbox({
   isPartial,
@@ -54,15 +53,7 @@ export function AnimatedCheckbox({
               alignItems: 'center',
             }}
           >
-            <CheckSolid
-              style={{
-                width: checkIconSize,
-                height: checkIconSize,
-                fill: '#ffffff',
-                stroke: '#ffffff',
-                strokeWidth: '1.875rem',
-              }}
-            />
+            <CheckIcon checkIconSize={checkIconSize} disabled={disabled} />
           </FlexRow>
         )}
         {isPartial && (
