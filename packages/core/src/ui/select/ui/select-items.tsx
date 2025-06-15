@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { FiSearch } from 'react-icons/fi';
 import { IoMdCheckmark } from 'react-icons/io';
 
-import type { SelectOption } from '@/ui/picker';
+import type { SelectOption } from '../model/select-type.ts';
 import { zIndex } from '@/constants';
 import { Input } from '@/ui/input';
 import { FlexRow } from '@/ui/layout';

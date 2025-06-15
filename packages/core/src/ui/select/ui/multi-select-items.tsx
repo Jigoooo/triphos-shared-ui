@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import { FiSearch } from 'react-icons/fi';
 
-import type { MultiSelectOption } from '@/ui/picker';
+import type { MultiSelectOption } from '../model/select-type.ts';
 import { zIndex } from '@/constants';
 import { Input } from '@/ui/input';
 import { FlexRow } from '@/ui/layout';

@@ -1,5 +1,5 @@
 import type { TEditCell } from '../model/table-type.ts';
-import { DatePicker } from '@/ui/picker';
+import { DatePicker } from '@/ui/date-time-picker';
 
 export function DateEditCell<TData>({
   cellData,

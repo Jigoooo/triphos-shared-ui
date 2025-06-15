@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { LuX } from 'react-icons/lu';
 import { HiChevronUpDown } from 'react-icons/hi2';
 
-import type { MultiSelectOption } from '@/ui/picker';
+import type { MultiSelectOption } from '../model/select-type.ts';
 import { useThemeContext } from '@/theme';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
