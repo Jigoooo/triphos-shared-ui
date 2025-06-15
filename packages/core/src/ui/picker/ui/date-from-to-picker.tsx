@@ -34,9 +34,10 @@ import { FlexColumn, FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
-import { colors, zIndex } from '@/constants';
+import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
 import { DateInputField } from './date-input-field.tsx';
+import { useThemeContext } from '@/theme';
 
 type FromToDateString = {
   from: string;
@@ -260,10 +261,11 @@ function getCellBackgroundColor(
   day: Date | null,
   selectedDate: Date | null,
   selectedFromToDate: FromToDates,
+  color: string,
 ): string {
   if (!day) return 'transparent';
   if (selectedDate && isEqual(day, selectedDate)) {
-    return colors.primary[500];
+    return color;
   }
   if (
     selectedFromToDate?.from &&
@@ -277,7 +279,7 @@ function getCellBackgroundColor(
     (selectedFromToDate?.from && isEqual(day, selectedFromToDate.from)) ||
     (selectedFromToDate?.to && isEqual(day, selectedFromToDate.to))
   ) {
-    return colors.primary[500];
+    return color;
   }
   return '#ffffff';
 }
@@ -315,6 +317,8 @@ function FromToPicker({
   minDate,
   maxDate,
 }: FromToPickerProps) {
+  const { theme } = useThemeContext();
+
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const days = generateDaysArray(year, month);
@@ -394,7 +398,12 @@ function FromToPicker({
               (maxDate ? isAfter(day, maxDate) : false));
           const currentMonth = !!day && isSameMonth(day);
           const borderRadius = getCellBorderRadius(day, selectedDate, selectedFromToDate);
-          const backgroundColor = getCellBackgroundColor(day, selectedDate, selectedFromToDate);
+          const backgroundColor = getCellBackgroundColor(
+            day,
+            selectedDate,
+            selectedFromToDate,
+            theme.colors.primary[500],
+          );
           const textColor = getCellTextColor(
             day,
             selectedDate,

@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react';
 
 import { LuFileUp } from 'react-icons/lu';
 
-import { colors } from '@/constants';
 import { FlexRow } from '@/ui/layout';
 import { Link } from '@/ui/link';
+import { useThemeContext } from '@/theme';
 
 export function DropZone({
   accept,
@@ -17,6 +17,8 @@ export function DropZone({
   handleFiles: (file: FileList) => void;
   disabled: boolean;
 }) {
+  const { theme } = useThemeContext();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const fileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +77,7 @@ export function DropZone({
         ...{
           boxSizing: 'border-box',
           borderRadius: 8,
-          border: dragOver ? `3px dashed ${colors.primary[400]}` : '3px dashed #bbbbbb',
+          border: dragOver ? `3px dashed ${theme.colors.primary[400]}` : '3px dashed #bbbbbb',
           transition: '0.2s',
           display: 'flex',
           flexDirection: 'column',
@@ -89,7 +91,7 @@ export function DropZone({
           minHeight: 130,
           height: 130,
           maxHeight: 130,
-          backgroundColor: dragOver ? colors.primary[50] : disabled ? '#f4f4f4' : undefined,
+          backgroundColor: dragOver ? theme.colors.primary[50] : disabled ? '#f4f4f4' : undefined,
           cursor: disabled ? 'not-allowed' : 'pointer',
         },
       }}
@@ -121,7 +123,7 @@ export function DropZone({
             justifyContent: 'center',
             padding: 12,
             borderRadius: '50%',
-            backgroundColor: dragOver ? colors.primary[100] : '#eeeeee',
+            backgroundColor: dragOver ? theme.colors.primary[100] : '#eeeeee',
             transition: '0.2s',
           }}
         >

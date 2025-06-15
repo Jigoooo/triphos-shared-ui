@@ -34,9 +34,10 @@ import { FlexColumn, FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
-import { colors, zIndex } from '@/constants';
+import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
 import { DateInputField } from './date-input-field.tsx';
+import { useThemeContext } from '@/theme';
 
 type TDatePicker = {
   strategy?: Strategy;
@@ -142,11 +143,13 @@ function getCellBorderRadius(day: Date | null, selectedDate: Date | null): numbe
   if (!day) return 0;
   return selectedDate && selectedDate.toDateString() === day.toDateString() ? 6 : 0;
 }
-function getCellBackgroundColor(day: Date | null, selectedDate: Date | null): string {
+function getCellBackgroundColor(
+  day: Date | null,
+  selectedDate: Date | null,
+  color: string,
+): string {
   if (!day) return 'transparent';
-  return selectedDate && selectedDate.toDateString() === day.toDateString()
-    ? colors.primary[500]
-    : '#ffffff';
+  return selectedDate && selectedDate.toDateString() === day.toDateString() ? color : '#ffffff';
 }
 function getCellTextColor(
   day: Date | null,
@@ -173,6 +176,8 @@ function Picker({
   minDate,
   maxDate,
 }: PickerProps) {
+  const { theme } = useThemeContext();
+
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const days = generateDaysArray(year, month);
@@ -248,7 +253,11 @@ function Picker({
               (maxDate ? isAfter(day, maxDate) : false));
           const currentMonth = !!day && isSameMonth(day);
           const borderRadius = getCellBorderRadius(day, selectedDate);
-          const backgroundColor = getCellBackgroundColor(day, selectedDate);
+          const backgroundColor = getCellBackgroundColor(
+            day,
+            selectedDate,
+            theme.colors.primary[500],
+          );
           const textColor = getCellTextColor(day, selectedDate, currentMonth, isDisabled);
           return (
             <div key={index} style={{ gridColumn: 'span 1' }}>

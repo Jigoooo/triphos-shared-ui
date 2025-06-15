@@ -10,7 +10,6 @@ import {
 } from '@/ui/etc';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import { colors } from '@/constants';
 import type { EditType, TableBodyRowProps, TDataWithIndex, THeader } from '../model/table-type.ts';
 import { useTableContext } from '../model/table-context.ts';
 import { validateTableDataList } from '../model/validate-table-data-list.ts';
@@ -19,6 +18,7 @@ import { useVirtualRow } from '../model/use-virtual-row.ts';
 import { useHandleClickOutsideRef } from 'hooks';
 import { Input } from '@/ui/input';
 import { Checkbox } from '@/ui/checkbox';
+import { useThemeContext } from '@/theme';
 
 export const TableBody = memo(function TableBody<TData extends TDataWithIndex>({
   bodyXRef,
@@ -400,6 +400,8 @@ const TableBodyCell = memo(function TableBodyCell<TData extends Record<string, a
   hoverIndex: number | null;
   rowClickIndex: number | null;
 }) {
+  const { theme } = useThemeContext();
+
   const {
     tableStyle,
     headers,
@@ -445,14 +447,14 @@ const TableBodyCell = memo(function TableBodyCell<TData extends Record<string, a
       (isChecked!(data) && hoverIndex === dataIndex) ||
       (hoverIndex === dataIndex && rowClickIndex === dataIndex)
     ) {
-      return colors.primary[100];
+      return theme.colors.primary[100];
     }
     if (isChecked!(data)) {
-      return colors.primary[50];
+      return theme.colors.primary[50];
     }
     if (rowClickIndex === dataIndex) {
       // return tableStyle.tableBodyHoverBackgroundColor;
-      return colors.primary[50];
+      return theme.colors.primary[50];
     }
     if (hoverIndex === dataIndex) {
       return tableStyle.tableBodyHoverBackgroundColor;

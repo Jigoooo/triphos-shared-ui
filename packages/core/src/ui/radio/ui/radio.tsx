@@ -2,20 +2,24 @@ import { motion } from 'framer-motion';
 
 import { Typography } from '@/ui/typography';
 import { useRadioGroupContext } from '../model/radio-group-context.ts';
-import { colors } from '@/constants';
 import type { RadioProps } from '../model/radio-type.ts';
+import { useThemeContext } from '@/theme';
 
 export function Radio({
   label,
   value,
   disabled = false,
   size = 1.4,
-  color = colors.primary[400],
+  color,
   labelColor = '#333333',
   style,
   iconStyle,
   dotStyle,
 }: RadioProps) {
+  const { theme } = useThemeContext();
+
+  const effectiveColor = color || theme.colors.primaryColor;
+
   const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext();
 
   const disabledValue = disabled || groupDisabled;
@@ -65,7 +69,7 @@ export function Radio({
           borderColor: disabledValue
             ? '#cccccc'
             : selectedRadio === value
-              ? colors.primary[400]
+              ? theme.colors.primaryColor
               : '#cccccc',
         }}
         transition={{ duration: 0.2 }}
@@ -76,7 +80,7 @@ export function Radio({
               width: `${indicatorSize}rem`,
               height: `${indicatorSize}rem`,
               borderRadius: '50%',
-              backgroundColor: disabledValue ? '#cccccc' : color,
+              backgroundColor: disabledValue ? '#cccccc' : effectiveColor,
               ...dotStyle,
             }}
             initial={{ scale: 0 }}
