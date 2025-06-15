@@ -38,7 +38,7 @@ export function AnimatedCheckbox({
       }}
     >
       <AnimatePresence mode={'wait'}>
-        {!disabled && checked && (
+        {checked && (
           <FlexRow
             as={motion.div}
             initial={{ scale: 0, opacity: 0 }}

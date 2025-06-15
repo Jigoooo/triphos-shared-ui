@@ -23,7 +23,7 @@ export function NoAnimatedCheckbox({
         backgroundColor: disabled ? '#f5f5f5' : checked ? color : '#ffffff',
       }}
     >
-      {!disabled && checked && (
+      {checked && (
         <FlexRow
           style={{
             justifyContent: 'center',
