@@ -1,5 +1,5 @@
 import type { Theme, ThemeInput } from '../model/theme-type';
-import { defaultThemeBase } from '../config/default-theme-base.ts';
+import { themeBase } from '../config/theme-base.ts';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -31,7 +31,7 @@ function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial
 }
 
 export function createTheme(themeInput: ThemeInput = {}): Theme {
-  const mergedTheme = deepMerge(defaultThemeBase, themeInput);
+  const mergedTheme = deepMerge(themeBase, themeInput);
 
   return {
     ...mergedTheme,

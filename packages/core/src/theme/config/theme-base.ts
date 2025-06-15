@@ -1,6 +1,6 @@
 import type { ThemeBaseInput } from '../model/theme-type.ts';
 
-export const defaultThemeBase: ThemeBaseInput = {
+export const themeBase: ThemeBaseInput = {
   colors: {
     primary: {
       900: '#071423',
