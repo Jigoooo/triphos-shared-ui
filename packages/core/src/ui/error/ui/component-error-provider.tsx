@@ -1,9 +1,9 @@
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { ComponentErrorPage } from './component-error-page';
-import type { ErrorProviderProps } from '../model/error-type.ts';
+import type { ComponentErrorProviderProps } from '../model/error-type.ts';
 
-export function ComponentErrorProvider({ children }: ErrorProviderProps) {
+export function ComponentErrorProvider({ children }: ComponentErrorProviderProps) {
   return (
     <ErrorBoundary
       fallbackRender={(props) => {

@@ -60,7 +60,7 @@ export { LoaderProvider, DeferredWrapper, Skeleton, loader, useLoaderStore } fro
 export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } from './ui/loader';
 
 export { ComponentErrorProvider } from './ui/error';
-export type { ErrorProviderProps } from './ui/error';
+export type { ComponentErrorProviderProps } from './ui/error';
 
 export {
   Select,
