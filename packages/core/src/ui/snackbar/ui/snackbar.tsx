@@ -5,7 +5,8 @@ import type { SnackBarInfo } from '../model/snackbar-type.ts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { snackbarActions, useSnackbarInfos } from '../model/snackbar-store.ts';
-import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Button } from '@/ui/button';
 
 const MAX_VISIBLE_SNACKBAR_COUNT = 3;
@@ -132,7 +133,6 @@ function SnackbarItem({
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
             fontSize: '0.9rem',
-            fontWeight: 500,
           }}
         >
           {snackbarInfo.title}

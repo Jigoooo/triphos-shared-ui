@@ -3,7 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-import { Divider, FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { Divider } from '@/ui/divider';
+import { Typography } from '@/ui/typography';
 import type { AccordionItemProps } from '../model/accordion-type';
 
 export function AccordionItem({

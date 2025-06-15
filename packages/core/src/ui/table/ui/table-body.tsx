@@ -6,10 +6,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   // CustomHorizontalScrollbar,
   // CustomVerticalScrollbar,
-  FlexRow,
-  Typography,
   NoData,
-} from '@/ui/view';
+} from '@/ui/etc';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { colors } from '@/constants';
 import type { EditType, TableBodyRowProps, TDataWithIndex, THeader } from '../model/table-type.ts';
 import { useTableContext } from '../model/table-context.ts';
@@ -579,7 +579,6 @@ const TableBodyCell = memo(function TableBodyCell<TData extends Record<string, a
         <Typography
           style={{
             fontSize: '0.84rem',
-            fontWeight: 500,
             color: tableStyle.tableBodyColor,
             whiteSpace: 'nowrap',
             overflow: 'hidden',

@@ -8,7 +8,6 @@ export const defaultInputStyle: CSSProperties = {
   paddingBlock: '0.625rem',
   borderRadius: '0.25rem',
   fontSize: '0.9rem',
-  fontWeight: 500,
   height: '2rem',
   outline: 'none',
 } as const;

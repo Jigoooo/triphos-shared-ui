@@ -2,7 +2,8 @@ import type { JSX, RefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import type { TDataWithIndex } from '../model/table-type.ts';
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { TableHeader } from './table-header.tsx';
 import { TableBody } from './table-body.tsx';
 import { useElementSize } from 'hooks';
@@ -238,19 +239,17 @@ export function Table<TData extends TDataWithIndex & Record<string, any>>({
             paddingLeft: 12,
           }}
         >
-          <Typography style={{ fontSize: '0.86rem', color: '#999999', fontWeight: 500 }}>
+          <Typography style={{ fontSize: '0.86rem', color: '#999999' }}>
             Rows:{' '}
             {filteredDataList.length !== tableDataList.length && (
               <>
-                <Typography style={{ color: '#000000', fontWeight: 500 }}>
-                  {filteredDataList.length}
-                </Typography>
+                <Typography style={{ color: '#000000' }}>{filteredDataList.length}</Typography>
                 &nbsp;
-                <Typography style={{ color: '#000000', fontWeight: 500 }}>of</Typography>
+                <Typography style={{ color: '#000000' }}>of</Typography>
                 &nbsp;
               </>
             )}
-            <Typography style={{ fontSize: '0.86rem', color: '#000000', fontWeight: 500 }}>
+            <Typography style={{ fontSize: '0.86rem', color: '#000000' }}>
               {tableDataList.length}
             </Typography>
           </Typography>

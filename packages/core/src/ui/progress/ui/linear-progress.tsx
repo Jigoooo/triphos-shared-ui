@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import type { LinearProgressProps } from '../model/progress-type.ts';
 
 export function LinearProgress({
@@ -35,9 +36,7 @@ export function LinearProgress({
           transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         />
       </FlexRow>
-      <Typography style={{ fontWeight: 500, fontSize: '0.9rem' }}>
-        {displayedPercentage}%
-      </Typography>
+      <Typography style={{ fontSize: '0.9rem' }}>{displayedPercentage}%</Typography>
     </FlexRow>
   );
 }

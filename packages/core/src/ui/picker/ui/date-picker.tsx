@@ -30,7 +30,8 @@ import {
 
 import { LuCalendar, LuMoveLeft, LuMoveRight } from 'react-icons/lu';
 
-import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
 import { colors, zIndex } from '@/constants';

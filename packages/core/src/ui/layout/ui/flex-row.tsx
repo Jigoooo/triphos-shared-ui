@@ -1,6 +1,6 @@
 import type { ElementType } from 'react';
 
-import type { FlexRowProps } from '../model/view-type.ts';
+import type { FlexRowProps } from '../model/layout-type.ts';
 
 export function FlexRow<E extends ElementType = 'div'>({
   as,

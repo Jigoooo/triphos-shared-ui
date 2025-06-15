@@ -1,14 +1,15 @@
-import type { DialogInfoStates } from '../model/dialog-type.ts';
-import type { DialogType } from '../model/dialog-type.ts';
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Button } from '@/ui/button';
 import { detectDeviceTypeAndOS } from '@/lib';
-import { dialogColors } from '../config/dialog-colors.ts';
+import type { DialogConfig } from '../model/dialog-type.ts';
+import { DialogType } from '../model/dialog-type.ts';
+import { useGetDialogButtonColor } from '../model/use-get-dialog-button-color.ts';
 
 const { isMobile } = detectDeviceTypeAndOS();
 
-export function AlertDialogActions({ dialogInfos }: { dialogInfos: DialogInfoStates }) {
-  const dialogColor = dialogColors[dialogInfos.dialogType as DialogType];
+export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfig }) {
+  const dialogColor = useGetDialogButtonColor(dialogConfig.dialogType || DialogType.INFO);
 
   return (
     <FlexRow
@@ -19,7 +20,7 @@ export function AlertDialogActions({ dialogInfos }: { dialogInfos: DialogInfoSta
         justifyContent: 'flex-end',
       }}
     >
-      {dialogInfos.withCancel && (
+      {dialogConfig.withCancel && (
         <Button.Outlined
           style={{
             minWidth: '4rem',
@@ -27,15 +28,15 @@ export function AlertDialogActions({ dialogInfos }: { dialogInfos: DialogInfoSta
             borderColor: '#bbbbbb',
           }}
           onClick={() => {
-            dialogInfos?.onCancel?.();
+            dialogConfig?.onCancel?.();
 
             if (isMobile) {
               window.history.back();
             }
           }}
         >
-          <Typography style={{ color: '#555555', fontSize: '0.9rem', fontWeight: 500 }}>
-            {dialogInfos.cancelText}
+          <Typography style={{ color: '#555555', fontSize: '0.9rem' }}>
+            {dialogConfig.cancelText}
           </Typography>
         </Button.Outlined>
       )}
@@ -43,7 +44,6 @@ export function AlertDialogActions({ dialogInfos }: { dialogInfos: DialogInfoSta
         style={{
           minWidth: '4rem',
           fontSize: '0.9rem',
-          fontWeight: 500,
           backgroundColor: dialogColor,
         }}
         onClick={() => {
@@ -51,10 +51,10 @@ export function AlertDialogActions({ dialogInfos }: { dialogInfos: DialogInfoSta
             window.history.back();
           }
 
-          setTimeout(() => dialogInfos?.onConfirm?.(), 10);
+          setTimeout(() => dialogConfig?.onConfirm?.(), 10);
         }}
       >
-        {dialogInfos.confirmText}
+        {dialogConfig.confirmText}
       </Button.Solid>
     </FlexRow>
   );

@@ -1,21 +1,26 @@
 import { motion } from 'framer-motion';
 
-import { Typography } from '@/ui/view';
+import { Typography } from '@/ui/typography';
 import { useRadioGroupContext } from '../model/radio-group-context.ts';
 import { colors } from '@/constants';
+import type { RadioProps } from '../model/radio-type.ts';
 
 export function Radio({
   label,
   value,
   disabled = false,
-}: {
-  label: string;
-  value: string;
-  disabled?: boolean;
-}) {
+  size = 1.4,
+  color = colors.primary[400],
+  labelColor = '#333333',
+  style,
+  iconStyle,
+  dotStyle,
+}: RadioProps) {
   const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext();
 
   const disabledValue = disabled || groupDisabled;
+
+  const indicatorSize = size * 0.5;
 
   return (
     <label
@@ -24,8 +29,9 @@ export function Radio({
         ...{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
-          cursor: disabledValue ? 'not-allowed' : 'pointer',
+          gap: '0.5rem',
+          cursor: disabledValue ? 'default' : 'pointer',
+          ...style,
         },
       }}
     >
@@ -46,13 +52,14 @@ export function Radio({
       />
       <motion.div
         style={{
-          width: '1.4rem',
-          height: '1.4rem',
+          width: `${size}rem`,
+          height: `${size}rem`,
           borderRadius: '50%',
           border: '2px solid #ccc',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          ...iconStyle,
         }}
         animate={{
           borderColor: disabledValue
@@ -66,10 +73,11 @@ export function Radio({
         {selectedRadio === value && (
           <motion.div
             style={{
-              width: '0.7rem',
-              height: '0.7rem',
+              width: `${indicatorSize}rem`,
+              height: `${indicatorSize}rem`,
               borderRadius: '50%',
-              backgroundColor: disabledValue ? '#cccccc' : colors.primary[400],
+              backgroundColor: disabledValue ? '#cccccc' : color,
+              ...dotStyle,
             }}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -77,7 +85,7 @@ export function Radio({
           />
         )}
       </motion.div>
-      <Typography style={{ fontSize: '0.9rem', color: disabledValue ? '#cccccc' : '#333333' }}>
+      <Typography style={{ fontSize: '0.9rem', color: disabledValue ? '#cccccc' : labelColor }}>
         {label}
       </Typography>
     </label>

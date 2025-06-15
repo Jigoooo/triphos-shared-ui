@@ -19,7 +19,8 @@ import { FiSearch } from 'react-icons/fi';
 
 import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import type { SelectOption } from '../model';
 
@@ -325,7 +326,6 @@ function SelectContainer({
           style={{
             padding: '3px 6px',
             borderRadius: 4,
-            fontWeight: 500,
             fontSize: '0.94rem',
             overflow: 'hidden',
             textOverflow: 'ellipsis',

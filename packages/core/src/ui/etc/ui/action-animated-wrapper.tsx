@@ -1,17 +1,14 @@
-import type { ReactNode, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 
-import { FlexRow } from './flex-row.tsx';
+import { FlexRow } from '@/ui/layout';
+import type { ActionsAnimatedProps } from '../model/etc-type.ts';
 
 export function ActionAnimatedWrapper({
   padding = '0.5rem',
   onClick,
   children,
-}: {
-  padding?: string | number;
-  onClick?: () => void;
-  children: ReactNode;
-}) {
+}: ActionsAnimatedProps) {
   const handleDoubleClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();

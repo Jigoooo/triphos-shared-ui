@@ -1,4 +1,4 @@
-import { FlexColumn } from '@/ui/view';
+import { FlexColumn } from '@/ui/layout';
 import { AccordionGroupContext } from '../model/accordion-group-context.ts';
 import type { AccordionGroupProps } from '../model/accordion-type.ts';
 

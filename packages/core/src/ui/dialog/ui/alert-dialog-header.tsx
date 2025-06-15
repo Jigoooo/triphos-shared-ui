@@ -1,4 +1,5 @@
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 
 export function AlertDialogHeader({
   title,

@@ -1,7 +1,7 @@
 import type { KeyboardEvent, ReactNode, Ref, TextareaHTMLAttributes } from 'react';
 import type { MotionProps } from 'framer-motion';
 
-export type ExtendedTextareaProps = MotionProps &
+export type TextareaProps = MotionProps &
   TextareaHTMLAttributes<HTMLTextAreaElement> & {
     ref?: Ref<HTMLTextAreaElement> | null;
     startDecorator?: ReactNode;

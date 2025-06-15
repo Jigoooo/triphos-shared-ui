@@ -19,7 +19,8 @@ import { FiSearch } from 'react-icons/fi';
 
 import { colors, zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import { Checkbox } from '@/ui/checkbox';
 import type { MultiSelectOption } from '../model';
@@ -376,7 +377,6 @@ function SelectContainer({
                 >
                   <Typography
                     style={{
-                      fontWeight: 500,
                       fontSize: '0.92rem',
                       color: '#ffffff',
                     }}

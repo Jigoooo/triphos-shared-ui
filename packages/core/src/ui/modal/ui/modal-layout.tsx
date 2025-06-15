@@ -1,12 +1,14 @@
-import type { CSSProperties, ReactNode, RefObject } from 'react';
+import type { CSSProperties } from 'react';
 import { useCallback } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useLayoutEffect, useState } from 'react';
 import { motion, useDragControls } from 'framer-motion';
 
-import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { CloseIconButton } from '@/ui/icon';
+import type { ModalLayoutProps } from '../model/modal-type.ts';
 
 const modalContainerDefaultStyle: CSSProperties = {
   backgroundColor: '#ffffff',
@@ -23,21 +25,12 @@ export function ModalLayout({
   close,
   drag = true,
   title = '',
+  titleIcon,
   subTitle = '',
   containerStyle,
   titleStyle,
   children,
-}: {
-  overlayRef: RefObject<HTMLDivElement | null>;
-  close: () => void;
-  drag?: boolean;
-  title?: string;
-  subTitle?: string;
-  containerStyle?: CSSProperties;
-  titleStyle?: CSSProperties;
-  withHeader?: boolean;
-  children: ReactNode;
-}) {
+}: ModalLayoutProps) {
   const dragControls = useDragControls();
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -127,10 +120,12 @@ export function ModalLayout({
         onPointerDown={(e) => dragControls.start(e)}
       >
         <FlexColumn style={{ gap: '0.2rem', userSelect: 'none' }}>
-          {/*todo 아이콘 추가 할 수 있게 */}
-          <Typography style={{ fontSize: '1.2rem', fontWeight: 700, ...titleStyle }}>
-            {title}
-          </Typography>
+          <FlexRow style={{ alignItems: 'center' }}>
+            {titleIcon && titleIcon}
+            <Typography style={{ fontSize: '1.2rem', fontWeight: 700, ...titleStyle }}>
+              {title}
+            </Typography>
+          </FlexRow>
           <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
         </FlexColumn>
         <FlexColumn style={{ height: '100%', justifyContent: 'flex-start', paddingTop: '0.4rem' }}>

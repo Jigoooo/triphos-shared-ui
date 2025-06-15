@@ -1,12 +1,6 @@
-import type { CSSProperties } from 'react';
+import type { DividerProps } from '../model/divider-type.ts';
 
-export function Divider({
-  direction = 'horizontal',
-  style,
-}: {
-  direction?: 'horizontal' | 'vertical';
-  style?: CSSProperties;
-}) {
+export function Divider({ direction = 'horizontal', style }: DividerProps) {
   return (
     <div
       style={{

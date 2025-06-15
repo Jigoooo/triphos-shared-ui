@@ -10,7 +10,7 @@ import type { THeader, TDataWithIndex } from '@/ui/table';
 import { ModalLayout, useModal } from '@/ui/modal';
 import { dialog } from '@/ui/dialog';
 import { readExcelFile } from '../model/excel-lib.ts';
-import { FlexColumn, FlexRow } from '@/ui/view';
+import { FlexColumn, FlexRow } from '@/ui/layout';
 import { Link } from '@/ui/link';
 import { Button } from '@/ui/button';
 

@@ -39,12 +39,12 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSPr
 
 export const buttonDisabledStyle: Record<ButtonStyle, CSSProperties> = {
   [ButtonStyle.SOLID]: {
-    // cursor: 'not-allowed',
+    // cursor: 'default',
     backgroundColor: '#eeeeee',
     color: '#aaaaaa',
   },
   [ButtonStyle.OUTLINED]: {
-    // cursor: 'not-allowed',
+    // cursor: 'default',
     backgroundColor: '#eeeeee',
     borderColor: '#bebebe',
     color: '#bbbbbb',

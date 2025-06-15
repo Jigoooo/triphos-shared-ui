@@ -39,7 +39,7 @@ export function useModalController({
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (isOpen) {
@@ -62,5 +62,5 @@ export function useModalController({
         document.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [isOpen]);
+  }, [isOpen, modalRef]);
 }

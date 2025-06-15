@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type DialogInfoStates = {
+export type DialogConfig = {
   title?: string;
   contents?: ReactNode;
   confirmText?: string;
@@ -11,32 +11,31 @@ export type DialogInfoStates = {
   overlayClose?: boolean;
   dialogType?: DialogType;
 };
+
 export type DialogStates = {
   dialogOpen: boolean;
-  dialogConfig: DialogInfoStates;
+  dialogConfig: DialogConfig;
 };
 
-type DialogActions = {
-  open: (openDialog: DialogInfoStates) => void;
-  openAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
-  close: () => void;
-  success: (openDialog: DialogInfoStates) => void;
-  successAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
-  error: (openDialog: DialogInfoStates) => void;
-  errorAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
-  warning: (openDialog: DialogInfoStates) => void;
-  warningAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
-  info: (openDialog: DialogInfoStates) => void;
-  infoAsync: (openDialog: DialogInfoStates) => Promise<boolean>;
-};
-
-export type DialogStoreInterface = DialogStates & {
-  actions: DialogActions;
+export type DialogStore = DialogStates & {
+  actions: {
+    open: (openDialog: DialogConfig) => void;
+    openAsync: (openDialog: DialogConfig) => Promise<boolean>;
+    close: () => void;
+    success: (openDialog: DialogConfig) => void;
+    successAsync: (openDialog: DialogConfig) => Promise<boolean>;
+    error: (openDialog: DialogConfig) => void;
+    errorAsync: (openDialog: DialogConfig) => Promise<boolean>;
+    warning: (openDialog: DialogConfig) => void;
+    warningAsync: (openDialog: DialogConfig) => Promise<boolean>;
+    info: (openDialog: DialogConfig) => void;
+    infoAsync: (openDialog: DialogConfig) => Promise<boolean>;
+  };
 };
 
 export enum DialogType {
-  INFO = 'info',
-  SUCCESS = 'success',
-  WARNING = 'warning',
-  ERROR = 'error',
+  INFO = 'INFO',
+  SUCCESS = 'SUCCESS',
+  WARNING = 'WARNING',
+  ERROR = 'ERROR',
 }

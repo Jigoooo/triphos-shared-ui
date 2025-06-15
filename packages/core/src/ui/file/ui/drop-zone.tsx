@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { LuFileUp } from 'react-icons/lu';
 
 import { colors } from '@/constants';
-import { FlexRow } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
 import { Link } from '@/ui/link';
 
 export function DropZone({
@@ -128,7 +128,7 @@ export function DropZone({
           <LuFileUp />
         </FlexRow>
         <Link
-          style={{ fontWeight: 500, fontSize: '0.9rem', color: disabled ? '#999999' : '#212121' }}
+          style={{ fontSize: '0.9rem', color: disabled ? '#999999' : '#212121' }}
           disabled={disabled}
         >
           {disabled ? '파일 업로드 제한' : '클릭 또는 드래그하여 파일 업로드'}

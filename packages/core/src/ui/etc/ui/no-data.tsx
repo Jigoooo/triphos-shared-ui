@@ -1,9 +1,10 @@
 import NoDataIcon from '../../../../public/images/no-data-icon.svg?react';
 
-import { FlexColumn } from './flex-column.tsx';
-import { Typography } from './typography.tsx';
+import type { NoDataProps } from '../model/etc-type.ts';
+import { FlexColumn } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 
-export function NoData({ emptyMessage }: { emptyMessage: string }) {
+export function NoData({ emptyMessage }: NoDataProps) {
   return (
     <FlexColumn
       style={{

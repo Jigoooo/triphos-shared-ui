@@ -3,15 +3,11 @@ import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
-import { FlexRow } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
 import { ModalContext } from '../model/modal-context.ts';
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
-import type {
-  TModalRenderProps,
-  TModalItem,
-  TIsPossibleOverlayClose,
-} from '../model/modal-type.ts';
+import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
 import { detectDeviceTypeAndOS } from '@/lib';
 
 const { isMobile } = detectDeviceTypeAndOS();
@@ -20,9 +16,9 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const [modalList, setModalList] = useState<TModalItem[]>([]);
+  const [modalList, setModalList] = useState<ModalItem[]>([]);
   const [isPossibleOverlayClose, setIsPossibleOverlayClose] =
-    useState<TIsPossibleOverlayClose | null>(null);
+    useState<IsPossibleOverlayClose | null>(null);
 
   const handleIsPossibleOverlayClose = (id: string, possible: boolean) => {
     setIsPossibleOverlayClose((prevState) => {
@@ -33,7 +29,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const open = (id: string, render: (props: TModalRenderProps) => ReactNode) => {
+  const open = (id: string, render: (props: ModalRenderProps) => ReactNode) => {
     setModalList((prevState) => [...prevState, { id, render, order: prevState.length }]);
   };
 

@@ -1,12 +1,7 @@
-import type { CSSProperties, SVGProps } from 'react';
+import { FlexRow } from '@/ui/layout';
+import type { DashedDividerProps } from '../model/divider-type.ts';
 
-import { FlexRow } from './flex-row.tsx';
-
-export function DashedDivider({
-  style,
-  strokeColor = '#888888',
-  ...props
-}: SVGProps<SVGSVGElement> & { style?: CSSProperties; strokeColor?: string }) {
+export function DashedDivider({ style, strokeColor = '#888888', ...props }: DashedDividerProps) {
   return (
     <FlexRow
       style={{

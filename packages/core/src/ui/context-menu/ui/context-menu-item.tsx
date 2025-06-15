@@ -1,7 +1,8 @@
-import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { useState } from 'react';
 
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
+import type { ContextMenuItemProps } from '../model/context-menu-type.ts';
 
 export function ContextMenuItem({
   title,
@@ -11,12 +12,7 @@ export function ContextMenuItem({
   onMouseEnter,
   onMouseLeave,
   ...props
-}: HTMLAttributes<HTMLElement> & {
-  title: string;
-  style?: CSSProperties;
-  icon?: ReactNode;
-  onClick?: () => void;
-}) {
+}: ContextMenuItemProps) {
   const [isHover, setIsHover] = useState(false);
   const Icon = icon;
 
@@ -34,9 +30,9 @@ export function ContextMenuItem({
         gap: '0.6rem',
         ...style,
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick?.();
+      onClick={(event) => {
+        event.stopPropagation();
+        onClick?.(event);
       }}
       onMouseEnter={(event) => {
         onMouseEnter?.(event);

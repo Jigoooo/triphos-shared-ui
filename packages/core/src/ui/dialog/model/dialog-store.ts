@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-import { useShallow } from 'zustand/react/shallow';
 
-import type { DialogStates, DialogStoreInterface } from './dialog-type.ts';
+import type { DialogStates, DialogStore } from './dialog-type.ts';
 import { DialogType } from './dialog-type.ts';
 
 const dialogInitialState: DialogStates = {
@@ -19,45 +18,45 @@ const dialogInitialState: DialogStates = {
   },
 };
 
-const useDialogStore = create<DialogStoreInterface>()((setState, getState) => {
+export const useDialogStore = create<DialogStore>()((setState, getState) => {
   return {
     ...dialogInitialState,
     actions: {
-      open: (dialogInfos) => {
+      open: (dialogConfig) => {
         setState((state) => ({
           ...state,
           dialogOpen: true,
           dialogConfig: {
             ...dialogInitialState.dialogConfig,
-            ...dialogInfos,
-            withCancel: dialogInfos.cancelText !== undefined ? true : !!dialogInfos.withCancel,
+            ...dialogConfig,
+            withCancel: dialogConfig.cancelText !== undefined ? true : !!dialogConfig.withCancel,
             onConfirm: () => {
-              if (dialogInfos.onConfirm) dialogInfos.onConfirm();
+              if (dialogConfig.onConfirm) dialogConfig.onConfirm();
               getState().actions.close();
             },
             onCancel: () => {
-              if (dialogInfos.onCancel) dialogInfos.onCancel();
+              if (dialogConfig.onCancel) dialogConfig.onCancel();
               getState().actions.close();
             },
           },
         }));
       },
-      openAsync: (dialogInfos) =>
+      openAsync: (dialogConfig) =>
         new Promise((resolve) => {
           setState((state) => ({
             ...state,
             dialogOpen: true,
             dialogConfig: {
               ...dialogInitialState.dialogConfig,
-              ...dialogInfos,
-              withCancel: dialogInfos.cancelText !== undefined ? true : !!dialogInfos.withCancel,
+              ...dialogConfig,
+              withCancel: dialogConfig.cancelText !== undefined ? true : !!dialogConfig.withCancel,
               onConfirm: () => {
-                if (dialogInfos.onConfirm) dialogInfos.onConfirm();
+                if (dialogConfig.onConfirm) dialogConfig.onConfirm();
                 getState().actions.close();
                 resolve(true);
               },
               onCancel: () => {
-                if (dialogInfos.onCancel) dialogInfos.onCancel();
+                if (dialogConfig.onCancel) dialogConfig.onCancel();
                 getState().actions.close();
                 resolve(false);
               },
@@ -67,34 +66,32 @@ const useDialogStore = create<DialogStoreInterface>()((setState, getState) => {
       close: () => {
         setState(() => ({ ...dialogInitialState.dialogConfig, dialogOpen: false }));
       },
-      success: (dialogInfos) => {
-        getState().actions.open({ ...dialogInfos, dialogType: DialogType.SUCCESS });
+      success: (dialogConfig) => {
+        getState().actions.open({ ...dialogConfig, dialogType: DialogType.SUCCESS });
       },
-      successAsync: (dialogInfos) => {
-        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.SUCCESS });
+      successAsync: (dialogConfig) => {
+        return getState().actions.openAsync({ ...dialogConfig, dialogType: DialogType.SUCCESS });
       },
-      error: (dialogInfos) => {
-        getState().actions.open({ ...dialogInfos, dialogType: DialogType.ERROR });
+      error: (dialogConfig) => {
+        getState().actions.open({ ...dialogConfig, dialogType: DialogType.ERROR });
       },
-      errorAsync: (dialogInfos) => {
-        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.ERROR });
+      errorAsync: (dialogConfig) => {
+        return getState().actions.openAsync({ ...dialogConfig, dialogType: DialogType.ERROR });
       },
-      warning: (dialogInfos) => {
-        getState().actions.open({ ...dialogInfos, dialogType: DialogType.WARNING });
+      warning: (dialogConfig) => {
+        getState().actions.open({ ...dialogConfig, dialogType: DialogType.WARNING });
       },
-      warningAsync: (dialogInfos) => {
-        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.WARNING });
+      warningAsync: (dialogConfig) => {
+        return getState().actions.openAsync({ ...dialogConfig, dialogType: DialogType.WARNING });
       },
-      info: (dialogInfos) => {
-        getState().actions.open({ ...dialogInfos, dialogType: DialogType.INFO });
+      info: (dialogConfig) => {
+        getState().actions.open({ ...dialogConfig, dialogType: DialogType.INFO });
       },
-      infoAsync: (dialogInfos) => {
-        return getState().actions.openAsync({ ...dialogInfos, dialogType: DialogType.INFO });
+      infoAsync: (dialogConfig) => {
+        return getState().actions.openAsync({ ...dialogConfig, dialogType: DialogType.INFO });
       },
     },
   };
 });
 
-export const useDialogOpen = () => useDialogStore((state) => state.dialogOpen);
-export const useDialogConfig = () => useDialogStore(useShallow((state) => state.dialogConfig));
 export const dialog = useDialogStore.getState().actions;

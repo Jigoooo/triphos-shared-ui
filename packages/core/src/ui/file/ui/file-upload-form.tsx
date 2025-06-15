@@ -50,7 +50,8 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { BiLogoTypescript } from 'react-icons/bi';
 
 import { DropZone } from './drop-zone.tsx';
-import { FlexColumn, FlexRow, Typography } from '@/ui/view';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import type { TFile } from '../model';
 import { fileSizeFormatter } from '../model';
 import { LinearProgress } from '@/ui/progress';
@@ -182,15 +183,11 @@ export function FileUploadForm({
                         {fileNameWithoutExtension}
                       </Typography>
                       <FlexRow style={{ alignItems: 'center', gap: 4 }}>
-                        <Typography
-                          style={{ fontWeight: 500, fontSize: '0.82rem', color: '#777777' }}
-                        >
+                        <Typography style={{ fontSize: '0.82rem', color: '#777777' }}>
                           {fileExtensionWithDot}
                         </Typography>
                         <Typography style={{ color: '#777777' }}>&middot;</Typography>
-                        <Typography
-                          style={{ fontWeight: 500, fontSize: '0.82rem', color: '#777777' }}
-                        >
+                        <Typography style={{ fontSize: '0.82rem', color: '#777777' }}>
                           {`${fileSize} ${isUnder1MB ? 'KB' : 'MB'}`}
                         </Typography>
                       </FlexRow>

@@ -1,43 +1,37 @@
-import type { ReactNode, RefObject } from 'react';
+import type { CSSProperties, ReactNode, RefObject } from 'react';
 
-export type TModalItem = {
+export type ModalItem = {
   id: string;
-  render: (props: TModalRenderProps) => ReactNode;
+  render: (props: ModalRenderProps) => ReactNode;
   order: number;
 };
 
-export type TModalRenderProps = {
+export type ModalRenderProps = {
   overlayRef: RefObject<HTMLDivElement | null>;
   isOpen: boolean;
   close: () => void;
 };
 
-export type TIsPossibleOverlayClose = {
+export type IsPossibleOverlayClose = {
   [key: string]: boolean;
 };
 
 export type ModalContextType = {
   modalIds: { id: string }[];
-  open: (id: string, render: (props: TModalRenderProps) => ReactNode) => void;
+  open: (id: string, render: (props: ModalRenderProps) => ReactNode) => void;
   close: (id: string) => void;
   handleIsPossibleOverlayClose: (id: string, possible: boolean) => void;
 };
 
-export type TMobileModal = {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  defaultSize?: {
-    width?: number | string;
-    height?: number | string;
-  };
-  minSize?: {
-    width?: number | string;
-    height?: number | string;
-  };
-  maxSize?: {
-    width?: number | string;
-    height?: number | string;
-  };
+export type ModalLayoutProps = {
+  overlayRef: RefObject<HTMLDivElement | null>;
+  close: () => void;
+  drag?: boolean;
+  title?: string;
+  titleIcon?: ReactNode;
+  subTitle?: string;
+  containerStyle?: CSSProperties;
+  titleStyle?: CSSProperties;
+  withHeader?: boolean;
   children: ReactNode;
 };

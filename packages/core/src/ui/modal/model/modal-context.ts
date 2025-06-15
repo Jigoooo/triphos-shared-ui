@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
-import type { ModalContextType, TModalRenderProps } from './modal-type.ts';
+import type { ModalContextType, ModalRenderProps } from './modal-type.ts';
 
 export const ModalContext = createContext<ModalContextType | null>(null);
 
@@ -25,7 +25,7 @@ export const useModal = ({
 
   return {
     ...context,
-    open: (render: (props: TModalRenderProps) => ReactNode) => {
+    open: (render: (props: ModalRenderProps) => ReactNode) => {
       context.open(id, render);
     },
     close: () => {

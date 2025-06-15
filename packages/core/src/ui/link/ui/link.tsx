@@ -30,7 +30,7 @@ export function Link({
           userSelect: 'none',
           borderBottom: isHovered ? '1px solid currentColor' : '1px solid transparent',
           lineHeight: 1,
-          cursor: disabled ? 'not-allowed' : 'pointer',
+          cursor: disabled ? 'default' : 'pointer',
         },
         ...style,
       }}

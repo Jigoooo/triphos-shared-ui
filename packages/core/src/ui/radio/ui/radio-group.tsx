@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react';
-
 import { RadioGroupContext } from '../model/radio-group-context.ts';
+import type { RadioGroupProps } from '../model/radio-type.ts';
 
 export function RadioGroup({
   name,
@@ -8,16 +7,10 @@ export function RadioGroup({
   handleSelectedRadio,
   groupDisabled = false,
   children,
-}: {
-  name: string;
-  selectedRadio: string;
-  handleSelectedRadio: (value: string) => void;
-  groupDisabled?: boolean;
-  children: ReactNode;
-}) {
+}: RadioGroupProps) {
   return (
     <RadioGroupContext value={{ name, selectedRadio, handleSelectedRadio, groupDisabled }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>{children}</div>
+      {children}
     </RadioGroupContext>
   );
 }

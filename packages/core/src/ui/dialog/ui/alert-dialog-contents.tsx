@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { FlexColumn, Typography } from '@/ui/view';
+import { FlexColumn } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 
 export function AlertDialogContents({ contents }: { contents?: ReactNode }) {
   return (

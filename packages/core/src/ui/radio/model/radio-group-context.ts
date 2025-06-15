@@ -1,14 +1,8 @@
 import { createContext, use } from 'react';
 
-export const RadioGroupContext = createContext<
-  | {
-      name: string;
-      selectedRadio: string;
-      handleSelectedRadio: (value: string) => void;
-      groupDisabled: boolean;
-    }
-  | undefined
->(undefined);
+import type { RadioGroupContextType } from '../model/radio-type.ts';
+
+export const RadioGroupContext = createContext<RadioGroupContextType | null>(null);
 
 export function useRadioGroupContext() {
   const context = use(RadioGroupContext);

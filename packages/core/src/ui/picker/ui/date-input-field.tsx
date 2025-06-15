@@ -3,7 +3,8 @@ import { format, isAfter, isBefore } from 'date-fns';
 
 import { LuCalendar } from 'react-icons/lu';
 
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 
 export function DateInputField({

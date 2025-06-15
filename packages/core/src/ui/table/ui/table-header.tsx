@@ -3,7 +3,8 @@ import type { RefObject } from 'react';
 import { LuMoveUp, LuMoveDown } from 'react-icons/lu';
 
 import type { THeader } from '../model/table-type.ts';
-import { FlexRow, Typography } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import { Checkbox } from '@/ui/checkbox';
 import { useTableContext } from '../model/table-context.ts';

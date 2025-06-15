@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import type { KeyboardEvent } from 'react';
 
 import { colors } from '@/constants';
-import type { ExtendedTextareaProps } from '../model/textarea-type.ts';
+import type { TextareaProps } from '../model/textarea-type.ts';
 import { defaultTextareaStyle, textareaDisabledStyle } from '../lib/textarea-styles.ts';
 import { useCompositionRef } from '@/hooks';
 
@@ -13,7 +13,7 @@ export function Textarea({
   onEnter,
   onKeyDown,
   ...props
-}: Readonly<ExtendedTextareaProps>) {
+}: TextareaProps) {
   const { isComposingRef, handleCompositionStart, handleCompositionEnd } = useCompositionRef();
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {

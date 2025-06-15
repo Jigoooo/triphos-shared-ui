@@ -1,6 +1,7 @@
 import CheckSolid from '../../../../public/images/check-solid.svg?react';
 
-import { FlexRow } from '@/ui/view';
+import { FlexRow } from '@/ui/layout';
+import type { NoAnimatedCheckboxProps } from '../model/checkbox-type.ts';
 
 export function NoAnimatedCheckbox({
   isPartial,
@@ -9,14 +10,7 @@ export function NoAnimatedCheckbox({
   disabled,
   checked,
   color,
-}: {
-  isPartial: boolean;
-  checkboxSize?: string | number;
-  checkIconSize?: string | number;
-  disabled?: boolean;
-  checked: boolean;
-  color?: string;
-}) {
+}: NoAnimatedCheckboxProps) {
   return (
     <FlexRow
       style={{

@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
+import { useShallow } from 'zustand/react/shallow';
 
 import { zIndex } from '@/constants';
 import { detectDeviceTypeAndOS } from '@/lib';
-import { dialog, useDialogConfig, useDialogOpen } from '../model/dialog-store.ts';
+import { dialog, useDialogStore } from '../model/dialog-store.ts';
 import { useModalController } from '@/ui/modal';
-import { FlexColumn } from '@/ui/view';
+import { FlexColumn } from '@/ui/layout';
 import { AlertDialogHeader } from './alert-dialog-header.tsx';
 import { AlertDialogContents } from './alert-dialog-contents.tsx';
 import { AlertDialogActions } from './alert-dialog-actions.tsx';
@@ -14,8 +15,8 @@ import { AlertDialogActions } from './alert-dialog-actions.tsx';
 const { isMobile } = detectDeviceTypeAndOS();
 
 export function AlertDialog() {
-  const dialogOpen = useDialogOpen();
-  const dialogConfig = useDialogConfig();
+  const dialogOpen = useDialogStore((state) => state.dialogOpen);
+  const dialogConfig = useDialogStore(useShallow((state) => state.dialogConfig));
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   useModalController({
@@ -90,7 +91,7 @@ export function AlertDialog() {
                 isEmptyContents={!dialogConfig.contents}
               />
               <AlertDialogContents contents={dialogConfig.contents} />
-              <AlertDialogActions dialogInfos={dialogConfig} />
+              <AlertDialogActions dialogConfig={dialogConfig} />
             </FlexColumn>
 
             <motion.div
