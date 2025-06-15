@@ -59,7 +59,7 @@ export type { LinearProgressProps } from './ui/progress';
 export { LoaderProvider, DeferredWrapper, Skeleton, loader, useLoaderStore } from './ui/loader';
 export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } from './ui/loader';
 
-export { ErrorProvider } from './ui/error';
+export { ComponentErrorProvider } from './ui/error';
 export type { ErrorProviderProps } from './ui/error';
 
 export {
