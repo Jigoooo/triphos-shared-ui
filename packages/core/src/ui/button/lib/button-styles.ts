@@ -19,6 +19,7 @@ export const defaultButtonStyle: CSSProperties = {
   WebkitUserSelect: 'none',
   MozUserSelect: 'none',
   msUserSelect: 'none',
+  fontWeight: 600,
 } as const;
 
 export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSProperties> {

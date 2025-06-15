@@ -2,13 +2,13 @@ export type { ThemeContextType, Theme } from './theme';
 export { useThemeContext, ThemeProvider } from './theme';
 export { Button, SolidButton, OutlinedButton, SearchButton, ButtonStyle } from './ui/button';
 export type { ButtonProps } from './ui/button';
+export { CloseIconButton } from './ui/icon';
 // export { AccordionGroup, AccordionItem } from './ui/accordion';
 
 export { dialog, AlertDialog } from './ui/dialog';
 
 export { ContextMenuWrapper, ContextMenuItem, ContextMenuDivider } from './ui/context-menu'; // 스타일 변경 가능하게 수정 필요
 export { Checkbox } from './ui/checkbox'; // 스타일 체크박스 스타일 변경 가능하게 수정
-export { CloseIcon } from './ui/icon';
 export { Textarea } from './ui/textarea';
 export { Input, BaseInput, SoftInput, OutlinedInput, UnderlineInput } from './ui/input';
 export { RadioGroup, Radio, useRadioGroupContext } from './ui/radio';

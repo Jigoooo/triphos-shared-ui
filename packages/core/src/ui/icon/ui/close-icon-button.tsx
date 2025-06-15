@@ -4,7 +4,7 @@ import { LuX } from 'react-icons/lu';
 
 import { FlexRow } from '@/ui/view';
 
-export function CloseIcon({ close }: { close: () => void }) {
+export function CloseIconButton({ close }: { close: () => void }) {
   return (
     <FlexRow
       as={motion.div}

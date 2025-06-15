@@ -1,1 +1,1 @@
-export { CloseIcon } from './ui/close-icon.tsx';
+export { CloseIconButton } from './ui/close-icon-button.tsx';

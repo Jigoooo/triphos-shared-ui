@@ -6,7 +6,7 @@ import { useLayoutEffect, useState } from 'react';
 import { motion, useDragControls } from 'framer-motion';
 
 import { FlexColumn, FlexRow, Typography } from '@/ui/view';
-import { CloseIcon } from '@/ui/icon';
+import { CloseIconButton } from '@/ui/icon';
 
 const modalContainerDefaultStyle: CSSProperties = {
   backgroundColor: '#ffffff',
@@ -134,7 +134,7 @@ export function ModalLayout({
           <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
         </FlexColumn>
         <FlexColumn style={{ height: '100%', justifyContent: 'flex-start', paddingTop: '0.4rem' }}>
-          <CloseIcon close={close} />
+          <CloseIconButton close={close} />
         </FlexColumn>
       </FlexRow>
       {/*<Divider />*/}
