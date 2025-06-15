@@ -1,7 +1,7 @@
-import type { KeyboardEvent, CSSProperties, HTMLProps } from 'react';
+import type { KeyboardEvent, CSSProperties } from 'react';
 import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import type { ReferenceType, Strategy, VirtualElement, Placement } from '@floating-ui/react';
+import { AnimatePresence } from 'framer-motion';
+import type { Strategy, Placement } from '@floating-ui/react';
 import {
   flip,
   FloatingOverlay,
@@ -13,16 +13,11 @@ import {
   useInteractions,
 } from '@floating-ui/react';
 
-import { HiChevronUpDown } from 'react-icons/hi2';
-import { IoMdCheckmark } from 'react-icons/io';
-import { FiSearch } from 'react-icons/fi';
-
 import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import { FlexRow } from '@/ui/layout';
-import { Typography } from '@/ui/typography';
-import { Input } from '@/ui/input';
-import type { SelectOption } from '../model/picker-type.ts';
+import type { SelectOption } from '../model/select-type.ts';
+import { SelectItems } from './select-items.tsx';
+import { SelectContainer } from './select-container.tsx';
 
 export function Select<ValueType extends string | number>({
   strategy = 'absolute',
@@ -251,222 +246,5 @@ export function Select<ValueType extends string | number>({
           ))}
       </AnimatePresence>
     </div>
-  );
-}
-
-function SelectContainer({
-  ref,
-  label,
-  selectedLabel,
-  toggleSelectBox,
-  containerHeight,
-  getReferenceProps,
-  containerHoverColor = '#f4f4f4',
-  containerStyle,
-  labelContainerStyle,
-  labelStyle,
-  selectedLabelStyle,
-  containerIconStyle,
-}: {
-  ref?: ((node: ReferenceType | null) => void) & ((node: Element | VirtualElement | null) => void);
-  label?: string;
-  selectedLabel?: string;
-  toggleSelectBox: () => void;
-  containerHeight: string | number;
-  getReferenceProps: (userProps?: HTMLProps<Element>) => Record<string, unknown>;
-  containerHoverColor?: string;
-  containerStyle?: CSSProperties;
-  labelContainerStyle?: CSSProperties;
-  labelStyle?: CSSProperties;
-  selectedLabelStyle?: CSSProperties;
-  containerIconStyle?: CSSProperties;
-}) {
-  return (
-    <FlexRow
-      ref={ref}
-      as={motion.div}
-      style={{
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: '0.5rem',
-        paddingLeft: label ? '0.75rem' : '0.375rem',
-        paddingRight: '0.375ren',
-        paddingBlock: '0.25rem',
-        height: containerHeight,
-        backgroundColor: '#ffffff',
-        boxShadow: '0 0 3px rgba(50, 50, 50, 0.1)',
-        border: `1px solid #cccccc`,
-        transition: 'border-color 0.1s ease',
-        borderRadius: '0.25rem',
-        cursor: 'pointer',
-        ...containerStyle,
-      }}
-      onClick={(event) => {
-        event.stopPropagation();
-        toggleSelectBox();
-      }}
-      whileHover={{ backgroundColor: containerHoverColor }}
-      transition={{ duration: 0.14 }}
-      {...getReferenceProps()}
-    >
-      <FlexRow
-        style={{ alignItems: 'center', gap: '0.5rem', overflow: 'hidden', ...labelContainerStyle }}
-      >
-        {label && (
-          <>
-            <Typography style={{ fontSize: '0.8rem', color: '#333333', ...labelStyle }}>
-              {label}
-            </Typography>
-            <div
-              style={{ height: 20, width: 1, alignSelf: 'center', backgroundColor: '#cccccc' }}
-            ></div>
-          </>
-        )}
-        <Typography
-          style={{
-            padding: '3px 6px',
-            borderRadius: 4,
-            fontSize: '0.94rem',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            ...selectedLabelStyle,
-          }}
-        >
-          {selectedLabel}
-        </Typography>
-      </FlexRow>
-      <FlexRow
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '1.3rem',
-          color: '#888888',
-          ...containerIconStyle,
-        }}
-      >
-        <HiChevronUpDown />
-      </FlexRow>
-    </FlexRow>
-  );
-}
-
-function SelectItems<ValueType extends string | number>({
-  setFloating,
-  floatingStyles,
-  getFloatingProps,
-  selectValue,
-  selectedValue,
-  options,
-  isAutocomplete,
-  filterText,
-  handleFilterText,
-  handleKeyDown,
-  highlightedIndex,
-  itemContainerStyle,
-  itemLabelContainerStyle,
-  itemLabelStyle,
-}: {
-  setFloating: (node: HTMLElement | null) => void;
-  floatingStyles: CSSProperties;
-  getFloatingProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
-  selectValue: (value: ValueType) => void;
-  selectedValue: ValueType;
-  options: SelectOption<ValueType>[];
-  isAutocomplete: boolean;
-  filterText: string;
-  handleFilterText: (text: string) => void;
-  handleKeyDown: (e: KeyboardEvent<HTMLDivElement>) => void;
-  highlightedIndex: number | null;
-  itemContainerStyle?: CSSProperties;
-  itemLabelContainerStyle?: CSSProperties;
-  itemLabelStyle?: CSSProperties;
-}) {
-  return (
-    <motion.div
-      ref={setFloating}
-      className='shadow-scroll'
-      style={{
-        ...{
-          backgroundColor: 'white',
-          border: '1px solid #ddd',
-          borderRadius: '0.25rem',
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-          maxHeight: '20rem',
-          overflowY: 'auto',
-          zIndex: zIndex.selectBoxItem,
-          padding: isAutocomplete ? 0 : '0.375rem',
-          ...itemContainerStyle,
-        },
-        ...floatingStyles,
-      }}
-      initial={{
-        opacity: 0,
-        scale: 0.95,
-      }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-      }}
-      exit={{
-        opacity: 0,
-        scale: 0.95,
-      }}
-      transition={{ duration: 0.14, ease: 'easeInOut' }}
-      {...getFloatingProps()}
-    >
-      {isAutocomplete && (
-        <div style={{ position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1 }}>
-          <Input.Underline
-            onKeyDown={handleKeyDown}
-            startDecorator={<FiSearch style={{ color: '#999999', fontSize: '1.1rem' }} />}
-            value={filterText}
-            onChange={(event) => {
-              handleFilterText(event.target.value);
-            }}
-            onClick={(event) => event.stopPropagation()}
-            isFocusEffect={false}
-            style={{ width: '100%', backgroundColor: 'transparent', height: 32, marginBottom: 6 }}
-            placeholder={'Search Option'}
-          />
-        </div>
-      )}
-      {options.map((option, index) => {
-        return (
-          <FlexRow
-            as={motion.div}
-            key={option.value}
-            style={{
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: '2.375rem',
-              cursor: 'pointer',
-              marginInline: isAutocomplete ? '0.375rem' : 0,
-              paddingBlock: '0.25rem',
-              paddingInline: '0.5rem',
-              backgroundColor: highlightedIndex === index ? '#f4f4f4' : '#ffffff',
-              borderRadius: '0.375rem',
-              ...itemLabelContainerStyle,
-            }}
-            onClick={() => selectValue(option.value)}
-            whileHover={{ backgroundColor: '#f4f4f4' }}
-          >
-            <Typography
-              style={{
-                fontSize: '0.94rem',
-                borderRadius: '0.25rem',
-                color: '#000000',
-                ...itemLabelStyle,
-              }}
-            >
-              {option.label}
-            </Typography>
-            {selectedValue === option.value && (
-              <IoMdCheckmark style={{ fontSize: '1.2rem', color: '#333333' }} />
-            )}
-          </FlexRow>
-        );
-      })}
-    </motion.div>
   );
 }

@@ -62,15 +62,12 @@ export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } f
 export { ComponentErrorProvider } from './ui/error';
 export type { ComponentErrorProviderProps } from './ui/error';
 
-export {
-  Select,
-  MultiSelect,
-  DatePicker,
-  DateFromToPicker,
-  TimePicker,
-  AnchorPicker,
-} from './ui/picker';
-export type { SelectOption, AnchorPickerProps } from './ui/picker';
+export { AnchorPicker } from './ui/picker';
+export type { AnchorPickerProps } from './ui/picker';
+
+export { Select, MultiSelect } from './ui/select';
+export type { SelectOption, MultiSelectOption } from './ui/select';
+export { DatePicker, DateFromToPicker, TimePicker } from './ui/date-time-picker';
 
 /*
  * todo

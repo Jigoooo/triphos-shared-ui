@@ -1,18 +1,6 @@
 import type { Placement, Strategy } from '@floating-ui/react';
 import type { MouseEvent, ReactNode } from 'react';
 
-export type SelectOption<ValueType extends string | number> = {
-  label: string;
-  value: ValueType;
-};
-
-export type MultiSelectOption = {
-  label: string;
-  value: string | number;
-};
-
-export type TimePart = 'hours' | 'minutes' | 'seconds';
-
 export type AnchorPickerProps = {
   strategy?: Strategy;
   placement?: Placement;
