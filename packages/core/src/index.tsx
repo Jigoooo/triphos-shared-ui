@@ -56,7 +56,7 @@ export type { LinkProps } from './ui/link';
 export { LinearProgress } from './ui/progress';
 export type { LinearProgressProps } from './ui/progress';
 
-export { LoaderProvider, DeferredWrapper, Skeleton } from './ui/loader';
+export { LoaderProvider, DeferredWrapper, Skeleton, loader, useLoaderStore } from './ui/loader';
 export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } from './ui/loader';
 
 export {

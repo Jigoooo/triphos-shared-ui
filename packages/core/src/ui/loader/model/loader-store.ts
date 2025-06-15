@@ -61,4 +61,4 @@ export const useLoaderStore = create<LoaderStore>()((setState, getState) => {
   };
 });
 
-export const loading = useLoaderStore.getState().actions;
+export const loader = useLoaderStore.getState().actions;
