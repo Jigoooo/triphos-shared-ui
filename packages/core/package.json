@@ -48,7 +48,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./dist/shared-ui.css": "./dist/shared-ui.css"
   },
   "sideEffects": [
     "**/*.css"

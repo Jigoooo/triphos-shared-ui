@@ -42,7 +42,6 @@ body {
   color: #212121;
 }
 
-/* 자동완성 시 배경색 및 글자색 지정 */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

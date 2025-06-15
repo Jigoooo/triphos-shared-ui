@@ -80,7 +80,7 @@ export function BaseInput({
         onCompositionStart={handleCompositionStart}
         onCompositionEnd={handleCompositionEnd}
         onClick={(event) => {
-          // event.stopPropagation();
+          event.stopPropagation();
           onClick?.(event);
         }}
         {...props}
