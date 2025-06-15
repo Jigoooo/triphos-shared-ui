@@ -22,7 +22,7 @@ import { useHandleClickOutsideRef } from 'hooks';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
-import type { SelectOption } from '../model';
+import type { SelectOption } from '../model/picker-type.ts';
 
 export function Select<ValueType extends string | number>({
   strategy = 'absolute',

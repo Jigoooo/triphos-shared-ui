@@ -41,7 +41,7 @@ export function BaseInput({
             position: 'absolute',
             display: 'flex',
             alignItems: 'center',
-            left: inputStyle === InputStyle.UNDERLINE ? 6 : 8,
+            left: inputStyle === InputStyle.UNDERLINE ? '0.375rem' : '0.5rem',
             top: inputStyle === InputStyle.UNDERLINE ? '40%' : '50%',
             transform: 'translateY(-50%)',
             pointerEvents: 'none',
@@ -80,7 +80,7 @@ export function BaseInput({
         onCompositionStart={handleCompositionStart}
         onCompositionEnd={handleCompositionEnd}
         onClick={(event) => {
-          event.stopPropagation();
+          // event.stopPropagation();
           onClick?.(event);
         }}
         {...props}
@@ -90,7 +90,7 @@ export function BaseInput({
           style={{
             height: '100%',
             position: 'absolute',
-            right: 8,
+            right: '0.5rem',
             top: '50%',
             transform: 'translateY(-50%)',
             pointerEvents: 'none',

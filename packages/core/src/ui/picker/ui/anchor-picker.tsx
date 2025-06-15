@@ -1,6 +1,5 @@
-import { type MouseEvent, useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { Placement, Strategy } from '@floating-ui/react';
 import {
   flip,
   FloatingOverlay,
@@ -13,6 +12,7 @@ import {
 } from '@floating-ui/react';
 
 import { zIndex } from '@/constants';
+import type { AnchorPickerProps } from '../model/picker-type.ts';
 
 export function AnchorPicker({
   strategy = 'absolute',
@@ -27,20 +27,7 @@ export function AnchorPicker({
   cachedChildren = false,
   useAnimation = true,
   children,
-}: {
-  strategy?: Strategy;
-  placement?: Placement;
-  minAxisOffset?: number;
-  crossAxis?: number;
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  onOverlayClick?: (e: MouseEvent<HTMLDivElement>) => void;
-  onClose?: () => void;
-  contents: ReactNode;
-  cachedChildren?: boolean;
-  useAnimation?: boolean;
-  children: ReactNode;
-}) {
+}: AnchorPickerProps) {
   const wasOpenRef = useRef(isOpen);
 
   useEffect(() => {

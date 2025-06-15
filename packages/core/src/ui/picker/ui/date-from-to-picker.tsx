@@ -493,7 +493,7 @@ export function DateFromToPicker({
     if (openListener) {
       openListener(showFromToDatePicker);
     }
-  }, [showFromToDatePicker]);
+  }, [openListener, showFromToDatePicker]);
 
   const { refs, floatingStyles, context } = useFloating({
     open: showFromToDatePicker,

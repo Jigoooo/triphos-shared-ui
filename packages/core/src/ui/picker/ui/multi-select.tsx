@@ -23,7 +23,7 @@ import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 import { Input } from '@/ui/input';
 import { Checkbox } from '@/ui/checkbox';
-import type { MultiSelectOption } from '../model';
+import type { MultiSelectOption } from '../model/picker-type.ts';
 
 export function MultiSelect<ValuesType extends (string | number)[]>({
   strategy = 'absolute',
