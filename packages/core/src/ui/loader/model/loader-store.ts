@@ -1,25 +1,24 @@
 import { create } from 'zustand';
-import { useShallow } from 'zustand/react/shallow';
 
-import type { LoadingStates, LoadingStoreInterface } from './loading-type.ts';
+import type { LoaderStates, LoaderStore } from './loader-type.ts';
 
-const loadingInitialState: LoadingStates = {
+const loaderInitialState: LoaderStates = {
   isLoading: false,
   isActiveOverlay: false,
-  loadingText: '',
+  loaderText: '',
   timer: null,
 };
 
-const useLoadingStore = create<LoadingStoreInterface>()((setState, getState) => {
+export const useLoaderStore = create<LoaderStore>()((setState, getState) => {
   return {
-    ...loadingInitialState,
+    ...loaderInitialState,
     actions: {
       show: ({ loadingText = 'Loading...', isActiveOverlay = true } = {}) => {
         setState((state) => ({
           ...state,
           isLoading: true,
           isActiveOverlay,
-          loadingText,
+          loaderText: loadingText,
         }));
       },
       debounceShow: ({ delay = 300, ...rest } = {}) => {
@@ -62,5 +61,4 @@ const useLoadingStore = create<LoadingStoreInterface>()((setState, getState) => 
   };
 });
 
-export const useLoading = () => useLoadingStore(useShallow((state) => state));
-export const loading = useLoadingStore.getState().actions;
+export const loading = useLoaderStore.getState().actions;

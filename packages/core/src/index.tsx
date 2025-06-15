@@ -56,6 +56,9 @@ export type { LinkProps } from './ui/link';
 export { LinearProgress } from './ui/progress';
 export type { LinearProgressProps } from './ui/progress';
 
+export { LoaderProvider, DeferredWrapper, Skeleton } from './ui/loader';
+export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } from './ui/loader';
+
 export {
   Select,
   MultiSelect,
@@ -68,7 +71,6 @@ export type { SelectOption, AnchorPickerProps } from './ui/picker';
 
 /*
  * todo
- * 전역 Loading
  * File
  * Excel
  * Table
