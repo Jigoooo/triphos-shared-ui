@@ -7,7 +7,7 @@ export enum InputStyle {
   UNDERLINE = 'underline',
 }
 
-export type ExtendedInputProps = MotionProps &
+export type InputProps = MotionProps &
   InputHTMLAttributes<HTMLInputElement> & {
     ref?: Ref<HTMLInputElement> | null;
     inputStyle?: InputStyle;

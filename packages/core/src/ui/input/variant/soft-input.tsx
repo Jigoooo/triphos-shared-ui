@@ -1,7 +1,7 @@
-import type { ExtendedInputProps } from '../model/input-type.ts';
+import type { InputProps } from '../model/input-type.ts';
 import { InputStyle } from '../model/input-type.ts';
 import { BaseInput } from '../ui/input.tsx';
 
-export function SoftInput(props: ExtendedInputProps) {
+export function SoftInput(props: InputProps) {
   return <BaseInput {...props} inputStyle={InputStyle.SOFT} />;
 }

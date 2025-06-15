@@ -1,5 +1,3 @@
-import '@/shared/assets/css/loader.css';
-
 import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 

@@ -48,6 +48,14 @@ export { NoData, ActionAnimatedWrapper } from './ui/etc';
 export type { ActionsAnimatedProps, NoDataProps } from './ui/etc';
 
 export { Input, BaseInput, SoftInput, OutlinedInput, UnderlineInput } from './ui/input';
+export type { InputProps } from './ui/input';
+
+export { Link } from './ui/link';
+export type { LinkProps } from './ui/link';
+
+export { LinearProgress } from './ui/progress';
+export type { LinearProgressProps } from './ui/progress';
+
 export {
   Select,
   MultiSelect,
@@ -60,11 +68,9 @@ export type { SelectOption, AnchorPickerProps } from './ui/picker';
 
 /*
  * todo
- * Link
  * 전역 Loading
  * File
  * Excel
- * LinearProgress
  * Table
  * Accordion
  * */

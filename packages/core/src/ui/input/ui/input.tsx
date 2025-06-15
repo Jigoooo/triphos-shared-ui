@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import type { ExtendedInputProps } from '../model/input-type.ts';
+import type { InputProps } from '../model/input-type.ts';
 import { useCompositionRef } from '@/hooks';
 import { InputStyle } from '../model/input-type.ts';
 import { colors, zIndex } from '@/constants';
@@ -25,7 +25,7 @@ export function BaseInput({
   isFocusEffect = true,
   onClick,
   ...props
-}: ExtendedInputProps) {
+}: InputProps) {
   const { handleCompositionStart, handleCompositionEnd } = useCompositionRef();
 
   return (

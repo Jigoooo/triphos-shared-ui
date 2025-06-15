@@ -1,12 +1,8 @@
-import type { AnchorHTMLAttributes } from 'react';
 import { useState } from 'react';
 
-export function Link({
-  style,
-  children,
-  disabled = false,
-  ...props
-}: AnchorHTMLAttributes<HTMLAnchorElement> & { disabled?: boolean; children: string }) {
+import type { LinkProps } from '../model/link-type.ts';
+
+export function Link({ style, children, disabled = false, ...props }: LinkProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
