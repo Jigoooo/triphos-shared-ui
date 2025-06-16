@@ -54,10 +54,53 @@ const shimmerAnimation = {
   },
 };
 
+/**
+ * Skeleton loader component with shimmer animation effect
+ *
+ * Creates a loading placeholder with a smooth shimmer animation that slides
+ * horizontally across the element. Useful for indicating loading states
+ * before content is available.
+ *
+ * @component
+ * @example
+ * // Basic usage
+ * <Skeleton style={{ width: '200px', height: '20px', borderRadius: '4px' }} />
+ *
+ * @example
+ * // Custom colors
+ * <Skeleton
+ *   baseColor="#f0f0f0"
+ *   shimmerColor="#e0e0e0"
+ *   style={{ width: '100%', height: '40px' }}
+ * />
+ *
+ * @example
+ * // Profile skeleton
+ * <div>
+ *   <Skeleton style={{ width: '60px', height: '60px', borderRadius: '50%' }} />
+ *   <Skeleton style={{ width: '120px', height: '16px', marginTop: '8px' }} />
+ *   <Skeleton style={{ width: '80px', height: '14px', marginTop: '4px' }} />
+ * </div>
+ *
+ * @param {Object} props - Component props
+ * @param {React.CSSProperties} [props.style={}] - Custom CSS styles to apply to the skeleton container
+ * @param {string} [props.baseColor='#f5f5f9'] - Background color of the skeleton element
+ * @param {string} [props.shimmerColor='#ececec'] - Color of the shimmer effect that slides across
+ *
+ * @returns {JSX.Element} A skeleton loader component with shimmer animation
+ *
+ * @since 1.0.0
+ *
+ * @see {@link https://mui.com/material-ui/react-skeleton/} MUI Skeleton for reference implementation
+ * @see {@link https://www.framer.com/motion/} Framer Motion for animation library
+ */
+
 export function Skeleton({
   style = {},
-  baseColor = 'rgba(0, 0, 0, 0.08)',
-  shimmerColor = 'rgba(0, 0, 0, 0.04)',
+  // baseColor = 'rgba(0, 0, 0, 0.08)',
+  // shimmerColor = 'rgba(0, 0, 0, 0.04)',
+  baseColor = '#f5f5f9',
+  shimmerColor = '#ececec',
 }: SkeletonProps) {
   return (
     <div
