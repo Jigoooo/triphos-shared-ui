@@ -86,21 +86,14 @@ const shimmerAnimation = {
  * @param {React.CSSProperties} [props.style={}] - Custom CSS styles to apply to the skeleton container
  * @param {string} [props.baseColor='#f5f5f9'] - Background color of the skeleton element
  * @param {string} [props.shimmerColor='#ececec'] - Color of the shimmer effect that slides across
- *
- * @returns {JSX.Element} A skeleton loader component with shimmer animation
- *
- * @since 1.0.0
- *
- * @see {@link https://mui.com/material-ui/react-skeleton/} MUI Skeleton for reference implementation
- * @see {@link https://www.framer.com/motion/} Framer Motion for animation library
  */
 
 export function Skeleton({
   style = {},
-  // baseColor = 'rgba(0, 0, 0, 0.08)',
-  // shimmerColor = 'rgba(0, 0, 0, 0.04)',
-  baseColor = '#f5f5f9',
-  shimmerColor = '#ececec',
+  baseColor = 'rgba(0, 0, 0, 0.08)',
+  shimmerColor = 'rgba(0, 0, 0, 0.04)',
+  // baseColor = '#f5f5f9',
+  // shimmerColor = '#ececec',
 }: SkeletonProps) {
   return (
     <div
