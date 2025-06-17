@@ -26,6 +26,7 @@ export type ModalContextType = {
 export type ModalLayoutProps = {
   overlayRef: RefObject<HTMLDivElement | null>;
   close: () => void;
+  headerVisible?: boolean;
   drag?: boolean;
   title?: string;
   titleIcon?: ReactNode;

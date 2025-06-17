@@ -23,6 +23,7 @@ const modalContainerDefaultStyle: CSSProperties = {
 export function ModalLayout({
   overlayRef,
   close,
+  headerVisible = true,
   drag = true,
   title = '',
   titleIcon,
@@ -110,29 +111,33 @@ export function ModalLayout({
       dragMomentum={false}
       dragElastic={0}
     >
-      <FlexRow
-        style={{
-          width: '100%',
-          justifyContent: 'space-between',
-          cursor: 'grab',
-        }}
-        as={motion.div}
-        onPointerDown={(e) => dragControls.start(e)}
-      >
-        <FlexColumn style={{ gap: '0.2rem', userSelect: 'none' }}>
-          <FlexRow style={{ alignItems: 'center' }}>
-            {titleIcon && titleIcon}
-            <Typography style={{ fontSize: '1.2rem', fontWeight: 700, ...titleStyle }}>
-              {title}
-            </Typography>
-          </FlexRow>
-          <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
-        </FlexColumn>
-        <FlexColumn style={{ height: '100%', justifyContent: 'flex-start', paddingTop: '0.4rem' }}>
-          <CloseIconButton close={close} />
-        </FlexColumn>
-      </FlexRow>
-      {/*<Divider />*/}
+      {headerVisible && (
+        <FlexRow
+          style={{
+            width: '100%',
+            justifyContent: 'space-between',
+            cursor: 'grab',
+          }}
+          as={motion.div}
+          onPointerDown={(e) => dragControls.start(e)}
+        >
+          <FlexColumn style={{ gap: '0.2rem', userSelect: 'none' }}>
+            <FlexRow style={{ alignItems: 'center' }}>
+              {titleIcon && titleIcon}
+              <Typography style={{ fontSize: '1.2rem', fontWeight: 700, ...titleStyle }}>
+                {title}
+              </Typography>
+            </FlexRow>
+            <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
+          </FlexColumn>
+          <FlexColumn
+            style={{ height: '100%', justifyContent: 'flex-start', paddingTop: '0.4rem' }}
+          >
+            <CloseIconButton close={close} />
+          </FlexColumn>
+        </FlexRow>
+      )}
+
       <FlexColumn style={{ flexGrow: 1, overflow: 'auto' }}>{children}</FlexColumn>
     </FlexColumn>
   );
