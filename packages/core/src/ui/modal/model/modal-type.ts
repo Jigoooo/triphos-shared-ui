@@ -32,6 +32,7 @@ export type ModalLayoutProps = {
   titleIcon?: ReactNode;
   subTitle?: string;
   containerStyle?: CSSProperties;
+  headerContainerStyle?: CSSProperties;
   titleStyle?: CSSProperties;
   withHeader?: boolean;
   children: ReactNode;

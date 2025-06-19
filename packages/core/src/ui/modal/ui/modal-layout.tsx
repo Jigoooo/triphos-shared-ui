@@ -29,6 +29,7 @@ export function ModalLayout({
   titleIcon,
   subTitle = '',
   containerStyle,
+  headerContainerStyle,
   titleStyle,
   children,
 }: ModalLayoutProps) {
@@ -117,6 +118,7 @@ export function ModalLayout({
             width: '100%',
             justifyContent: 'space-between',
             cursor: 'grab',
+            ...headerContainerStyle,
           }}
           as={motion.div}
           onPointerDown={(e) => dragControls.start(e)}
