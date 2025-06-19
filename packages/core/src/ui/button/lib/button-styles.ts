@@ -28,11 +28,13 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSPr
       backgroundColor: theme.colors.primaryColor,
       color: 'white',
       border: 'none',
+      opacity: 1,
     },
     [ButtonStyle.OUTLINED]: {
       backgroundColor: '#ffffff',
       color: theme.colors.primaryColor,
       border: `1px solid ${theme.colors.primaryColor}`,
+      opacity: 1,
     },
   };
 }
@@ -40,13 +42,10 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSPr
 export const buttonDisabledStyle: Record<ButtonStyle, CSSProperties> = {
   [ButtonStyle.SOLID]: {
     // cursor: 'default',
-    backgroundColor: '#eeeeee',
-    color: '#aaaaaa',
+    opacity: 0.5,
   },
   [ButtonStyle.OUTLINED]: {
     // cursor: 'default',
-    backgroundColor: '#eeeeee',
-    borderColor: '#bebebe',
-    color: '#bbbbbb',
+    opacity: 0.5,
   },
 } as const;
