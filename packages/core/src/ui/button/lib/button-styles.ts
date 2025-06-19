@@ -41,11 +41,11 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSPr
 
 export const buttonDisabledStyle: Record<ButtonStyle, CSSProperties> = {
   [ButtonStyle.SOLID]: {
-    // cursor: 'default',
+    cursor: 'default',
     opacity: 0.5,
   },
   [ButtonStyle.OUTLINED]: {
-    // cursor: 'default',
+    cursor: 'default',
     opacity: 0.5,
   },
 } as const;
