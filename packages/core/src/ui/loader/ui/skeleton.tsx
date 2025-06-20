@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 import type { SkeletonProps } from '../model/loader-type.ts';
 
 // const skeletonAnimation = {
@@ -105,7 +103,7 @@ export function Skeleton({
       }}
     >
       {/* MUI의 ::after 요소 역할 */}
-      <motion.div
+      <div
         {...shimmerAnimation}
         style={{
           position: 'absolute',
