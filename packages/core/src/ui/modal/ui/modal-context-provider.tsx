@@ -63,12 +63,11 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
       {children}
 
       <FloatingPortal>
-        <div ref={modalRef} tabIndex={-1} />
+        <div ref={modalRef} />
         {modalList.length > 0 && (
           <div
             ref={overlayRef}
             style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}
-            tabIndex={-1}
           />
         )}
 
@@ -95,7 +94,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     zIndex: zIndex.modal + index,
                   }}
                   onClick={(e) => e.stopPropagation()}
-                  tabIndex={-1}
                 >
                   {modal.render({
                     overlayRef: overlayRef,
@@ -138,7 +136,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                         }
                       }
                     }}
-                    tabIndex={-1}
                   />
                 </motion.div>
               </div>

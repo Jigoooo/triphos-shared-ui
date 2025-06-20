@@ -97,85 +97,6 @@ export function ModalLayout({
     };
   }, [close]);
 
-  useEffect(() => {
-    const modal = modalRef.current;
-    if (!modal) return;
-
-    // 모달 외부의 모든 요소를 비활성화
-    const allElements = document.querySelectorAll('*');
-    const originalTabIndexes = new Map();
-
-    allElements.forEach((element) => {
-      if (!modal.contains(element) && element !== modal) {
-        const currentTabIndex = element.getAttribute('tabindex');
-        originalTabIndexes.set(element, currentTabIndex);
-        element.setAttribute('tabindex', '-1');
-      }
-    });
-
-    // 모달 내부 포커스 가능한 요소들
-    const getFocusableElements = () => {
-      return modal.querySelectorAll(
-        'input:not([disabled]):not([tabindex="-1"]), button:not([disabled]):not([tabindex="-1"]), select:not([disabled]):not([tabindex="-1"]), textarea:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"]):not([disabled])',
-      ) as NodeListOf<HTMLElement>;
-    };
-
-    // 첫 번째 요소에 포커스
-    const focusFirstElement = () => {
-      const focusableElements = getFocusableElements();
-      if (focusableElements.length > 0) {
-        focusableElements[0].focus();
-      }
-    };
-
-    // 지연 후 포커스 (렌더링 완료 대기)
-    setTimeout(focusFirstElement, 150);
-
-    // 탭 키 처리
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') {
-        e.preventDefault();
-
-        const focusableElements = getFocusableElements();
-        if (focusableElements.length === 0) return;
-
-        const currentIndex = Array.from(focusableElements).indexOf(
-          document.activeElement as HTMLElement,
-        );
-        let nextIndex;
-
-        if (e.shiftKey) {
-          // Shift + Tab (역방향)
-          nextIndex = currentIndex <= 0 ? focusableElements.length - 1 : currentIndex - 1;
-        } else {
-          // Tab (정방향)
-          nextIndex = currentIndex >= focusableElements.length - 1 ? 0 : currentIndex + 1;
-        }
-
-        focusableElements[nextIndex].focus();
-      } else if (e.key === 'Escape') {
-        close();
-      }
-    };
-
-    // 전역 키보드 이벤트
-    document.addEventListener('keydown', handleKeyDown, true);
-
-    // 정리
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown, true);
-
-      // 원래 tabindex 복원
-      originalTabIndexes.forEach((originalValue, element) => {
-        if (originalValue === null) {
-          element.removeAttribute('tabindex');
-        } else {
-          element.setAttribute('tabindex', originalValue);
-        }
-      });
-    };
-  }, [close]);
-
   return (
     <FlexColumn
       ref={modalRef}
@@ -190,7 +111,6 @@ export function ModalLayout({
       dragConstraints={constraints}
       dragMomentum={false}
       dragElastic={0}
-      tabIndex={-1}
     >
       {headerVisible && (
         <FlexRow
@@ -200,7 +120,6 @@ export function ModalLayout({
             cursor: 'grab',
             ...headerContainerStyle,
           }}
-          tabIndex={-1}
           as={motion.div}
           onPointerDown={(e) => dragControls.start(e)}
         >
