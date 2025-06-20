@@ -111,6 +111,7 @@ export function ModalLayout({
       dragConstraints={constraints}
       dragMomentum={false}
       dragElastic={0}
+      tabIndex={-1}
     >
       {headerVisible && (
         <FlexRow
@@ -120,6 +121,7 @@ export function ModalLayout({
             cursor: 'grab',
             ...headerContainerStyle,
           }}
+          tabIndex={-1}
           as={motion.div}
           onPointerDown={(e) => dragControls.start(e)}
         >
