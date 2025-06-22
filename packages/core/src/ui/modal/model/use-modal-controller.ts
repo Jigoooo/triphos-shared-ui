@@ -49,18 +49,17 @@ export function useModalController({
 
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
-          event.preventDefault();
-          event.stopPropagation();
-          event.stopImmediatePropagation();
+          const isModalFocused =
+            modalRef.current?.contains(document.activeElement as Node) ||
+            !document.activeElement ||
+            document.activeElement === document.body;
 
-          onClose();
-
-          return false;
+          if (isModalFocused) {
+            event.preventDefault();
+            event.stopPropagation();
+            onClose();
+          }
         }
-        // if (event.key === 'Tab') {
-        //   event.preventDefault();
-        //   modalRef.current?.focus();
-        // }
       };
 
       document.addEventListener('keydown', handleKeyDown, {
