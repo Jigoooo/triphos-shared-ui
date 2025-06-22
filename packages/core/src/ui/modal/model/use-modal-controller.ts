@@ -50,11 +50,13 @@ export function useModalController({
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Escape') {
           event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
         }
-        if (event.key === 'Tab') {
-          event.preventDefault();
-          modalRef.current?.focus();
-        }
+        // if (event.key === 'Tab') {
+        //   event.preventDefault();
+        //   modalRef.current?.focus();
+        // }
       };
 
       document.addEventListener('keydown', handleKeyDown);
