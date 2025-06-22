@@ -1,12 +1,7 @@
 import type { ReactNode } from 'react';
 import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  FloatingFocusManager,
-  FloatingOverlay,
-  FloatingPortal,
-  useFloating,
-} from '@floating-ui/react';
+import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 
 import { FlexRow } from '@/ui/layout';
 import { ModalContext } from '../model/modal-context.ts';
@@ -63,8 +58,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     [modalIds],
   );
 
-  const { context } = useFloating();
-
   return (
     <ModalContext value={contextValue}>
       {children}
@@ -82,48 +75,38 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
           {modalList.map((modal, index) => {
             return (
               <div key={modal.id}>
-                <FloatingFocusManager
-                  context={context}
-                  modal={true}
-                  restoreFocus={true}
-                  returnFocus={true}
-                  guards={true}
-                  closeOnFocusOut={false}
-                  order={['floating']}
+                <FlexRow
+                  as={motion.div}
+                  initial={{ opacity: 0, x: '-50%', y: '-45%' }}
+                  animate={{ opacity: 1, x: '-50%', y: '-50%' }}
+                  exit={{ opacity: 0, x: '-50%', y: '-45%' }}
+                  transition={{
+                    duration: 0.1,
+                  }}
+                  style={{
+                    userSelect: 'none',
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    zIndex: zIndex.modal + index,
+                  }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <FlexRow
-                    as={motion.div}
-                    initial={{ opacity: 0, x: '-50%', y: '-45%' }}
-                    animate={{ opacity: 1, x: '-50%', y: '-50%' }}
-                    exit={{ opacity: 0, x: '-50%', y: '-45%' }}
-                    transition={{
-                      duration: 0.1,
-                    }}
-                    style={{
-                      userSelect: 'none',
-                      position: 'fixed',
-                      top: '50%',
-                      left: '50%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      zIndex: zIndex.modal + index,
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {modal.render({
-                      overlayRef: overlayRef,
-                      isOpen: true,
-                      close: () => {
-                        close(modal.id);
+                  {modal.render({
+                    overlayRef: overlayRef,
+                    isOpen: true,
+                    close: () => {
+                      close(modal.id);
 
-                        if (isMobile) {
-                          window.history.back();
-                        }
-                      },
-                    })}
-                  </FlexRow>
-                </FloatingFocusManager>
+                      if (isMobile) {
+                        window.history.back();
+                      }
+                    },
+                  })}
+                </FlexRow>
 
                 <motion.div
                   initial={{ opacity: 0 }}
