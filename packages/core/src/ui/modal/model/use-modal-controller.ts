@@ -52,6 +52,8 @@ export function useModalController({
           event.preventDefault();
           event.stopPropagation();
           event.stopImmediatePropagation();
+
+          onClose();
         }
         // if (event.key === 'Tab') {
         //   event.preventDefault();
