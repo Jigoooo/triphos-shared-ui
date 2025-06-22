@@ -9,7 +9,6 @@ import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
 import { detectDeviceTypeAndOS } from '@/lib';
-import { useFocusTrap } from '../model/use-focus-trap.ts';
 
 const { isMobile } = detectDeviceTypeAndOS();
 
@@ -54,7 +53,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     },
   });
 
-  const { focusElement } = useFocusTrap({
+  /*const { focusElement } = useFocusTrap({
     enabled: modalList.length > 0,
     containerRef: modalRef,
     restoreFocus: true,
@@ -62,11 +61,11 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     activationDelay: 100,
     restorationDelay: 100,
     modalSelectors: ['[data-floating-ui-portal]', '[data-modal-content]', '.modal-overlay'],
-  });
+  });*/
 
   const contextValue = useMemo(
-    () => ({ modalIds, open, close, handleIsPossibleOverlayClose, focusElement }),
-    [focusElement, modalIds],
+    () => ({ modalIds, open, close, handleIsPossibleOverlayClose }),
+    [modalIds],
   );
 
   return (
@@ -74,7 +73,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
       {children}
 
       <FloatingPortal>
-        <div ref={modalRef} style={{ outline: 'none' }} tabIndex={-1} data-modal-content />
+        <div ref={modalRef} data-modal-content />
         {modalList.length > 0 && (
           <div
             ref={overlayRef}

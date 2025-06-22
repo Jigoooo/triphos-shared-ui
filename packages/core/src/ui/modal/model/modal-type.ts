@@ -21,7 +21,6 @@ export type ModalContextType = {
   open: (id: string, render: (props: ModalRenderProps) => ReactNode) => void;
   close: (id: string) => void;
   handleIsPossibleOverlayClose: (id: string, possible: boolean) => void;
-  focusElement: (target?: number | RefObject<HTMLElement>) => void;
 };
 
 export type ModalLayoutProps = {
