@@ -9,6 +9,7 @@ import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
 import { detectDeviceTypeAndOS } from '@/lib';
+import { useFocusTrap } from '../model/use-focus-trap.ts';
 
 const { isMobile } = detectDeviceTypeAndOS();
 
@@ -53,9 +54,19 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     },
   });
 
+  const { focusElement } = useFocusTrap({
+    enabled: modalList.length > 0,
+    containerRef: modalRef,
+    restoreFocus: true,
+    initialFocus: 0,
+    activationDelay: 100,
+    restorationDelay: 100,
+    modalSelectors: ['[data-floating-ui-portal]', '[data-modal-content]', '.modal-overlay'],
+  });
+
   const contextValue = useMemo(
-    () => ({ modalIds, open, close, handleIsPossibleOverlayClose }),
-    [modalIds],
+    () => ({ modalIds, open, close, handleIsPossibleOverlayClose, focusElement }),
+    [focusElement, modalIds],
   );
 
   return (
@@ -63,7 +74,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
       {children}
 
       <FloatingPortal>
-        <div ref={modalRef} />
+        <div ref={modalRef} style={{ outline: 'none' }} tabIndex={-1} data-modal-content />
         {modalList.length > 0 && (
           <div
             ref={overlayRef}
@@ -94,6 +105,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     zIndex: zIndex.modal + index,
                   }}
                   onClick={(e) => e.stopPropagation()}
+                  data-modal-content
                 >
                   {modal.render({
                     overlayRef: overlayRef,
@@ -121,6 +133,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     right: 0,
                     bottom: 0,
                   }}
+                  className='modal-overlay'
                 >
                   <FloatingOverlay
                     lockScroll
