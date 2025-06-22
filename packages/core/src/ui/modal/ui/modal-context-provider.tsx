@@ -82,7 +82,15 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
           {modalList.map((modal, index) => {
             return (
               <div key={modal.id}>
-                <FloatingFocusManager context={context}>
+                <FloatingFocusManager
+                  context={context}
+                  modal={true}
+                  restoreFocus={true}
+                  returnFocus={true}
+                  guards={true}
+                  closeOnFocusOut={false}
+                  order={['floating']}
+                >
                   <FlexRow
                     as={motion.div}
                     initial={{ opacity: 0, x: '-50%', y: '-45%' }}

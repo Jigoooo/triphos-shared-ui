@@ -54,6 +54,8 @@ export function useModalController({
           event.stopImmediatePropagation();
 
           onClose();
+
+          return false;
         }
         // if (event.key === 'Tab') {
         //   event.preventDefault();
@@ -61,10 +63,13 @@ export function useModalController({
         // }
       };
 
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown, {
+        capture: true,
+        passive: false,
+      });
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [isOpen, modalRef]);
+  }, [isOpen, modalRef, onClose]);
 }
