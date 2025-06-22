@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import type { SkeletonProps } from '../model/loader-type.ts';
 
 // const skeletonAnimation = {
@@ -40,17 +42,17 @@ import type { SkeletonProps } from '../model/loader-type.ts';
 //   );
 // }
 
-const shimmerAnimation = {
-  animate: {
-    x: ['-100%', '100%'],
-  },
-  transition: {
-    duration: 2,
-    repeat: Infinity,
-    ease: 'linear',
-    delay: 0.5, // MUI의 0.5s delay
-  },
-};
+// const shimmerAnimation = {
+//   animate: {
+//     x: ['-100%', '100%'],
+//   },
+//   transition: {
+//     duration: 2,
+//     repeat: Infinity,
+//     ease: 'linear',
+//     delay: 0.5, // MUI의 0.5s delay
+//   },
+// };
 
 /**
  * Skeleton loader component with shimmer animation effect
@@ -90,8 +92,6 @@ export function Skeleton({
   style = {},
   baseColor = 'rgba(0, 0, 0, 0.08)',
   shimmerColor = 'rgba(0, 0, 0, 0.04)',
-  // baseColor = '#f5f5f9',
-  // shimmerColor = '#ececec',
 }: SkeletonProps) {
   return (
     <div
@@ -102,9 +102,16 @@ export function Skeleton({
         ...style,
       }}
     >
-      {/* MUI의 ::after 요소 역할 */}
-      <div
-        {...shimmerAnimation}
+      <motion.div
+        animate={{
+          x: ['-100%', '100%'],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: 'linear',
+          delay: 0.5,
+        }}
         style={{
           position: 'absolute',
           top: 0,
