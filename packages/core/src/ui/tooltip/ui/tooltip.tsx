@@ -47,15 +47,17 @@ export function Tooltip({ style, placement, children, content, disabled = false 
             style={{
               ...{
                 userSelect: 'none',
-                paddingInline: '0.9rem',
-                paddingBlock: '0.25rem',
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
                 color: 'white',
                 borderRadius: '0.25rem',
                 whiteSpace: 'nowrap',
                 zIndex: zIndex.tooltip,
                 margin: '0.25rem',
-                fontSize: '0.82rem',
+
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                paddingBlock: '0.14rem',
+                paddingInline: '0.6rem',
+                fontWeight: 400,
+                fontSize: '0.78rem',
               },
               ...style,
               ...floatingStyles,
