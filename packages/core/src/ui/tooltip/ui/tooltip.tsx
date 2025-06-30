@@ -40,21 +40,21 @@ export function Tooltip({ style, placement, children, content, disabled = false 
           <motion.div
             key='tooltip'
             ref={refs.setFloating}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            // initial={{ opacity: 0, scale: 0.9 }}
+            // animate={{ opacity: 1, scale: 1 }}
             // exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 600, damping: 20, duration: 0.04 }}
+            // transition={{ type: 'spring', stiffness: 600, damping: 20, duration: 0.04 }}
             style={{
               ...{
                 userSelect: 'none',
-                paddingInline: 14,
-                paddingBlock: 4,
+                paddingInline: '0.9rem',
+                paddingBlock: '0.25rem',
                 backgroundColor: 'rgba(0, 0, 0, 0.8)',
                 color: 'white',
-                borderRadius: 4,
+                borderRadius: '0.25rem',
                 whiteSpace: 'nowrap',
                 zIndex: zIndex.tooltip,
-                margin: 4,
+                margin: '0.25rem',
                 fontSize: '0.82rem',
               },
               ...style,
