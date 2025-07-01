@@ -71,7 +71,7 @@ export function Select<ValueType extends string | number>({
   itemLabelContainerStyle?: CSSProperties;
   itemLabelStyle?: CSSProperties;
   checkIconSize?: string | number;
-  customContainerRenderer?: (props: CustomContainerRendererProps) => ReactNode;
+  customContainerRenderer?: (props: CustomContainerRendererProps<ValueType>) => ReactNode;
   customOptionRenderer?: (props: CustomOptionRendererProps<ValueType>) => ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -201,8 +201,9 @@ export function Select<ValueType extends string | number>({
         labelStyle={labelStyle}
         selectedLabelStyle={selectedLabelStyle}
         containerIconStyle={containerIconStyle}
-        customContainerRenderer={customContainerRenderer}
         isOpen={isOpen}
+        customContainerRenderer={customContainerRenderer}
+        selectedValue={value}
       />
       <AnimatePresence initial={false}>
         {isOpen &&

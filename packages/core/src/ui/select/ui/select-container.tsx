@@ -8,7 +8,7 @@ import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 import type { CustomContainerRendererProps } from '@/ui/select/model/select-type.ts';
 
-export function SelectContainer({
+export function SelectContainer<ValueType extends string | number>({
   ref,
   label,
   selectedLabel,
@@ -23,6 +23,7 @@ export function SelectContainer({
   containerIconStyle,
   customContainerRenderer,
   isOpen = false,
+  selectedValue,
 }: {
   ref?: ((node: ReferenceType | null) => void) & ((node: Element | VirtualElement | null) => void);
   label?: string;
@@ -36,20 +37,20 @@ export function SelectContainer({
   labelStyle?: CSSProperties;
   selectedLabelStyle?: CSSProperties;
   containerIconStyle?: CSSProperties;
-  customContainerRenderer?: (props: CustomContainerRendererProps) => ReactNode;
   isOpen?: boolean;
+  customContainerRenderer?: (props: CustomContainerRendererProps<ValueType>) => ReactNode;
+  selectedValue: ValueType;
 }) {
   if (customContainerRenderer) {
     return (
       <>
         {customContainerRenderer({
           ref,
-          label,
-          selectedLabel,
-          toggleSelectBox,
-          containerHeight,
-          getReferenceProps,
           isOpen,
+          selectedLabel,
+          selectedValue,
+          toggleSelectBox,
+          getReferenceProps,
         })}
       </>
     );

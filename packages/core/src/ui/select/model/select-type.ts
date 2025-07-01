@@ -19,12 +19,11 @@ export type CustomOptionRendererProps<ValueType extends string | number> = {
   onSelect: (value: ValueType) => void;
 };
 
-export type CustomContainerRendererProps = {
+export type CustomContainerRendererProps<ValueType extends string | number> = {
   ref?: ((node: ReferenceType | null) => void) & ((node: Element | VirtualElement | null) => void);
-  label?: string;
   selectedLabel?: string;
+  selectedValue: ValueType;
   toggleSelectBox: () => void;
-  containerHeight: string | number;
   getReferenceProps: (userProps?: HTMLProps<Element>) => Record<string, unknown>;
   isOpen: boolean;
 };
