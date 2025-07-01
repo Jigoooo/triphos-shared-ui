@@ -62,8 +62,8 @@ export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } f
 export { ComponentErrorProvider } from './ui/error';
 export type { ComponentErrorProviderProps } from './ui/error';
 
-export { AnchorPicker } from './ui/picker';
-export type { AnchorPickerProps } from './ui/picker';
+export { AnchorWithoutAction, AnchorPicker } from './ui/picker';
+export type { AnchorWithoutActionProps, AnchorPickerProps } from './ui/picker';
 
 export { Select, MultiSelect } from './ui/select';
 export type {
