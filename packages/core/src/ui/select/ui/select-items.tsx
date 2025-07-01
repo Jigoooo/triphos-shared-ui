@@ -99,23 +99,13 @@ export function SelectItems<ValueType extends string | number>({
         const isHighlighted = highlightedIndex === index;
 
         if (customOptionRenderer) {
-          return (
-            <div
-              key={option.value}
-              style={{
-                marginInline: isAutocomplete ? '0.375rem' : 0,
-                height: '2.375rem',
-              }}
-            >
-              {customOptionRenderer({
-                option,
-                index,
-                isSelected,
-                isHighlighted,
-                onSelect: selectValue,
-              })}
-            </div>
-          );
+          return customOptionRenderer({
+            option,
+            index,
+            isSelected,
+            isHighlighted,
+            onSelect: selectValue,
+          });
         }
 
         return (
