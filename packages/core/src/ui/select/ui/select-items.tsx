@@ -25,6 +25,7 @@ export function SelectItems<ValueType extends string | number>({
   itemContainerStyle,
   itemLabelContainerStyle,
   itemLabelStyle,
+  checkIconSize = '1.2rem',
 }: {
   setFloating: (node: HTMLElement | null) => void;
   floatingStyles: CSSProperties;
@@ -40,6 +41,7 @@ export function SelectItems<ValueType extends string | number>({
   itemContainerStyle?: CSSProperties;
   itemLabelContainerStyle?: CSSProperties;
   itemLabelStyle?: CSSProperties;
+  checkIconSize?: string | number;
 }) {
   return (
     <motion.div
@@ -121,7 +123,7 @@ export function SelectItems<ValueType extends string | number>({
               {option.label}
             </Typography>
             {selectedValue === option.value && (
-              <IoMdCheckmark style={{ fontSize: '1.2rem', color: '#333333' }} />
+              <IoMdCheckmark size={checkIconSize} style={{ color: '#333333' }} />
             )}
           </FlexRow>
         );
