@@ -1,11 +1,12 @@
 import type { ReferenceType, VirtualElement } from '@floating-ui/react';
-import type { CSSProperties, HTMLProps } from 'react';
+import type { CSSProperties, HTMLProps, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 import { HiChevronUpDown } from 'react-icons/hi2';
 
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
+import type { CustomContainerRendererProps } from '@/ui/select/model/select-type.ts';
 
 export function SelectContainer({
   ref,
@@ -20,6 +21,8 @@ export function SelectContainer({
   labelStyle,
   selectedLabelStyle,
   containerIconStyle,
+  customContainerRenderer,
+  isOpen = false,
 }: {
   ref?: ((node: ReferenceType | null) => void) & ((node: Element | VirtualElement | null) => void);
   label?: string;
@@ -33,7 +36,25 @@ export function SelectContainer({
   labelStyle?: CSSProperties;
   selectedLabelStyle?: CSSProperties;
   containerIconStyle?: CSSProperties;
+  customContainerRenderer?: (props: CustomContainerRendererProps) => ReactNode;
+  isOpen?: boolean;
 }) {
+  if (customContainerRenderer) {
+    return (
+      <>
+        {customContainerRenderer({
+          ref,
+          label,
+          selectedLabel,
+          toggleSelectBox,
+          containerHeight,
+          getReferenceProps,
+          isOpen,
+        })}
+      </>
+    );
+  }
+
   return (
     <FlexRow
       ref={ref}

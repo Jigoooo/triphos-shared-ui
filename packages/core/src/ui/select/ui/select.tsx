@@ -15,7 +15,11 @@ import {
 
 import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import type { CustomOptionRendererProps, SelectOption } from '../model/select-type.ts';
+import type {
+  CustomContainerRendererProps,
+  CustomOptionRendererProps,
+  SelectOption,
+} from '../model/select-type.ts';
 import { SelectItems } from './select-items.tsx';
 import { SelectContainer } from './select-container.tsx';
 
@@ -42,6 +46,7 @@ export function Select<ValueType extends string | number>({
   itemLabelContainerStyle,
   itemLabelStyle,
   checkIconSize,
+  customContainerRenderer,
   customOptionRenderer,
 }: {
   strategy?: Strategy;
@@ -66,6 +71,7 @@ export function Select<ValueType extends string | number>({
   itemLabelContainerStyle?: CSSProperties;
   itemLabelStyle?: CSSProperties;
   checkIconSize?: string | number;
+  customContainerRenderer?: (props: CustomContainerRendererProps) => ReactNode;
   customOptionRenderer?: (props: CustomOptionRendererProps<ValueType>) => ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -195,6 +201,8 @@ export function Select<ValueType extends string | number>({
         labelStyle={labelStyle}
         selectedLabelStyle={selectedLabelStyle}
         containerIconStyle={containerIconStyle}
+        customContainerRenderer={customContainerRenderer}
+        isOpen={isOpen}
       />
       <AnimatePresence initial={false}>
         {isOpen &&
