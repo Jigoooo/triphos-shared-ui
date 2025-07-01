@@ -66,7 +66,7 @@ export { AnchorPicker } from './ui/picker';
 export type { AnchorPickerProps } from './ui/picker';
 
 export { Select, MultiSelect } from './ui/select';
-export type { SelectOption, MultiSelectOption } from './ui/select';
+export type { SelectOption, MultiSelectOption, CustomOptionRendererProps } from './ui/select';
 export { DatePicker, DateFromToPicker, TimePicker } from './ui/date-time-picker';
 
 export { SplashCursor } from './ui/cursor';
