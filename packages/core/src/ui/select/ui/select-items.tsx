@@ -118,7 +118,6 @@ export function SelectItems<ValueType extends string | number>({
           );
         }
 
-        // 기본 렌더링
         return (
           <FlexRow
             as={motion.div}
