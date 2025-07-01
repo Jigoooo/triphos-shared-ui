@@ -1,4 +1,4 @@
-import type { KeyboardEvent, CSSProperties } from 'react';
+import type { KeyboardEvent, CSSProperties, ReactNode } from 'react';
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import type { Strategy, Placement } from '@floating-ui/react';
@@ -15,7 +15,7 @@ import {
 
 import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
-import type { SelectOption } from '../model/select-type.ts';
+import type { CustomOptionRendererProps, SelectOption } from '../model/select-type.ts';
 import { SelectItems } from './select-items.tsx';
 import { SelectContainer } from './select-container.tsx';
 
@@ -42,6 +42,7 @@ export function Select<ValueType extends string | number>({
   itemLabelContainerStyle,
   itemLabelStyle,
   checkIconSize,
+  customOptionRenderer,
 }: {
   strategy?: Strategy;
   placement?: Placement;
@@ -65,6 +66,7 @@ export function Select<ValueType extends string | number>({
   itemLabelContainerStyle?: CSSProperties;
   itemLabelStyle?: CSSProperties;
   checkIconSize?: string | number;
+  customOptionRenderer?: (props: CustomOptionRendererProps<ValueType>) => ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [filterText, setFilterText] = useState('');
@@ -223,6 +225,7 @@ export function Select<ValueType extends string | number>({
                 itemLabelContainerStyle={itemLabelContainerStyle}
                 itemLabelStyle={itemLabelStyle}
                 checkIconSize={checkIconSize}
+                customOptionRenderer={customOptionRenderer}
               />
             </FloatingPortal>
           ) : (
@@ -246,6 +249,7 @@ export function Select<ValueType extends string | number>({
               itemLabelContainerStyle={itemLabelContainerStyle}
               itemLabelStyle={itemLabelStyle}
               checkIconSize={checkIconSize}
+              customOptionRenderer={customOptionRenderer}
             />
           ))}
       </AnimatePresence>

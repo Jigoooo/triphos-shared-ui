@@ -1,10 +1,10 @@
-import type { CSSProperties, HTMLProps, KeyboardEvent } from 'react';
+import type { CSSProperties, HTMLProps, KeyboardEvent, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 import { FiSearch } from 'react-icons/fi';
 import { IoMdCheckmark } from 'react-icons/io';
 
-import type { SelectOption } from '../model/select-type.ts';
+import type { CustomOptionRendererProps, SelectOption } from '../model/select-type.ts';
 import { zIndex } from '@/constants';
 import { Input } from '@/ui/input';
 import { FlexRow } from '@/ui/layout';
@@ -26,6 +26,7 @@ export function SelectItems<ValueType extends string | number>({
   itemLabelContainerStyle,
   itemLabelStyle,
   checkIconSize = '1.2rem',
+  customOptionRenderer,
 }: {
   setFloating: (node: HTMLElement | null) => void;
   floatingStyles: CSSProperties;
@@ -42,6 +43,7 @@ export function SelectItems<ValueType extends string | number>({
   itemLabelContainerStyle?: CSSProperties;
   itemLabelStyle?: CSSProperties;
   checkIconSize?: string | number;
+  customOptionRenderer?: (props: CustomOptionRendererProps<ValueType>) => ReactNode;
 }) {
   return (
     <motion.div
@@ -93,6 +95,30 @@ export function SelectItems<ValueType extends string | number>({
         </div>
       )}
       {options.map((option, index) => {
+        const isSelected = selectedValue === option.value;
+        const isHighlighted = highlightedIndex === index;
+
+        if (customOptionRenderer) {
+          return (
+            <div
+              key={option.value}
+              style={{
+                marginInline: isAutocomplete ? '0.375rem' : 0,
+                height: '2.375rem',
+              }}
+            >
+              {customOptionRenderer({
+                option,
+                index,
+                isSelected,
+                isHighlighted,
+                onSelect: selectValue,
+              })}
+            </div>
+          );
+        }
+
+        // 기본 렌더링
         return (
           <FlexRow
             as={motion.div}
@@ -105,7 +131,7 @@ export function SelectItems<ValueType extends string | number>({
               marginInline: isAutocomplete ? '0.375rem' : 0,
               paddingBlock: '0.25rem',
               paddingInline: '0.5rem',
-              backgroundColor: highlightedIndex === index ? '#f4f4f4' : '#ffffff',
+              backgroundColor: isHighlighted ? '#f4f4f4' : '#ffffff',
               borderRadius: '0.375rem',
               ...itemLabelContainerStyle,
             }}
@@ -122,9 +148,7 @@ export function SelectItems<ValueType extends string | number>({
             >
               {option.label}
             </Typography>
-            {selectedValue === option.value && (
-              <IoMdCheckmark size={checkIconSize} style={{ color: '#333333' }} />
-            )}
+            {isSelected && <IoMdCheckmark size={checkIconSize} style={{ color: '#333333' }} />}
           </FlexRow>
         );
       })}
