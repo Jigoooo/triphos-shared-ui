@@ -41,6 +41,7 @@ export function Select<ValueType extends string | number>({
   itemContainerStyle,
   itemLabelContainerStyle,
   itemLabelStyle,
+  checkIconSize,
 }: {
   strategy?: Strategy;
   placement?: Placement;
@@ -63,6 +64,7 @@ export function Select<ValueType extends string | number>({
   itemContainerStyle?: CSSProperties;
   itemLabelContainerStyle?: CSSProperties;
   itemLabelStyle?: CSSProperties;
+  checkIconSize?: string | number;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [filterText, setFilterText] = useState('');
@@ -220,6 +222,7 @@ export function Select<ValueType extends string | number>({
                 itemContainerStyle={itemContainerStyle}
                 itemLabelContainerStyle={itemLabelContainerStyle}
                 itemLabelStyle={itemLabelStyle}
+                checkIconSize={checkIconSize}
               />
             </FloatingPortal>
           ) : (
@@ -242,6 +245,7 @@ export function Select<ValueType extends string | number>({
               itemContainerStyle={itemContainerStyle}
               itemLabelContainerStyle={itemLabelContainerStyle}
               itemLabelStyle={itemLabelStyle}
+              checkIconSize={checkIconSize}
             />
           ))}
       </AnimatePresence>
