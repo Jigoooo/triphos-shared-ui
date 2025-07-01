@@ -99,13 +99,17 @@ export function SelectItems<ValueType extends string | number>({
         const isHighlighted = highlightedIndex === index;
 
         if (customOptionRenderer) {
-          return customOptionRenderer({
-            option,
-            index,
-            isSelected,
-            isHighlighted,
-            onSelect: selectValue,
-          });
+          return (
+            <div key={option.value}>
+              {customOptionRenderer({
+                option,
+                index,
+                isSelected,
+                isHighlighted,
+                onSelect: selectValue,
+              })}
+            </div>
+          );
         }
 
         return (
