@@ -11,6 +11,7 @@ export type AnchorWithoutActionProps = {
   contents: ReactNode;
   cachedChildren?: boolean;
   useAnimation?: boolean;
+  forceUpdateTrigger?: any;
   children: ReactNode;
 };
 

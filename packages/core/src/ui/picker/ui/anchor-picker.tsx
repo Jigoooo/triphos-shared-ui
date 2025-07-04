@@ -26,9 +26,11 @@ export function AnchorPicker({
   contents,
   cachedChildren = false,
   useAnimation = true,
+  forceUpdateTrigger,
   children,
 }: AnchorPickerProps) {
   const wasOpenRef = useRef(isOpen);
+  const updateRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (wasOpenRef.current && !isOpen) {
@@ -37,7 +39,7 @@ export function AnchorPicker({
     wasOpenRef.current = isOpen;
   }, [isOpen, onClose]);
 
-  const { refs, floatingStyles, context } = useFloating({
+  const { refs, floatingStyles, context, update } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
     strategy,
@@ -57,6 +59,16 @@ export function AnchorPicker({
       }),
     ],
   });
+
+  updateRef.current = update;
+
+  useEffect(() => {
+    if (!!forceUpdateTrigger && isOpen && updateRef.current) {
+      requestAnimationFrame(() => {
+        updateRef.current?.();
+      });
+    }
+  }, [forceUpdateTrigger, isOpen]);
 
   const click = useClick(context);
   const { getReferenceProps, getFloatingProps } = useInteractions([click]);

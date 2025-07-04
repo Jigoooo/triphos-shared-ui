@@ -1,10 +1,9 @@
-import type { ReactNode } from 'react';
 import { useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { Placement, Strategy } from '@floating-ui/react';
 import { flip, FloatingPortal, offset, size, useFloating } from '@floating-ui/react';
 
 import { zIndex } from '@/constants';
+import type { AnchorWithoutActionProps } from '@/ui/picker';
 
 export function AnchorWithoutAction({
   strategy = 'absolute',
@@ -18,19 +17,7 @@ export function AnchorWithoutAction({
   useAnimation = true,
   forceUpdateTrigger,
   children,
-}: {
-  strategy?: Strategy;
-  placement?: Placement;
-  minAxisOffset?: number;
-  crossAxis?: number;
-  isOpen: boolean;
-  onClose?: () => void;
-  contents: ReactNode;
-  cachedChildren?: boolean;
-  useAnimation?: boolean;
-  forceUpdateTrigger?: any;
-  children: ReactNode;
-}) {
+}: AnchorWithoutActionProps) {
   const wasOpenRef = useRef(isOpen);
   const updateRef = useRef<() => void>(() => {});
 
