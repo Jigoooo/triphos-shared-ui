@@ -16,6 +16,7 @@ export function AnchorWithoutAction({
   contents,
   cachedChildren = false,
   useAnimation = true,
+  forceUpdateTrigger,
   children,
 }: {
   strategy?: Strategy;
@@ -27,9 +28,11 @@ export function AnchorWithoutAction({
   contents: ReactNode;
   cachedChildren?: boolean;
   useAnimation?: boolean;
+  forceUpdateTrigger?: any;
   children: ReactNode;
 }) {
   const wasOpenRef = useRef(isOpen);
+  const updateRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (wasOpenRef.current && !isOpen) {
@@ -38,7 +41,7 @@ export function AnchorWithoutAction({
     wasOpenRef.current = isOpen;
   }, [isOpen, onClose]);
 
-  const { refs, floatingStyles } = useFloating({
+  const { refs, floatingStyles, update } = useFloating({
     open: isOpen,
     strategy,
     placement,
@@ -57,6 +60,16 @@ export function AnchorWithoutAction({
       }),
     ],
   });
+
+  updateRef.current = update;
+
+  useEffect(() => {
+    if (!forceUpdateTrigger && isOpen && updateRef.current) {
+      requestAnimationFrame(() => {
+        updateRef.current?.();
+      });
+    }
+  }, [forceUpdateTrigger, isOpen]);
 
   const floatingContent = (
     <div
