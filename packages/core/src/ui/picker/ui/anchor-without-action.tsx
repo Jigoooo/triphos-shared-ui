@@ -64,7 +64,7 @@ export function AnchorWithoutAction({
   updateRef.current = update;
 
   useEffect(() => {
-    if (!forceUpdateTrigger && isOpen && updateRef.current) {
+    if (!!forceUpdateTrigger && isOpen && updateRef.current) {
       requestAnimationFrame(() => {
         updateRef.current?.();
       });
