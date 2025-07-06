@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { createContext, useContext, useEffect, useMemo } from 'react';
+import { createContext, useContext } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
 import type { ModalContextType, ModalRenderProps } from './modal-type.ts';
@@ -17,20 +17,16 @@ export const useModal = ({
     throw new Error('useModal must be used within a ModalProvider');
   }
 
-  const id = useMemo(() => uuidV4(), []);
-
-  useEffect(() => {
-    context.handleIsPossibleOverlayClose(id, isPossibleOverlayClose);
-  }, [id, isPossibleOverlayClose]);
-
   return {
     ...context,
     open: (render: (props: ModalRenderProps) => ReactNode) => {
+      const id = uuidV4();
+      context.handleIsPossibleOverlayClose(id, isPossibleOverlayClose);
       context.open(id, render);
+      return id;
     },
-    close: () => {
+    close: (id: string) => {
       context.close(id);
     },
-    id,
   };
 };
