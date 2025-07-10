@@ -7,6 +7,7 @@ export type CheckboxLabelProps = {
 };
 
 export type AnimatedCheckboxProps = {
+  containerStyle?: CSSProperties;
   isPartial: boolean;
   checkboxSize?: string | number;
   checkIconSize?: string | number;
@@ -28,6 +29,7 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   onClick: MouseEventHandler;
   disabled?: boolean;
   isActiveAnimation?: boolean;
+  containerStyle?: CSSProperties;
 };
 
 export type CheckboxIconProps = {

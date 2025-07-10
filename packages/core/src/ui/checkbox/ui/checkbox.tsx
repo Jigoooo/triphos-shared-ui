@@ -17,6 +17,7 @@ export function Checkbox({
   onClick,
   disabled = false,
   isActiveAnimation = true,
+  containerStyle,
   ...checkboxProps
 }: CheckboxProps) {
   const { theme } = useThemeContext();
@@ -41,6 +42,7 @@ export function Checkbox({
       />
       {isActiveAnimation ? (
         <AnimatedCheckbox
+          containerStyle={containerStyle}
           isPartial={isPartial}
           checkboxSize={checkboxSize}
           checkIconSize={checkIconSize}
@@ -50,6 +52,7 @@ export function Checkbox({
         />
       ) : (
         <NoAnimatedCheckbox
+          containerStyle={containerStyle}
           isPartial={isPartial}
           checkboxSize={checkboxSize}
           checkIconSize={checkIconSize}

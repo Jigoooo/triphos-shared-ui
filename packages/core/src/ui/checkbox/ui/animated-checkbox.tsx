@@ -5,6 +5,7 @@ import type { AnimatedCheckboxProps } from '../model/checkbox-type.ts';
 import { CheckIcon } from './check-icon.tsx';
 
 export function AnimatedCheckbox({
+  containerStyle,
   isPartial,
   checkboxSize,
   checkIconSize,
@@ -23,6 +24,7 @@ export function AnimatedCheckbox({
         border: `1px solid ${!disabled && checked ? color : '#cccccc'}`,
         borderRadius: '0.25rem',
         backgroundColor: disabled ? '#f5f5f5' : checked ? color : '#ffffff',
+        ...containerStyle,
       }}
       variants={{
         hover: {
