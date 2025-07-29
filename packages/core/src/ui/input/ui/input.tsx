@@ -24,6 +24,9 @@ export function BaseInput({
   startDecorator,
   endDecorator,
   isFocusEffect = true,
+  outlinedFocusWidth = 2.4,
+  underlineFocusWidth = 2,
+  focusColor = colors.primary[300],
   onClick,
   ...props
 }: InputProps) {
@@ -58,11 +61,11 @@ export function BaseInput({
         type={type}
         variants={{
           focus: {
-            boxShadow: `inset 0 0 0 2.4px ${colors.primary[300]}`,
+            boxShadow: `inset 0 0 0 ${outlinedFocusWidth}px ${focusColor}`,
           },
           focusUnderline: {
             // borderBottom: `2px solid ${colors.primary[400]}`,
-            boxShadow: `inset 0 -2px 0 0 ${colors.primary[300]}`,
+            boxShadow: `inset 0 -${underlineFocusWidth}px 0 0 ${focusColor}`,
           },
           none: {},
         }}

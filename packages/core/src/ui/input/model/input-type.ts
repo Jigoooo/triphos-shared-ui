@@ -15,4 +15,7 @@ export type InputProps = MotionProps &
     startDecorator?: ReactNode;
     endDecorator?: ReactNode;
     isFocusEffect?: boolean;
+    outlinedFocusWidth?: number;
+    underlineFocusWidth?: number;
+    focusColor?: string;
   };
