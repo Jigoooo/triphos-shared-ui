@@ -39,6 +39,28 @@ export function AlertDialog() {
   }, [dialogOpen]);
 
   useEffect(() => {
+    if (dialogOpen && isMobile) {
+      const scrollY = window.scrollY;
+
+      // 현재 스크롤 위치를 고정
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [dialogOpen]);
+
+  useEffect(() => {
     if (!dialogOpen) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -108,7 +130,7 @@ export function AlertDialog() {
               }}
             >
               <FloatingOverlay
-                lockScroll={false}
+                lockScroll
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
                   dialog.close();
