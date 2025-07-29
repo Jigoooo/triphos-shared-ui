@@ -108,7 +108,7 @@ export function AlertDialog() {
               }}
             >
               <FloatingOverlay
-                lockScroll
+                lockScroll={false}
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
                   dialog.close();
