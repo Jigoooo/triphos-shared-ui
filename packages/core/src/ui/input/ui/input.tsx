@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 
 import type { InputProps } from '../model/input-type.ts';
 import { useCompositionRef } from '@/hooks';
@@ -14,6 +15,7 @@ import {
 } from '../lib/input-styles.ts';
 
 const EXTRA_PADDING = '2rem';
+const DECORATOR_SPACING = '0.5rem';
 
 export function BaseInput({
   ref,
@@ -31,6 +33,15 @@ export function BaseInput({
   ...props
 }: InputProps) {
   const { handleCompositionStart, handleCompositionEnd } = useCompositionRef();
+  const startDecoratorRef = useRef<HTMLDivElement>(null);
+  const [startDecoratorWidth, setStartDecoratorWidth] = useState(0);
+
+  useEffect(() => {
+    if (startDecoratorRef.current) {
+      const width = startDecoratorRef.current.offsetWidth;
+      setStartDecoratorWidth(width);
+    }
+  }, [startDecorator]);
 
   return (
     <div
@@ -41,6 +52,7 @@ export function BaseInput({
     >
       {startDecorator && (
         <div
+          ref={startDecoratorRef}
           style={{
             position: 'absolute',
             display: 'flex',
@@ -76,7 +88,9 @@ export function BaseInput({
         style={{
           ...defaultInputStyle,
           ...inputWithTypeStyles[inputStyle],
-          paddingLeft: startDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
+          paddingLeft: startDecorator
+            ? `calc(${startDecoratorWidth}px + ${inputStyle === InputStyle.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
+            : defaultInputStyle.paddingInline,
           paddingRight: endDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
           ...style,
           ...(props.disabled ? { ...inputDisabledStyles[inputStyle], ...disabledStyle } : {}),
