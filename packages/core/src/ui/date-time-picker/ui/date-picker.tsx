@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLProps } from 'react';
+import type { CSSProperties, HTMLProps, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import {
   addDays,
@@ -50,6 +50,9 @@ type TDatePicker = {
   minDate?: Date;
   maxDate?: Date;
   openListener?: (isShowDatePicker: boolean) => void;
+  endDecorator?: ReactNode;
+  containerStyle?: CSSProperties;
+  inputStyle?: CSSProperties;
 };
 
 // 헬퍼: 달력에 표시할 날짜 배열 생성
@@ -303,6 +306,9 @@ export function DatePicker({
   minDate,
   maxDate,
   openListener,
+  endDecorator,
+  containerStyle,
+  inputStyle,
 }: TDatePicker) {
   const {
     selectedDate,
@@ -358,15 +364,23 @@ export function DatePicker({
   const inputSelectedDateString = selectedDate ? format(selectedDate, dateFormat) : '';
 
   return (
-    <FlexColumn ref={datePickerRef} style={{ position: 'relative', width }}>
+    <FlexColumn ref={datePickerRef} style={{ position: 'relative', width, ...containerStyle }}>
       <div ref={refs.setReference} {...getReferenceProps()}>
         {!isInputMode ? (
           <Input.Outlined
-            style={{ width: width !== 'auto' ? width : '10rem', cursor: 'pointer' }}
+            style={{ width: width !== 'auto' ? width : '10rem', cursor: 'pointer', ...inputStyle }}
             value={inputSelectedDateString}
             onClick={handleInputClick}
             readOnly
-            endDecorator={<LuCalendar style={{ fontSize: '1.2rem' }} />}
+            endDecorator={
+              !endDecorator ? (
+                <FlexRow style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                  <LuCalendar style={{ fontSize: '1.1rem' }} />
+                </FlexRow>
+              ) : (
+                endDecorator
+              )
+            }
           />
         ) : (
           <DateInputField
