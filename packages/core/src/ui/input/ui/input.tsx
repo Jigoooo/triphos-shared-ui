@@ -61,7 +61,6 @@ export function BaseInput({
             top: inputStyle === InputStyle.UNDERLINE ? '40%' : '50%',
             transform: 'translateY(-50%)',
             pointerEvents: 'none',
-            height: '100%',
             zIndex: zIndex.base,
           }}
         >
@@ -106,8 +105,9 @@ export function BaseInput({
       {endDecorator && (
         <div
           style={{
-            height: '100%',
             position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
             right: '0.5rem',
             top: '50%',
             transform: 'translateY(-50%)',
