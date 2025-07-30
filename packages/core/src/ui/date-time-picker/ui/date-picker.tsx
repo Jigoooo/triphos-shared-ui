@@ -32,7 +32,7 @@ import { LuCalendar, LuMoveLeft, LuMoveRight } from 'react-icons/lu';
 
 import { FlexColumn, FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import { Input } from '@/ui/input';
+import { OutlinedInput } from '@/ui/input';
 import { Button } from '@/ui/button';
 import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
@@ -53,6 +53,13 @@ type TDatePicker = {
   endDecorator?: ReactNode;
   containerStyle?: CSSProperties;
   inputStyle?: CSSProperties;
+  InputComponent?: ({
+    dateString,
+    openDatePicker,
+  }: {
+    dateString: string;
+    openDatePicker: () => void;
+  }) => ReactNode;
 };
 
 // 헬퍼: 달력에 표시할 날짜 배열 생성
@@ -306,6 +313,7 @@ export function DatePicker({
   minDate,
   maxDate,
   openListener,
+  InputComponent,
   endDecorator,
   containerStyle,
   inputStyle,
@@ -367,21 +375,34 @@ export function DatePicker({
     <FlexColumn ref={datePickerRef} style={{ position: 'relative', width, ...containerStyle }}>
       <div ref={refs.setReference} {...getReferenceProps()}>
         {!isInputMode ? (
-          <Input.Outlined
-            style={{ width: width !== 'auto' ? width : '10rem', cursor: 'pointer', ...inputStyle }}
-            value={inputSelectedDateString}
-            onClick={handleInputClick}
-            readOnly
-            endDecorator={
-              !endDecorator ? (
-                <FlexRow style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                  <LuCalendar style={{ fontSize: '1.1rem' }} />
-                </FlexRow>
-              ) : (
-                endDecorator
-              )
-            }
-          />
+          InputComponent ? (
+            InputComponent({
+              dateString: inputSelectedDateString,
+              openDatePicker: handleInputClick,
+            })
+          ) : (
+            <OutlinedInput
+              style={{
+                width: width !== 'auto' ? width : '10rem',
+                cursor: 'pointer',
+                ...inputStyle,
+              }}
+              value={inputSelectedDateString}
+              onClick={handleInputClick}
+              readOnly
+              endDecorator={
+                !endDecorator ? (
+                  <FlexRow
+                    style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}
+                  >
+                    <LuCalendar style={{ fontSize: '1.1rem' }} />
+                  </FlexRow>
+                ) : (
+                  endDecorator
+                )
+              }
+            />
+          )
         ) : (
           <DateInputField
             selectedDate={selectedDate}
