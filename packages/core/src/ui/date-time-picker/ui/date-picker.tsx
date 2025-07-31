@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLProps, ReactNode } from 'react';
+import type { CSSProperties, HTMLProps } from 'react';
 import { useEffect, useState } from 'react';
 import {
   addDays,
@@ -16,7 +16,6 @@ import {
   subMonths,
 } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import type { Placement, Strategy } from '@floating-ui/react';
 import {
   flip,
   FloatingOverlay,
@@ -38,29 +37,7 @@ import { zIndex } from '@/constants';
 import { useHandleClickOutsideRef } from 'hooks';
 import { DateInputField } from './date-input-field.tsx';
 import { useThemeContext } from '@/theme';
-
-type TDatePicker = {
-  strategy?: Strategy;
-  placement?: Placement;
-  width?: number | string;
-  isInputMode?: boolean;
-  dateString?: string;
-  onChange?: (dateString: string) => void;
-  dateFormat?: string;
-  minDate?: Date;
-  maxDate?: Date;
-  openListener?: (isShowDatePicker: boolean) => void;
-  endDecorator?: ReactNode;
-  containerStyle?: CSSProperties;
-  inputStyle?: CSSProperties;
-  InputComponent?: ({
-    dateString,
-    openDatePicker,
-  }: {
-    dateString: string;
-    openDatePicker: () => void;
-  }) => ReactNode;
-};
+import type { DatePickerProps } from '../model/picker-type.ts';
 
 // 헬퍼: 달력에 표시할 날짜 배열 생성
 function generateDaysArray(year: number, month: number): Date[] {
@@ -317,7 +294,7 @@ export function DatePicker({
   endDecorator,
   containerStyle,
   inputStyle,
-}: TDatePicker) {
+}: DatePickerProps) {
   const {
     selectedDate,
     showDatePicker,
