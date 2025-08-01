@@ -48,7 +48,7 @@ export function useResponsiveSize(width: string | number, height: string | numbe
     return {
       width: widthPx,
       height: heightPx,
-      padding: heightPx * 0.18,
+      padding: heightPx * 0.13,
       circleSize: heightPx * 0.8,
       borderRadius: heightPx / 2,
     };
@@ -64,7 +64,7 @@ export function useResponsiveSize(width: string | number, height: string | numbe
     setDimensions({
       width: widthPx,
       height: heightPx,
-      padding: heightPx * 0.18,
+      padding: heightPx * 0.13,
       circleSize: heightPx * 0.8,
       borderRadius: heightPx / 2,
     });
@@ -77,7 +77,7 @@ export function useResponsiveSize(width: string | number, height: string | numbe
       setDimensions({
         width: newWidthPx,
         height: newHeightPx,
-        padding: newHeightPx * 0.18,
+        padding: newHeightPx * 0.13,
         circleSize: newHeightPx * 0.8,
         borderRadius: newHeightPx / 2,
       });
