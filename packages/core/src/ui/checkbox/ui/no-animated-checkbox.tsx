@@ -9,7 +9,8 @@ export function NoAnimatedCheckbox({
   checkIconSize,
   disabled,
   checked,
-  color,
+  checkboxCheckedColor,
+  checkboxColor = '#ffffff',
   checkIconColor,
 }: NoAnimatedCheckboxProps) {
   return (
@@ -19,9 +20,9 @@ export function NoAnimatedCheckbox({
         alignItems: 'center',
         width: checkboxSize,
         height: checkboxSize,
-        border: `1px solid ${!disabled && checked ? color : '#cccccc'}`,
+        border: `1px solid ${!disabled && checked ? checkboxCheckedColor : '#cccccc'}`,
         borderRadius: '0.25rem',
-        backgroundColor: disabled ? '#f5f5f5' : checked ? color : '#ffffff',
+        backgroundColor: disabled ? '#f5f5f5' : checked ? checkboxCheckedColor : checkboxColor,
         ...containerStyle,
       }}
     >
@@ -46,7 +47,9 @@ export function NoAnimatedCheckbox({
             alignItems: 'center',
           }}
         >
-          <div style={{ width: '0.625rem', height: '0.625rem', backgroundColor: color }} />
+          <div
+            style={{ width: '0.625rem', height: '0.625rem', backgroundColor: checkboxCheckedColor }}
+          />
         </FlexRow>
       )}
     </FlexRow>

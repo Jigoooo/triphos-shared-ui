@@ -13,6 +13,7 @@ export function Checkbox({
   label = '',
   labelStyle,
   checked,
+  checkboxCheckedColor,
   checkboxColor,
   isPartial = false,
   onClick,
@@ -22,7 +23,7 @@ export function Checkbox({
   ...checkboxProps
 }: CheckboxProps) {
   const { theme } = useThemeContext();
-  const effectiveColor = checkboxColor || theme.colors.primaryColor;
+  const effectiveColor = checkboxCheckedColor || theme.colors.primaryColor;
 
   return (
     <FlexRow
@@ -49,7 +50,8 @@ export function Checkbox({
           checkIconSize={checkIconSize}
           disabled={disabled}
           checked={checked}
-          color={effectiveColor}
+          checkboxCheckedColor={effectiveColor}
+          checkboxColor={checkboxColor}
           checkIconColor={checkIconColor}
         />
       ) : (
@@ -60,7 +62,8 @@ export function Checkbox({
           checkIconSize={checkIconSize}
           disabled={disabled}
           checked={checked}
-          color={effectiveColor}
+          checkboxCheckedColor={effectiveColor}
+          checkboxColor={checkboxColor}
           checkIconColor={checkIconColor}
         />
       )}

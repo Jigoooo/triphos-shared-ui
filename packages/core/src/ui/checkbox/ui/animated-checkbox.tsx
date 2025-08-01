@@ -11,7 +11,8 @@ export function AnimatedCheckbox({
   checkIconSize,
   disabled,
   checked,
-  color,
+  checkboxCheckedColor,
+  checkboxColor = '#ffffff',
   checkIconColor,
 }: AnimatedCheckboxProps) {
   return (
@@ -22,14 +23,14 @@ export function AnimatedCheckbox({
         alignItems: 'center',
         width: checkboxSize,
         height: checkboxSize,
-        border: `1px solid ${!disabled && checked ? color : '#cccccc'}`,
+        border: `1px solid ${!disabled && checked ? checkboxCheckedColor : '#cccccc'}`,
         borderRadius: '0.25rem',
-        backgroundColor: disabled ? '#f5f5f5' : checked ? color : '#ffffff',
+        backgroundColor: disabled ? '#f5f5f5' : checked ? checkboxCheckedColor : checkboxColor,
         ...containerStyle,
       }}
       variants={{
         hover: {
-          borderColor: color,
+          borderColor: checkboxCheckedColor,
           backgroundColor: '#ffffff',
         },
         none: {},
@@ -79,7 +80,13 @@ export function AnimatedCheckbox({
               alignItems: 'center',
             }}
           >
-            <div style={{ width: '0.625rem', height: '0.625rem', backgroundColor: color }} />
+            <div
+              style={{
+                width: '0.625rem',
+                height: '0.625rem',
+                backgroundColor: checkboxCheckedColor,
+              }}
+            />
           </FlexRow>
         )}
       </AnimatePresence>
