@@ -109,9 +109,9 @@ export function AlertDialog() {
             >
               <AlertDialogHeader
                 title={dialogConfig.title}
-                isEmptyContents={!dialogConfig.contents}
+                isEmptyContents={!dialogConfig.content}
               />
-              <AlertDialogContents contents={dialogConfig.contents} />
+              <AlertDialogContents contents={dialogConfig.content} />
               <AlertDialogActions dialogConfig={dialogConfig} />
             </FlexColumn>
 

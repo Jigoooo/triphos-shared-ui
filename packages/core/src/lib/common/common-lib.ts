@@ -134,7 +134,7 @@ export function openTMap({
     window.location.href = `tmap://search?name=${encodeURIComponent(placeName)}&lon=${longitude}&lat=${latitude}`;
   } else {
     dialog.warning({
-      contents: '모바일에서만 지원됩니다.',
+      content: '모바일에서만 지원됩니다.',
     });
   }
 }

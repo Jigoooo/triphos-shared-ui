@@ -7,7 +7,7 @@ const dialogInitialState: DialogStates = {
   dialogOpen: false,
   dialogConfig: {
     title: '',
-    contents: '',
+    content: '',
     confirmText: '확인',
     cancelText: '취소',
     withCancel: false,

@@ -39,7 +39,7 @@ export function ExcelUploadModal<TData extends TDataWithIndex>({
     ) {
       dialog.error({
         title: '업로드 실패',
-        contents: '허용되지 않는 파일이에요',
+        content: '허용되지 않는 파일이에요',
       });
 
       return;
@@ -142,7 +142,7 @@ export function ExcelUploadModal<TData extends TDataWithIndex>({
     } catch {
       dialog.error({
         title: '읽을 수 없는 파일입니다.',
-        contents: '파일 손상여부를 확인해 주세요.',
+        content: '파일 손상여부를 확인해 주세요.',
         overlayClose: true,
       });
     }

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 export type DialogConfig = {
   title?: string;
-  contents?: ReactNode;
+  content?: ReactNode;
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;

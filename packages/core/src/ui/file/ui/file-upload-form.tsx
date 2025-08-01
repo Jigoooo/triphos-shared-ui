@@ -101,7 +101,7 @@ export function FileUploadForm({
     } else {
       dialog.warning({
         title: '업로드 용량이 초과되었습니다.',
-        contents: `업로드 가능한 최대 용량은 ${limitMB}MB 입니다.`,
+        content: `업로드 가능한 최대 용량은 ${limitMB}MB 입니다.`,
       });
     }
   };
