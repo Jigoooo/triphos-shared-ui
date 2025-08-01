@@ -33,7 +33,7 @@ export function Checkbox({
         gap: '0.375rem',
         cursor: 'pointer',
       }}
-      onClick={(e) => !disabled && onClick(e)}
+      onClick={(e) => !disabled && onClick && onClick(e)}
     >
       <input
         type='checkbox'
