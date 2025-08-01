@@ -5,6 +5,7 @@ export type SwitchProps = {
   containerStyle?: CSSProperties;
   label?: string;
   labelStyle?: CSSProperties;
+  labelDirection?: 'left' | 'right';
   isOn: boolean;
   onClick: () => void;
   width?: string | number;

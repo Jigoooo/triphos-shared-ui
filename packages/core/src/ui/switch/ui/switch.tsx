@@ -11,6 +11,7 @@ export function Switch({
   containerStyle,
   label,
   labelStyle,
+  labelDirection = 'right',
   isOn,
   onClick,
   width = '2.125rem',
@@ -39,13 +40,13 @@ export function Switch({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 6,
+        gap: '0.25rem',
         cursor: disabled ? 'default' : 'pointer',
         ...containerStyle,
       }}
       onClick={disabled ? undefined : onClick}
     >
-      {label && (
+      {label && labelDirection === 'left' && (
         <Typography
           style={{
             ...{
@@ -98,6 +99,20 @@ export function Switch({
           />
         </motion.div>
       </LayoutGroup>
+      {label && labelDirection === 'right' && (
+        <Typography
+          style={{
+            ...{
+              userSelect: 'none',
+              fontSize: '0.9rem',
+              color: disabled ? '#9f9f9f' : '#666666',
+            },
+            ...labelStyle,
+          }}
+        >
+          {label}
+        </Typography>
+      )}
     </div>
   );
 }
