@@ -13,7 +13,7 @@ export function Checkbox({
   label = '',
   labelStyle,
   checked,
-  color,
+  checkboxColor,
   isPartial = false,
   onClick,
   disabled = false,
@@ -22,7 +22,7 @@ export function Checkbox({
   ...checkboxProps
 }: CheckboxProps) {
   const { theme } = useThemeContext();
-  const effectiveColor = color || theme.colors.primaryColor;
+  const effectiveColor = checkboxColor || theme.colors.primaryColor;
 
   return (
     <FlexRow
