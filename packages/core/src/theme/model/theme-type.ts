@@ -9,18 +9,24 @@ type BaseColors = {
   error: ColorPalette;
 };
 
-// Base theme input (for theme-base.ts)
+type FontSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
+
+export type TypographyType = {
+  fontSize?: Record<FontSize, string>;
+};
+
 export type ThemeBaseInput = {
   colors: BaseColors;
+  typography: TypographyType;
 };
 
-// Theme input with custom colors (for createTheme)
-export type ThemeInput<TCustomColors = Record<string, never>> = {
-  colors?: Partial<BaseColors> & TCustomColors;
-};
+export type ThemeInput<TCustom extends Record<string, any> = Record<string, never>> = {
+  colors?: Partial<BaseColors> & Omit<TCustom, 'typography'>;
+  typography?: Partial<TypographyType>;
+} & Omit<TCustom, 'colors' | 'typography'>;
 
-// Theme with custom colors
-export type Theme<TCustomColors = Record<string, never>> = {
+// Theme with custom colors and typography
+export type Theme<TCustom extends Record<string, any> = Record<string, never>> = {
   colors: {
     primaryColor: string;
     successColor: string;
@@ -30,9 +36,10 @@ export type Theme<TCustomColors = Record<string, never>> = {
     success: ColorPalette;
     warning: ColorPalette;
     error: ColorPalette;
-  } & TCustomColors;
-};
+  } & Omit<TCustom, 'typography'>;
+  typography: TypographyType;
+} & Omit<TCustom, 'colors' | 'typography'>;
 
-export type ThemeContextType<TCustomColors = Record<string, never>> = {
-  theme: Theme<TCustomColors>;
+export type ThemeContextType<TCustom extends Record<string, any> = Record<string, never>> = {
+  theme: Theme<TCustom>;
 };

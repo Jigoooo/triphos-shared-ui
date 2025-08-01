@@ -9,8 +9,14 @@ import type { Theme } from './theme-type.ts';
 import { ThemeContext } from './theme-context.tsx';
 import { createTheme } from '../lib/create-theme.ts';
 
-export function ThemeProvider({ theme, children }: { theme?: Theme; children: ReactNode }) {
-  const defaultTheme = createTheme();
+export function ThemeProvider<TCustom extends Record<string, any> = Record<string, never>>({
+  theme,
+  children,
+}: {
+  theme?: Theme<TCustom>;
+  children: ReactNode;
+}) {
+  const defaultTheme = createTheme<TCustom>();
 
   return (
     <ThemeContext

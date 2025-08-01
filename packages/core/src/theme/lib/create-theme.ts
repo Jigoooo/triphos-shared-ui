@@ -30,19 +30,37 @@ function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial
   return result;
 }
 
-export function createTheme<TCustomColors = Record<string, never>>(
-  themeInput: ThemeInput<TCustomColors> = {} as ThemeInput<TCustomColors>,
-): Theme<TCustomColors> {
-  const mergedTheme = deepMerge(themeBase, themeInput);
+export function createTheme<TCustom extends Record<string, any> = Record<string, never>>(
+  themeInput: ThemeInput<TCustom> = {} as ThemeInput<TCustom>,
+): Theme<TCustom> {
+  const { colors: inputColors, typography: inputTypography, ...otherInputs } = themeInput;
+
+  // Merge colors
+  const mergedColors = deepMerge(themeBase.colors, inputColors || {});
+
+  // Merge typography
+  const mergedTypography = deepMerge(themeBase.typography, inputTypography || {});
+
+  // Extract custom properties that should go in the root level
+  const customRootProps = Object.entries(otherInputs).reduce(
+    (acc, [key, value]) => {
+      if (key !== 'colors' && key !== 'typography') {
+        acc[key] = value;
+      }
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
 
   return {
-    ...mergedTheme,
+    ...customRootProps,
     colors: {
-      ...mergedTheme.colors,
-      primaryColor: mergedTheme.colors.primary['400'],
-      successColor: mergedTheme.colors.success['400'],
-      warningColor: mergedTheme.colors.warning['400'],
-      errorColor: mergedTheme.colors.error['400'],
+      ...mergedColors,
+      primaryColor: mergedColors.primary?.['400'] || themeBase.colors.primary['400'],
+      successColor: mergedColors.success?.['400'] || themeBase.colors.success['400'],
+      warningColor: mergedColors.warning?.['400'] || themeBase.colors.warning['400'],
+      errorColor: mergedColors.error?.['400'] || themeBase.colors.error['400'],
     },
-  } as Theme<TCustomColors>;
+    typography: mergedTypography,
+  } as Theme<TCustom>;
 }
