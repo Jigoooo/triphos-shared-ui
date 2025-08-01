@@ -96,7 +96,7 @@ export function AlertDialog() {
                 top: '50%',
                 left: '50%',
                 zIndex: zIndex.dialog,
-                width: 'clamp(20rem, 90vw, 37.5rem)',
+                width: 'clamp(18rem, 82vw, 37.5rem)',
                 maxHeight: 'clamp(0px, 80vh, 25rem)',
                 background: '#ffffff',
                 paddingInline: '1rem',
