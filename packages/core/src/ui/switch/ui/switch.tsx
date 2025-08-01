@@ -14,7 +14,7 @@ export function Switch({
   isOn,
   onClick,
   width = '2.125rem',
-  height = '1.125rem',
+  height = '1.24rem',
   disabled = false,
 }: SwitchProps) {
   const { theme } = useThemeContext();
