@@ -9,11 +9,12 @@ type BaseColors = {
   error: ColorPalette;
 };
 
-// Allow custom colors to be added
-export type ThemeBaseInput<TCustomColors = Record<string, never>> = {
-  colors: BaseColors & TCustomColors;
+// Base theme input (for theme-base.ts)
+export type ThemeBaseInput = {
+  colors: BaseColors;
 };
 
+// Theme input with custom colors (for createTheme)
 export type ThemeInput<TCustomColors = Record<string, never>> = {
   colors?: Partial<BaseColors> & TCustomColors;
 };
