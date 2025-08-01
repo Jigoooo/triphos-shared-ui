@@ -1,4 +1,4 @@
-import type { Theme, ThemeInput } from '../model/theme-type';
+import type { Theme, ThemeInput, CustomColorValue } from '../model/theme-type';
 import { themeBase } from '../config/theme-base.ts';
 
 type DeepPartial<T> = {
@@ -30,30 +30,34 @@ function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial
   return result;
 }
 
-export function createTheme<TCustom extends Record<string, any> = Record<string, never>>(
-  themeInput: ThemeInput<TCustom> = {} as ThemeInput<TCustom>,
-): Theme<TCustom> {
-  const { colors: inputColors, typography: inputTypography, ...otherInputs } = themeInput;
+// Default typography config
+const defaultTypography = {
+  fontSize: {
+    xs: '0.75rem',
+    sm: '0.875rem',
+    base: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+    '5xl': '3rem',
+  },
+};
 
-  // Merge colors
+export function createTheme<
+  TCustomColors extends Record<string, CustomColorValue> = Record<string, never>,
+>(themeInput: ThemeInput<TCustomColors> = {} as ThemeInput<TCustomColors>): Theme<TCustomColors> {
+  const { colors: inputColors, typography: inputTypography } = themeInput;
+
   const mergedColors = deepMerge(themeBase.colors, inputColors || {});
 
-  // Merge typography
-  const mergedTypography = deepMerge(themeBase.typography, inputTypography || {});
-
-  // Extract custom properties that should go in the root level
-  const customRootProps = Object.entries(otherInputs).reduce(
-    (acc, [key, value]) => {
-      if (key !== 'colors' && key !== 'typography') {
-        acc[key] = value;
-      }
-      return acc;
-    },
-    {} as Record<string, any>,
+  const mergedTypography = deepMerge(
+    themeBase.typography || defaultTypography,
+    inputTypography || {},
   );
 
   return {
-    ...customRootProps,
     colors: {
       ...mergedColors,
       primaryColor: mergedColors.primary?.['400'] || themeBase.colors.primary['400'],
@@ -62,5 +66,5 @@ export function createTheme<TCustom extends Record<string, any> = Record<string,
       errorColor: mergedColors.error?.['400'] || themeBase.colors.error['400'],
     },
     typography: mergedTypography,
-  } as Theme<TCustom>;
+  } as Theme<TCustomColors>;
 }
