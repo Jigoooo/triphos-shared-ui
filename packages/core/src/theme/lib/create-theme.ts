@@ -30,7 +30,9 @@ function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial
   return result;
 }
 
-export function createTheme(themeInput: ThemeInput = {}): Theme {
+export function createTheme<TCustomColors = Record<string, never>>(
+  themeInput: ThemeInput<TCustomColors> = {} as ThemeInput<TCustomColors>,
+): Theme<TCustomColors> {
   const mergedTheme = deepMerge(themeBase, themeInput);
 
   return {
@@ -42,5 +44,5 @@ export function createTheme(themeInput: ThemeInput = {}): Theme {
       warningColor: mergedTheme.colors.warning['400'],
       errorColor: mergedTheme.colors.error['400'],
     },
-  };
+  } as Theme<TCustomColors>;
 }
