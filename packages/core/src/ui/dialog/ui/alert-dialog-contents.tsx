@@ -13,7 +13,7 @@ export function AlertDialogContents({ contents }: { contents?: ReactNode }) {
             paddingBottom: '1.5rem',
             whiteSpace: 'pre-line',
             overflowY: 'auto',
-            marginBottom: '0.625rem',
+            marginBottom: '0.4rem',
           }}
         >
           {typeof contents === 'string' ? (
@@ -25,7 +25,7 @@ export function AlertDialogContents({ contents }: { contents?: ReactNode }) {
           )}
         </FlexColumn>
       ) : (
-        <div style={{ height: '0.625rem' }}></div>
+        <div style={{ height: '0.4rem' }}></div>
       )}
     </>
   );
