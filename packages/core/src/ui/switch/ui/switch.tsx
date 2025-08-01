@@ -15,10 +15,13 @@ export function Switch({
   onClick,
   width = '2.125rem',
   height = '1.24rem',
+  barColor,
   disabled = false,
 }: SwitchProps) {
   const { theme } = useThemeContext();
   const dimensions = useResponsiveSize(width, height);
+
+  const applyBarColor = barColor || theme.colors.primaryColor;
 
   const [isInit, setIsInit] = useState(false);
   useEffect(() => {
@@ -71,7 +74,7 @@ export function Switch({
             width: dimensions.width,
             height: dimensions.height,
             borderRadius: dimensions.borderRadius,
-            backgroundColor: disabled ? '#e0e0e0' : isOn ? theme.colors.primaryColor : '#bbbbbb',
+            backgroundColor: disabled ? '#e0e0e0' : isOn ? applyBarColor : '#e4e4e4',
             padding: dimensions.padding,
             cursor: disabled ? 'default' : 'pointer',
             justifyContent: isOn ? 'flex-end' : 'flex-start',

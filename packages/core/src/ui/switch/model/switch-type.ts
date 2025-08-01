@@ -9,5 +9,6 @@ export type SwitchProps = {
   onClick: () => void;
   width?: string | number;
   height?: string | number;
+  barColor?: string;
   disabled?: boolean;
 };
