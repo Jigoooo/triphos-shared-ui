@@ -93,6 +93,7 @@ export function Switch({
               height: dimensions.circleSize,
               backgroundColor: 'white',
               borderRadius: '50%',
+              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.06)',
             }}
           />
         </motion.div>
