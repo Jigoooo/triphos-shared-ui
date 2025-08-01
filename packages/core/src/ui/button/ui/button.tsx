@@ -78,10 +78,21 @@ export function BaseButton({
           ? customVariants
           : {
               hover: { backgroundColor: animationBackgroundColor.hoverBackgroundColor },
-              tap: { backgroundColor: animationBackgroundColor.tapBackgroundColor, scale: 0.98 },
+              tap: {
+                backgroundColor: animationBackgroundColor.tapBackgroundColor,
+                scale: 0.98,
+                transition: {
+                  scale: { duration: 0.1, ease: 'easeOut' },
+                  backgroundColor: { duration: 0.1, ease: 'easeOut' },
+                },
+              },
               none: {},
             }
       }
+      transition={{
+        scale: { duration: 0.1, ease: 'easeOut' },
+        backgroundColor: { duration: 0.4, ease: 'easeOut' },
+      }}
       whileHover={props.disabled ? 'none' : 'hover'}
       whileTap={props.disabled ? 'none' : 'tap'}
       onDoubleClick={handleDoubleClick}
