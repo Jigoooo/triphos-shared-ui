@@ -1,5 +1,5 @@
-export { useThemeContext, ThemeProvider, createTheme } from './theme';
-export type { ThemeContextType, Theme, themeBase, createUseTheme } from './theme';
+export { useThemeContext, ThemeProvider, createTheme, createUseTheme } from './theme';
+export type { ThemeContextType, Theme, themeBase } from './theme';
 
 export { Button, SolidButton, OutlinedButton, SearchButton, ButtonStyle } from './ui/button';
 export type { ButtonProps } from './ui/button';
