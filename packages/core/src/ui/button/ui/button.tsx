@@ -83,7 +83,7 @@ export function BaseButton({
                 scale: 0.98,
                 transition: {
                   scale: { duration: 0.1, ease: 'easeOut' },
-                  backgroundColor: { duration: 0.1, ease: 'easeOut' },
+                  backgroundColor: { duration: 0.3, ease: 'easeOut' },
                 },
               },
               none: {},
