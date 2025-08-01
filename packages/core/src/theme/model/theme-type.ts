@@ -20,34 +20,27 @@ export type ThemeBaseInput = {
   typography: TypographyType;
 };
 
-// Custom color type that can be either a string or ColorPalette
-export type CustomColorValue = string | ColorPalette;
-
-export type ThemeInput<
-  TCustomColors extends Record<string, CustomColorValue> = Record<string, never>,
-> = {
+export type ThemeInput<TCustomColors extends Record<string, string> = Record<string, never>> = {
   colors?: Partial<BaseColors> & TCustomColors;
   typography?: Partial<TypographyType>;
 };
 
 // Theme with custom colors and typography
-export type Theme<TCustomColors extends Record<string, CustomColorValue> = Record<string, never>> =
-  {
-    colors: {
-      primaryColor: string;
-      successColor: string;
-      warningColor: string;
-      errorColor: string;
-      primary: ColorPalette;
-      success: ColorPalette;
-      warning: ColorPalette;
-      error: ColorPalette;
-    } & TCustomColors;
-    typography: TypographyType;
-  };
-
-export type ThemeContextType<
-  TCustomColors extends Record<string, CustomColorValue> = Record<string, never>,
-> = {
-  theme: Theme<TCustomColors>;
+export type Theme<TCustomColors extends Record<string, string> = Record<string, never>> = {
+  colors: {
+    primaryColor: string;
+    successColor: string;
+    warningColor: string;
+    errorColor: string;
+    primary: ColorPalette;
+    success: ColorPalette;
+    warning: ColorPalette;
+    error: ColorPalette;
+  } & TCustomColors;
+  typography: TypographyType;
 };
+
+export type ThemeContextType<TCustomColors extends Record<string, string> = Record<string, never>> =
+  {
+    theme: Theme<TCustomColors>;
+  };

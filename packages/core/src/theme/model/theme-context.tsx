@@ -1,10 +1,10 @@
 import { createContext, use } from 'react';
-import type { ThemeContextType, CustomColorValue } from './theme-type.ts';
+import type { ThemeContextType } from './theme-type.ts';
 
 export const ThemeContext = createContext<ThemeContextType<any> | null>(null);
 
 export function useThemeContext<
-  TCustomColors extends Record<string, CustomColorValue> = Record<string, never>,
+  TCustomColors extends Record<string, string> = Record<string, never>,
 >() {
   const themeContext = use(ThemeContext) as ThemeContextType<TCustomColors> | null;
 

@@ -1,4 +1,4 @@
-import type { Theme, ThemeInput, CustomColorValue } from '../model/theme-type';
+import type { Theme, ThemeInput } from '../model/theme-type';
 import { themeBase } from '../config/theme-base.ts';
 
 type DeepPartial<T> = {
@@ -45,9 +45,9 @@ const defaultTypography = {
   },
 };
 
-export function createTheme<
-  TCustomColors extends Record<string, CustomColorValue> = Record<string, never>,
->(themeInput: ThemeInput<TCustomColors> = {} as ThemeInput<TCustomColors>): Theme<TCustomColors> {
+export function createTheme<TCustomColors extends Record<string, string> = Record<string, never>>(
+  themeInput: ThemeInput<TCustomColors> = {} as ThemeInput<TCustomColors>,
+): Theme<TCustomColors> {
   const { colors: inputColors, typography: inputTypography } = themeInput;
 
   const mergedColors = deepMerge(themeBase.colors, inputColors || {});
