@@ -49,7 +49,7 @@ export function useResponsiveSize(width: string | number, height: string | numbe
       width: widthPx,
       height: heightPx,
       padding: heightPx * 0.15,
-      circleSize: heightPx * 0.7,
+      circleSize: heightPx * 0.8,
       borderRadius: heightPx / 2,
     };
   });
@@ -65,7 +65,7 @@ export function useResponsiveSize(width: string | number, height: string | numbe
       width: widthPx,
       height: heightPx,
       padding: heightPx * 0.15,
-      circleSize: heightPx * 0.7,
+      circleSize: heightPx * 0.8,
       borderRadius: heightPx / 2,
     });
 
@@ -78,7 +78,7 @@ export function useResponsiveSize(width: string | number, height: string | numbe
         width: newWidthPx,
         height: newHeightPx,
         padding: newHeightPx * 0.15,
-        circleSize: newHeightPx * 0.7,
+        circleSize: newHeightPx * 0.8,
         borderRadius: newHeightPx / 2,
       });
     };
