@@ -7,6 +7,7 @@ import { useThemeContext } from '@/theme';
 
 export function Checkbox({
   style,
+  checkIconColor,
   checkboxSize = '1.125rem',
   checkIconSize = '0.75rem',
   label = '',
@@ -49,6 +50,7 @@ export function Checkbox({
           disabled={disabled}
           checked={checked}
           color={effectiveColor}
+          checkIconColor={checkIconColor}
         />
       ) : (
         <NoAnimatedCheckbox
@@ -59,6 +61,7 @@ export function Checkbox({
           disabled={disabled}
           checked={checked}
           color={effectiveColor}
+          checkIconColor={checkIconColor}
         />
       )}
       {!!label && <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />}

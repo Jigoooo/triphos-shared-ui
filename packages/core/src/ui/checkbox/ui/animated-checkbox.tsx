@@ -12,6 +12,7 @@ export function AnimatedCheckbox({
   disabled,
   checked,
   color,
+  checkIconColor,
 }: AnimatedCheckboxProps) {
   return (
     <FlexRow
@@ -55,7 +56,11 @@ export function AnimatedCheckbox({
               alignItems: 'center',
             }}
           >
-            <CheckIcon checkIconSize={checkIconSize} disabled={disabled} />
+            <CheckIcon
+              checkIconSize={checkIconSize}
+              checkIconColor={checkIconColor}
+              disabled={disabled}
+            />
           </FlexRow>
         )}
         {isPartial && (

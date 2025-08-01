@@ -14,11 +14,13 @@ export type AnimatedCheckboxProps = {
   disabled?: boolean;
   checked: boolean;
   color?: string;
+  checkIconColor?: string;
 };
 
 export type NoAnimatedCheckboxProps = AnimatedCheckboxProps;
 
 export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
+  checkIconColor?: string;
   checkboxSize?: string | number;
   checkIconSize?: string | number;
   label?: string;
@@ -34,5 +36,6 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export type CheckboxIconProps = {
   checkIconSize?: string | number;
+  checkIconColor?: string;
   disabled?: boolean;
 };

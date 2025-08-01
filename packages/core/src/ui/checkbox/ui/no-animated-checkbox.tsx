@@ -10,6 +10,7 @@ export function NoAnimatedCheckbox({
   disabled,
   checked,
   color,
+  checkIconColor,
 }: NoAnimatedCheckboxProps) {
   return (
     <FlexRow
@@ -31,7 +32,11 @@ export function NoAnimatedCheckbox({
             alignItems: 'center',
           }}
         >
-          <CheckIcon checkIconSize={checkIconSize} disabled={disabled} />
+          <CheckIcon
+            checkIconSize={checkIconSize}
+            checkIconColor={checkIconColor}
+            disabled={disabled}
+          />
         </FlexRow>
       )}
       {isPartial && (
