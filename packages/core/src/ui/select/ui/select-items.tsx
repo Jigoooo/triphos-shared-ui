@@ -124,8 +124,8 @@ export function SelectItems<ValueType extends string | number>({
               marginInline: isAutocomplete ? '0.375rem' : 0,
               paddingBlock: '0.25rem',
               paddingInline: '0.5rem',
-              backgroundColor: isHighlighted ? '#f4f4f4' : '#ffffff',
-              borderRadius: '0.375rem',
+              backgroundColor: isSelected ? '#efefef' : isHighlighted ? '#f4f4f4' : '#ffffff',
+              borderRadius: '0.25rem',
               ...itemLabelContainerStyle,
             }}
             onClick={() => selectValue(option.value)}
