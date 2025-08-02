@@ -65,7 +65,7 @@ export function SelectContainer<ValueType extends string | number>({
         alignItems: 'center',
         gap: '0.5rem',
         paddingLeft: label ? '0.75rem' : '0.375rem',
-        paddingRight: '0.75rem',
+        paddingRight: '0.4rem',
         paddingBlock: '0.25rem',
         height: containerHeight,
         backgroundColor: '#ffffff',
