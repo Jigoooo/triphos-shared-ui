@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 
 export type SwitchProps = {
   isActiveAnimation?: boolean;
+  animationDelay?: number;
   containerStyle?: CSSProperties;
   label?: string;
   labelStyle?: CSSProperties;

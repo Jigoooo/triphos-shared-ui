@@ -8,6 +8,7 @@ import { useThemeContext } from '@/theme';
 
 export function Switch({
   isActiveAnimation = true,
+  animationDelay = 300,
   containerStyle,
   label,
   labelStyle,
@@ -28,11 +29,11 @@ export function Switch({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsInit(true);
-    }, 300);
+    }, animationDelay);
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [animationDelay]);
 
   return (
     <div
