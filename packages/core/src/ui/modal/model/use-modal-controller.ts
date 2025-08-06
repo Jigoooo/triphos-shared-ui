@@ -1,10 +1,6 @@
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
 
-import { detectDeviceTypeAndOS } from '@/lib';
-
-const { isMobile } = detectDeviceTypeAndOS();
-
 export function useModalController({
   modalRef,
   isOpen,
@@ -15,26 +11,11 @@ export function useModalController({
   onClose: () => void;
 }) {
   useEffect(() => {
-    if (!isMobile) {
-      return;
-    }
+    if (!isOpen) return;
 
-    const addQueryParam = (key: string, value: string) => {
-      const searchParams = new URLSearchParams(window.location.search);
-      searchParams.set(key, value);
-      const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
-      window.history.pushState(null, '', newUrl);
-    };
-
-    let timeoutId: NodeJS.Timeout;
-
-    if (isOpen) {
-      addQueryParam('modal', 'true');
-
-      timeoutId = setTimeout(() => {
-        window.history.pushState({ modal: true }, '');
-      }, 0);
-    }
+    const timeoutId = setTimeout(() => {
+      window.history.pushState({ modal: true }, '');
+    }, 0);
 
     const handlePopState = () => {
       onClose();
