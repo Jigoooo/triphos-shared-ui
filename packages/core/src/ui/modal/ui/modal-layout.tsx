@@ -133,7 +133,11 @@ export function ModalLayout({
             <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
           </FlexColumn>
           <FlexColumn
-            style={{ height: '100%', justifyContent: 'flex-start', paddingTop: '0.4rem' }}
+            style={{
+              height: '100%',
+              justifyContent: 'flex-start',
+              paddingTop: subTitle ? '0.4rem' : 0,
+            }}
           >
             <CloseIconButton close={close} />
           </FlexColumn>
