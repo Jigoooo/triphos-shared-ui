@@ -131,7 +131,9 @@ export function ModalLayout({
                 {title}
               </Typography>
             </FlexRow>
-            <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
+            {subTitle && (
+              <Typography style={{ fontSize: '0.9rem', color: '#888888' }}>{subTitle}</Typography>
+            )}
           </FlexColumn>
           <FlexColumn
             style={{
