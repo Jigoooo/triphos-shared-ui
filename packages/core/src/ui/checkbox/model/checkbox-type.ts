@@ -34,6 +34,7 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   onClick?: MouseEventHandler;
   disabled?: boolean;
   isActiveAnimation?: boolean;
+  wrapperStyle?: CSSProperties;
   containerStyle?: CSSProperties;
 };
 

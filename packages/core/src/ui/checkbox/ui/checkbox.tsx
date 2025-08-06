@@ -20,6 +20,7 @@ export function Checkbox({
   onClick,
   disabled = false,
   isActiveAnimation = true,
+  wrapperStyle,
   containerStyle,
   ...checkboxProps
 }: CheckboxProps) {
@@ -33,6 +34,7 @@ export function Checkbox({
         alignItems: 'center',
         gap: '0.375rem',
         cursor: 'pointer',
+        ...wrapperStyle,
       }}
       onClick={(e) => !disabled && onClick && onClick(e)}
     >
