@@ -8,9 +8,9 @@ import { ModalContext } from '../model/modal-context.ts';
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
-import { detectDeviceTypeAndOS } from '@/lib';
+// import { detectDeviceTypeAndOS } from '@/lib';
 
-const { isMobile } = detectDeviceTypeAndOS();
+// const { isMobile } = detectDeviceTypeAndOS();
 
 export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -111,10 +111,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     isOpen: true,
                     close: () => {
                       close(modal.id);
-
-                      if (isMobile) {
-                        window.history.back();
-                      }
                     },
                   })}
                 </FlexRow>
@@ -142,10 +138,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     onClick={() => {
                       if (isPossibleOverlayClose !== null && isPossibleOverlayClose[modal.id]) {
                         close(modal.id);
-
-                        if (isMobile) {
-                          window.history.back();
-                        }
                       }
                     }}
                   />

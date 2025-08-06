@@ -26,8 +26,14 @@ export function useModalController({
       window.history.pushState(null, '', newUrl);
     };
 
+    let timeoutId: NodeJS.Timeout;
+
     if (isOpen) {
       addQueryParam('modal', 'true');
+
+      timeoutId = setTimeout(() => {
+        window.history.pushState({ modal: true }, '');
+      }, 0);
     }
 
     const handlePopState = () => {
@@ -37,6 +43,7 @@ export function useModalController({
     window.addEventListener('popstate', handlePopState);
 
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener('popstate', handlePopState);
     };
   }, [isOpen, onClose]);

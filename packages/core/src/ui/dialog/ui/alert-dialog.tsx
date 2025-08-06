@@ -134,10 +134,6 @@ export function AlertDialog() {
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
                   dialog.close();
-
-                  if (isMobile) {
-                    window.history.back();
-                  }
                 }}
               />
             </motion.div>
