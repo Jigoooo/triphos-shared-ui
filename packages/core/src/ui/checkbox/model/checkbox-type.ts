@@ -26,6 +26,7 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   checkIconSize?: string | number;
   label?: string;
   labelStyle?: CSSProperties;
+  labelPosition?: 'left' | 'right';
   checked: boolean;
   checkboxCheckedColor?: string;
   checkboxColor?: string;

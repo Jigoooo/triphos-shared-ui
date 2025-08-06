@@ -12,6 +12,7 @@ export function Checkbox({
   checkIconSize = '0.75rem',
   label = '',
   labelStyle,
+  labelPosition = 'right',
   checked,
   checkboxCheckedColor,
   checkboxColor,
@@ -42,6 +43,9 @@ export function Checkbox({
         style={{ ...style, display: 'none' }}
         {...checkboxProps}
       />
+      {!!label && labelPosition === 'left' && (
+        <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />
+      )}
       {isActiveAnimation ? (
         <AnimatedCheckbox
           containerStyle={containerStyle}
@@ -67,7 +71,9 @@ export function Checkbox({
           checkIconColor={checkIconColor}
         />
       )}
-      {!!label && <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />}
+      {!!label && labelPosition === 'right' && (
+        <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />
+      )}
     </FlexRow>
   );
 }
