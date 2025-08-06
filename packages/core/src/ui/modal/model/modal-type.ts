@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode, RefObject } from 'react';
+import type { CSSProperties, ReactNode, Ref } from 'react';
 
 export type ModalItem = {
   id: string;
@@ -7,7 +7,7 @@ export type ModalItem = {
 };
 
 export type ModalRenderProps = {
-  overlayRef: RefObject<HTMLDivElement | null>;
+  overlayRef: Ref<HTMLDivElement>;
   isOpen: boolean;
   close: () => void;
 };
@@ -24,7 +24,7 @@ export type ModalContextType = {
 };
 
 export type ModalLayoutProps = {
-  overlayRef: RefObject<HTMLDivElement | null>;
+  overlayRef: Ref<HTMLDivElement>;
   close: () => void;
   headerVisible?: boolean;
   drag?: boolean;
