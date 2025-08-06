@@ -1,5 +1,7 @@
 import type { CSSProperties, ReactNode, RefObject } from 'react';
 
+import type { CloseIconButtonProps } from '@/ui/icon';
+
 export type ModalItem = {
   id: string;
   render: (props: ModalRenderProps) => ReactNode;
@@ -34,8 +36,7 @@ export type ModalLayoutProps = {
   containerStyle?: CSSProperties;
   headerContainerStyle?: CSSProperties;
   titleStyle?: CSSProperties;
-  closeButtonStyle?: CSSProperties;
-  closeIconStyle?: CSSProperties;
+  closeIconProps?: CloseIconButtonProps;
   withHeader?: boolean;
   children: ReactNode;
 };

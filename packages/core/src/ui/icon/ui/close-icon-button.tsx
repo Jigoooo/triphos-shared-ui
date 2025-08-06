@@ -11,6 +11,7 @@ export function CloseIconButton({
   color = '#212121',
   iconSize = '1.3rem',
   style,
+  iconStyle,
 }: CloseIconButtonProps) {
   return (
     <FlexRow
@@ -32,7 +33,7 @@ export function CloseIconButton({
         close();
       }}
     >
-      <LuX size={iconSize} style={{ color }} />
+      <LuX size={iconSize} style={{ color, ...iconStyle }} />
     </FlexRow>
   );
 }

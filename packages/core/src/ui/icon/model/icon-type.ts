@@ -6,4 +6,5 @@ export type CloseIconButtonProps = {
   color?: string;
   style?: CSSProperties;
   close: () => void;
+  iconStyle?: CSSProperties;
 };
