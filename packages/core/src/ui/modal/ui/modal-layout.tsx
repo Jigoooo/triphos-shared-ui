@@ -31,6 +31,8 @@ export function ModalLayout({
   containerStyle,
   headerContainerStyle,
   titleStyle,
+  closeButtonStyle,
+  closeIconStyle,
   children,
 }: ModalLayoutProps) {
   const dragControls = useDragControls();
@@ -137,9 +139,10 @@ export function ModalLayout({
               height: '100%',
               justifyContent: 'flex-start',
               paddingTop: subTitle ? '0.4rem' : 0,
+              ...closeButtonStyle,
             }}
           >
-            <CloseIconButton close={close} />
+            <CloseIconButton close={close} style={closeIconStyle} />
           </FlexColumn>
         </FlexRow>
       )}
