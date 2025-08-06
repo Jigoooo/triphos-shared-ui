@@ -36,7 +36,7 @@ export type ModalLayoutProps = {
   containerStyle?: CSSProperties;
   headerContainerStyle?: CSSProperties;
   titleStyle?: CSSProperties;
-  closeIconProps?: CloseIconButtonProps;
+  closeIconProps?: Omit<CloseIconButtonProps, 'close'>;
   withHeader?: boolean;
   children: ReactNode;
 };
