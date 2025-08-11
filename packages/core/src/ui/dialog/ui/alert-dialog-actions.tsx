@@ -47,9 +47,9 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           backgroundColor: dialogColor,
         }}
         onClick={() => {
-          if (isMobile) {
-            window.history.back();
-          }
+          // if (isMobile) {
+          //   window.history.back();
+          // }
 
           setTimeout(() => dialogConfig?.onConfirm?.(), 10);
         }}
