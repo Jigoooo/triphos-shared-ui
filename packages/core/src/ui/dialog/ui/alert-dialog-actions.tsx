@@ -1,12 +1,9 @@
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 import { Button } from '@/ui/button';
-import { detectDeviceTypeAndOS } from '@/lib';
 import type { DialogConfig } from '../model/dialog-type.ts';
 import { DialogType } from '../model/dialog-type.ts';
 import { useGetDialogButtonColor } from '../model/use-get-dialog-button-color.ts';
-
-const { isMobile } = detectDeviceTypeAndOS();
 
 export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfig }) {
   const dialogColor = useGetDialogButtonColor(dialogConfig.dialogType || DialogType.INFO);
@@ -30,9 +27,9 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           onClick={() => {
             dialogConfig?.onCancel?.();
 
-            if (isMobile) {
-              window.history.back();
-            }
+            // if (isMobile) {
+            //   window.history.back();
+            // }
           }}
         >
           <Typography style={{ color: '#555555', fontSize: '0.9rem' }}>
