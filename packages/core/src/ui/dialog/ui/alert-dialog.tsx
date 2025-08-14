@@ -133,8 +133,8 @@ export function AlertDialog() {
                 lockScroll
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
-                  // dialog.close();
-                  window.history.back();
+                  dialog.close();
+                  // window.history.back(); // useModalController에서 처리
                 }}
               />
             </motion.div>

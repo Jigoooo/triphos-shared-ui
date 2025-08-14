@@ -25,12 +25,8 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
             borderColor: '#bbbbbb',
           }}
           onClick={() => {
-            window.history.back();
+            // window.history.back();
             dialogConfig?.onCancel?.();
-
-            // if (isMobile) {
-            //   window.history.back();
-            // }
           }}
         >
           <Typography style={{ color: '#555555', fontSize: '0.9rem' }}>
@@ -45,10 +41,7 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           backgroundColor: dialogColor,
         }}
         onClick={() => {
-          // if (isMobile) {
-          //   window.history.back();
-          // }
-          window.history.back();
+          // window.history.back();
           dialogConfig?.onConfirm?.();
         }}
       >
