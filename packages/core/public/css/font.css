@@ -62,3 +62,10 @@
     font-display: swap;
     src: url('../fonts/Pretendard/PretendardVariable.woff2') format('woff2-variations');
 }
+
+@supports (font-variant-numeric: tabular-nums) {
+    * {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum" 1;
+    }
+}
