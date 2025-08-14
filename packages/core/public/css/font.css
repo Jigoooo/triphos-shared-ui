@@ -60,5 +60,5 @@
     font-weight: 45 920;
     font-style: normal;
     font-display: swap;
-    src: url('/packages/core/public/fonts/Pretendard/PretendardVariable.woff2') format('woff2-variations');
+    src: url('../fonts/Pretendard/PretendardVariable.woff2') format('woff2-variations');
 }
