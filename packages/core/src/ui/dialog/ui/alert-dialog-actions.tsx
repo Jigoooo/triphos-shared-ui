@@ -25,6 +25,7 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
             borderColor: '#bbbbbb',
           }}
           onClick={() => {
+            window.history.back();
             dialogConfig?.onCancel?.();
 
             // if (isMobile) {
@@ -47,8 +48,8 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           // if (isMobile) {
           //   window.history.back();
           // }
-
-          setTimeout(() => dialogConfig?.onConfirm?.(), 10);
+          window.history.back();
+          dialogConfig?.onConfirm?.();
         }}
       >
         {dialogConfig.confirmText}

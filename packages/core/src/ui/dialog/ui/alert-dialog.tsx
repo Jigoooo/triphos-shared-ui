@@ -133,7 +133,8 @@ export function AlertDialog() {
                 lockScroll
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
-                  dialog.close();
+                  // dialog.close();
+                  window.history.back();
                 }}
               />
             </motion.div>

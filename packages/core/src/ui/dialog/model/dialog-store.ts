@@ -32,11 +32,11 @@ export const useDialogStore = create<DialogStore>()((setState, getState) => {
             withCancel: dialogConfig.cancelText !== undefined ? true : !!dialogConfig.withCancel,
             onConfirm: () => {
               if (dialogConfig.onConfirm) dialogConfig.onConfirm();
-              getState().actions.close();
+              // getState().actions.close();
             },
             onCancel: () => {
               if (dialogConfig.onCancel) dialogConfig.onCancel();
-              getState().actions.close();
+              // getState().actions.close();
             },
           },
         }));
@@ -52,12 +52,12 @@ export const useDialogStore = create<DialogStore>()((setState, getState) => {
               withCancel: dialogConfig.cancelText !== undefined ? true : !!dialogConfig.withCancel,
               onConfirm: () => {
                 if (dialogConfig.onConfirm) dialogConfig.onConfirm();
-                getState().actions.close();
+                // getState().actions.close();
                 resolve(true);
               },
               onCancel: () => {
                 if (dialogConfig.onCancel) dialogConfig.onCancel();
-                getState().actions.close();
+                // getState().actions.close();
                 resolve(false);
               },
             },
