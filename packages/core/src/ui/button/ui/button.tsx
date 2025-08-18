@@ -71,10 +71,11 @@ export function BaseButton({
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[buttonStyle],
         ...(props.disabled ? { ...buttonDisabledStyle[buttonStyle], ...disabledStyle } : {}),
-        transformOrigin: 'center center',
-        display: 'flex',
+        transformOrigin: 'center',
+        display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: '0.5rem',
         ...style,
       }}
       variants={
@@ -84,9 +85,15 @@ export function BaseButton({
               hover: { backgroundColor: animationBackgroundColor.hoverBackgroundColor },
               tap: {
                 backgroundColor: animationBackgroundColor.tapBackgroundColor,
-                scale: 0.98,
+                scale: 0.97,
                 transition: {
-                  scale: { duration: 0.1, ease: 'easeOut' },
+                  scale: {
+                    duration: 0.08,
+                    ease: [0.25, 0.1, 0.25, 1],
+                    type: 'spring',
+                    damping: 15,
+                    stiffness: 400,
+                  },
                   backgroundColor: { duration: 0.3, ease: 'easeOut' },
                 },
               },
@@ -94,7 +101,13 @@ export function BaseButton({
             }
       }
       transition={{
-        scale: { duration: 0.1, ease: 'easeOut' },
+        scale: {
+          duration: 0.08,
+          ease: [0.25, 0.1, 0.25, 1],
+          type: 'spring',
+          damping: 15,
+          stiffness: 400,
+        },
         backgroundColor: { duration: 0.4, ease: 'easeOut' },
       }}
       whileHover={props.disabled ? 'none' : 'hover'}
