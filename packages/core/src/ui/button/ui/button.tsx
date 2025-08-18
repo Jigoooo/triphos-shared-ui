@@ -71,7 +71,8 @@ export function BaseButton({
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[buttonStyle],
         ...(props.disabled ? { ...buttonDisabledStyle[buttonStyle], ...disabledStyle } : {}),
-        transformOrigin: '50% 50%',
+        originX: 0.5,
+        originY: 0.5,
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -86,14 +87,11 @@ export function BaseButton({
               hover: { backgroundColor: animationBackgroundColor.hoverBackgroundColor },
               tap: {
                 backgroundColor: animationBackgroundColor.tapBackgroundColor,
-                scale: 0.97,
+                scale: 0.95,
                 transition: {
                   scale: {
-                    duration: 0.08,
-                    ease: [0.25, 0.1, 0.25, 1],
-                    type: 'spring',
-                    damping: 15,
-                    stiffness: 400,
+                    duration: 0.05,
+                    ease: 'easeOut',
                   },
                   backgroundColor: { duration: 0.3, ease: 'easeOut' },
                 },
@@ -103,11 +101,8 @@ export function BaseButton({
       }
       transition={{
         scale: {
-          duration: 0.08,
-          ease: [0.25, 0.1, 0.25, 1],
-          type: 'spring',
-          damping: 15,
-          stiffness: 400,
+          duration: 0.05,
+          ease: 'easeOut',
         },
         backgroundColor: { duration: 0.4, ease: 'easeOut' },
       }}
