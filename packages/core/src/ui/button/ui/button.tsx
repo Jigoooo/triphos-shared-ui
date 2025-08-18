@@ -71,11 +71,12 @@ export function BaseButton({
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[buttonStyle],
         ...(props.disabled ? { ...buttonDisabledStyle[buttonStyle], ...disabledStyle } : {}),
-        transformOrigin: 'center',
+        transformOrigin: '50% 50%',
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '0.5rem',
+        gap: '0.25rem',
+        position: 'relative',
         ...style,
       }}
       variants={

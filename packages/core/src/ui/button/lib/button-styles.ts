@@ -13,7 +13,7 @@ export const defaultButtonStyle: CSSProperties = {
   cursor: 'pointer',
   fontSize: '0.84rem',
   height: '2rem',
-  lineHeight: 0,
+  lineHeight: 1,
   width: 'auto',
   userSelect: 'none',
   WebkitUserSelect: 'none',
