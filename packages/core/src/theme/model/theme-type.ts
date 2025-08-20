@@ -1,5 +1,3 @@
-import { type ButtonType } from '@/ui/button';
-
 type ColorScale = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 type ColorPalette = Record<ColorScale, string>;
 
@@ -16,24 +14,14 @@ export type TypographyType = {
   fontSize?: Record<FontSize, string>;
 };
 
-export type Button = {
-  type: ButtonType;
-};
-
-export type ComponentStyles = {
-  button: Button;
-};
-
 export type CustomThemeExtensions = {
   colors?: Record<string, string>;
   typography?: Record<string, string>;
-  components?: ComponentStyles;
 };
 
 export type ThemeBaseInput = {
   colors: BaseColors;
   typography: TypographyType;
-  components: ComponentStyles;
 };
 
 export type ExtendedColor<TCustomTheme extends CustomThemeExtensions = Record<string, never>> =
@@ -46,16 +34,9 @@ export type ExtendedTypography<TCustomTheme extends CustomThemeExtensions = Reco
     ? TCustomTheme['typography']
     : Record<string, never>;
 
-export type ExtendedComponentStyles<
-  TCustomTheme extends CustomThemeExtensions = Record<string, never>,
-> = TCustomTheme extends { components: ComponentStyles }
-  ? TCustomTheme['components']
-  : Record<string, never>;
-
 export type ThemeInput<TCustomTheme extends CustomThemeExtensions = Record<string, never>> = {
   colors?: Partial<BaseColors> & ExtendedColor<TCustomTheme>;
   typography?: Partial<TypographyType> & ExtendedTypography<TCustomTheme>;
-  components?: Partial<ComponentStyles> & ExtendedComponentStyles<TCustomTheme>;
 };
 
 export type Theme<TCustomTheme extends CustomThemeExtensions = Record<string, never>> = {
@@ -70,7 +51,6 @@ export type Theme<TCustomTheme extends CustomThemeExtensions = Record<string, ne
     error: ColorPalette;
   } & ExtendedColor<TCustomTheme>;
   typography: TypographyType & ExtendedTypography<TCustomTheme>;
-  components: ComponentStyles & ExtendedComponentStyles<TCustomTheme>;
 };
 
 export type ThemeContextType<TCustomTheme extends CustomThemeExtensions = Record<string, never>> = {

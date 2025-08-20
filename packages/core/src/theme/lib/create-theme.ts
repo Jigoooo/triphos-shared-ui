@@ -39,8 +39,6 @@ export function createTheme<TCustomTheme extends CustomThemeExtensions = Record<
 
   const mergedTypography = deepMerge(themeBase.typography, inputTypography || {});
 
-  const mergedComponents = deepMerge(themeBase.components, themeInput.components || {});
-
   return {
     colors: {
       ...mergedColors,
@@ -50,6 +48,5 @@ export function createTheme<TCustomTheme extends CustomThemeExtensions = Record<
       errorColor: mergedColors.error?.['400'] || themeBase.colors.error['400'],
     },
     typography: mergedTypography,
-    components: mergedComponents,
   } as Theme<TCustomTheme>;
 }

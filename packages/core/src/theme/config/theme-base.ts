@@ -1,5 +1,4 @@
 import type { ThemeBaseInput } from '../model/theme-type.ts';
-import { ButtonType } from '@/ui/button';
 
 export const themeBase: ThemeBaseInput = {
   colors: {
@@ -63,11 +62,6 @@ export const themeBase: ThemeBaseInput = {
       '3xl': '1.875rem',
       '4xl': '2.25rem',
       '5xl': '3rem',
-    },
-  },
-  components: {
-    button: {
-      type: ButtonType.SOLID,
     },
   },
 };

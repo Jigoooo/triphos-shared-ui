@@ -17,7 +17,7 @@ import { PlainButton } from '@/ui/button/variant/plain-button.tsx';
 
 export function BaseButton({
   ref,
-  buttonType,
+  buttonType = ButtonType.SOLID,
   customVariants,
   customTransition,
   animationBackgroundColor,
@@ -29,13 +29,11 @@ export function BaseButton({
 }: ButtonProps) {
   const { theme } = useThemeContext();
 
-  const applyButtonType = buttonType ?? theme.components.button.type;
-
   const backgroundColor = style?.backgroundColor ?? theme.colors.primaryColor;
   const color = style?.color ?? theme.colors.primaryColor;
-  const defaultAnimationColor = applyButtonType === ButtonType.OUTLINED ? color : backgroundColor;
+  const defaultAnimationColor = buttonType === ButtonType.OUTLINED ? color : backgroundColor;
   const applyAnimationBackgroundColor = getButtonAnimationBackgroundColor(
-    applyButtonType,
+    buttonType,
     animationBackgroundColor ?? defaultAnimationColor,
   );
 
@@ -68,8 +66,8 @@ export function BaseButton({
       }}
       style={{
         ...defaultButtonStyle,
-        ...getButtonWithTypeStyles(theme)[applyButtonType],
-        ...(props.disabled ? { ...buttonDisabledStyle[applyButtonType], ...disabledStyle } : {}),
+        ...getButtonWithTypeStyles(theme)[buttonType],
+        ...(props.disabled ? { ...buttonDisabledStyle[buttonType], ...disabledStyle } : {}),
         ...style,
       }}
       variants={customVariants ? customVariants : defaultButtonVariants}
