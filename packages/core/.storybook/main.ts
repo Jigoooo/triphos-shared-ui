@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-
 import { join, dirname } from 'path';
 
 /**
@@ -15,6 +14,7 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-onboarding'),
     getAbsolutePath('@chromatic-com/storybook'),
     getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-controls'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-vitest'),
   ],
@@ -22,5 +22,6 @@ const config: StorybookConfig = {
     name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
+  staticDirs: ['../public'],
 };
 export default config;

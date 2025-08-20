@@ -22,7 +22,7 @@ export const defaultButtonStyle: CSSProperties = {
   MozUserSelect: 'none',
   msUserSelect: 'none',
   fontWeight: 600,
-} as const;
+} as CSSProperties;
 
 export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSProperties> {
   return {
@@ -102,7 +102,7 @@ export const getDefaultButtonVariants: (
 export const getDefaultButtonTransition: () => Transition = () => {
   return {
     scale: {
-      duration: 0.05,
+      duration: 0.08,
       ease: 'easeOut',
     },
     backgroundColor: { duration: 0.4, ease: 'easeOut' },

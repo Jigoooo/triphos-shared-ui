@@ -60,13 +60,6 @@ export function BaseButton({
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[applyButtonType],
         ...(props.disabled ? { ...buttonDisabledStyle[applyButtonType], ...disabledStyle } : {}),
-        originX: 0.5,
-        originY: 0.5,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '0.25rem',
-        position: 'relative',
         ...style,
       }}
       variants={customVariants ? customVariants : defaultButtonVariants}
