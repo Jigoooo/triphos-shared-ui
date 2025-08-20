@@ -17,6 +17,7 @@ export function NoAnimatedCheckbox({
   checkboxCheckedColor,
   checkboxColor = '#ffffff',
   checkIconColor,
+  checkboxBorderWidth,
 }: NoAnimatedCheckboxProps) {
   const applyCheckboxStyle = getCheckboxStyle({
     checkboxStyle,
@@ -25,6 +26,7 @@ export function NoAnimatedCheckbox({
     checked,
     checkboxCheckedColor,
     checkboxColor,
+    checkboxBorderWidth,
   });
 
   const checkboxPartialStyle = getCheckboxPartialStyle(checkboxCheckedColor);

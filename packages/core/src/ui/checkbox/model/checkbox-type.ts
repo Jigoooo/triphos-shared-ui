@@ -16,6 +16,7 @@ export type AnimatedCheckboxProps = {
   checkboxCheckedColor: string;
   checkboxColor?: string;
   checkIconColor?: string;
+  checkboxBorderWidth: number;
 };
 
 export type NoAnimatedCheckboxProps = AnimatedCheckboxProps;
@@ -37,6 +38,7 @@ export type CheckboxProps = {
   isActiveAnimation?: boolean;
   wrapperStyle?: CSSProperties;
   checkboxStyle?: CSSProperties;
+  checkboxBorderWidth?: number;
 };
 
 export type CheckboxIconProps = {

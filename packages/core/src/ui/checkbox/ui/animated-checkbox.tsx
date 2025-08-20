@@ -19,6 +19,7 @@ export function AnimatedCheckbox({
   checkboxCheckedColor,
   checkboxColor = '#ffffff',
   checkIconColor,
+  checkboxBorderWidth,
 }: AnimatedCheckboxProps) {
   const applyCheckboxStyle = getCheckboxStyle({
     checkboxStyle,
@@ -27,6 +28,7 @@ export function AnimatedCheckbox({
     checked,
     checkboxCheckedColor,
     checkboxColor,
+    checkboxBorderWidth,
   });
 
   const checkboxPartialStyle = getCheckboxPartialStyle(checkboxCheckedColor);

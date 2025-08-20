@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
-import { Checkbox } from '../src';
+import { Checkbox, useThemeContext } from '../src';
 import type { CheckboxProps } from '../src/ui/checkbox/model/checkbox-type';
 
 const meta = {
@@ -140,6 +140,7 @@ export const Circular: Story = {
     return (
       <Checkbox
         {...args}
+        checkIconSize={'0.55rem'}
         checked={checked}
         onChange={setChecked}
         checkboxStyle={{
@@ -398,6 +399,27 @@ export const Shapes: Story = {
           onChange={(checked) => handleChange(2, checked)}
         />
       </div>
+    );
+  },
+};
+
+export const EmptyBackground: Story = {
+  render: (args) => {
+    const { theme } = useThemeContext();
+    const [checked, setChecked] = useState(args.checked);
+
+    return (
+      <Checkbox
+        {...args}
+        label='배경 색상 없는 체크박스'
+        checked={checked}
+        onChange={setChecked}
+        checkboxColor='transparent'
+        checkboxStyle={{ backgroundColor: '#ffffff' }}
+        checkboxCheckedColor={theme.colors.primaryColor}
+        checkIconColor={theme.colors.primaryColor}
+        checkboxBorderWidth={1.6}
+      />
     );
   },
 };

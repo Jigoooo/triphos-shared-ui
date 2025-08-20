@@ -33,6 +33,7 @@ export function Checkbox({
   isActiveAnimation = true,
   wrapperStyle,
   checkboxStyle,
+  checkboxBorderWidth = 1,
 }: CheckboxProps) {
   const { theme } = useThemeContext();
   const effectiveColor = checkboxCheckedColor || theme.colors.primaryColor;
@@ -67,10 +68,11 @@ export function Checkbox({
       checkboxCheckedColor: effectiveColor,
       checkboxColor,
       checkIconColor,
+      checkboxBorderWidth,
     }),
     [
-      checkboxStyle,
       isPartial,
+      checkboxStyle,
       validatedSizes.checkboxSize,
       validatedSizes.checkIconSize,
       disabled,

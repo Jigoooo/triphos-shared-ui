@@ -7,6 +7,7 @@ export const getCheckboxStyle = ({
   checked,
   checkboxCheckedColor,
   checkboxColor = '#ffffff',
+  checkboxBorderWidth,
 }: {
   checkboxStyle?: CSSProperties;
   checkboxSize?: string | number;
@@ -14,13 +15,14 @@ export const getCheckboxStyle = ({
   checked: boolean;
   checkboxCheckedColor?: string;
   checkboxColor?: string;
+  checkboxBorderWidth: number;
 }): CSSProperties => {
   return {
     justifyContent: 'center',
     alignItems: 'center',
     width: checkboxSize,
     height: checkboxSize,
-    border: `1px solid ${!disabled && checked ? checkboxCheckedColor : '#cccccc'}`,
+    border: `${checkboxBorderWidth}px solid ${!disabled && checked ? checkboxCheckedColor : '#cccccc'}`,
     borderRadius: '0.25rem',
     backgroundColor: disabled ? '#f5f5f5' : checked ? checkboxCheckedColor : checkboxColor,
     ...checkboxStyle,
