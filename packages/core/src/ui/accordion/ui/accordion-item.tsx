@@ -4,6 +4,7 @@ import { useState, type KeyboardEvent } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 import {
+  accordionDefaultTransition,
   accordionItemContentStyle,
   accordionItemIconStyle,
   accordionItemTitleStyle,
@@ -22,6 +23,7 @@ export function AccordionItem({
   renderHeader,
   children,
   index = 0,
+  customTransition,
 }: AccordionItemProps) {
   const { openItems, toggleItem } = useAccordionGroupContext();
   const isOpen = openItems.includes(index);
@@ -79,7 +81,7 @@ export function AccordionItem({
             animate={{ height: contentHeight, opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             style={{ overflow: 'hidden' }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            transition={customTransition ?? accordionDefaultTransition}
           >
             <div ref={contentRef} style={accordionItemContentStyle}>
               {children}

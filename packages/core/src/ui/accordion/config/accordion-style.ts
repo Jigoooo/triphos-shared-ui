@@ -1,3 +1,4 @@
+import { type Transition } from 'framer-motion';
 import { type CSSProperties } from 'react';
 
 export const getAccordionItemHeaderStyle = ({
@@ -59,3 +60,5 @@ export const accordionItemIconStyle: CSSProperties = {
 export const accordionItemContentStyle: CSSProperties = {
   padding: '0.5rem 0',
 };
+
+export const accordionDefaultTransition: Transition = { duration: 0.22, ease: 'easeInOut' };

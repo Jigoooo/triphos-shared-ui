@@ -1,3 +1,4 @@
+import { type Transition } from 'framer-motion';
 import type { CSSProperties, ReactNode } from 'react';
 
 export type AccordionType = 'single' | 'multiple';
@@ -27,4 +28,5 @@ export type AccordionItemProps = {
   children: ReactNode;
   renderHeader?: (props: AccordionItemHeaderRenderProps) => ReactNode;
   index?: number;
+  customTransition?: Transition;
 };

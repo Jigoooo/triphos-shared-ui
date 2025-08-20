@@ -298,7 +298,7 @@ export const CustomStyles: Story = {
       <AccordionItem title='Styled Accordion Item'>
         <div
           style={{
-            padding: '1.5rem 0',
+            padding: '1.5rem 2rem',
             background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
             borderRadius: '8px',
             color: 'white',
@@ -312,7 +312,7 @@ export const CustomStyles: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='Another Custom Item'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 2rem' }}>
           <p>You can style each accordion item individually or apply global styles to the group.</p>
         </div>
       </AccordionItem>
@@ -322,5 +322,87 @@ export const CustomStyles: Story = {
     style: {
       gap: '0.5rem',
     },
+  },
+};
+
+export const CustomHeader: Story = {
+  render: (args) => (
+    <AccordionGroup {...args}>
+      <AccordionItem
+        renderHeader={({ isOpen, toggle }) => (
+          <div
+            role='button'
+            tabIndex={0}
+            aria-expanded={isOpen}
+            onClick={toggle}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '1rem 1.25rem',
+              background: isOpen ? '#E8F4FD' : '#FFFFFF',
+              border: `2px solid ${isOpen ? '#2196F3' : '#E0E0E0'}`,
+              borderRadius: '12px',
+              cursor: 'pointer',
+              transition: 'all 200ms ease',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  background: isOpen ? '#2196F3' : '#F5F5F5',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '16px',
+                  transition: 'all 200ms ease',
+                }}
+              >
+                🚀
+              </div>
+              <span
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 600,
+                  color: isOpen ? '#1976D2' : '#333',
+                }}
+              >
+                커스텀 헤더 예시
+              </span>
+            </div>
+            <div
+              style={{
+                fontSize: '18px',
+                transform: isOpen ? 'rotate(-180deg)' : 'rotate(0deg)',
+                transition: 'transform 200ms ease',
+                color: isOpen ? '#2196F3' : '#666',
+              }}
+            >
+              ▼
+            </div>
+          </div>
+        )}
+      >
+        <div style={{ padding: '1rem 0' }}>
+          <p>
+            이것은 renderHeader prop을 사용한 완전히 커스텀된 헤더입니다. 원하는 디자인과
+            애니메이션을 자유롭게 구현할 수 있습니다.
+          </p>
+        </div>
+      </AccordionItem>
+
+      <AccordionItem title='기본 헤더'>
+        <div style={{ padding: '1rem 0' }}>
+          <p>비교를 위한 기본 헤더 스타일입니다.</p>
+        </div>
+      </AccordionItem>
+    </AccordionGroup>
+  ),
+  args: {
+    type: 'single',
+    defaultOpenItems: [0],
   },
 };
