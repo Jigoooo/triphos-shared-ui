@@ -77,6 +77,8 @@ export type { DatePickerProps } from './ui/date-time-picker';
 
 export { SplashCursor } from './ui/cursor';
 
+export { AccordionItem, AccordionGroup } from './ui/accordion';
+
 /*
  * todo
  * File
