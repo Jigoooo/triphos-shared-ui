@@ -1,4 +1,4 @@
-import type { MotionProps } from 'framer-motion';
+import type { MotionProps, Variant, Transition } from 'framer-motion';
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
 
 export enum ButtonStyle {
@@ -12,9 +12,10 @@ export type ButtonProps = MotionProps &
     disabledStyle?: CSSProperties;
     animationColor?: string;
     customVariants?: {
-      hover: any;
-      tap: any;
-      none: any;
+      hover: Variant;
+      tap: Variant;
+      none: Variant;
     };
+    customTransition?: Transition;
     children: ReactNode;
   };

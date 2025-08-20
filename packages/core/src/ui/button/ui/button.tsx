@@ -15,6 +15,7 @@ import { useThemeContext } from '@/theme';
 export function BaseButton({
   buttonStyle = ButtonStyle.SOLID,
   customVariants,
+  customTransition,
   animationColor,
   children,
   style,
@@ -76,13 +77,17 @@ export function BaseButton({
               none: {},
             }
       }
-      transition={{
-        scale: {
-          duration: 0.05,
-          ease: 'easeOut',
-        },
-        backgroundColor: { duration: 0.4, ease: 'easeOut' },
-      }}
+      transition={
+        customTransition
+          ? customTransition
+          : {
+              scale: {
+                duration: 0.05,
+                ease: 'easeOut',
+              },
+              backgroundColor: { duration: 0.4, ease: 'easeOut' },
+            }
+      }
       whileHover={props.disabled ? 'none' : 'hover'}
       whileTap={props.disabled ? 'none' : 'tap'}
       onDoubleClick={handleDoubleClick}

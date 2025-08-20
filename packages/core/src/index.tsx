@@ -1,7 +1,7 @@
 export { useThemeContext, ThemeProvider, createTheme, createUseTheme } from './theme';
 export type { ThemeContextType, Theme, themeBase } from './theme';
 
-export { Button, SolidButton, OutlinedButton, SearchButton, ButtonStyle } from './ui/button';
+export { Button, SolidButton, OutlinedButton, ButtonStyle } from './ui/button';
 export type { ButtonProps } from './ui/button';
 
 export { CloseIconButton } from './ui/icon';
