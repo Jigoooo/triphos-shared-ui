@@ -18,20 +18,20 @@ const meta = {
     children: (
       <>
         <AccordionItem title='What is React?'>
-          <div style={{ padding: '1rem 0' }}>
+          <div style={{ padding: '1rem 1rem' }}>
             React is a JavaScript library for building user interfaces. It lets you compose complex
             UIs from small and isolated pieces of code called components.
           </div>
         </AccordionItem>
         <AccordionItem title='What is TypeScript?'>
-          <div style={{ padding: '1rem 0' }}>
+          <div style={{ padding: '1rem 1rem' }}>
             TypeScript is a programming language developed and maintained by Microsoft. It is a
             strict syntactical superset of JavaScript and adds optional static type checking to the
             language.
           </div>
         </AccordionItem>
         <AccordionItem title='What is Framer Motion?'>
-          <div style={{ padding: '1rem 0' }}>
+          <div style={{ padding: '1rem 1rem' }}>
             Framer Motion is a production-ready motion library for React. It brings declarative
             animations, effortless layout transitions and gestures while maintaining HTML and SVG
             semantics.
@@ -91,19 +91,19 @@ export const Default: Story = {
   render: (args) => (
     <AccordionGroup {...args}>
       <AccordionItem title='What is React?'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           React is a JavaScript library for building user interfaces. It lets you compose complex
           UIs from small and isolated pieces of code called components.
         </div>
       </AccordionItem>
       <AccordionItem title='What is TypeScript?'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           TypeScript is a programming language developed and maintained by Microsoft. It is a strict
           syntactical superset of JavaScript and adds optional static type checking to the language.
         </div>
       </AccordionItem>
       <AccordionItem title='What is Framer Motion?'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           Framer Motion is a production-ready motion library for React. It brings declarative
           animations, effortless layout transitions and gestures while maintaining HTML and SVG
           semantics.
@@ -120,7 +120,7 @@ export const Single: Story = {
   render: (args) => (
     <AccordionGroup {...args} type='single' defaultOpenItems={[0]}>
       <AccordionItem title='Getting Started'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <h4>Installation</h4>
           <pre style={{ background: '#f5f5f5', padding: '1rem', borderRadius: '4px' }}>
             npm install @jigoooo/shared-ui
@@ -129,7 +129,7 @@ export const Single: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='API Reference'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>
             <strong>AccordionGroup Props:</strong>
           </p>
@@ -147,7 +147,7 @@ export const Single: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='Examples'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>Check out our comprehensive examples in the playground section.</p>
         </div>
       </AccordionItem>
@@ -162,7 +162,7 @@ export const Multiple: Story = {
   render: (args) => (
     <AccordionGroup {...args} type='multiple' defaultOpenItems={[0, 2]}>
       <AccordionItem title='Frontend Technologies'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <ul>
             <li>React</li>
             <li>TypeScript</li>
@@ -172,7 +172,7 @@ export const Multiple: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='Backend Technologies'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <ul>
             <li>Node.js</li>
             <li>Express</li>
@@ -182,7 +182,7 @@ export const Multiple: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='DevOps Tools'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <ul>
             <li>Docker</li>
             <li>Kubernetes</li>
@@ -202,7 +202,7 @@ export const PreExpanded: Story = {
   render: (args) => (
     <AccordionGroup {...args} type='single' defaultOpenItems={[0]}>
       <AccordionItem title='Frequently Asked Question'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>
             <strong>Q: How do I customize the accordion styles?</strong>
           </p>
@@ -213,7 +213,7 @@ export const PreExpanded: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='Advanced Usage'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>
             For advanced use cases, you can create your own controlled accordion logic using the
             base components.
@@ -256,7 +256,7 @@ export const CustomContent: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='Code Example'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <pre
             style={{
               background: '#282c34',
@@ -312,7 +312,7 @@ export const CustomStyles: Story = {
         </div>
       </AccordionItem>
       <AccordionItem title='Another Custom Item'>
-        <div style={{ padding: '1rem 2rem' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>You can style each accordion item individually or apply global styles to the group.</p>
         </div>
       </AccordionItem>
@@ -386,7 +386,7 @@ export const CustomHeader: Story = {
           </div>
         )}
       >
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>
             이것은 renderHeader prop을 사용한 완전히 커스텀된 헤더입니다. 원하는 디자인과
             애니메이션을 자유롭게 구현할 수 있습니다.
@@ -395,7 +395,7 @@ export const CustomHeader: Story = {
       </AccordionItem>
 
       <AccordionItem title='기본 헤더'>
-        <div style={{ padding: '1rem 0' }}>
+        <div style={{ padding: '1rem 1rem' }}>
           <p>비교를 위한 기본 헤더 스타일입니다.</p>
         </div>
       </AccordionItem>

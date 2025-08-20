@@ -22,7 +22,7 @@ export function Checkbox({
   isActiveAnimation = true,
   wrapperStyle,
   containerStyle,
-  ...checkboxProps
+  ...props
 }: CheckboxProps) {
   const { theme } = useThemeContext();
   const effectiveColor = checkboxCheckedColor || theme.colors.primaryColor;
@@ -43,7 +43,7 @@ export function Checkbox({
         checked={checked}
         onChange={() => {}}
         style={{ ...style, display: 'none' }}
-        {...checkboxProps}
+        {...props}
       />
       {!!label && labelPosition === 'left' && (
         <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />
