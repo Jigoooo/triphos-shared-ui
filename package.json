@@ -99,5 +99,8 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "lucide-react": "^0.518.0"
   }
 }

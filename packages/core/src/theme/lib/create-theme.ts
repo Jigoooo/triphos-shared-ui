@@ -1,5 +1,5 @@
 import { themeBase } from '../config/theme-base.ts';
-import type { Theme, ThemeInput } from '../model/theme-type';
+import type { Theme, ThemeInput, CustomThemeExtensions } from '../model/theme-type';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -30,32 +30,16 @@ function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial
   return result;
 }
 
-// Default typography config
-const defaultTypography = {
-  fontSize: {
-    xs: '0.75rem',
-    sm: '0.875rem',
-    base: '1rem',
-    lg: '1.125rem',
-    xl: '1.25rem',
-    '2xl': '1.5rem',
-    '3xl': '1.875rem',
-    '4xl': '2.25rem',
-    '5xl': '3rem',
-  },
-};
-
-export function createTheme<TCustomColors extends Record<string, string> = Record<string, never>>(
-  themeInput: ThemeInput<TCustomColors> = {} as ThemeInput<TCustomColors>,
-): Theme<TCustomColors> {
+export function createTheme<TCustomTheme extends CustomThemeExtensions = Record<string, never>>(
+  themeInput: ThemeInput<TCustomTheme> = {} as ThemeInput<TCustomTheme>,
+): Theme<TCustomTheme> {
   const { colors: inputColors, typography: inputTypography } = themeInput;
 
   const mergedColors = deepMerge(themeBase.colors, inputColors || {});
 
-  const mergedTypography = deepMerge(
-    themeBase.typography || defaultTypography,
-    inputTypography || {},
-  );
+  const mergedTypography = deepMerge(themeBase.typography, inputTypography || {});
+
+  const mergedComponents = deepMerge(themeBase.components, themeInput.components || {});
 
   return {
     colors: {
@@ -66,5 +50,6 @@ export function createTheme<TCustomColors extends Record<string, string> = Recor
       errorColor: mergedColors.error?.['400'] || themeBase.colors.error['400'],
     },
     typography: mergedTypography,
-  } as Theme<TCustomColors>;
+    components: mergedComponents,
+  } as Theme<TCustomTheme>;
 }

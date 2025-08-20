@@ -4,8 +4,10 @@ import {
   buttonDisabledStyle,
   getButtonWithTypeStyles,
   defaultButtonStyle,
-} from '../lib/button-styles.ts';
-import { getAnimationBackgroundColor } from '../lib/get-animation-background-color.ts';
+  getButtonAnimationBackgroundColor,
+  getDefaultButtonVariants,
+  getDefaultButtonTransition,
+} from '../config/button-styles.ts';
 import { type ButtonProps, ButtonStyle } from '../model/button-type.ts';
 import { useButtonInteraction } from '../model/use-button-interaction.ts';
 import { OutlinedButton } from '../variant/outlined-button.tsx';
@@ -13,7 +15,7 @@ import { SolidButton } from '../variant/solid-button.tsx';
 import { useThemeContext } from '@/theme';
 
 export function BaseButton({
-  buttonStyle = ButtonStyle.SOLID,
+  buttonStyle,
   customVariants,
   customTransition,
   animationColor,
@@ -25,13 +27,22 @@ export function BaseButton({
 }: ButtonProps) {
   const { theme } = useThemeContext();
 
+  const applyButtonType = buttonStyle ?? theme.components.button.type;
+
   const backgroundColor = style?.backgroundColor ?? theme.colors.primaryColor;
   const color = style?.color ?? theme.colors.primaryColor;
-  const defaultAnimationColor = buttonStyle === ButtonStyle.OUTLINED ? color : backgroundColor;
-  const animationBackgroundColor = getAnimationBackgroundColor(
-    buttonStyle,
+  const defaultAnimationColor = applyButtonType === ButtonStyle.OUTLINED ? color : backgroundColor;
+  const animationBackgroundColor = getButtonAnimationBackgroundColor(
+    applyButtonType,
     animationColor ?? defaultAnimationColor,
   );
+
+  const defaultButtonVariants = getDefaultButtonVariants(
+    animationBackgroundColor.hoverBackgroundColor,
+    animationBackgroundColor.tapBackgroundColor,
+  );
+
+  const defaultButtonTransition = getDefaultButtonTransition();
 
   const { buttonRef, handleDoubleClick, handleMouseDown, handleMouseUp, handleMouseLeave } =
     useButtonInteraction({
@@ -47,8 +58,8 @@ export function BaseButton({
       ref={buttonRef}
       style={{
         ...defaultButtonStyle,
-        ...getButtonWithTypeStyles(theme)[buttonStyle],
-        ...(props.disabled ? { ...buttonDisabledStyle[buttonStyle], ...disabledStyle } : {}),
+        ...getButtonWithTypeStyles(theme)[applyButtonType],
+        ...(props.disabled ? { ...buttonDisabledStyle[applyButtonType], ...disabledStyle } : {}),
         originX: 0.5,
         originY: 0.5,
         display: 'inline-flex',
@@ -58,36 +69,8 @@ export function BaseButton({
         position: 'relative',
         ...style,
       }}
-      variants={
-        customVariants
-          ? customVariants
-          : {
-              hover: { backgroundColor: animationBackgroundColor.hoverBackgroundColor },
-              tap: {
-                backgroundColor: animationBackgroundColor.tapBackgroundColor,
-                scale: 0.95,
-                transition: {
-                  scale: {
-                    duration: 0.05,
-                    ease: 'easeOut',
-                  },
-                  backgroundColor: { duration: 0.3, ease: 'easeOut' },
-                },
-              },
-              none: {},
-            }
-      }
-      transition={
-        customTransition
-          ? customTransition
-          : {
-              scale: {
-                duration: 0.05,
-                ease: 'easeOut',
-              },
-              backgroundColor: { duration: 0.4, ease: 'easeOut' },
-            }
-      }
+      variants={customVariants ? customVariants : defaultButtonVariants}
+      transition={customTransition ? customTransition : defaultButtonTransition}
       whileHover={props.disabled ? 'none' : 'hover'}
       whileTap={props.disabled ? 'none' : 'tap'}
       onDoubleClick={handleDoubleClick}

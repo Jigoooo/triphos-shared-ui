@@ -1,19 +1,23 @@
 import { useThemeContext as useBaseThemeContext } from '../model/theme-context';
+import type { CustomThemeExtensions } from '../model/theme-type.ts';
 
 /**
- * Creates a typed useTheme hook with custom colors
+ * Creates a typed useTheme hook with custom colors and typography
  * @example
  * // In your app's theme config file
- * type MyCustomColors = { point1: string; point2: string; };
- * export const useTheme = createUseTheme<MyCustomColors>();
+ * type MyCustomTheme = {
+ *   colors: { point1: string; point2: string; };
+ *   typography: { fontWeight: { bold: number; } };
+ * };
+ * export const useTheme = createUseTheme<MyCustomTheme>();
  *
  * // In components
- * const { theme } = useTheme(); // Fully typed with custom colors
+ * const { theme } = useTheme(); // Fully typed with custom colors and typography
  */
 export function createUseTheme<
-  TCustomColors extends Record<string, string> = Record<string, never>,
+  TCustomTheme extends CustomThemeExtensions = Record<string, never>,
 >() {
   return function useTheme() {
-    return useBaseThemeContext<TCustomColors>();
+    return useBaseThemeContext<TCustomTheme>();
   };
 }

@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      lucide-react:
+        specifier: ^0.518.0
+        version: 0.518.0(react@19.1.0)
     devDependencies:
       '@chromatic-com/storybook':
         specifier: ^4.0.0

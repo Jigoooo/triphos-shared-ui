@@ -1,13 +1,13 @@
 import { createContext, use } from 'react';
 
-import type { ThemeContextType } from './theme-type.ts';
+import type { ThemeContextType, CustomThemeExtensions } from './theme-type.ts';
 
 export const ThemeContext = createContext<ThemeContextType<any> | null>(null);
 
 export function useThemeContext<
-  TCustomColors extends Record<string, string> = Record<string, never>,
+  TCustomTheme extends CustomThemeExtensions = Record<string, never>,
 >() {
-  const themeContext = use(ThemeContext) as ThemeContextType<TCustomColors> | null;
+  const themeContext = use(ThemeContext) as ThemeContextType<TCustomTheme> | null;
 
   if (!themeContext) {
     throw new Error('useThemeContext must be used within a ThemeProvider');
