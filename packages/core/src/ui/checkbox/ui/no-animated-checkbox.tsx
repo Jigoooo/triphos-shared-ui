@@ -1,9 +1,14 @@
 import { CheckIcon } from './check-icon.tsx';
 import type { NoAnimatedCheckboxProps } from '../model/checkbox-type.ts';
+import {
+  checkboxIconWrapperStyle,
+  getCheckboxPartialStyle,
+  getCheckboxStyle,
+} from '@/ui/checkbox/config/checkbox-style.ts';
 import { FlexRow } from '@/ui/layout';
 
 export function NoAnimatedCheckbox({
-  containerStyle,
+  checkboxStyle,
   isPartial,
   checkboxSize,
   checkIconSize,
@@ -13,26 +18,21 @@ export function NoAnimatedCheckbox({
   checkboxColor = '#ffffff',
   checkIconColor,
 }: NoAnimatedCheckboxProps) {
+  const applyCheckboxStyle = getCheckboxStyle({
+    checkboxStyle,
+    checkboxSize,
+    disabled,
+    checked,
+    checkboxCheckedColor,
+    checkboxColor,
+  });
+
+  const checkboxPartialStyle = getCheckboxPartialStyle(checkboxCheckedColor);
+
   return (
-    <FlexRow
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: checkboxSize,
-        height: checkboxSize,
-        border: `1px solid ${!disabled && checked ? checkboxCheckedColor : '#cccccc'}`,
-        borderRadius: '0.25rem',
-        backgroundColor: disabled ? '#f5f5f5' : checked ? checkboxCheckedColor : checkboxColor,
-        ...containerStyle,
-      }}
-    >
+    <FlexRow style={applyCheckboxStyle}>
       {checked && (
-        <FlexRow
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <FlexRow style={checkboxIconWrapperStyle}>
           <CheckIcon
             checkIconSize={checkIconSize}
             checkIconColor={checkIconColor}
@@ -41,15 +41,8 @@ export function NoAnimatedCheckbox({
         </FlexRow>
       )}
       {isPartial && (
-        <FlexRow
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <div
-            style={{ width: '0.625rem', height: '0.625rem', backgroundColor: checkboxCheckedColor }}
-          />
+        <FlexRow style={checkboxIconWrapperStyle}>
+          <div style={checkboxPartialStyle} />
         </FlexRow>
       )}
     </FlexRow>

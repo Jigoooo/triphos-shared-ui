@@ -17,15 +17,26 @@ export function Checkbox({
   checkboxCheckedColor,
   checkboxColor,
   isPartial = false,
+  onChange,
   onClick,
   disabled = false,
   isActiveAnimation = true,
   wrapperStyle,
-  containerStyle,
+  checkboxStyle,
   ...props
 }: CheckboxProps) {
   const { theme } = useThemeContext();
   const effectiveColor = checkboxCheckedColor || theme.colors.primaryColor;
+
+  const handleToggle = (e: React.MouseEvent) => {
+    if (disabled) return;
+
+    if (onChange) {
+      onChange(!checked);
+    } else if (onClick) {
+      onClick(e);
+    }
+  };
 
   return (
     <FlexRow
@@ -33,10 +44,10 @@ export function Checkbox({
         justifyContent: 'center',
         alignItems: 'center',
         gap: '0.375rem',
-        cursor: 'pointer',
+        cursor: disabled ? 'default' : 'pointer',
         ...wrapperStyle,
       }}
-      onClick={(e) => !disabled && onClick && onClick(e)}
+      onClick={handleToggle}
     >
       <input
         type='checkbox'
@@ -50,7 +61,7 @@ export function Checkbox({
       )}
       {isActiveAnimation ? (
         <AnimatedCheckbox
-          containerStyle={containerStyle}
+          checkboxStyle={checkboxStyle}
           isPartial={isPartial}
           checkboxSize={checkboxSize}
           checkIconSize={checkIconSize}
@@ -62,7 +73,7 @@ export function Checkbox({
         />
       ) : (
         <NoAnimatedCheckbox
-          containerStyle={containerStyle}
+          checkboxStyle={checkboxStyle}
           isPartial={isPartial}
           checkboxSize={checkboxSize}
           checkIconSize={checkIconSize}

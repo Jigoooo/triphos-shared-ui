@@ -7,20 +7,20 @@ export type CheckboxLabelProps = {
 };
 
 export type AnimatedCheckboxProps = {
-  containerStyle?: CSSProperties;
+  checkboxStyle?: CSSProperties;
   isPartial: boolean;
   checkboxSize?: string | number;
   checkIconSize?: string | number;
   disabled?: boolean;
   checked: boolean;
-  checkboxCheckedColor?: string;
+  checkboxCheckedColor: string;
   checkboxColor?: string;
   checkIconColor?: string;
 };
 
 export type NoAnimatedCheckboxProps = AnimatedCheckboxProps;
 
-export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
+export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
   checkIconColor?: string;
   checkboxSize?: string | number;
   checkIconSize?: string | number;
@@ -31,11 +31,12 @@ export type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
   checkboxCheckedColor?: string;
   checkboxColor?: string;
   isPartial?: boolean;
+  onChange?: (checked: boolean) => void;
   onClick?: MouseEventHandler;
   disabled?: boolean;
   isActiveAnimation?: boolean;
   wrapperStyle?: CSSProperties;
-  containerStyle?: CSSProperties;
+  checkboxStyle?: CSSProperties;
 };
 
 export type CheckboxIconProps = {

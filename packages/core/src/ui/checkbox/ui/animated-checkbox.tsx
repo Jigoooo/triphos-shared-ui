@@ -2,10 +2,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { CheckIcon } from './check-icon.tsx';
 import type { AnimatedCheckboxProps } from '../model/checkbox-type.ts';
+import {
+  checkboxIconWrapperStyle,
+  getCheckboxPartialStyle,
+  getCheckboxStyle,
+} from '@/ui/checkbox/config/checkbox-style.ts';
 import { FlexRow } from '@/ui/layout';
 
 export function AnimatedCheckbox({
-  containerStyle,
+  checkboxStyle,
   isPartial,
   checkboxSize,
   checkIconSize,
@@ -15,19 +20,21 @@ export function AnimatedCheckbox({
   checkboxColor = '#ffffff',
   checkIconColor,
 }: AnimatedCheckboxProps) {
+  const applyCheckboxStyle = getCheckboxStyle({
+    checkboxStyle,
+    checkboxSize,
+    disabled,
+    checked,
+    checkboxCheckedColor,
+    checkboxColor,
+  });
+
+  const checkboxPartialStyle = getCheckboxPartialStyle(checkboxCheckedColor);
+
   return (
     <FlexRow
       as={motion.div}
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: checkboxSize,
-        height: checkboxSize,
-        border: `1px solid ${!disabled && checked ? checkboxCheckedColor : '#cccccc'}`,
-        borderRadius: '0.25rem',
-        backgroundColor: disabled ? '#f5f5f5' : checked ? checkboxCheckedColor : checkboxColor,
-        ...containerStyle,
-      }}
+      style={applyCheckboxStyle}
       variants={{
         hover: {
           borderColor: checkboxCheckedColor,
@@ -52,10 +59,7 @@ export function AnimatedCheckbox({
               stiffness: 260,
               damping: 20,
             }}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            style={checkboxIconWrapperStyle}
           >
             <CheckIcon
               checkIconSize={checkIconSize}
@@ -75,18 +79,9 @@ export function AnimatedCheckbox({
               stiffness: 260,
               damping: 20,
             }}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            style={checkboxIconWrapperStyle}
           >
-            <div
-              style={{
-                width: '0.625rem',
-                height: '0.625rem',
-                backgroundColor: checkboxCheckedColor,
-              }}
-            />
+            <div style={checkboxPartialStyle} />
           </FlexRow>
         )}
       </AnimatePresence>
