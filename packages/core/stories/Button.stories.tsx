@@ -19,6 +19,7 @@ const meta = {
     style: {},
     disabledStyle: {},
     buttonType: ButtonType.SOLID,
+    animationBackgroundColor: undefined,
   },
   argTypes: {
     children: {
@@ -66,16 +67,25 @@ const meta = {
     },
     customVariants: {
       control: false,
-      description: 'Custom Framer Motion animation variants',
+      description:
+        'Custom Framer Motion animation variants. Example: { hover: { scale: 1.05 }, tap: { scale: 0.95 }, none: {} }',
       table: {
         type: { summary: '{ hover: Variant; tap: Variant; none: Variant }' },
+        defaultValue: {
+          summary:
+            '{ hover: { backgroundColor: "..." }, tap: { backgroundColor: "...", scale: 0.96 }, none: {} }',
+        },
       },
     },
     customTransition: {
       control: false,
-      description: 'Custom Framer Motion transition configuration',
+      description:
+        'Custom Framer Motion transition configuration. Example: { type: "spring", stiffness: 300, damping: 20 }',
       table: {
         type: { summary: 'Transition' },
+        defaultValue: {
+          summary: '{ type: "tween", duration: 0.15, ease: "easeOut" }',
+        },
       },
     },
   },
@@ -83,6 +93,10 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  render: (args) => <BaseButton {...args}>{args.children}</BaseButton>,
+};
 
 export const Solid: Story = {
   render: (args) => <Button.Solid {...args}>{args.children}</Button.Solid>,
