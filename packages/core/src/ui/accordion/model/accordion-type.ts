@@ -18,8 +18,7 @@ export type AccordionGroupProps = {
 
 export type AccordionItemProps = {
   title?: string;
-  style?: CSSProperties;
+  headerStyle?: CSSProperties;
   children: ReactNode;
-  // 내부적으로 사용할 props (사용자가 직접 설정하지 않음)
   index?: number;
 };
