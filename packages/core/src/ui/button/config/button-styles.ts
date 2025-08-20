@@ -39,6 +39,12 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonType, CSSPro
       border: `1px solid ${theme.colors.primaryColor}`,
       opacity: 1,
     },
+    [ButtonType.PLAIN]: {
+      backgroundColor: 'rgba(255,255,255,0)',
+      color: theme.colors.primaryColor,
+      border: 'none',
+      opacity: 1,
+    },
   };
 }
 
@@ -48,6 +54,10 @@ export const buttonDisabledStyle: Record<ButtonType, CSSProperties> = {
     opacity: 0.5,
   },
   [ButtonType.OUTLINED]: {
+    cursor: 'default',
+    opacity: 0.5,
+  },
+  [ButtonType.PLAIN]: {
     cursor: 'default',
     opacity: 0.5,
   },
@@ -65,6 +75,12 @@ export const getButtonAnimationBackgroundColor = (
       };
     }
     case ButtonType.OUTLINED: {
+      return {
+        hoverBackgroundColor: rgba(animationColor, 0.08),
+        tapBackgroundColor: rgba(animationColor, 0.12),
+      };
+    }
+    case ButtonType.PLAIN: {
       return {
         hoverBackgroundColor: rgba(animationColor, 0.08),
         tapBackgroundColor: rgba(animationColor, 0.12),

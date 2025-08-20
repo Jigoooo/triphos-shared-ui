@@ -91,7 +91,6 @@ const meta = {
   },
 } satisfies Meta<ButtonProps>;
 
-export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -112,6 +111,13 @@ export const Outlined: Story = {
   },
 };
 
+export const Plain: Story = {
+  render: (args) => <Button.Plain {...args}>{args.children}</Button.Plain>,
+  args: {
+    children: 'Button',
+  },
+};
+
 export const SolidWithIcon: Story = {
   render: (args) => <Button.Solid {...args}>{args.children}</Button.Solid>,
   args: {
@@ -121,6 +127,13 @@ export const SolidWithIcon: Story = {
 
 export const OutlinedWithIcon: Story = {
   render: (args) => <Button.Outlined {...args}>{args.children}</Button.Outlined>,
+  args: {
+    children: <LuImage size={16} />,
+  },
+};
+
+export const PlainWithIcon: Story = {
+  render: (args) => <Button.Plain {...args}>{args.children}</Button.Plain>,
   args: {
     children: <LuImage size={16} />,
   },
@@ -144,6 +157,15 @@ export const OutlinedWithIconAndText: Story = {
   ),
 };
 
+export const PlainWithIconAndText: Story = {
+  render: (args) => (
+    <Button.Plain {...args}>
+      <LuImage />
+      Button
+    </Button.Plain>
+  ),
+};
+
 export const SolidDisabled: Story = {
   render: (args) => <Button.Solid {...args}>{args.children}</Button.Solid>,
   args: {
@@ -159,3 +181,13 @@ export const OutlinedDisabled: Story = {
     children: 'Button',
   },
 };
+
+export const PlainDisabled: Story = {
+  render: (args) => <Button.Plain {...args}>{args.children}</Button.Plain>,
+  args: {
+    disabled: true,
+    children: 'Button',
+  },
+};
+
+export default meta;

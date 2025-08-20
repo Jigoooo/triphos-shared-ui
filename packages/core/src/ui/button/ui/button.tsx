@@ -13,8 +13,10 @@ import { useButtonInteraction } from '../model/use-button-interaction.ts';
 import { OutlinedButton } from '../variant/outlined-button.tsx';
 import { SolidButton } from '../variant/solid-button.tsx';
 import { useThemeContext } from '@/theme';
+import { PlainButton } from '@/ui/button/variant/plain-button.tsx';
 
 export function BaseButton({
+  ref,
   buttonType,
   customVariants,
   customTransition,
@@ -55,7 +57,15 @@ export function BaseButton({
 
   return (
     <motion.button
-      ref={buttonRef}
+      ref={(buttonElementRef) => {
+        if (typeof ref === 'function' && ref) {
+          ref(buttonElementRef);
+        } else if (ref) {
+          ref.current = buttonElementRef;
+        }
+
+        buttonRef.current = buttonElementRef;
+      }}
       style={{
         ...defaultButtonStyle,
         ...getButtonWithTypeStyles(theme)[applyButtonType],
@@ -81,4 +91,5 @@ export function BaseButton({
 export const Button = Object.assign(BaseButton, {
   Solid: SolidButton,
   Outlined: OutlinedButton,
+  Plain: PlainButton,
 });

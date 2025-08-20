@@ -58,7 +58,6 @@ export type ThemeInput<TCustomTheme extends CustomThemeExtensions = Record<strin
   components?: Partial<ComponentStyles> & ExtendedComponentStyles<TCustomTheme>;
 };
 
-// Theme with custom colors and typography
 export type Theme<TCustomTheme extends CustomThemeExtensions = Record<string, never>> = {
   colors: {
     primaryColor: string;
