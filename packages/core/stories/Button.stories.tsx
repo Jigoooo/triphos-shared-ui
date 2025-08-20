@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { LuImage } from 'react-icons/lu';
+import { LuImage, LuPower } from 'react-icons/lu';
 
 import { Button, ButtonType } from '../src';
 import type { ButtonProps } from '../src/ui/button/model/button-type';
@@ -42,7 +42,7 @@ const meta = {
     },
     buttonType: {
       control: 'select',
-      options: [ButtonType.SOLID, ButtonType.OUTLINED],
+      options: [ButtonType.SOLID, ButtonType.OUTLINED, ButtonType.PLAIN],
       description: 'Button type variant',
       table: {
         type: { summary: 'ButtonType' },
@@ -88,6 +88,9 @@ const meta = {
         },
       },
     },
+    ref: {
+      table: { disable: true },
+    },
   },
 } satisfies Meta<ButtonProps>;
 
@@ -121,6 +124,7 @@ export const Plain: Story = {
 export const SolidWithIcon: Story = {
   render: (args) => <Button.Solid {...args}>{args.children}</Button.Solid>,
   args: {
+    style: { paddingInline: '0.6rem' },
     children: <LuImage size={16} />,
   },
 };
@@ -128,6 +132,7 @@ export const SolidWithIcon: Story = {
 export const OutlinedWithIcon: Story = {
   render: (args) => <Button.Outlined {...args}>{args.children}</Button.Outlined>,
   args: {
+    style: { paddingInline: '0.6rem' },
     children: <LuImage size={16} />,
   },
 };
@@ -135,6 +140,7 @@ export const OutlinedWithIcon: Story = {
 export const PlainWithIcon: Story = {
   render: (args) => <Button.Plain {...args}>{args.children}</Button.Plain>,
   args: {
+    style: { paddingInline: '0.6rem' },
     children: <LuImage size={16} />,
   },
 };
@@ -186,6 +192,30 @@ export const PlainDisabled: Story = {
   render: (args) => <Button.Plain {...args}>{args.children}</Button.Plain>,
   args: {
     disabled: true,
+    children: 'Button',
+  },
+};
+
+export const CustomAnimation: Story = {
+  render: (args) => (
+    <Button.Plain {...args}>
+      <LuPower size={24} />
+    </Button.Plain>
+  ),
+  args: {
+    style: {
+      padding: '0.2rem',
+    },
+    customVariants: {
+      hover: { scale: 1 },
+      tap: { scale: 0.9 },
+      none: {},
+    },
+    customTransition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
+    },
     children: 'Button',
   },
 };
