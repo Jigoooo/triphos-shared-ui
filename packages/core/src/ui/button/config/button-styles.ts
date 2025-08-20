@@ -33,7 +33,7 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSPr
       opacity: 1,
     },
     [ButtonStyle.OUTLINED]: {
-      backgroundColor: '#ffffff',
+      backgroundColor: 'rgba(255,255,255,0)',
       color: theme.colors.primaryColor,
       border: `1px solid ${theme.colors.primaryColor}`,
       opacity: 1,
@@ -94,10 +94,8 @@ export const getDefaultButtonVariants: (
 
 export const getDefaultButtonTransition: () => Transition = () => {
   return {
-    scale: {
-      duration: 0.1,
-      ease: 'easeOut',
-    },
-    backgroundColor: { duration: 0.4, ease: 'easeOut' },
+    type: 'tween',
+    duration: 0.15,
+    ease: 'easeOut',
   };
 };
