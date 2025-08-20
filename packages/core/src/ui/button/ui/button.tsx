@@ -8,14 +8,14 @@ import {
   getDefaultButtonVariants,
   getDefaultButtonTransition,
 } from '../config/button-styles.ts';
-import { type ButtonProps, ButtonStyle } from '../model/button-type.ts';
+import { type ButtonProps, ButtonType } from '../model/button-type.ts';
 import { useButtonInteraction } from '../model/use-button-interaction.ts';
 import { OutlinedButton } from '../variant/outlined-button.tsx';
 import { SolidButton } from '../variant/solid-button.tsx';
 import { useThemeContext } from '@/theme';
 
 export function BaseButton({
-  buttonStyle,
+  buttonType,
   customVariants,
   customTransition,
   animationBackgroundColor,
@@ -27,11 +27,11 @@ export function BaseButton({
 }: ButtonProps) {
   const { theme } = useThemeContext();
 
-  const applyButtonType = buttonStyle ?? theme.components.button.type;
+  const applyButtonType = buttonType ?? theme.components.button.type;
 
   const backgroundColor = style?.backgroundColor ?? theme.colors.primaryColor;
   const color = style?.color ?? theme.colors.primaryColor;
-  const defaultAnimationColor = applyButtonType === ButtonStyle.OUTLINED ? color : backgroundColor;
+  const defaultAnimationColor = applyButtonType === ButtonType.OUTLINED ? color : backgroundColor;
   const applyAnimationBackgroundColor = getButtonAnimationBackgroundColor(
     applyButtonType,
     animationBackgroundColor ?? defaultAnimationColor,

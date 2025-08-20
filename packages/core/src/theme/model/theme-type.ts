@@ -1,4 +1,4 @@
-import { type ButtonStyle } from '@/ui/button';
+import { type ButtonType } from '@/ui/button';
 
 type ColorScale = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 type ColorPalette = Record<ColorScale, string>;
@@ -17,7 +17,7 @@ export type TypographyType = {
 };
 
 export type Button = {
-  type: ButtonStyle;
+  type: ButtonType;
 };
 
 export type ComponentStyles = {

@@ -2,7 +2,7 @@ import { type Transition, type Variants } from 'framer-motion';
 import { darken, rgba } from 'polished';
 import type { CSSProperties } from 'react';
 
-import { ButtonStyle } from '../model/button-type.ts';
+import { ButtonType } from '../model/button-type.ts';
 import type { Theme } from '@/theme';
 
 export const defaultButtonStyle: CSSProperties = {
@@ -11,7 +11,7 @@ export const defaultButtonStyle: CSSProperties = {
   alignItems: 'center',
   paddingInline: '0.8rem',
   paddingBlock: '0.4rem',
-  borderRadius: '0.4rem',
+  borderRadius: '0.3rem',
   cursor: 'pointer',
   fontSize: '0.84rem',
   height: '2rem',
@@ -22,17 +22,18 @@ export const defaultButtonStyle: CSSProperties = {
   MozUserSelect: 'none',
   msUserSelect: 'none',
   fontWeight: 600,
+  gap: '0.3rem',
 } as CSSProperties;
 
-export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSProperties> {
+export function getButtonWithTypeStyles(theme: Theme): Record<ButtonType, CSSProperties> {
   return {
-    [ButtonStyle.SOLID]: {
+    [ButtonType.SOLID]: {
       backgroundColor: theme.colors.primaryColor,
       color: 'white',
       border: 'none',
       opacity: 1,
     },
-    [ButtonStyle.OUTLINED]: {
+    [ButtonType.OUTLINED]: {
       backgroundColor: 'rgba(255,255,255,0)',
       color: theme.colors.primaryColor,
       border: `1px solid ${theme.colors.primaryColor}`,
@@ -41,29 +42,29 @@ export function getButtonWithTypeStyles(theme: Theme): Record<ButtonStyle, CSSPr
   };
 }
 
-export const buttonDisabledStyle: Record<ButtonStyle, CSSProperties> = {
-  [ButtonStyle.SOLID]: {
+export const buttonDisabledStyle: Record<ButtonType, CSSProperties> = {
+  [ButtonType.SOLID]: {
     cursor: 'default',
     opacity: 0.5,
   },
-  [ButtonStyle.OUTLINED]: {
+  [ButtonType.OUTLINED]: {
     cursor: 'default',
     opacity: 0.5,
   },
 } as const;
 
 export const getButtonAnimationBackgroundColor = (
-  buttonStyle: ButtonStyle,
+  buttonStyle: ButtonType,
   animationColor: string,
 ): { hoverBackgroundColor: string; tapBackgroundColor: string } => {
   switch (buttonStyle) {
-    case ButtonStyle.SOLID: {
+    case ButtonType.SOLID: {
       return {
         hoverBackgroundColor: darken(0.08, animationColor),
         tapBackgroundColor: darken(0.15, animationColor),
       };
     }
-    case ButtonStyle.OUTLINED: {
+    case ButtonType.OUTLINED: {
       return {
         hoverBackgroundColor: rgba(animationColor, 0.08),
         tapBackgroundColor: rgba(animationColor, 0.12),

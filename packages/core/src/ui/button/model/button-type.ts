@@ -1,14 +1,14 @@
 import type { MotionProps, Variant, Transition } from 'framer-motion';
 import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
 
-export enum ButtonStyle {
-  SOLID = 'solid',
-  OUTLINED = 'outlined',
+export enum ButtonType {
+  SOLID = 'SOLID',
+  OUTLINED = 'OUTLINED',
 }
 
 export type ButtonProps = MotionProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
-    buttonStyle?: ButtonStyle;
+    buttonType?: ButtonType;
     disabledStyle?: CSSProperties;
     animationBackgroundColor?: string;
     customVariants?: {
