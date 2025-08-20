@@ -19,7 +19,7 @@ const validateSize = (size: string | number, fallback: string): string => {
 export function Checkbox({
   checkIconColor,
   checkboxSize = '1.125rem',
-  checkIconSize = '0.75rem',
+  checkIconSize = '0.65rem',
   label = '',
   labelStyle,
   labelPosition = 'right',
