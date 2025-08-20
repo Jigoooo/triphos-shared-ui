@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import type { SortingState } from '@tanstack/react-table';
 import {
+  type SortingState,
   createColumnHelper,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useState } from 'react';
 
-import { Typography } from '@/ui/typography';
 import type { UseTableInstanceProps, ColumnValueFunction } from './table-type-legacy.ts';
+import { Typography } from '@/ui/typography';
 
 export function useTableInstance<TColumnData>({
   data,

@@ -1,13 +1,13 @@
-import type { CSSProperties, HTMLProps, KeyboardEvent } from 'react';
 import { motion } from 'framer-motion';
+import type { CSSProperties, HTMLProps, KeyboardEvent } from 'react';
 
 import { FiSearch } from 'react-icons/fi';
 
 import type { MultiSelectOption } from '../model/select-type.ts';
 import { zIndex } from '@/constants';
+import { Checkbox } from '@/ui/checkbox';
 import { Input } from '@/ui/input';
 import { FlexRow } from '@/ui/layout';
-import { Checkbox } from '@/ui/checkbox';
 import { Typography } from '@/ui/typography';
 
 export function MultiSelectItems<ValuesType extends (string | number)[]>({

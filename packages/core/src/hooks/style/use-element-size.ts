@@ -1,5 +1,4 @@
-import type { RefObject } from 'react';
-import { useState, useEffect } from 'react';
+import { type RefObject, useState, useEffect } from 'react';
 
 export function useElementSize(ref: RefObject<HTMLElement | null>): {
   width: number;
@@ -31,7 +30,7 @@ export function useElementSize(ref: RefObject<HTMLElement | null>): {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [ref]);
 
   return size;
 }

@@ -1,5 +1,4 @@
-import type React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type MouseEvent as ReactMouseEvent } from 'react';
 
 export const useDraggable = (defaultPosition?: { x: number; y: number }) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -12,7 +11,7 @@ export const useDraggable = (defaultPosition?: { x: number; y: number }) => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseDown = (event: React.MouseEvent) => {
+  const handleMouseDown = (event: ReactMouseEvent) => {
     if (elementRef.current) {
       const rect = elementRef.current.getBoundingClientRect();
       setOffset({
@@ -52,7 +51,7 @@ export const useDraggable = (defaultPosition?: { x: number; y: number }) => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
-  }, [isDragging]);
+  }, [handleMouseMove, isDragging]);
 
   return {
     position,

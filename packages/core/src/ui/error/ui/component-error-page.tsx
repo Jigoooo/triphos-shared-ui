@@ -1,7 +1,7 @@
-import { SolidButton } from '@/ui/button';
-import { Typography } from '@/ui/typography';
-import { FlexColumn } from '@/ui/layout';
 import type { ComponentErrorPageProps } from '../model/error-type.ts';
+import { SolidButton } from '@/ui/button';
+import { FlexColumn } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 
 export function ComponentErrorPage({ error, resetErrorBoundary }: ComponentErrorPageProps) {
   return (

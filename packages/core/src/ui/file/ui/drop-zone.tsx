@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react';
 
 import { LuFileUp } from 'react-icons/lu';
 
+import { useThemeContext } from '@/theme';
 import { FlexRow } from '@/ui/layout';
 import { Link } from '@/ui/link';
-import { useThemeContext } from '@/theme';
 
 export function DropZone({
   accept,

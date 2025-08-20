@@ -1,5 +1,5 @@
-import { useThemeContext } from '@/theme';
 import { DialogType } from '../model/dialog-type.ts';
+import { useThemeContext } from '@/theme';
 
 export function useGetDialogButtonColor(dialogType: DialogType) {
   const { theme } = useThemeContext();

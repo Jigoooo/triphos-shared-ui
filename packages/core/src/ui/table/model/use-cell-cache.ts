@@ -1,5 +1,4 @@
-import type { JSX, RefObject } from 'react';
-import { useRef } from 'react';
+import { type JSX, type RefObject, useRef } from 'react';
 
 function shallowEqual<T>(objA: T, objB: T): boolean {
   if (objA === objB) return true;

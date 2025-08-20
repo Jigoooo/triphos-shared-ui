@@ -1,5 +1,4 @@
 import NoDataIcon from '../../../../public/images/no-data-icon.svg?react';
-
 import type { NoDataProps } from '../model/etc-type.ts';
 import { FlexColumn } from '@/ui/layout';
 import { Typography } from '@/ui/typography';

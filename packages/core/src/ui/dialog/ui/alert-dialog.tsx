@@ -1,16 +1,16 @@
-import { useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
+import { AlertDialogActions } from './alert-dialog-actions.tsx';
+import { AlertDialogContents } from './alert-dialog-contents.tsx';
+import { AlertDialogHeader } from './alert-dialog-header.tsx';
+import { dialog, useDialogStore } from '../model/dialog-store.ts';
 import { zIndex } from '@/constants';
 import { detectDeviceTypeAndOS } from '@/lib';
-import { dialog, useDialogStore } from '../model/dialog-store.ts';
-import { useModalController } from '@/ui/modal';
 import { FlexColumn } from '@/ui/layout';
-import { AlertDialogHeader } from './alert-dialog-header.tsx';
-import { AlertDialogContents } from './alert-dialog-contents.tsx';
-import { AlertDialogActions } from './alert-dialog-actions.tsx';
+import { useModalController } from '@/ui/modal';
 
 const { isMobile } = detectDeviceTypeAndOS();
 

@@ -1,39 +1,16 @@
 import { motion } from 'framer-motion';
 
-import type { ButtonProps } from '../model/button-type.ts';
-import { ButtonStyle } from '../model/button-type.ts';
 import {
   buttonDisabledStyle,
   getButtonWithTypeStyles,
   defaultButtonStyle,
 } from '../lib/button-styles.ts';
 import { getAnimationBackgroundColor } from '../lib/get-animation-background-color.ts';
-import { SolidButton } from '../variant/solid-button.tsx';
-import { OutlinedButton } from '../variant/outlined-button.tsx';
+import { type ButtonProps, ButtonStyle } from '../model/button-type.ts';
 import { useButtonInteraction } from '../model/use-button-interaction.ts';
+import { OutlinedButton } from '../variant/outlined-button.tsx';
+import { SolidButton } from '../variant/solid-button.tsx';
 import { useThemeContext } from '@/theme';
-
-//<button
-//             onClick={onClearAll}
-//             style={{
-//               fontSize: '0.75rem',
-//               color: '#dc2626',
-//               backgroundColor: 'transparent',
-//               border: 'none',
-//               cursor: 'pointer',
-//               padding: '0.25rem 0.5rem',
-//               borderRadius: '4px',
-//               transition: 'background-color 0.2s ease',
-//             }}
-//             onMouseEnter={(e) => {
-//               e.currentTarget.style.backgroundColor = '#fee2e2';
-//             }}
-//             onMouseLeave={(e) => {
-//               e.currentTarget.style.backgroundColor = 'transparent';
-//             }}
-//           >
-//             모두 삭제
-//           </button>
 
 export function BaseButton({
   buttonStyle = ButtonStyle.SOLID,

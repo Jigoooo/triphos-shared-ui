@@ -1,19 +1,9 @@
-import type { JSX } from 'react';
-import { useMemo } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
-import { v4 as uuidV4 } from 'uuid';
+import { type JSX, useMemo } from 'react';
 import type { IconType } from 'react-icons';
+import { v4 as uuidV4 } from 'uuid';
 
-import {
-  FaFilePdf,
-  FaFileExcel,
-  FaFilePowerpoint,
-  FaFileAlt,
-  FaFileArchive,
-  FaFileVideo,
-  FaFileAudio,
-  FaFileCode,
-} from 'react-icons/fa';
+import { BiLogoTypescript } from 'react-icons/bi';
 import {
   BsFiletypePng,
   BsFiletypeJpg,
@@ -44,19 +34,27 @@ import {
   BsFiletypeCs,
   BsFiletypePhp,
 } from 'react-icons/bs';
-import { TbFavicon } from 'react-icons/tb';
-import { RiFileHwpFill } from 'react-icons/ri';
+import {
+  FaFilePdf,
+  FaFileExcel,
+  FaFilePowerpoint,
+  FaFileAlt,
+  FaFileArchive,
+  FaFileVideo,
+  FaFileAudio,
+  FaFileCode,
+} from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
-import { BiLogoTypescript } from 'react-icons/bi';
+import { RiFileHwpFill } from 'react-icons/ri';
+import { TbFavicon } from 'react-icons/tb';
 
 import { DropZone } from './drop-zone.tsx';
-import { FlexColumn, FlexRow } from '@/ui/layout';
-import { Typography } from '@/ui/typography';
-import type { TFile } from '../model';
-import { fileSizeFormatter } from '../model';
-import { LinearProgress } from '@/ui/progress';
+import { type TFile, fileSizeFormatter } from '../model';
 import { Button } from '@/ui/button';
 import { dialog } from '@/ui/dialog';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { LinearProgress } from '@/ui/progress';
+import { Typography } from '@/ui/typography';
 
 export function FileUploadForm({
   accept,

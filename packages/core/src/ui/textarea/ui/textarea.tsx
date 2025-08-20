@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import type { KeyboardEvent } from 'react';
 
-import { colors } from '@/constants';
-import type { TextareaProps } from '../model/textarea-type.ts';
 import { defaultTextareaStyle, textareaDisabledStyle } from '../lib/textarea-styles.ts';
+import type { TextareaProps } from '../model/textarea-type.ts';
+import { colors } from '@/constants';
 import { useCompositionRef } from '@/hooks';
 
 export function Textarea({

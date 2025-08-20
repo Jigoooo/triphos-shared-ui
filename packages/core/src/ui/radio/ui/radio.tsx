@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 
-import { Typography } from '@/ui/typography';
 import { useRadioGroupContext } from '../model/radio-group-context.ts';
 import type { RadioProps } from '../model/radio-type.ts';
 import { useThemeContext } from '@/theme';
+import { Typography } from '@/ui/typography';
 
 export function Radio({
   label,

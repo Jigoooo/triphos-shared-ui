@@ -1,5 +1,5 @@
-import type { CSSProperties, HTMLProps, KeyboardEvent, ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import type { CSSProperties, HTMLProps, KeyboardEvent, ReactNode } from 'react';
 
 import { FiSearch } from 'react-icons/fi';
 import { IoMdCheckmark } from 'react-icons/io';

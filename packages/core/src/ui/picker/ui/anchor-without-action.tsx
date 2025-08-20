@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { flip, FloatingPortal, offset, size, useFloating } from '@floating-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 import { zIndex } from '@/constants';
 import type { AnchorWithoutActionProps } from '@/ui/picker';

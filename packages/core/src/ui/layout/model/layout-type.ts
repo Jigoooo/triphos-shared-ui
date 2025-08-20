@@ -1,5 +1,5 @@
-import type { ElementType, HTMLAttributes, ReactNode, Ref } from 'react';
 import type { ForwardRefComponent, MotionProps } from 'framer-motion';
+import type { ElementType, HTMLAttributes, ReactNode, Ref } from 'react';
 
 export type FlexRowProps<E extends ElementType> =
   E extends ForwardRefComponent<any, any>

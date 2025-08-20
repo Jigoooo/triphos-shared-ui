@@ -1,4 +1,15 @@
-import { useEffect, useState } from 'react';
+import {
+  type Strategy,
+  type Placement,
+  useFloating,
+  offset,
+  flip,
+  size,
+  useClick,
+  useInteractions,
+  FloatingPortal,
+  FloatingOverlay,
+} from '@floating-ui/react';
 import {
   addDays,
   addMonths,
@@ -16,28 +27,18 @@ import {
   subMonths,
 } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import type { Strategy, Placement } from '@floating-ui/react';
-import {
-  useFloating,
-  offset,
-  flip,
-  size,
-  useClick,
-  useInteractions,
-  FloatingPortal,
-  FloatingOverlay,
-} from '@floating-ui/react';
+import { useHandleClickOutsideRef } from 'hooks';
+import { useEffect, useState } from 'react';
 
 import { LuCalendar, LuMoveLeft, LuMoveRight } from 'react-icons/lu';
 
+import { DateInputField } from './date-input-field.tsx';
+import { zIndex } from '@/constants';
+import { useThemeContext } from '@/theme';
+import { Button } from '@/ui/button';
+import { Input } from '@/ui/input';
 import { FlexColumn, FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import { Input } from '@/ui/input';
-import { Button } from '@/ui/button';
-import { zIndex } from '@/constants';
-import { useHandleClickOutsideRef } from 'hooks';
-import { DateInputField } from './date-input-field.tsx';
-import { useThemeContext } from '@/theme';
 
 type FromToDateString = {
   from: string;

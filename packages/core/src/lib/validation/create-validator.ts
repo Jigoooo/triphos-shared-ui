@@ -1,3 +1,5 @@
+import { isValid, parse } from 'date-fns';
+
 import {
   isAllDigits,
   isValidBusinessNumber,
@@ -7,7 +9,6 @@ import {
   isValidPassword,
   isValidPhoneNumber,
 } from '@/lib';
-import { isValid, parse } from 'date-fns';
 
 export function createValidator<TValue extends string | number | null>(value: TValue) {
   let error = false;

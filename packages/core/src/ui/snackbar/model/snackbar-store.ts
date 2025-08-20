@@ -1,9 +1,8 @@
+import { v4 as uuidV4 } from 'uuid';
 import { create } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
-import { v4 as uuidV4 } from 'uuid';
 
-import type { SnackBarStates, TSnackBarStore } from './snackbar-type.ts';
-import { SnackbarType } from './snackbar-type.ts';
+import { type SnackBarStates, type TSnackBarStore, SnackbarType } from './snackbar-type.ts';
 
 const snackBarInitialState: SnackBarStates = {
   snackbarInfos: [],

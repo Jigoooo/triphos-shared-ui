@@ -1,5 +1,5 @@
-import { Typography } from '@/ui/typography';
 import type { CheckboxLabelProps } from '../model/checkbox-type.ts';
+import { Typography } from '@/ui/typography';
 
 export function CheckboxLabel({ label, labelStyle, disabled }: CheckboxLabelProps) {
   return (

@@ -1,8 +1,8 @@
-import type { MouseEvent } from 'react';
 import { motion } from 'framer-motion';
+import type { MouseEvent } from 'react';
 
-import { FlexRow } from '@/ui/layout';
 import type { ActionsAnimatedProps } from '../model/etc-type.ts';
+import { FlexRow } from '@/ui/layout';
 
 export function ActionAnimatedWrapper({
   padding = '0.5rem',

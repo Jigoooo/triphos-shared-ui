@@ -1,9 +1,9 @@
-import { FlexRow } from '@/ui/layout';
-import type { CheckboxProps } from '../model/checkbox-type.ts';
-import { CheckboxLabel } from './checkbox-label.tsx';
 import { AnimatedCheckbox } from './animated-checkbox.tsx';
+import { CheckboxLabel } from './checkbox-label.tsx';
 import { NoAnimatedCheckbox } from './no-animated-checkbox.tsx';
+import type { CheckboxProps } from '../model/checkbox-type.ts';
 import { useThemeContext } from '@/theme';
+import { FlexRow } from '@/ui/layout';
 
 export function Checkbox({
   style,

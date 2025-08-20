@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
+import type { ContextMenuItemProps } from '../model/context-menu-type.ts';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import type { ContextMenuItemProps } from '../model/context-menu-type.ts';
 
 export function ContextMenuItem({
   title,

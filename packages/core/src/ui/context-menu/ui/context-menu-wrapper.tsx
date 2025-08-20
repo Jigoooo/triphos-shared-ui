@@ -1,5 +1,5 @@
-import { FlexColumn } from '@/ui/layout';
 import type { ContextMenuWrapperProps } from '../model/context-menu-type.ts';
+import { FlexColumn } from '@/ui/layout';
 
 export function ContextMenuWrapper({ style, children }: ContextMenuWrapperProps) {
   return (

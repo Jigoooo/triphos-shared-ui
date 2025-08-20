@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export function useHandleClickOutsideRef<T extends HTMLElement>({
   condition,
@@ -9,11 +9,14 @@ export function useHandleClickOutsideRef<T extends HTMLElement>({
 }) {
   const ref = useRef<T>(null);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      outsideClickAction();
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        outsideClickAction();
+      }
+    },
+    [outsideClickAction],
+  );
 
   useEffect(() => {
     if (condition) {
@@ -25,7 +28,7 @@ export function useHandleClickOutsideRef<T extends HTMLElement>({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [condition, outsideClickAction]);
+  }, [condition, handleClickOutside, outsideClickAction]);
 
   return ref;
 }

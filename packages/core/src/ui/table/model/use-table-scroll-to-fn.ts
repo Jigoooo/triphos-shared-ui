@@ -1,7 +1,5 @@
-import type { VirtualizerOptions } from '@tanstack/react-virtual';
-import { elementScroll } from '@tanstack/react-virtual';
-import type { RefObject } from 'react';
-import { useCallback, useRef } from 'react';
+import { type VirtualizerOptions, elementScroll } from '@tanstack/react-virtual';
+import { type RefObject, useCallback, useRef } from 'react';
 
 function easeInOutQuint(t: number) {
   return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
@@ -33,7 +31,7 @@ export function useTableScrollToFn(bodyRef: RefObject<HTMLDivElement | null>) {
 
       requestAnimationFrame(run);
     },
-    [],
+    [bodyRef],
   );
 
   return scrollToFn;

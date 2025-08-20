@@ -1,5 +1,5 @@
-import { Divider } from '@/ui/divider';
 import type { ContextMenuDividerProps } from '../model/context-menu-type.ts';
+import { Divider } from '@/ui/divider';
 
 export function ContextMenuDivider({ style, direction = 'horizontal' }: ContextMenuDividerProps) {
   return (

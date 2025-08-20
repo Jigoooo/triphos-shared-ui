@@ -27,7 +27,7 @@ export function useMediaQueryWidth(threshold: number, type: 'min' | 'max' = 'max
         mediaQueryList.removeListener(listener);
       }
     };
-  }, [threshold]);
+  }, [threshold, type]);
 
   return isMatched;
 }

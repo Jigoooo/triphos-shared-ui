@@ -1,12 +1,12 @@
 import type { ReferenceType, VirtualElement } from '@floating-ui/react';
-import type { CSSProperties, HTMLProps, ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import type { CSSProperties, HTMLProps, ReactNode } from 'react';
 
 import { HiChevronUpDown } from 'react-icons/hi2';
 
 import { FlexRow } from '@/ui/layout';
-import { Typography } from '@/ui/typography';
 import type { CustomContainerRendererProps } from '@/ui/select/model/select-type.ts';
+import { Typography } from '@/ui/typography';
 
 export function SelectContainer<ValueType extends string | number>({
   ref,

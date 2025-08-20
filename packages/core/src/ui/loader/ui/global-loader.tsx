@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
+import type { GlobalLoaderProps } from '../model/loader-type.ts';
 import { zIndex } from '@/constants';
 import { Typography } from '@/ui/typography';
-import type { GlobalLoaderProps } from '../model/loader-type.ts';
 
 export function GlobalLoader({ loaderText }: GlobalLoaderProps) {
   return (

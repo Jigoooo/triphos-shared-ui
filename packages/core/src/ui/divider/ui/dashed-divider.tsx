@@ -1,5 +1,5 @@
-import { FlexRow } from '@/ui/layout';
 import type { DashedDividerProps } from '../model/divider-type.ts';
+import { FlexRow } from '@/ui/layout';
 
 export function DashedDivider({ style, strokeColor = '#888888', ...props }: DashedDividerProps) {
   return (

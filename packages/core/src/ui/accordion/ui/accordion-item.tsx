@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
-import { FlexColumn, FlexRow } from '@/ui/layout';
-import { Divider } from '@/ui/divider';
-import { Typography } from '@/ui/typography';
 import type { AccordionItemProps } from '../model/accordion-type';
+import { Divider } from '@/ui/divider';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 
 export function AccordionItem({
   title,

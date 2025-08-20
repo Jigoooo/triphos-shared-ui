@@ -1,10 +1,9 @@
 import type { ReferenceType, VirtualElement } from '@floating-ui/react';
-import type { HTMLProps } from 'react';
-import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { type HTMLProps, useEffect, useRef, useState } from 'react';
 
-import { LuX } from 'react-icons/lu';
 import { HiChevronUpDown } from 'react-icons/hi2';
+import { LuX } from 'react-icons/lu';
 
 import type { MultiSelectOption } from '../model/select-type.ts';
 import { useThemeContext } from '@/theme';

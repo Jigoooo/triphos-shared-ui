@@ -1,5 +1,5 @@
-import type { KeyboardEvent, ReactNode, Ref, TextareaHTMLAttributes } from 'react';
 import type { MotionProps } from 'framer-motion';
+import type { KeyboardEvent, ReactNode, Ref, TextareaHTMLAttributes } from 'react';
 
 export type TextareaProps = MotionProps &
   TextareaHTMLAttributes<HTMLTextAreaElement> & {

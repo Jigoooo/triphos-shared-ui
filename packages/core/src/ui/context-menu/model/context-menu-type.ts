@@ -1,4 +1,5 @@
 import type { ReactNode, CSSProperties, HTMLAttributes } from 'react';
+
 import type { DividerProps } from '@/ui/divider';
 
 export type ContextMenuWrapperProps = {

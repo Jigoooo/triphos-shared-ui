@@ -1,14 +1,17 @@
-import type { CSSProperties } from 'react';
-import { useCallback } from 'react';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-import { useLayoutEffect, useState } from 'react';
 import { motion, useDragControls } from 'framer-motion';
+import {
+  type CSSProperties,
+  useCallback,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 
+import type { ModalLayoutProps } from '../model/modal-type.ts';
+import { CloseIconButton } from '@/ui/icon';
 import { FlexColumn, FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import { CloseIconButton } from '@/ui/icon';
-import type { ModalLayoutProps } from '../model/modal-type.ts';
 
 const modalContainerDefaultStyle: CSSProperties = {
   backgroundColor: '#ffffff',

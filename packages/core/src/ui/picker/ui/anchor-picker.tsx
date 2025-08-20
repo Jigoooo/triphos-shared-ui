@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import {
   flip,
   FloatingOverlay,
@@ -10,9 +8,11 @@ import {
   useFloating,
   useInteractions,
 } from '@floating-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
-import { zIndex } from '@/constants';
 import type { AnchorPickerProps } from '../model/picker-type.ts';
+import { zIndex } from '@/constants';
 
 export function AnchorPicker({
   strategy = 'absolute',

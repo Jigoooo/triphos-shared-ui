@@ -1,5 +1,5 @@
-import type { HTMLProps } from 'react';
 import type { ReferenceType, VirtualElement } from '@floating-ui/react';
+import type { HTMLProps } from 'react';
 
 export type SelectOption<ValueType extends string | number> = {
   label: string;

@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 
-import type { DialogStates, DialogStore } from './dialog-type.ts';
-import { DialogType } from './dialog-type.ts';
+import { type DialogStates, type DialogStore, DialogType } from './dialog-type.ts';
 
 const dialogInitialState: DialogStates = {
   dialogOpen: false,

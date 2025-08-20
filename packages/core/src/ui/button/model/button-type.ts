@@ -1,5 +1,5 @@
-import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
 import type { MotionProps } from 'framer-motion';
+import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from 'react';
 
 export enum ButtonStyle {
   SOLID = 'solid',
@@ -12,8 +12,9 @@ export type ButtonProps = MotionProps &
     disabledStyle?: CSSProperties;
     animationColor?: string;
     customVariants?: {
-      hover?: any;
-      tap?: any;
+      hover: any;
+      tap: any;
+      none: any;
     };
     children: ReactNode;
   };

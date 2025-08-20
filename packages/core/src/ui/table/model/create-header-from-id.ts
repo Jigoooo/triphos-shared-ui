@@ -1,5 +1,5 @@
-import type { THeader } from './table-type.ts';
 import { createHeader } from './create-header.ts';
+import type { THeader } from './table-type.ts';
 
 export function createHeaderFromId<TData, K extends Extract<keyof TData, string>>(
   headerKeyLabels: Map<K, string>,

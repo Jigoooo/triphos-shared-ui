@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { offset, useFloating, useHover, useInteractions } from '@floating-ui/react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
-import { zIndex } from '@/constants';
 import type { TooltipProps } from '../model/tooltip-type.ts';
+import { zIndex } from '@/constants';
 
 export function Tooltip({ style, placement, children, content, disabled = false }: TooltipProps) {
   const [isOpen, setIsOpen] = useState(false);

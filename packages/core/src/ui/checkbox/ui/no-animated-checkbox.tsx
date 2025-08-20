@@ -1,6 +1,6 @@
-import { FlexRow } from '@/ui/layout';
-import type { NoAnimatedCheckboxProps } from '../model/checkbox-type.ts';
 import { CheckIcon } from './check-icon.tsx';
+import type { NoAnimatedCheckboxProps } from '../model/checkbox-type.ts';
+import { FlexRow } from '@/ui/layout';
 
 export function NoAnimatedCheckbox({
   containerStyle,

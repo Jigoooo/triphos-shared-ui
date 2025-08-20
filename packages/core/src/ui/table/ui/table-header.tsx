@@ -2,12 +2,12 @@ import type { RefObject } from 'react';
 
 import { LuMoveUp, LuMoveDown } from 'react-icons/lu';
 
+import { useTableContext } from '../model/table-context.ts';
 import type { THeader } from '../model/table-type.ts';
+import { Checkbox } from '@/ui/checkbox';
+import { Input } from '@/ui/input';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import { Input } from '@/ui/input';
-import { Checkbox } from '@/ui/checkbox';
-import { useTableContext } from '../model/table-context.ts';
 
 export function TableHeader({ ref }: { ref: RefObject<HTMLDivElement | null> }) {
   const { tableStyle, headerHeight, sortedHeaders: headers } = useTableContext();

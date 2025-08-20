@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
 import { LayoutGroup, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-import { Typography } from '@/ui/typography';
 import type { SwitchProps } from '../model/switch-type.ts';
 import { useResponsiveSize } from '../model/use-responsive-size.ts';
 import { useThemeContext } from '@/theme';
+import { Typography } from '@/ui/typography';
 
 export function Switch({
   isActiveAnimation = true,

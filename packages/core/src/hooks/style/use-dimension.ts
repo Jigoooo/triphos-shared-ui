@@ -1,5 +1,4 @@
-import type { RefObject } from 'react';
-import { useEffect, useRef } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
 
 export const useDimensions = (ref: RefObject<HTMLElement>) => {
   const dimensions = useRef({ width: 0, height: 0 });
@@ -7,7 +6,7 @@ export const useDimensions = (ref: RefObject<HTMLElement>) => {
   useEffect(() => {
     dimensions.current.width = ref?.current?.offsetWidth ?? 0;
     dimensions.current.height = ref?.current?.offsetHeight ?? 0;
-  }, []);
+  }, [ref]);
 
   return dimensions.current;
 };

@@ -1,5 +1,5 @@
-import type { Theme, ThemeInput } from '../model/theme-type';
 import { themeBase } from '../config/theme-base.ts';
+import type { Theme, ThemeInput } from '../model/theme-type';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];

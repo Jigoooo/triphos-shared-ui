@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react';
-import { createContext, useContext } from 'react';
+import { type ReactNode, createContext, useContext } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
 import type { ModalContextType, ModalRenderProps } from './modal-type.ts';

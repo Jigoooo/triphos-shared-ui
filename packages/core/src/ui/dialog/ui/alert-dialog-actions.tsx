@@ -1,9 +1,8 @@
+import { type DialogConfig, DialogType } from '../model/dialog-type.ts';
+import { useGetDialogButtonColor } from '../model/use-get-dialog-button-color.ts';
+import { Button } from '@/ui/button';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import { Button } from '@/ui/button';
-import type { DialogConfig } from '../model/dialog-type.ts';
-import { DialogType } from '../model/dialog-type.ts';
-import { useGetDialogButtonColor } from '../model/use-get-dialog-button-color.ts';
 
 export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfig }) {
   const dialogColor = useGetDialogButtonColor(dialogConfig.dialogType || DialogType.INFO);

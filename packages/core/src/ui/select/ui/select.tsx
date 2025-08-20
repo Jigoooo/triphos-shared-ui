@@ -1,8 +1,6 @@
-import type { KeyboardEvent, CSSProperties, ReactNode } from 'react';
-import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import type { Strategy, Placement } from '@floating-ui/react';
 import {
+  type Strategy,
+  type Placement,
   flip,
   FloatingOverlay,
   FloatingPortal,
@@ -12,16 +10,18 @@ import {
   useFloating,
   useInteractions,
 } from '@floating-ui/react';
-
-import { zIndex } from '@/constants';
+import { AnimatePresence } from 'framer-motion';
 import { useHandleClickOutsideRef } from 'hooks';
+import { useState, useEffect, type KeyboardEvent, type CSSProperties, type ReactNode } from 'react';
+
+import { SelectContainer } from './select-container.tsx';
+import { SelectItems } from './select-items.tsx';
 import type {
   CustomContainerRendererProps,
   CustomOptionRendererProps,
   SelectOption,
 } from '../model/select-type.ts';
-import { SelectItems } from './select-items.tsx';
-import { SelectContainer } from './select-container.tsx';
+import { zIndex } from '@/constants';
 
 export function Select<ValueType extends string | number>({
   strategy = 'absolute',

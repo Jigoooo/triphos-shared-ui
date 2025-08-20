@@ -1,6 +1,5 @@
 import type { TEditCell } from '../model/table-type.ts';
-import type { SelectOption } from '@/ui/select';
-import { Select } from '@/ui/select';
+import { type SelectOption, Select } from '@/ui/select';
 
 export function SelectEditCell<TData>({
   options,

@@ -1,5 +1,5 @@
-import type { PaginationState } from '@tanstack/table-core';
 import type { VisibilityState } from '@tanstack/react-table';
+import type { PaginationState } from '@tanstack/table-core';
 
 export type ColumnValueFunction<T> = (row: T) => string;
 

@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { FlexRow } from '@/ui/layout';
-import type { AnimatedCheckboxProps } from '../model/checkbox-type.ts';
 import { CheckIcon } from './check-icon.tsx';
+import type { AnimatedCheckboxProps } from '../model/checkbox-type.ts';
+import { FlexRow } from '@/ui/layout';
 
 export function AnimatedCheckbox({
   containerStyle,

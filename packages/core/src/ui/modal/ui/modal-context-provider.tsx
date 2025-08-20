@@ -1,13 +1,12 @@
-import type { ReactNode } from 'react';
-import { useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { type ReactNode, useMemo, useRef, useState } from 'react';
 
-import { FlexRow } from '@/ui/layout';
 import { ModalContext } from '../model/modal-context.ts';
+import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
-import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
+import { FlexRow } from '@/ui/layout';
 // import { detectDeviceTypeAndOS } from '@/lib';
 
 // const { isMobile } = detectDeviceTypeAndOS();

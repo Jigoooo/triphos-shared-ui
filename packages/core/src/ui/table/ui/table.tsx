@@ -1,16 +1,20 @@
-import type { JSX, RefObject } from 'react';
-import { useEffect, useRef, useState } from 'react';
-
-import type { TDataWithIndex } from '../model/table-type.ts';
-import { FlexRow } from '@/ui/layout';
-import { Typography } from '@/ui/typography';
-import { TableHeader } from './table-header.tsx';
-import { TableBody } from './table-body.tsx';
 import { useElementSize } from 'hooks';
-import type { THeaderGroup, THeader, TTableContext, TTableStyle } from '../model/table-type.ts';
+import { type JSX, type RefObject, useEffect, useRef, useState } from 'react';
+
+import { TableBody } from './table-body.tsx';
+import { TableHeader } from './table-header.tsx';
 import { TableContext } from '../model/table-context.ts';
+import {
+  type THeaderGroup,
+  type THeader,
+  type TTableContext,
+  type TTableStyle,
+  type TDataWithIndex,
+} from '../model/table-type.ts';
 import { useTableChecked } from '../model/use-table-checked.ts';
 import { useTableSorting } from '../model/use-table-sorting.ts';
+import { FlexRow } from '@/ui/layout';
+import { Typography } from '@/ui/typography';
 
 /*
  * - 하단 페이징
@@ -107,7 +111,7 @@ export function Table<TData extends TDataWithIndex & Record<string, any>>({
 
   useEffect(() => {
     handleSyncCheckList?.(checkList);
-  }, [checkList]);
+  }, [checkList, handleSyncCheckList]);
 
   const [verticalScrollWidth, setVerticalScrollWidth] = useState(0);
   useEffect(() => {
@@ -273,7 +277,7 @@ function useSyncScroll<TData>(
         bodyRef.current.scrollLeft = 0;
       }
     }
-  }, [tableDataList.length]);
+  }, [bodyRef, headerRef, tableDataList.length]);
 
   useEffect(() => {
     const headerEl = headerRef.current;

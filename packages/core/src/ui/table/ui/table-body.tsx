@@ -1,24 +1,23 @@
-import type { RefObject } from 'react';
-import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useHandleClickOutsideRef } from 'hooks';
+import { type RefObject, memo, useCallback, useMemo, useRef, useState } from 'react';
 
+import { useTableContext } from '../model/table-context.ts';
+import type { EditType, TableBodyRowProps, TDataWithIndex, THeader } from '../model/table-type.ts';
+import { useTableScrollToFn } from '../model/use-table-scroll-to-fn.ts';
+import { useVirtualRow } from '../model/use-virtual-row.ts';
+import { validateTableDataList } from '../model/validate-table-data-list.ts';
+import { useThemeContext } from '@/theme';
+import { Checkbox } from '@/ui/checkbox';
 import {
   // CustomHorizontalScrollbar,
   // CustomVerticalScrollbar,
   NoData,
 } from '@/ui/etc';
+import { Input } from '@/ui/input';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
-import type { EditType, TableBodyRowProps, TDataWithIndex, THeader } from '../model/table-type.ts';
-import { useTableContext } from '../model/table-context.ts';
-import { validateTableDataList } from '../model/validate-table-data-list.ts';
-import { useTableScrollToFn } from '../model/use-table-scroll-to-fn.ts';
-import { useVirtualRow } from '../model/use-virtual-row.ts';
-import { useHandleClickOutsideRef } from 'hooks';
-import { Input } from '@/ui/input';
-import { Checkbox } from '@/ui/checkbox';
-import { useThemeContext } from '@/theme';
 
 export const TableBody = memo(function TableBody<TData extends TDataWithIndex>({
   bodyXRef,

@@ -1,15 +1,14 @@
 import { useState } from 'react';
 
-import type { TDataWithIndex, THeader } from '@/ui/table';
-import { Table, useTableData } from '@/ui/table';
-import { OutlinedButton, SolidButton } from '@/ui/button';
-import { FlexColumn, FlexRow } from '@/ui/layout';
-import { Typography } from '@/ui/typography';
-import { Input } from '@/ui/input';
-import { dialog } from '@/ui/dialog';
-import type { TValidationRuleWithHeaderId } from '@/ui/excel';
-import { writeExcelFile } from '@/ui/excel';
 import { MdOutlineFileDownload } from 'react-icons/md';
+
+import { OutlinedButton, SolidButton } from '@/ui/button';
+import { dialog } from '@/ui/dialog';
+import { type TValidationRuleWithHeaderId, writeExcelFile } from '@/ui/excel';
+import { Input } from '@/ui/input';
+import { FlexColumn, FlexRow } from '@/ui/layout';
+import { type TDataWithIndex, type THeader, Table, useTableData } from '@/ui/table';
+import { Typography } from '@/ui/typography';
 
 export function ExcelEditModal<TData extends TDataWithIndex>({
   excelNm,

@@ -1,6 +1,5 @@
-import type { Sheet2JSONOpts } from 'xlsx-js-style';
-import XLSX from 'xlsx-js-style';
 import { toast } from 'sonner';
+import XLSX, { type Sheet2JSONOpts } from 'xlsx-js-style';
 
 import type { WriteExcelFileParams } from './excel-type.ts';
 

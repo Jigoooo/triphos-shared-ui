@@ -1,5 +1,4 @@
-import type { Usable } from 'react';
-import { createContext, use } from 'react';
+import { type Usable, createContext, use } from 'react';
 
 import type { TTableContext } from './table-type.ts';
 

@@ -1,5 +1,5 @@
-import type { BookType, WritingOptions } from 'xlsx-js-style';
-import type XLSX from 'xlsx-js-style';
+//eslint-disable-next-line
+import XLSX, { type BookType, type WritingOptions } from 'xlsx-js-style';
 
 import type { TDataWithIndex } from '@/ui/table';
 

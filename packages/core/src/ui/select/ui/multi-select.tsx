@@ -1,8 +1,6 @@
-import type { KeyboardEvent } from 'react';
-import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import type { Strategy, Placement } from '@floating-ui/react';
 import {
+  type Strategy,
+  type Placement,
   flip,
   FloatingOverlay,
   FloatingPortal,
@@ -12,12 +10,14 @@ import {
   useFloating,
   useInteractions,
 } from '@floating-ui/react';
-
-import { zIndex } from '@/constants';
+import { AnimatePresence } from 'framer-motion';
 import { useHandleClickOutsideRef } from 'hooks';
-import type { MultiSelectOption } from '../model/select-type.ts';
-import { MultiSelectItems } from './multi-select-items.tsx';
+import { useEffect, useState, type KeyboardEvent } from 'react';
+
 import { MultiSelectContainer } from './multi-select-container.tsx';
+import { MultiSelectItems } from './multi-select-items.tsx';
+import type { MultiSelectOption } from '../model/select-type.ts';
+import { zIndex } from '@/constants';
 
 export function MultiSelect<ValuesType extends (string | number)[]>({
   strategy = 'absolute',

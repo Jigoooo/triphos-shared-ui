@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 import { LuX } from 'react-icons/lu';
 
-import { FlexRow } from '@/ui/layout';
 import type { CloseIconButtonProps } from '../model/icon-type.ts';
+import { FlexRow } from '@/ui/layout';
 
 export function CloseIconButton({
   close,
