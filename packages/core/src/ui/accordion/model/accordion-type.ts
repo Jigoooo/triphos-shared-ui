@@ -16,9 +16,15 @@ export type AccordionGroupProps = {
   onItemChange?: (openItems: number[]) => void;
 };
 
+export type AccordionItemHeaderRenderProps = {
+  isOpen: boolean;
+  toggle: () => void;
+};
+
 export type AccordionItemProps = {
   title?: string;
   headerStyle?: CSSProperties;
   children: ReactNode;
+  renderHeader?: (props: AccordionItemHeaderRenderProps) => ReactNode;
   index?: number;
 };
