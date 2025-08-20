@@ -23,6 +23,7 @@ export const defaultButtonStyle: CSSProperties = {
   msUserSelect: 'none',
   fontWeight: 600,
   gap: '0.3rem',
+  willChange: 'transform',
 } as CSSProperties;
 
 export function getButtonWithTypeStyles(theme: Theme): Record<ButtonType, CSSProperties> {
