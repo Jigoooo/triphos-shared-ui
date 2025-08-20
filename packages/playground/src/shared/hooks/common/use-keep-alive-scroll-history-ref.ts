@@ -1,7 +1,6 @@
-import type { RefObject } from 'react';
-import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useEffectOnActive } from 'keepalive-for-react';
+import { type RefObject, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export function useKeepAliveScrollHistoryRef<T extends HTMLElement>({
   ref,

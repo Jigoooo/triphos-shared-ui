@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
-
 import { Typography, useLoading } from '@jigoooo/shared-ui';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { zIndex } from '@/shared/constants';
 
 export function LoadingProvider() {

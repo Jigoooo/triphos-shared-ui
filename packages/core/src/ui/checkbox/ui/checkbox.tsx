@@ -1,3 +1,5 @@
+import { type MouseEvent, useMemo } from 'react';
+
 import { AnimatedCheckbox } from './animated-checkbox.tsx';
 import { CheckboxLabel } from './checkbox-label.tsx';
 import { NoAnimatedCheckbox } from './no-animated-checkbox.tsx';
@@ -5,8 +7,16 @@ import type { CheckboxProps } from '../model/checkbox-type.ts';
 import { useThemeContext } from '@/theme';
 import { FlexRow } from '@/ui/layout';
 
+const validateSize = (size: string | number, fallback: string): string => {
+  if (typeof size === 'number') {
+    return size > 0 ? `${size}px` : fallback;
+  }
+
+  const validCssSize = /^[0-9]+(\.[0-9]+)?(px|rem|em|%)$/.test(size.trim());
+  return validCssSize ? size : fallback;
+};
+
 export function Checkbox({
-  style,
   checkIconColor,
   checkboxSize = '1.125rem',
   checkIconSize = '0.75rem',
@@ -23,12 +33,20 @@ export function Checkbox({
   isActiveAnimation = true,
   wrapperStyle,
   checkboxStyle,
-  ...props
 }: CheckboxProps) {
   const { theme } = useThemeContext();
   const effectiveColor = checkboxCheckedColor || theme.colors.primaryColor;
 
-  const handleToggle = (e: React.MouseEvent) => {
+  // 크기 값 검증 및 메모이제이션
+  const validatedSizes = useMemo(
+    () => ({
+      checkboxSize: validateSize(checkboxSize, '1.125rem'),
+      checkIconSize: validateSize(checkIconSize, '0.75rem'),
+    }),
+    [checkboxSize, checkIconSize],
+  );
+
+  const handleToggle = (e: MouseEvent) => {
     if (disabled) return;
 
     if (onChange) {
@@ -38,8 +56,38 @@ export function Checkbox({
     }
   };
 
+  const checkboxSharedProps = useMemo(
+    () => ({
+      checkboxStyle,
+      isPartial,
+      checkboxSize: validatedSizes.checkboxSize,
+      checkIconSize: validatedSizes.checkIconSize,
+      disabled,
+      checked,
+      checkboxCheckedColor: effectiveColor,
+      checkboxColor,
+      checkIconColor,
+    }),
+    [
+      checkboxStyle,
+      isPartial,
+      validatedSizes.checkboxSize,
+      validatedSizes.checkIconSize,
+      disabled,
+      checked,
+      effectiveColor,
+      checkboxColor,
+      checkIconColor,
+    ],
+  );
+
   return (
     <FlexRow
+      role='checkbox'
+      aria-checked={isPartial ? 'mixed' : checked}
+      aria-disabled={disabled}
+      aria-label={label || undefined}
+      tabIndex={disabled ? -1 : 0}
       style={{
         justifyContent: 'center',
         alignItems: 'center',
@@ -48,41 +96,27 @@ export function Checkbox({
         ...wrapperStyle,
       }}
       onClick={handleToggle}
+      onKeyDown={(e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && !disabled) {
+          e.preventDefault();
+          handleToggle(e as any);
+        }
+      }}
     >
       <input
         type='checkbox'
         checked={checked}
         onChange={() => {}}
-        style={{ ...style, display: 'none' }}
-        {...props}
+        style={{ display: 'none' }}
+        aria-hidden='true'
       />
       {!!label && labelPosition === 'left' && (
         <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />
       )}
       {isActiveAnimation ? (
-        <AnimatedCheckbox
-          checkboxStyle={checkboxStyle}
-          isPartial={isPartial}
-          checkboxSize={checkboxSize}
-          checkIconSize={checkIconSize}
-          disabled={disabled}
-          checked={checked}
-          checkboxCheckedColor={effectiveColor}
-          checkboxColor={checkboxColor}
-          checkIconColor={checkIconColor}
-        />
+        <AnimatedCheckbox {...checkboxSharedProps} />
       ) : (
-        <NoAnimatedCheckbox
-          checkboxStyle={checkboxStyle}
-          isPartial={isPartial}
-          checkboxSize={checkboxSize}
-          checkIconSize={checkIconSize}
-          disabled={disabled}
-          checked={checked}
-          checkboxCheckedColor={effectiveColor}
-          checkboxColor={checkboxColor}
-          checkIconColor={checkIconColor}
-        />
+        <NoAnimatedCheckbox {...checkboxSharedProps} />
       )}
       {!!label && labelPosition === 'right' && (
         <CheckboxLabel label={label} labelStyle={labelStyle} disabled={disabled} />

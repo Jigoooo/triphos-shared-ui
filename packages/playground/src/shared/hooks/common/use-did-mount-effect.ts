@@ -1,4 +1,4 @@
-import { DependencyList, useEffect, useRef } from 'react';
+import { type DependencyList, useEffect, useRef } from 'react';
 
 /**
  * 첫 렌더링 시 useEffect 막음

@@ -1,4 +1,4 @@
-import type { CSSProperties, InputHTMLAttributes, MouseEventHandler } from 'react';
+import type { CSSProperties, MouseEventHandler } from 'react';
 
 export type CheckboxLabelProps = {
   label: string;
@@ -20,7 +20,7 @@ export type AnimatedCheckboxProps = {
 
 export type NoAnimatedCheckboxProps = AnimatedCheckboxProps;
 
-export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
+export type CheckboxProps = {
   checkIconColor?: string;
   checkboxSize?: string | number;
   checkIconSize?: string | number;

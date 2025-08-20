@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
 // import { useLocation } from 'react-router-dom';
 import { useEffectOnActive } from 'keepalive-for-react';
 import { useLenis } from 'lenis/react';
+import { useEffect, useRef } from 'react';
 
 export function useKeepAliveLenisScrollHistory({
   enabled,
