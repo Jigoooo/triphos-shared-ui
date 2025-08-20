@@ -86,14 +86,7 @@ export const getDefaultButtonVariants: (
     hover: { backgroundColor: hoverBackgroundColor },
     tap: {
       backgroundColor: tapBackgroundColor,
-      scale: 0.95,
-      transition: {
-        scale: {
-          duration: 0.05,
-          ease: 'easeOut',
-        },
-        backgroundColor: { duration: 0.3, ease: 'easeOut' },
-      },
+      scale: 0.96,
     },
     none: {},
   };
@@ -102,7 +95,7 @@ export const getDefaultButtonVariants: (
 export const getDefaultButtonTransition: () => Transition = () => {
   return {
     scale: {
-      duration: 0.08,
+      duration: 0.1,
       ease: 'easeOut',
     },
     backgroundColor: { duration: 0.4, ease: 'easeOut' },

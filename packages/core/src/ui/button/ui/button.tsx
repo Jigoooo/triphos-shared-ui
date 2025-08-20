@@ -18,7 +18,7 @@ export function BaseButton({
   buttonStyle,
   customVariants,
   customTransition,
-  animationColor,
+  animationBackgroundColor,
   children,
   style,
   disabledStyle,
@@ -32,14 +32,14 @@ export function BaseButton({
   const backgroundColor = style?.backgroundColor ?? theme.colors.primaryColor;
   const color = style?.color ?? theme.colors.primaryColor;
   const defaultAnimationColor = applyButtonType === ButtonStyle.OUTLINED ? color : backgroundColor;
-  const animationBackgroundColor = getButtonAnimationBackgroundColor(
+  const applyAnimationBackgroundColor = getButtonAnimationBackgroundColor(
     applyButtonType,
-    animationColor ?? defaultAnimationColor,
+    animationBackgroundColor ?? defaultAnimationColor,
   );
 
   const defaultButtonVariants = getDefaultButtonVariants(
-    animationBackgroundColor.hoverBackgroundColor,
-    animationBackgroundColor.tapBackgroundColor,
+    applyAnimationBackgroundColor.hoverBackgroundColor,
+    applyAnimationBackgroundColor.tapBackgroundColor,
   );
 
   const defaultButtonTransition = getDefaultButtonTransition();

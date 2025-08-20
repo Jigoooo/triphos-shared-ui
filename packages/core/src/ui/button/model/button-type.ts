@@ -10,7 +10,7 @@ export type ButtonProps = MotionProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     buttonStyle?: ButtonStyle;
     disabledStyle?: CSSProperties;
-    animationColor?: string;
+    animationBackgroundColor?: string;
     customVariants?: {
       hover: Variant;
       tap: Variant;
