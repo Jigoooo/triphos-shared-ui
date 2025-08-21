@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, type PanInfo, useDragControls } from 'framer-motion';
-import { type ReactNode, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
+import { type BottomSheetProps } from '../model/bottom-sheet-type.ts';
 import { zIndex } from '@/constants';
 import { useModalHistory } from '@/hooks';
 
@@ -11,20 +12,12 @@ export function BottomSheet({
   maxHeight = 'auto',
   dragThreshold = 80,
   bottomInset = 0,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
-  maxHeight?: string | number;
-  dragThreshold?: string | number;
-  bottomInset?: string | number;
-}) {
+}: BottomSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
 
   useModalHistory(isOpen, onClose);
 
-  // Convert drag threshold to pixels
   const getThresholdInPixels = (threshold: string | number): number => {
     if (typeof threshold === 'number') return threshold;
 
@@ -34,10 +27,10 @@ export function BottomSheet({
     if (unit === '%' && sheetRef.current) {
       return (sheetRef.current.offsetHeight * value) / 100;
     } else if (unit === 'rem') {
-      return value * 16; // 1rem = 16px
+      return value * 16;
     }
 
-    return value; // Default to px
+    return value;
   };
 
   useEffect(() => {

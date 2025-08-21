@@ -1,11 +1,11 @@
-import { type ButtonProps, SolidButton } from '@/ui/button';
-import { type SelectOption } from '@/ui/select';
+import { type BottomSheetDefaultOptionProps } from '../model/bottom-sheet-type.ts';
+import { SolidButton } from '@/ui/button';
 
 export function BottomSheetDefaultOption<TValue extends string | number>({
   option,
   isSelected,
   ...props
-}: Omit<ButtonProps, 'children'> & { option: SelectOption<TValue>; isSelected: boolean }) {
+}: BottomSheetDefaultOptionProps<TValue>) {
   return (
     <SolidButton
       key={option.value}

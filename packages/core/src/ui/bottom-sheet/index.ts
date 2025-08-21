@@ -1,3 +1,5 @@
 export { BottomSheet } from './ui/bottom-sheet';
-export { BottomSheetInput } from './ui/bottom-sheet-input';
+export { BottomSheetWithInput } from './ui/bottom-sheet-with-input.tsx';
 export { BottomSheetDefaultOption } from './ui/bottom-sheet-default-option';
+
+export type { BottomSheetProps, BottomSheetWithInputProps } from './model/bottom-sheet-type.ts';

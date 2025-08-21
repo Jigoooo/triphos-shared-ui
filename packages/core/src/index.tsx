@@ -1,8 +1,14 @@
 export { useThemeContext, ThemeProvider, createTheme, createUseTheme } from './theme';
 export type { ThemeContextType, Theme, themeBase } from './theme';
 
+export { colors } from './constants/colors';
+export { zIndex } from './constants/z-index';
+
 export { Button, SolidButton, OutlinedButton, ButtonType } from './ui/button';
 export type { ButtonProps } from './ui/button';
+
+export { BottomSheet, BottomSheetWithInput } from './ui/bottom-sheet';
+export type { BottomSheetProps, BottomSheetWithInputProps } from './ui/bottom-sheet';
 
 export { CloseIconButton } from './ui/icon';
 export type { CloseIconButtonProps } from './ui/icon';

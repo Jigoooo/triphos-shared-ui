@@ -1,24 +1,18 @@
-import { type InputProps } from '@jigoooo/shared-ui';
-import { type MouseEvent, type ReactNode, useCallback, useState } from 'react';
+import { type MouseEvent, useCallback, useState } from 'react';
 
 import { LuChevronDown } from 'react-icons/lu';
 
 import { BottomSheet } from './bottom-sheet';
+import { type BottomSheetWithInputProps } from '../model/bottom-sheet-type.ts';
 import { OutlinedInput } from '@/ui/input';
 
-interface BottomSheetInputProps extends InputProps {
-  bottomSheetContent: ReactNode | ((props: { close: () => void }) => ReactNode);
-  bottomSheetMaxHeight?: string | number;
-  bottomSheetDragThreshold?: string | number;
-}
-
-export function BottomSheetInput({
+export function BottomSheetWithInput({
   bottomSheetContent,
   bottomSheetMaxHeight,
   bottomSheetDragThreshold,
   onClick,
   ...props
-}: BottomSheetInputProps) {
+}: BottomSheetWithInputProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = useCallback(
