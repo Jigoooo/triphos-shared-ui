@@ -5,3 +5,4 @@ export { OutlinedInput } from './variant/outlined-input.tsx';
 export { UnderlineInput } from './variant/underline-input.tsx';
 
 export type { InputProps } from './model/input-type.ts';
+export { InputType } from './model/input-type.ts';
