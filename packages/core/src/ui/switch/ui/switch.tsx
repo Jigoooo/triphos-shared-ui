@@ -1,5 +1,5 @@
 import { LayoutGroup, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 import {
   defaultSwitchDisableTransition,
@@ -30,6 +30,7 @@ export function Switch({
 }: SwitchProps) {
   const { theme } = useThemeContext();
   const dimensions = useSwitchResponsiveSize(width, height);
+  const switchId = useId();
 
   const applyBarColor = barColor || theme.colors.primaryColor;
 
@@ -55,7 +56,7 @@ export function Switch({
       )}
       <LayoutGroup>
         <motion.div
-          key={isInit && isActiveAnimation ? 'switch' : 'no-switch'}
+          key={isInit && isActiveAnimation ? `switch-${switchId}` : `no-switch-${switchId}`}
           layout={isInit && isActiveAnimation}
           onClick={(event) => {
             event.stopPropagation();
@@ -66,7 +67,11 @@ export function Switch({
           style={barStyleConst}
         >
           <motion.div
-            layoutId={isInit && isActiveAnimation ? 'switch-thumb' : 'no-switch-thumb'}
+            layoutId={
+              isInit && isActiveAnimation
+                ? `switch-thumb-${switchId}`
+                : `no-switch-thumb-${switchId}`
+            }
             transition={
               isInit && isActiveAnimation ? defaultSwitchTransition : defaultSwitchDisableTransition
             }
