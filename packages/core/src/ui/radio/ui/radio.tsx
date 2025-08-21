@@ -1,5 +1,15 @@
 import { motion } from 'framer-motion';
 
+import {
+  defaultRadioSize,
+  defaultLabelColor,
+  getRadioLabelStyle,
+  getRadioInputStyle,
+  getRadioIconStyle,
+  getRadioDotStyle,
+  getRadioBorderColor,
+  getRadioLabelTextStyle,
+} from '../config/radio-style.ts';
 import { useRadioGroupContext } from '../model/radio-group-context.ts';
 import type { RadioProps } from '../model/radio-type.ts';
 import { useThemeContext } from '@/theme';
@@ -9,9 +19,9 @@ export function Radio({
   label,
   value,
   disabled = false,
-  size = 1.4,
+  size = defaultRadioSize,
   color,
-  labelColor = '#333333',
+  labelColor = defaultLabelColor,
   style,
   iconStyle,
   dotStyle,
@@ -19,79 +29,69 @@ export function Radio({
   const { theme } = useThemeContext();
 
   const effectiveColor = color || theme.colors.primaryColor;
-
   const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext();
 
   const disabledValue = disabled || groupDisabled;
-
+  const isSelected = selectedRadio === value;
   const indicatorSize = size * 0.5;
 
+  const labelStyle = getRadioLabelStyle({
+    style,
+    disabledValue,
+    cursor: 'pointer',
+  });
+
+  const inputStyle = getRadioInputStyle();
+
+  const iconStyleCombined = getRadioIconStyle({
+    size,
+    iconStyle,
+  });
+
+  const dotStyleCombined = getRadioDotStyle({
+    indicatorSize,
+    disabledValue,
+    effectiveColor,
+    dotStyle,
+  });
+
+  const borderColor = getRadioBorderColor({
+    disabledValue,
+    isSelected,
+    primaryColor: theme.colors.primaryColor,
+  });
+
+  const textStyle = getRadioLabelTextStyle({
+    disabledValue,
+    labelColor,
+  });
+
   return (
-    <label
-      key={value}
-      style={{
-        ...{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          cursor: disabledValue ? 'default' : 'pointer',
-          ...style,
-        },
-      }}
-    >
+    <label key={value} style={labelStyle}>
       <input
         type='radio'
         name={name}
         value={value}
-        checked={selectedRadio === value}
-        onChange={() => {
-          handleSelectedRadio(value);
-        }}
+        checked={isSelected}
+        onChange={() => handleSelectedRadio(value)}
         disabled={disabledValue}
-        style={{
-          position: 'absolute',
-          opacity: 0,
-          pointerEvents: 'none',
-        }}
+        style={inputStyle}
       />
       <motion.div
-        style={{
-          width: `${size}rem`,
-          height: `${size}rem`,
-          borderRadius: '50%',
-          border: '2px solid #ccc',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          ...iconStyle,
-        }}
-        animate={{
-          borderColor: disabledValue
-            ? '#cccccc'
-            : selectedRadio === value
-              ? theme.colors.primaryColor
-              : '#cccccc',
-        }}
+        style={iconStyleCombined}
+        animate={{ borderColor }}
         transition={{ duration: 0.2 }}
       >
-        {selectedRadio === value && (
+        {isSelected && (
           <motion.div
-            style={{
-              width: `${indicatorSize}rem`,
-              height: `${indicatorSize}rem`,
-              borderRadius: '50%',
-              backgroundColor: disabledValue ? '#cccccc' : effectiveColor,
-              ...dotStyle,
-            }}
+            style={dotStyleCombined}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.1 }}
           />
         )}
       </motion.div>
-      <Typography style={{ fontSize: '0.9rem', color: disabledValue ? '#cccccc' : labelColor }}>
-        {label}
-      </Typography>
+      <Typography style={textStyle}>{label}</Typography>
     </label>
   );
 }

@@ -7,8 +7,13 @@ export type RadioGroupContextType = {
   groupDisabled: boolean;
 };
 
-export type RadioGroupProps = RadioGroupContextType & {
+export type RadioGroupProps = {
   children: ReactNode;
+  defaultValue?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+  style?: CSSProperties;
 };
 
 export type RadioProps = {
