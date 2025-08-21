@@ -107,7 +107,6 @@ export function AlertDialog() {
                 justifyContent: 'space-between',
                 outline: 'none',
                 userSelect: 'none',
-
                 border: '1px solid #ECEEF3',
                 boxShadow: '0 8px 24px rgba(16, 24, 40, 0.12), 0 2px 8px rgba(16, 24, 40, 0.06)',
                 gap: '0.5rem',
