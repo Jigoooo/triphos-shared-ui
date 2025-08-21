@@ -79,13 +79,13 @@ export function AlertDialog() {
 
   return (
     <FloatingPortal>
-      <div ref={dialogRef} tabIndex={-1} />
-
       <AnimatePresence initial={false}>
         {dialogOpen && (
           <>
             <FlexColumn
+              ref={dialogRef}
               as={motion.div}
+              tabIndex={-1}
               // initial={{ opacity: 0.6, scale: 0.94, x: '-50%', y: '-40%' }}
               // animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
               // exit={{ opacity: 0.2, scale: 0.98, x: '-50%', y: '-45%' }}

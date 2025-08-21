@@ -1,8 +1,10 @@
 import { AnimatePresence, motion, type PanInfo, useDragControls } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
+import { BottomSheetGrab } from './bottom-sheet-grab.tsx';
+import { BottomSheetOverlay } from './bottom-sheet-overlay.tsx';
+import { getBottomSheetContainerStyle, getBottomSheetStyle } from '../config/bottom-sheet-style.ts';
 import { type BottomSheetProps } from '../model/bottom-sheet-type.ts';
-import { zIndex } from '@/constants';
 import { useModalHistory } from '@/hooks';
 
 export function BottomSheet({
@@ -15,6 +17,9 @@ export function BottomSheet({
 }: BottomSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
+
+  const bottomSheetContainerStyle = getBottomSheetContainerStyle({ maxHeight });
+  const bottomSheetStyle = getBottomSheetStyle({ bottomInset });
 
   useModalHistory(isOpen, onClose);
 
@@ -62,21 +67,8 @@ export function BottomSheet({
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              zIndex: zIndex.anchorOverlay,
-            }}
-          />
+          <BottomSheetOverlay />
+
           <motion.div
             ref={sheetRef}
             initial={{ y: '100%' }}
@@ -103,55 +95,11 @@ export function BottomSheet({
               }
             }}
             onDragEnd={handleDragEnd}
-            style={{
-              position: 'fixed',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: maxHeight,
-              backgroundColor: 'white',
-              borderTopLeftRadius: '1rem',
-              borderTopRightRadius: '1rem',
-              boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.1)',
-              zIndex: zIndex.anchor,
-              display: 'flex',
-              flexDirection: 'column',
-            }}
+            style={bottomSheetContainerStyle}
           >
-            <div
-              onPointerDown={(e) => {
-                e.preventDefault();
-                dragControls.start(e);
-              }}
-              style={{
-                width: '100%',
-                flexShrink: 0,
-                cursor: 'grab',
-                paddingTop: '0.75rem',
-                paddingBottom: '0.75rem',
-                touchAction: 'none',
-              }}
-            >
-              <div
-                style={{
-                  width: '3rem',
-                  height: '0.25rem',
-                  backgroundColor: '#ddd',
-                  borderRadius: '0.125rem',
-                  margin: '0 auto',
-                }}
-              />
-            </div>
-            <div
-              style={{
-                flex: 1,
-                overflow: 'hidden',
-                minHeight: 0,
-                paddingBottom: bottomInset,
-              }}
-            >
-              {children}
-            </div>
+            <BottomSheetGrab dragControls={dragControls} />
+
+            <div style={bottomSheetStyle}>{children}</div>
           </motion.div>
         </>
       )}
