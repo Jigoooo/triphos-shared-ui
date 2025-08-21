@@ -1,3 +1,4 @@
+import { FloatingPortal } from '@floating-ui/react';
 import { AnimatePresence, motion, type PanInfo, useDragControls } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
@@ -72,50 +73,52 @@ export function BottomSheet({
   };
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <BottomSheetOverlay />
+    <FloatingPortal>
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <BottomSheetOverlay />
 
-          <motion.div
-            ref={sheetRef}
-            role='dialog'
-            aria-modal='true'
-            aria-label='Bottom sheet'
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{
-              duration: 0.6,
-              ease: [0.32, 0.72, 0, 1],
-            }}
-            drag='y'
-            dragControls={dragControls}
-            dragListener={false}
-            dragConstraints={{ top: 0 }}
-            dragElastic={0.2}
-            dragSnapToOrigin={true}
-            onDrag={(_, info) => {
-              if (info.offset.y < 0) {
-                dragControls.stop();
-              }
-            }}
-            onDragStart={(_, info) => {
-              if (info.delta.y < 0) {
-                dragControls.stop();
-              }
-            }}
-            onDragEnd={handleDragEnd}
-            style={bottomSheetContainerStyle}
-          >
-            <BottomSheetGrab dragControls={dragControls} />
+            <motion.div
+              ref={sheetRef}
+              role='dialog'
+              aria-modal='true'
+              aria-label='Bottom sheet'
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{
+                duration: 0.6,
+                ease: [0.32, 0.72, 0, 1],
+              }}
+              drag='y'
+              dragControls={dragControls}
+              dragListener={false}
+              dragConstraints={{ top: 0 }}
+              dragElastic={0.2}
+              dragSnapToOrigin={true}
+              onDrag={(_, info) => {
+                if (info.offset.y < 0) {
+                  dragControls.stop();
+                }
+              }}
+              onDragStart={(_, info) => {
+                if (info.delta.y < 0) {
+                  dragControls.stop();
+                }
+              }}
+              onDragEnd={handleDragEnd}
+              style={bottomSheetContainerStyle}
+            >
+              <BottomSheetGrab dragControls={dragControls} />
 
-            <div role='document' style={bottomSheetStyle}>
-              {children}
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+              <div role='document' style={bottomSheetStyle}>
+                {children}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </FloatingPortal>
   );
 }

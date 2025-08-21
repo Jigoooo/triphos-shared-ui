@@ -119,7 +119,6 @@ const meta = {
   },
 } satisfies Meta<CheckboxProps>;
 
-export default meta;
 type Story = StoryObj<typeof meta>;
 
 // 기본 스토리
@@ -423,3 +422,5 @@ export const EmptyBackground: Story = {
     );
   },
 };
+
+export default meta;

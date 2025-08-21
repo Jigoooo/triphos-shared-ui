@@ -84,7 +84,6 @@ const meta = {
   },
 } satisfies Meta<AccordionGroupProps>;
 
-export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -406,3 +405,5 @@ export const CustomHeader: Story = {
     defaultOpenItems: [0],
   },
 };
+
+export default meta;
