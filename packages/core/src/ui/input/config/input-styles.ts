@@ -7,7 +7,7 @@ const EXTRA_PADDING = '2rem';
 const DECORATOR_SPACING = '0.5rem';
 
 export const defaultInputStyle: CSSProperties = {
-  width: 'auto',
+  width: '100%',
   paddingInline: '0.5rem',
   paddingBlock: '0.625rem',
   borderRadius: '0.25rem',

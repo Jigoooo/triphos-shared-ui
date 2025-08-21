@@ -1,3 +1,4 @@
+import { FloatingOverlay } from '@floating-ui/react';
 import { motion } from 'framer-motion';
 
 import { bottomSheetOverlayStyle } from '../config/bottom-sheet-style.ts';
@@ -12,6 +13,8 @@ export function BottomSheetOverlay() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       style={bottomSheetOverlayStyle}
-    />
+    >
+      <FloatingOverlay lockScroll style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} />
+    </motion.div>
   );
 }

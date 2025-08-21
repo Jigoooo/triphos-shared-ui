@@ -39,6 +39,9 @@ export function BottomSheetWithInput({
         onClick={handleClick}
         endDecorator={<LuChevronDown aria-hidden='true' />}
         isFocusEffect={false}
+        style={{
+          width: '100%',
+        }}
         {...props}
       />
       <BottomSheet
