@@ -21,7 +21,6 @@ const meta = {
 
 type Story = StoryObj<typeof meta>;
 
-// Helper component for demo boxes
 const DemoBox = ({
   children,
   color = '#007bff',
