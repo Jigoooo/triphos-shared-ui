@@ -1,6 +1,14 @@
 import { LayoutGroup, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import {
+  defaultSwitchDisableTransition,
+  defaultSwitchTransition,
+  getSwitchBarStyle,
+  getSwitchContainerStyle,
+  getSwitchLabelStyle,
+  getSwitchThumbStyle,
+} from '../config/switch-style.ts';
 import type { SwitchProps } from '../model/switch-type.ts';
 import { useSwitchResponsiveSize } from '../model/use-switch-responsive-size.ts';
 import { useThemeContext } from '@/theme';
@@ -35,31 +43,15 @@ export function Switch({
     };
   }, [animationDelay]);
 
+  const containerStyleConst = getSwitchContainerStyle({ disabled, containerStyle });
+  const labelStyleConst = getSwitchLabelStyle({ disabled, labelStyle });
+  const barStyleConst = getSwitchBarStyle({ dimensions, disabled, isOn, barColor: applyBarColor });
+  const thumbStyleConst = getSwitchThumbStyle(dimensions);
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: '0.25rem',
-        cursor: disabled ? 'default' : 'pointer',
-        ...containerStyle,
-      }}
-      onClick={disabled ? undefined : onClick}
-    >
+    <div style={containerStyleConst} onClick={disabled ? undefined : onClick}>
       {label && labelDirection === 'left' && (
-        <Typography
-          style={{
-            ...{
-              userSelect: 'none',
-              fontSize: '0.9rem',
-              color: disabled ? '#9f9f9f' : '#666666',
-            },
-            ...labelStyle,
-          }}
-        >
-          {label}
-        </Typography>
+        <Typography style={labelStyleConst}>{label}</Typography>
       )}
       <LayoutGroup>
         <motion.div
@@ -71,48 +63,19 @@ export function Switch({
               onClick();
             }
           }}
-          style={{
-            display: 'flex',
-            width: dimensions.width,
-            height: dimensions.height,
-            borderRadius: dimensions.borderRadius,
-            backgroundColor: disabled ? '#e0e0e0' : isOn ? applyBarColor : '#e4e4e4',
-            padding: dimensions.padding,
-            cursor: disabled ? 'default' : 'pointer',
-            justifyContent: isOn ? 'flex-end' : 'flex-start',
-            alignItems: 'center',
-          }}
+          style={barStyleConst}
         >
           <motion.div
             layoutId={isInit && isActiveAnimation ? 'switch-thumb' : 'no-switch-thumb'}
             transition={
-              isInit && isActiveAnimation
-                ? { type: 'spring', stiffness: 700, damping: 35 }
-                : { duration: 0 }
+              isInit && isActiveAnimation ? defaultSwitchTransition : defaultSwitchDisableTransition
             }
-            style={{
-              width: dimensions.circleSize,
-              height: dimensions.circleSize,
-              backgroundColor: 'white',
-              borderRadius: '50%',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.06)',
-            }}
+            style={thumbStyleConst}
           />
         </motion.div>
       </LayoutGroup>
       {label && labelDirection === 'right' && (
-        <Typography
-          style={{
-            ...{
-              userSelect: 'none',
-              fontSize: '0.9rem',
-              color: disabled ? '#9f9f9f' : '#666666',
-            },
-            ...labelStyle,
-          }}
-        >
-          {label}
-        </Typography>
+        <Typography style={labelStyleConst}>{label}</Typography>
       )}
     </div>
   );

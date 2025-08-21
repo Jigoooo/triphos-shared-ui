@@ -1,5 +1,13 @@
 import type { CSSProperties } from 'react';
 
+export interface SwitchDimensions {
+  width: number;
+  height: number;
+  padding: number;
+  circleSize: number;
+  borderRadius: number;
+}
+
 export type SwitchProps = {
   isActiveAnimation?: boolean;
   animationDelay?: number;
