@@ -13,6 +13,7 @@ export function Textarea({
   onEnter,
   onKeyDown,
   focusWidth = 2,
+  focusColor,
   disabled,
   disabledStyle,
   ...props
@@ -32,6 +33,7 @@ export function Textarea({
   };
 
   const textareaStyle = getTextareaStyle({ style, disabled, disabledStyle });
+  const applyFocusColor = focusColor ? focusColor : colors.primary[400];
 
   return (
     <motion.textarea
@@ -42,7 +44,7 @@ export function Textarea({
       style={textareaStyle}
       variants={{
         focus: {
-          boxShadow: `inset 0 0 0 ${focusWidth}px ${colors.primary[400]}`,
+          boxShadow: `inset 0 0 0 ${focusWidth}px ${applyFocusColor}`,
         },
         none: {},
       }}

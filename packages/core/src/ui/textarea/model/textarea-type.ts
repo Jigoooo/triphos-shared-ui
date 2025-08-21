@@ -10,4 +10,5 @@ export type TextareaProps = MotionProps &
     onEnter?: (e: KeyboardEvent<HTMLTextAreaElement>) => void;
     disabledStyle?: CSSProperties;
     focusWidth?: number;
+    focusColor?: string;
   };
