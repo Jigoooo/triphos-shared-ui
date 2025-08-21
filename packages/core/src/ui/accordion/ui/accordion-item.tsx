@@ -45,13 +45,18 @@ export function AccordionItem({
     toggle: handleToggle,
   };
 
+  const headerId = `accordion-header-${index}`;
+  const panelId = `accordion-panel-${index}`;
+
   const headerContent = renderHeader ? (
     renderHeader(headerRenderProps)
   ) : (
     <FlexRow
       role='button'
       tabIndex={0}
+      id={headerId}
       aria-expanded={isOpen}
+      aria-controls={panelId}
       onClick={handleToggle}
       onKeyDown={onKeyDown}
       onMouseEnter={() => setHover(true)}
@@ -64,7 +69,7 @@ export function AccordionItem({
     >
       <Typography style={accordionItemTitleStyle}>{title}</Typography>
 
-      <FlexRow aria-hidden style={getAccordionItemIconStyle({ isOpen, hover })}>
+      <FlexRow aria-hidden='true' style={getAccordionItemIconStyle({ isOpen, hover })}>
         <MdOutlineKeyboardArrowDown style={accordionItemIconStyle} />
       </FlexRow>
     </FlexRow>
@@ -83,7 +88,13 @@ export function AccordionItem({
             style={{ overflow: 'hidden' }}
             transition={customTransition ?? accordionDefaultTransition}
           >
-            <div ref={contentRef} style={accordionItemContentStyle}>
+            <div
+              ref={contentRef}
+              id={panelId}
+              role='region'
+              aria-labelledby={headerId}
+              style={accordionItemContentStyle}
+            >
               {children}
             </div>
           </motion.div>

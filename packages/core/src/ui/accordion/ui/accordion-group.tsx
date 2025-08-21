@@ -52,6 +52,8 @@ export function AccordionGroup({
   return (
     <AccordionGroupContext value={contextValue}>
       <FlexColumn
+        role='region'
+        aria-label='Accordion'
         style={{
           userSelect: 'none',
           gap: '0.5rem',
