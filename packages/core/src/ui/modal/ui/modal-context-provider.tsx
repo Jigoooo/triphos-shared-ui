@@ -91,6 +91,10 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                   }}
                   onClick={(e) => e.stopPropagation()}
                   data-modal-content
+                  role='dialog'
+                  aria-modal='true'
+                  aria-labelledby={`modal-title-${modal.id}`}
+                  aria-describedby={`modal-description-${modal.id}`}
                 >
                   {modal.render({
                     overlayRef: overlayRef,

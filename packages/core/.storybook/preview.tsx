@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import { useEffect, useState } from 'react';
 
-import { AlertDialog } from '../src';
+import { AlertDialog, ModalContextProvider } from '../src';
 import { ThemeProvider } from '../src/theme';
 
 // 전역 상태로 AlertDialog 렌더링 관리
@@ -23,7 +23,7 @@ const GlobalDialogWrapper = ({ children }: { children: React.ReactNode }) => {
           <AlertDialog />
         </div>
       )}
-      {children}
+      <ModalContextProvider>{children}</ModalContextProvider>
     </>
   );
 };

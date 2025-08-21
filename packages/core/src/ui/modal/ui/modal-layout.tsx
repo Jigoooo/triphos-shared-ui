@@ -88,16 +88,41 @@ export function ModalLayout({
     };
   }, [updateConstraints]);
 
+  // 포커스 트랩 구현
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
+    if (!modalRef.current) return;
+
+    const modal = modalRef.current;
+    const focusableElements = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    const firstFocusableElement = focusableElements[0] as HTMLElement;
+    const lastFocusableElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === firstFocusableElement) {
+          e.preventDefault();
+          lastFocusableElement?.focus();
+        } else if (!e.shiftKey && document.activeElement === lastFocusableElement) {
+          e.preventDefault();
+          firstFocusableElement?.focus();
+        }
+      }
+    };
+
+    const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         close();
       }
     };
 
-    window.addEventListener('keydown', onKeyDown);
+    modal.addEventListener('keydown', handleTabKey);
+    modal.addEventListener('keydown', handleEscapeKey);
+
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
+      modal.removeEventListener('keydown', handleTabKey);
+      modal.removeEventListener('keydown', handleEscapeKey);
     };
   }, [close]);
 
