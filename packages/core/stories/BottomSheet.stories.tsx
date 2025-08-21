@@ -31,16 +31,16 @@ export const Default: Story = {
     ];
 
     return (
-      <div style={{ width: '300px', padding: '20px' }}>
+      <div style={{ width: '18.75rem', padding: '1.25rem' }}>
         <BottomSheetWithInput
           placeholder='Select an option'
           bottomSheetContent={({ close }) => {
             return (
-              <div style={{ padding: '20px' }}>
-                <h2 style={{ marginBottom: '20px', fontSize: '18px', fontWeight: 'bold' }}>
+              <div style={{ padding: '1.25rem' }}>
+                <h2 style={{ marginBottom: '1.25rem', fontSize: '1.125rem', fontWeight: 'bold' }}>
                   Select Option
                 </h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
                   {options.map((option) => (
                     <button
                       key={option.value}
@@ -49,9 +49,9 @@ export const Default: Story = {
                         close();
                       }}
                       style={{
-                        padding: '12px 16px',
-                        border: '1px solid #e0e0e0',
-                        borderRadius: '8px',
+                        padding: '0.75rem 1rem',
+                        border: '0.0625rem solid #e0e0e0',
+                        borderRadius: '0.5rem',
                         backgroundColor: '#ffffff',
                         cursor: 'pointer',
                         textAlign: 'left',
@@ -110,25 +110,25 @@ export const LongList: Story = {
       ];
 
       return (
-        <div style={{ width: '300px', padding: '20px' }}>
+        <div style={{ width: '18.75rem', padding: '1.25rem' }}>
           <BottomSheetWithInput
             value={selectedCountry}
             placeholder='Select your country'
             bottomSheetMaxHeight='60vh'
             bottomSheetContent={({ close }) => {
               return (
-                <div style={{ padding: '20px' }}>
-                  <h2 style={{ marginBottom: '20px', fontSize: '18px', fontWeight: 'bold' }}>
+                <div style={{ padding: '1.25rem' }}>
+                  <h2 style={{ marginBottom: '1.25rem', fontSize: '1.125rem', fontWeight: 'bold' }}>
                     Select Country
                   </h2>
                   <div
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '8px',
+                      gap: '0.5rem',
                       maxHeight: '50vh',
                       overflowY: 'auto',
-                      paddingRight: '12px',
+                      paddingRight: '0.75rem',
                     }}
                   >
                     {countries.map((country) => (
@@ -139,9 +139,9 @@ export const LongList: Story = {
                           close();
                         }}
                         style={{
-                          padding: '12px 16px',
-                          border: '1px solid #e0e0e0',
-                          borderRadius: '8px',
+                          padding: '0.75rem 1rem',
+                          border: '0.0625rem solid #e0e0e0',
+                          borderRadius: '0.5rem',
                           backgroundColor: selectedCountry === country ? '#f0f0f0' : '#ffffff',
                           cursor: 'pointer',
                           textAlign: 'left',
@@ -180,53 +180,53 @@ export const CustomContent: Story = {
       const [isOpen, setIsOpen] = useState(false);
 
       return (
-        <div style={{ width: '300px', padding: '20px' }}>
+        <div style={{ width: '18.75rem', padding: '1.25rem' }}>
           <button
             onClick={() => setIsOpen(true)}
             style={{
               width: '100%',
-              padding: '12px',
+              padding: '0.75rem',
               backgroundColor: '#007bff',
               color: 'white',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '0.5rem',
               cursor: 'pointer',
-              fontSize: '16px',
+              fontSize: '1rem',
             }}
           >
             Open Bottom Sheet
           </button>
 
           <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
-            <div style={{ padding: '24px' }}>
-              <h2 style={{ marginBottom: '16px', fontSize: '20px', fontWeight: 'bold' }}>
+            <div style={{ padding: '1.5rem' }}>
+              <h2 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: 'bold' }}>
                 Terms and Conditions
               </h2>
-              <div style={{ marginBottom: '20px', color: '#666', lineHeight: '1.6' }}>
-                <p style={{ marginBottom: '12px' }}>
+              <div style={{ marginBottom: '1.25rem', color: '#666', lineHeight: '1.6' }}>
+                <p style={{ marginBottom: '0.75rem' }}>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
                   incididunt ut labore et dolore magna aliqua.
                 </p>
-                <p style={{ marginBottom: '12px' }}>
+                <p style={{ marginBottom: '0.75rem' }}>
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                   ex ea commodo consequat.
                 </p>
-                <p style={{ marginBottom: '12px' }}>
+                <p style={{ marginBottom: '0.75rem' }}>
                   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                   fugiat nulla pariatur.
                 </p>
               </div>
-              <div style={{ display: 'flex', gap: '12px' }}>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
                 <button
                   onClick={() => setIsOpen(false)}
                   style={{
                     flex: 1,
-                    padding: '12px',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
+                    padding: '0.75rem',
+                    border: '0.0625rem solid #ddd',
+                    borderRadius: '0.5rem',
                     backgroundColor: '#fff',
                     cursor: 'pointer',
-                    fontSize: '16px',
+                    fontSize: '1rem',
                   }}
                 >
                   Decline
@@ -238,13 +238,13 @@ export const CustomContent: Story = {
                   }}
                   style={{
                     flex: 1,
-                    padding: '12px',
+                    padding: '0.75rem',
                     border: 'none',
-                    borderRadius: '8px',
+                    borderRadius: '0.5rem',
                     backgroundColor: '#28a745',
                     color: 'white',
                     cursor: 'pointer',
-                    fontSize: '16px',
+                    fontSize: '1rem',
                   }}
                 >
                   Accept
