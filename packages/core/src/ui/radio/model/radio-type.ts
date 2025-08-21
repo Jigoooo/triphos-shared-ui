@@ -21,7 +21,7 @@ export type RadioProps = {
   value: string;
   disabled?: boolean;
   size?: number;
-  color?: string;
+  radioColor?: string;
   labelColor?: string;
   style?: CSSProperties;
   iconStyle?: CSSProperties;

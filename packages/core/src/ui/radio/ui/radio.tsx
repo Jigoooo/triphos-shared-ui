@@ -20,7 +20,7 @@ export function Radio({
   value,
   disabled = false,
   size = defaultRadioSize,
-  color,
+  radioColor,
   labelColor = defaultLabelColor,
   style,
   iconStyle,
@@ -28,7 +28,7 @@ export function Radio({
 }: RadioProps) {
   const { theme } = useThemeContext();
 
-  const effectiveColor = color || theme.colors.primaryColor;
+  const effectiveColor = radioColor || theme.colors.primaryColor;
   const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext();
 
   const disabledValue = disabled || groupDisabled;
