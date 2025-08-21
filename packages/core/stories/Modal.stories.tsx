@@ -10,7 +10,7 @@ import { ModalLayout, useModal } from '../src/ui/modal';
 import { Typography } from '../src/ui/typography';
 
 const meta: Meta<typeof ModalLayout> = {
-  title: 'UI/Modal',
+  title: 'Design/Molecules/Modal',
   component: ModalLayout,
   tags: ['autodocs'],
   parameters: {
