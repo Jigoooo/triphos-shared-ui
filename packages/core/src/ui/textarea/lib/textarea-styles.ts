@@ -16,3 +16,19 @@ export const defaultTextareaStyle: CSSProperties = {
 export const textareaDisabledStyle: CSSProperties = {
   backgroundColor: '#fafafa',
 };
+
+export const getTextareaStyle = ({
+  style,
+  disabled,
+  disabledStyle,
+}: {
+  style?: CSSProperties;
+  disabled?: boolean;
+  disabledStyle?: CSSProperties;
+}): CSSProperties => {
+  return {
+    ...defaultTextareaStyle,
+    ...(disabled && (disabledStyle ?? textareaDisabledStyle)),
+    ...style,
+  };
+};

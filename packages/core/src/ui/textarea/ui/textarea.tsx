@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { KeyboardEvent } from 'react';
 
-import { defaultTextareaStyle, textareaDisabledStyle } from '../lib/textarea-styles.ts';
+import { getTextareaStyle } from '../lib/textarea-styles.ts';
 import type { TextareaProps } from '../model/textarea-type.ts';
 import { colors } from '@/constants';
 import { useCompositionRef } from '@/hooks';
@@ -12,6 +12,9 @@ export function Textarea({
   isFocusEffect = true,
   onEnter,
   onKeyDown,
+  focusWidth = 2,
+  disabled,
+  disabledStyle,
   ...props
 }: TextareaProps) {
   const { isComposingRef, handleCompositionStart, handleCompositionEnd } = useCompositionRef();
@@ -28,20 +31,18 @@ export function Textarea({
     }
   };
 
+  const textareaStyle = getTextareaStyle({ style, disabled, disabledStyle });
+
   return (
     <motion.textarea
       ref={ref}
       onKeyDown={handleKeyDown}
       onCompositionStart={handleCompositionStart}
       onCompositionEnd={handleCompositionEnd}
-      style={{
-        ...defaultTextareaStyle,
-        ...(props.disabled ? textareaDisabledStyle : {}),
-        ...style,
-      }}
+      style={textareaStyle}
       variants={{
         focus: {
-          boxShadow: `inset 0 0 0 2px ${colors.primary[400]}`,
+          boxShadow: `inset 0 0 0 ${focusWidth}px ${colors.primary[400]}`,
         },
         none: {},
       }}
