@@ -1,6 +1,10 @@
+import { type Transition } from 'framer-motion';
 import type { CSSProperties } from 'react';
 
-import { InputStyle } from '../model/input-type.ts';
+import { InputType } from '../model/input-type.ts';
+
+const EXTRA_PADDING = '2rem';
+const DECORATOR_SPACING = '0.5rem';
 
 export const defaultInputStyle: CSSProperties = {
   width: 'auto',
@@ -12,38 +16,67 @@ export const defaultInputStyle: CSSProperties = {
   outline: 'none',
 } as const;
 
-export const inputWithTypeStyles: Record<InputStyle, CSSProperties> = {
-  [InputStyle.SOFT]: {
+export const inputWithTypeStyles: Record<InputType, CSSProperties> = {
+  [InputType.SOFT]: {
     backgroundColor: '#eaeaea',
     border: 'none',
   },
-  [InputStyle.OUTLINED]: {
+  [InputType.OUTLINED]: {
     backgroundColor: '#ffffff',
     boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.24)`,
     border: 'none',
   },
-  [InputStyle.UNDERLINE]: {
+  [InputType.UNDERLINE]: {
     backgroundColor: '#ffffff',
     borderRadius: 0,
     borderTop: 'none',
     borderLeft: 'none',
     borderRight: 'none',
-    // borderBottom: `1.4px solid #c4c4c4`,
     border: 'none',
     boxShadow: 'inset 0 -1.4px 0 0 #c4c4c4',
   },
 } as const;
 
-export const inputDisabledStyles: Record<InputStyle, CSSProperties> = {
-  [InputStyle.SOFT]: {
+export const inputDisabledStyles: Record<InputType, CSSProperties> = {
+  [InputType.SOFT]: {
     backgroundColor: '#f3f3f3',
   },
-  [InputStyle.OUTLINED]: {
+  [InputType.OUTLINED]: {
     boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.24)`,
     backgroundColor: '#f2f2f2',
   },
-  [InputStyle.UNDERLINE]: {
-    // borderBottom: `2px solid #e1e1e1`,
+  [InputType.UNDERLINE]: {
     boxShadow: 'inset 0 -2px 0 0 #e1e1e1',
   },
 } as const;
+
+export const defaultInputTransition: Transition = { duration: 0.14 };
+
+export const getInputStyle = ({
+  style,
+  inputType,
+  hasStartDecorator,
+  hasEndDecorator,
+  startDecoratorWidth,
+  disabled,
+  disabledStyle,
+}: {
+  style?: CSSProperties;
+  inputType: InputType;
+  hasStartDecorator: boolean;
+  hasEndDecorator: boolean;
+  startDecoratorWidth: number;
+  disabled: boolean;
+  disabledStyle?: CSSProperties;
+}): CSSProperties => {
+  return {
+    ...defaultInputStyle,
+    ...inputWithTypeStyles[inputType],
+    paddingLeft: hasStartDecorator
+      ? `calc(${startDecoratorWidth}px + ${inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
+      : defaultInputStyle.paddingInline,
+    paddingRight: hasEndDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
+    ...style,
+    ...(disabled ? { ...inputDisabledStyles[inputType], ...disabledStyle } : {}),
+  };
+};

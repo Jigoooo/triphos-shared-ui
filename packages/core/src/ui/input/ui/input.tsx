@@ -1,37 +1,36 @@
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
-import { type InputProps, InputStyle } from '../model/input-type.ts';
+import { InputEndDecoratorWrapper } from './input-end-decorator-wrapper.tsx';
+import { InputStartDecoratorWrapper } from './input-start-decorator-wrapper.tsx';
+import { defaultInputTransition, getInputStyle } from '../config/input-styles.ts';
+import { type InputProps, InputType } from '../model/input-type.ts';
 import { OutlinedInput } from '../variant/outlined-input.tsx';
 import { SoftInput } from '../variant/soft-input.tsx';
 import { UnderlineInput } from '../variant/underline-input.tsx';
-import { colors, zIndex } from '@/constants';
-import { useCompositionRef } from '@/hooks';
-import {
-  defaultInputStyle,
-  inputWithTypeStyles,
-  inputDisabledStyles,
-} from '@/ui/input/config/input-styles.ts';
-
-const EXTRA_PADDING = '2rem';
-const DECORATOR_SPACING = '0.5rem';
+import { useThemeContext } from '@/theme';
 
 export function BaseInput({
   ref,
   style,
   type = 'text',
-  inputStyle = InputStyle.OUTLINED,
+  inputType = InputType.OUTLINED,
   disabledStyle,
   startDecorator,
   endDecorator,
   isFocusEffect = true,
   outlinedFocusWidth = 2.4,
   underlineFocusWidth = 2,
-  focusColor = colors.primary[300],
+  focusColor,
   onClick,
+  customTransition,
+  disabled = false,
   ...props
 }: InputProps) {
-  const { handleCompositionStart, handleCompositionEnd } = useCompositionRef();
+  const { theme } = useThemeContext();
+
+  const applyFocusColor = focusColor ?? theme.colors.primary[300];
+
   const startDecoratorRef = useRef<HTMLDivElement>(null);
   const [startDecoratorWidth, setStartDecoratorWidth] = useState(0);
 
@@ -42,6 +41,16 @@ export function BaseInput({
     }
   }, [startDecorator]);
 
+  const applyInputStyle = getInputStyle({
+    style,
+    inputType,
+    hasStartDecorator: !!startDecorator,
+    hasEndDecorator: !!endDecorator,
+    startDecoratorWidth,
+    disabled,
+    disabledStyle,
+  });
+
   return (
     <div
       style={{
@@ -50,73 +59,35 @@ export function BaseInput({
       }}
     >
       {startDecorator && (
-        <div
-          ref={startDecoratorRef}
-          style={{
-            position: 'absolute',
-            display: 'flex',
-            alignItems: 'center',
-            left: inputStyle === InputStyle.UNDERLINE ? '0.375rem' : '0.5rem',
-            top: inputStyle === InputStyle.UNDERLINE ? '40%' : '50%',
-            transform: 'translateY(-50%)',
-            pointerEvents: 'none',
-            zIndex: zIndex.base,
-          }}
-        >
+        <InputStartDecoratorWrapper ref={startDecoratorRef} inputType={inputType}>
           {startDecorator}
-        </div>
+        </InputStartDecoratorWrapper>
       )}
       <motion.input
-        ref={ref}
         type={type}
+        ref={ref}
         variants={{
           focus: {
-            boxShadow: `inset 0 0 0 ${outlinedFocusWidth}px ${focusColor}`,
+            boxShadow: `inset 0 0 0 ${outlinedFocusWidth}px ${applyFocusColor}`,
           },
           focusUnderline: {
             // borderBottom: `2px solid ${colors.primary[400]}`,
-            boxShadow: `inset 0 -${underlineFocusWidth}px 0 0 ${focusColor}`,
+            boxShadow: `inset 0 -${underlineFocusWidth}px 0 0 ${applyFocusColor}`,
           },
           none: {},
         }}
         whileFocus={
-          !isFocusEffect ? 'none' : inputStyle === InputStyle.UNDERLINE ? 'focusUnderline' : 'focus'
+          !isFocusEffect ? 'none' : inputType === InputType.UNDERLINE ? 'focusUnderline' : 'focus'
         }
-        transition={{ duration: 0.14 }}
-        style={{
-          ...defaultInputStyle,
-          ...inputWithTypeStyles[inputStyle],
-          paddingLeft: startDecorator
-            ? `calc(${startDecoratorWidth}px + ${inputStyle === InputStyle.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
-            : defaultInputStyle.paddingInline,
-          paddingRight: endDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
-          ...style,
-          ...(props.disabled ? { ...inputDisabledStyles[inputStyle], ...disabledStyle } : {}),
-        }}
-        onCompositionStart={handleCompositionStart}
-        onCompositionEnd={handleCompositionEnd}
+        transition={customTransition ?? defaultInputTransition}
+        style={applyInputStyle}
         onClick={(event) => {
           event.stopPropagation();
           onClick?.(event);
         }}
         {...props}
       />
-      {endDecorator && (
-        <div
-          style={{
-            position: 'absolute',
-            display: 'flex',
-            alignItems: 'center',
-            right: '0.5rem',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            pointerEvents: 'none',
-            zIndex: zIndex.base,
-          }}
-        >
-          {endDecorator}
-        </div>
-      )}
+      {endDecorator && <InputEndDecoratorWrapper>{endDecorator}</InputEndDecoratorWrapper>}
     </div>
   );
 }

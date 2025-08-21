@@ -3,6 +3,7 @@ export const zIndex = {
   content: 2,
   raisedContent: 3,
   scrollbar: 10,
+  noneModalFab: 97,
   modalOverlay: 98,
   modal: 99,
   anchorOverlay: 101,

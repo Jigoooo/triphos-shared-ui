@@ -36,6 +36,7 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           minWidth: '4.5rem',
           fontSize: '0.9rem',
           backgroundColor: dialogColor,
+          boxShadow: '0 6px 14px rgba(17, 24, 39, 0.12)',
         }}
         onClick={() => {
           dialogConfig?.onConfirm?.();
