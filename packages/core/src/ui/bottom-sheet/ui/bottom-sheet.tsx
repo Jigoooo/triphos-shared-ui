@@ -1,11 +1,13 @@
 import { FloatingPortal } from '@floating-ui/react';
 import { AnimatePresence, motion, type PanInfo, useDragControls } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { BottomSheetGrab } from './bottom-sheet-grab.tsx';
 import { BottomSheetOverlay } from './bottom-sheet-overlay.tsx';
 import { getBottomSheetContainerStyle, getBottomSheetStyle } from '../config/bottom-sheet-style.ts';
 import { type BottomSheetProps } from '../model/bottom-sheet-type.ts';
+import { useBottomSheetInteraction } from '../model/use-bottom-sheet-interaction.ts';
+import { useThresholdInPixels } from '../model/use-threshold-in-pixels.ts';
 import { useModalHistory } from '@/hooks';
 
 export function BottomSheet({
@@ -24,50 +26,16 @@ export function BottomSheet({
 
   useModalHistory(isOpen, onClose);
 
-  const getThresholdInPixels = (threshold: string | number): number => {
-    if (typeof threshold === 'number') return threshold;
+  const thresholdPx = useThresholdInPixels(dragThreshold, sheetRef.current);
 
-    const value = parseFloat(threshold);
-    const unit = threshold.replace(/[0-9.-]/g, '');
-
-    if (unit === '%' && sheetRef.current) {
-      return (sheetRef.current.offsetHeight * value) / 100;
-    } else if (unit === 'rem') {
-      return value * 16;
-    }
-
-    return value;
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (sheetRef.current && !sheetRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('touchstart', handleClickOutside);
-      document.addEventListener('keydown', handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [isOpen, onClose]);
+  useBottomSheetInteraction({
+    sheetRef,
+    isOpen,
+    onClose,
+  });
 
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const threshold = getThresholdInPixels(dragThreshold);
-    if (info.offset.y > threshold) {
+    if (info.offset.y > thresholdPx) {
       onClose();
     }
   };

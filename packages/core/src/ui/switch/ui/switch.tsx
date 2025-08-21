@@ -2,7 +2,7 @@ import { LayoutGroup, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import type { SwitchProps } from '../model/switch-type.ts';
-import { useResponsiveSize } from '../model/use-responsive-size.ts';
+import { useSwitchResponsiveSize } from '../model/use-switch-responsive-size.ts';
 import { useThemeContext } from '@/theme';
 import { Typography } from '@/ui/typography';
 
@@ -21,7 +21,7 @@ export function Switch({
   disabled = false,
 }: SwitchProps) {
   const { theme } = useThemeContext();
-  const dimensions = useResponsiveSize(width, height);
+  const dimensions = useSwitchResponsiveSize(width, height);
 
   const applyBarColor = barColor || theme.colors.primaryColor;
 
