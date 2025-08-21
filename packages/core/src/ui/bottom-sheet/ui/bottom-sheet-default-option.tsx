@@ -9,6 +9,8 @@ export function BottomSheetDefaultOption<TValue extends string | number>({
   return (
     <SolidButton
       key={option.value}
+      role='option'
+      aria-selected={isSelected}
       style={{
         justifyContent: 'flex-start',
         paddingBlock: '1.2rem',

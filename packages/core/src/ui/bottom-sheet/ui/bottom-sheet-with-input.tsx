@@ -32,8 +32,12 @@ export function BottomSheetWithInput({
     <>
       <OutlinedInput
         readOnly
+        role='combobox'
+        aria-haspopup='dialog'
+        aria-expanded={isOpen}
+        aria-label='Select option'
         onClick={handleClick}
-        endDecorator={<LuChevronDown />}
+        endDecorator={<LuChevronDown aria-hidden='true' />}
         isFocusEffect={false}
         {...props}
       />

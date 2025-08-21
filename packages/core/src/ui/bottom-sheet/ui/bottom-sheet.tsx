@@ -45,14 +45,22 @@ export function BottomSheet({
       }
     };
 
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('touchstart', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
     };
   }, [isOpen, onClose]);
 
@@ -71,6 +79,9 @@ export function BottomSheet({
 
           <motion.div
             ref={sheetRef}
+            role='dialog'
+            aria-modal='true'
+            aria-label='Bottom sheet'
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -99,7 +110,9 @@ export function BottomSheet({
           >
             <BottomSheetGrab dragControls={dragControls} />
 
-            <div style={bottomSheetStyle}>{children}</div>
+            <div role='document' style={bottomSheetStyle}>
+              {children}
+            </div>
           </motion.div>
         </>
       )}

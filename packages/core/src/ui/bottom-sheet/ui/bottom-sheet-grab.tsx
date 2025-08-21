@@ -8,13 +8,22 @@ import {
 export function BottomSheetGrab({ dragControls }: { dragControls: DragControls }) {
   return (
     <div
+      role='button'
+      tabIndex={0}
+      aria-label='Drag handle'
       onPointerDown={(e) => {
         e.preventDefault();
         dragControls.start(e);
       }}
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Escape') {
+          e.preventDefault();
+          // Handle keyboard interaction if needed
+        }
+      }}
       style={bottomSheetGrabContainerStyle}
     >
-      <div style={bottomSheetGrabStyle} />
+      <div aria-hidden='true' style={bottomSheetGrabStyle} />
     </div>
   );
 }

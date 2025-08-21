@@ -5,6 +5,8 @@ import { bottomSheetOverlayStyle } from '../config/bottom-sheet-style.ts';
 export function BottomSheetOverlay() {
   return (
     <motion.div
+      role='presentation'
+      aria-hidden='true'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
