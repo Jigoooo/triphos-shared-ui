@@ -22,7 +22,7 @@ export function Switch({
   labelStyle,
   labelDirection = 'right',
   isOn,
-  onClick,
+  onChange,
   width = '2.125rem',
   height = '1.24rem',
   barColor,
@@ -49,8 +49,14 @@ export function Switch({
   const barStyleConst = getSwitchBarStyle({ dimensions, disabled, isOn, barColor: applyBarColor });
   const thumbStyleConst = getSwitchThumbStyle(dimensions);
 
+  const handleClick = () => {
+    if (!disabled) {
+      onChange(!isOn);
+    }
+  };
+
   return (
-    <div style={containerStyleConst} onClick={disabled ? undefined : onClick}>
+    <div style={containerStyleConst} onClick={handleClick}>
       {label && labelDirection === 'left' && (
         <Typography style={labelStyleConst}>{label}</Typography>
       )}
@@ -61,7 +67,7 @@ export function Switch({
           onClick={(event) => {
             event.stopPropagation();
             if (!disabled) {
-              onClick();
+              onChange(!isOn);
             }
           }}
           style={barStyleConst}

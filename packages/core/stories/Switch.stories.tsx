@@ -21,9 +21,9 @@ const meta = {
       control: 'boolean',
       description: 'Current state of the switch',
     },
-    onClick: {
-      action: 'clicked',
-      description: 'Callback function when switch is clicked',
+    onChange: {
+      action: 'changed',
+      description: 'Callback function when switch state changes, receives the new state',
     },
     label: {
       control: 'text',
@@ -72,35 +72,30 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [isOn, setIsOn] = useState(false);
-    return <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} />;
+    return <Switch isOn={isOn} onChange={setIsOn} />;
   },
 };
 
 export const WithLabel: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [isOn, setIsOn] = useState(false);
     return (
       <div
         style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}
       >
-        <Switch isOn={isOn} onClick={() => setIsOn(!isOn)} label='Enable notifications' />
-        <Switch
-          isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
-          label='Dark mode'
-          labelDirection='left'
-        />
+        <Switch isOn={isOn} onChange={setIsOn} label='Enable notifications' />
+        <Switch isOn={isOn} onChange={setIsOn} label='Dark mode' labelDirection='left' />
       </div>
     );
   },
 };
 
 export const Sizes: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [isOn, setIsOn] = useState(false);
     return (
@@ -112,41 +107,23 @@ export const Sizes: Story = {
           alignItems: 'flex-start',
         }}
       >
+        <Switch isOn={isOn} onChange={setIsOn} label='Small' width='1.5rem' height='0.875rem' />
         <Switch
           isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
-          label='Small'
-          width='1.5rem'
-          height='0.875rem'
-        />
-        <Switch
-          isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
+          onChange={setIsOn}
           label='Medium (Default)'
           width='2.125rem'
           height='1.25rem'
         />
-        <Switch
-          isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
-          label='Large'
-          width='3rem'
-          height='1.75rem'
-        />
-        <Switch
-          isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
-          label='Extra Large'
-          width='4rem'
-          height='2.25rem'
-        />
+        <Switch isOn={isOn} onChange={setIsOn} label='Large' width='3rem' height='1.75rem' />
+        <Switch isOn={isOn} onChange={setIsOn} label='Extra Large' width='4rem' height='2.25rem' />
       </div>
     );
   },
 };
 
 export const CustomColors: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [settings, setSettings] = useState({
       notifications: false,
@@ -166,25 +143,25 @@ export const CustomColors: Story = {
       >
         <Switch
           isOn={settings.notifications}
-          onClick={() => setSettings((prev) => ({ ...prev, notifications: !prev.notifications }))}
+          onChange={(value) => setSettings((prev) => ({ ...prev, notifications: value }))}
           label='Notifications'
           barColor='#10b981'
         />
         <Switch
           isOn={settings.darkMode}
-          onClick={() => setSettings((prev) => ({ ...prev, darkMode: !prev.darkMode }))}
+          onChange={(value) => setSettings((prev) => ({ ...prev, darkMode: value }))}
           label='Dark Mode'
           barColor='#6366f1'
         />
         <Switch
           isOn={settings.autoSave}
-          onClick={() => setSettings((prev) => ({ ...prev, autoSave: !prev.autoSave }))}
+          onChange={(value) => setSettings((prev) => ({ ...prev, autoSave: value }))}
           label='Auto Save'
           barColor='#f59e0b'
         />
         <Switch
           isOn={settings.soundEffects}
-          onClick={() => setSettings((prev) => ({ ...prev, soundEffects: !prev.soundEffects }))}
+          onChange={(value) => setSettings((prev) => ({ ...prev, soundEffects: value }))}
           label='Sound Effects'
           barColor='#ef4444'
         />
@@ -194,16 +171,15 @@ export const CustomColors: Story = {
 };
 
 export const DisabledStates: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => (
     <div
       style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', alignItems: 'flex-start' }}
     >
-      <Switch isOn={false} onClick={() => {}} label='Disabled Off' disabled />
-      <Switch isOn={true} onClick={() => {}} label='Disabled On' disabled />
+      <Switch isOn={false} label='Disabled Off' disabled />
+      <Switch isOn={true} label='Disabled On' disabled />
       <Switch
         isOn={false}
-        onClick={() => {}}
         label='Disabled with Custom Style'
         disabled
         labelStyle={{ fontWeight: 'bold', color: '#999' }}
@@ -214,7 +190,7 @@ export const DisabledStates: Story = {
 };
 
 export const WithoutAnimation: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [isOn, setIsOn] = useState(false);
     return (
@@ -226,21 +202,16 @@ export const WithoutAnimation: Story = {
           alignItems: 'flex-start',
         }}
       >
+        <Switch isOn={isOn} onChange={setIsOn} label='No Animation' isActiveAnimation={false} />
         <Switch
           isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
-          label='No Animation'
-          isActiveAnimation={false}
-        />
-        <Switch
-          isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
+          onChange={setIsOn}
           label='With Animation (Default)'
           isActiveAnimation={true}
         />
         <Switch
           isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
+          onChange={setIsOn}
           label='Custom Animation Delay'
           isActiveAnimation={true}
           animationDelay={600}
@@ -251,7 +222,7 @@ export const WithoutAnimation: Story = {
 };
 
 export const CustomStyling: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [isOn, setIsOn] = useState(true);
     return (
@@ -265,7 +236,7 @@ export const CustomStyling: Story = {
       >
         <Switch
           isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
+          onChange={setIsOn}
           label='Custom Container'
           containerStyle={{
             padding: '0.75rem',
@@ -280,7 +251,7 @@ export const CustomStyling: Story = {
         />
         <Switch
           isOn={isOn}
-          onClick={() => setIsOn(!isOn)}
+          onChange={setIsOn}
           label='Gradient Background'
           barColor='linear-gradient(45deg, #667eea 0%, #764ba2 100%)'
           width='3rem'
@@ -299,7 +270,7 @@ export const CustomStyling: Story = {
 };
 
 export const FormIntegration: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [formData, setFormData] = useState({
       emailNotifications: true,
@@ -309,8 +280,8 @@ export const FormIntegration: Story = {
       securityAlerts: true,
     });
 
-    const handleToggle = (key: keyof typeof formData) => {
-      setFormData((prev) => ({ ...prev, [key]: !prev[key] }));
+    const handleChange = (key: keyof typeof formData, value: boolean) => {
+      setFormData((prev) => ({ ...prev, [key]: value }));
     };
 
     return (
@@ -339,21 +310,21 @@ export const FormIntegration: Story = {
 
         <Switch
           isOn={formData.emailNotifications}
-          onClick={() => handleToggle('emailNotifications')}
+          onChange={(value) => handleChange('emailNotifications', value)}
           label='Email Notifications'
           barColor='#3b82f6'
         />
 
         <Switch
           isOn={formData.pushNotifications}
-          onClick={() => handleToggle('pushNotifications')}
+          onChange={(value) => handleChange('pushNotifications', value)}
           label='Push Notifications'
           barColor='#3b82f6'
         />
 
         <Switch
           isOn={formData.smsNotifications}
-          onClick={() => handleToggle('smsNotifications')}
+          onChange={(value) => handleChange('smsNotifications', value)}
           label='SMS Notifications'
           barColor='#3b82f6'
         />
@@ -362,14 +333,14 @@ export const FormIntegration: Story = {
 
         <Switch
           isOn={formData.marketingEmails}
-          onClick={() => handleToggle('marketingEmails')}
+          onChange={(value) => handleChange('marketingEmails', value)}
           label='Marketing Emails'
           barColor='#10b981'
         />
 
         <Switch
           isOn={formData.securityAlerts}
-          onClick={() => handleToggle('securityAlerts')}
+          onChange={(value) => handleChange('securityAlerts', value)}
           label='Security Alerts'
           barColor='#ef4444'
           labelStyle={{ fontWeight: '600' }}
@@ -395,7 +366,7 @@ export const FormIntegration: Story = {
 };
 
 export const ResponsiveLayout: Story = {
-  args: { isOn: false, onClick: () => {} },
+  args: { isOn: false },
   render: () => {
     const [settings, setSettings] = useState({
       feature1: false,
@@ -404,8 +375,8 @@ export const ResponsiveLayout: Story = {
       feature4: true,
     });
 
-    const handleToggle = (key: keyof typeof settings) => {
-      setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
+    const handleChange = (key: keyof typeof settings, value: boolean) => {
+      setSettings((prev) => ({ ...prev, [key]: value }));
     };
 
     return (
@@ -424,12 +395,12 @@ export const ResponsiveLayout: Story = {
           </h4>
           <Switch
             isOn={settings.feature1}
-            onClick={() => handleToggle('feature1')}
+            onChange={(value) => handleChange('feature1', value)}
             label='Feature 1'
           />
           <Switch
             isOn={settings.feature2}
-            onClick={() => handleToggle('feature2')}
+            onChange={(value) => handleChange('feature2', value)}
             label='Feature 2'
           />
         </div>
@@ -440,13 +411,13 @@ export const ResponsiveLayout: Story = {
           </h4>
           <Switch
             isOn={settings.feature3}
-            onClick={() => handleToggle('feature3')}
+            onChange={(value) => handleChange('feature3', value)}
             label='Feature 3'
             barColor='#8b5cf6'
           />
           <Switch
             isOn={settings.feature4}
-            onClick={() => handleToggle('feature4')}
+            onChange={(value) => handleChange('feature4', value)}
             label='Feature 4'
             barColor='#06b6d4'
           />

@@ -1,4 +1,4 @@
-import type { CSSProperties, MouseEventHandler } from 'react';
+import type { CSSProperties } from 'react';
 
 export type CheckboxLabelProps = {
   label: string;
@@ -32,8 +32,7 @@ export type CheckboxProps = {
   checkboxCheckedColor?: string;
   checkboxColor?: string;
   isPartial?: boolean;
-  onChange?: (checked: boolean) => void;
-  onClick?: MouseEventHandler;
+  onChange: (checked: boolean) => void;
   disabled?: boolean;
   isActiveAnimation?: boolean;
   wrapperStyle?: CSSProperties;

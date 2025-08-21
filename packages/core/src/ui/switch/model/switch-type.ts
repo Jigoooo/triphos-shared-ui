@@ -16,7 +16,7 @@ export type SwitchProps = {
   labelStyle?: CSSProperties;
   labelDirection?: 'left' | 'right';
   isOn: boolean;
-  onClick: () => void;
+  onChange: (isOn: boolean) => void;
   width?: string | number;
   height?: string | number;
   barColor?: string;

@@ -14,6 +14,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     checked: false,
+    onChange: () => {},
     label: 'Checkbox',
     disabled: false,
     isActiveAnimation: true,

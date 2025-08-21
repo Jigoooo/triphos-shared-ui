@@ -1,4 +1,4 @@
-import { type MouseEvent, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { AnimatedCheckbox } from './animated-checkbox.tsx';
 import { CheckboxLabel } from './checkbox-label.tsx';
@@ -28,7 +28,6 @@ export function Checkbox({
   checkboxColor,
   isPartial = false,
   onChange,
-  onClick,
   disabled = false,
   isActiveAnimation = true,
   wrapperStyle,
@@ -38,7 +37,6 @@ export function Checkbox({
   const { theme } = useThemeContext();
   const effectiveColor = checkboxCheckedColor || theme.colors.primaryColor;
 
-  // 크기 값 검증 및 메모이제이션
   const validatedSizes = useMemo(
     () => ({
       checkboxSize: validateSize(checkboxSize, '1.125rem'),
@@ -47,14 +45,10 @@ export function Checkbox({
     [checkboxSize, checkIconSize],
   );
 
-  const handleToggle = (e: MouseEvent) => {
+  const handleToggle = () => {
     if (disabled) return;
 
-    if (onChange) {
-      onChange(!checked);
-    } else if (onClick) {
-      onClick(e);
-    }
+    onChange(!checked);
   };
 
   const checkboxSharedProps = useMemo(
@@ -101,7 +95,7 @@ export function Checkbox({
       onKeyDown={(e) => {
         if ((e.key === 'Enter' || e.key === ' ') && !disabled) {
           e.preventDefault();
-          handleToggle(e as any);
+          handleToggle();
         }
       }}
     >
