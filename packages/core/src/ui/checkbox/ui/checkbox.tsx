@@ -65,8 +65,8 @@ export function Checkbox({
       checkboxBorderWidth,
     }),
     [
-      isPartial,
       checkboxStyle,
+      isPartial,
       validatedSizes.checkboxSize,
       validatedSizes.checkIconSize,
       disabled,
@@ -74,6 +74,7 @@ export function Checkbox({
       effectiveColor,
       checkboxColor,
       checkIconColor,
+      checkboxBorderWidth,
     ],
   );
 
