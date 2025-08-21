@@ -18,7 +18,7 @@ export const defaultInputStyle: CSSProperties = {
 
 export const inputWithTypeStyles: Record<InputType, CSSProperties> = {
   [InputType.SOFT]: {
-    backgroundColor: '#eaeaea',
+    backgroundColor: '#f3f3f3',
     border: 'none',
   },
   [InputType.OUTLINED]: {
@@ -39,7 +39,7 @@ export const inputWithTypeStyles: Record<InputType, CSSProperties> = {
 
 export const inputDisabledStyles: Record<InputType, CSSProperties> = {
   [InputType.SOFT]: {
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#f9f9f9',
   },
   [InputType.OUTLINED]: {
     boxShadow: `inset 0 0 0 0.8px rgba(0,27,55,0.24)`,

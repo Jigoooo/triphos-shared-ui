@@ -7,9 +7,6 @@ import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../mod
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import { FlexRow } from '@/ui/layout';
-// import { detectDeviceTypeAndOS } from '@/lib';
-
-// const { isMobile } = detectDeviceTypeAndOS();
 
 export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -51,16 +48,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
       }
     },
   });
-
-  /*const { focusElement } = useFocusTrap({
-    enabled: modalList.length > 0,
-    containerRef: modalRef,
-    restoreFocus: true,
-    initialFocus: 0,
-    activationDelay: 100,
-    restorationDelay: 100,
-    modalSelectors: ['[data-floating-ui-portal]', '[data-modal-content]', '.modal-overlay'],
-  });*/
 
   const contextValue = useMemo(
     () => ({ modalIds, open, close, handleIsPossibleOverlayClose }),
@@ -109,7 +96,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     overlayRef: overlayRef,
                     isOpen: true,
                     close: () => {
-                      // close(modal.id);
                       window.history.back();
                     },
                   })}
@@ -137,7 +123,6 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     }}
                     onClick={() => {
                       if (isPossibleOverlayClose !== null && isPossibleOverlayClose[modal.id]) {
-                        // close(modal.id);
                         window.history.back();
                       }
                     }}
