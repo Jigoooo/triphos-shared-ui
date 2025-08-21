@@ -2,8 +2,8 @@ import { offset, useFloating, useHover, useInteractions } from '@floating-ui/rea
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
+import { getTooltipStyle } from '../config/tooltip-style.ts';
 import type { TooltipProps } from '../model/tooltip-type.ts';
-import { zIndex } from '@/constants';
 
 export function Tooltip({ style, placement, children, content, disabled = false }: TooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +30,8 @@ export function Tooltip({ style, placement, children, content, disabled = false 
 
   const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
 
+  const tooltipStyle = getTooltipStyle({ style, floatingStyles });
+
   return (
     <>
       <div ref={refs.setReference} {...getReferenceProps()}>
@@ -44,24 +46,7 @@ export function Tooltip({ style, placement, children, content, disabled = false 
             // animate={{ opacity: 1, scale: 1 }}
             // exit={{ opacity: 0, scale: 0.9 }}
             // transition={{ type: 'spring', stiffness: 600, damping: 20, duration: 0.04 }}
-            style={{
-              ...{
-                userSelect: 'none',
-                color: 'white',
-                borderRadius: '0.25rem',
-                whiteSpace: 'nowrap',
-                zIndex: zIndex.tooltip,
-                margin: '0.25rem',
-
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                paddingBlock: '0.14rem',
-                paddingInline: '0.6rem',
-                fontWeight: 400,
-                fontSize: '0.78rem',
-              },
-              ...style,
-              ...floatingStyles,
-            }}
+            style={tooltipStyle}
             {...getFloatingProps()}
           >
             {/*<FloatingArrow*/}
