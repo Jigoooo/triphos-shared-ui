@@ -9,7 +9,7 @@ export function AlertDialogContents({ contents }: { contents?: ReactNode }) {
       {contents ? (
         <FlexColumn
           style={{
-            paddingTop: '0.3rem',
+            paddingTop: '0.5rem',
             paddingBottom: '1.2rem',
             whiteSpace: 'pre-line',
             overflowY: 'auto',

@@ -42,7 +42,6 @@ export function AlertDialog() {
     if (dialogOpen && isMobile) {
       const scrollY = window.scrollY;
 
-      // 현재 스크롤 위치를 고정
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.left = '0';
@@ -87,16 +86,19 @@ export function AlertDialog() {
           <>
             <FlexColumn
               as={motion.div}
-              initial={{ opacity: 0.6, scale: 0.94, x: '-50%', y: '-40%' }}
+              // initial={{ opacity: 0.6, scale: 0.94, x: '-50%', y: '-40%' }}
+              // animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+              // exit={{ opacity: 0.2, scale: 0.98, x: '-50%', y: '-45%' }}
+              initial={{ opacity: 0.8, scale: 0.96, x: '-50%', y: '-46%' }}
               animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
-              exit={{ opacity: 0.2, scale: 0.98, x: '-50%', y: '-45%' }}
+              exit={{ opacity: 0, scale: 0.98, x: '-50%', y: '-48%' }}
               transition={{ duration: 0.1 }}
               style={{
                 position: 'fixed',
                 top: '50%',
                 left: '50%',
                 zIndex: zIndex.dialog,
-                width: 'clamp(18rem, 82vw, 37.5rem)',
+                width: 'clamp(18rem, 82vw, 26rem)',
                 maxHeight: 'clamp(0px, 80vh, 25rem)',
                 background: '#ffffff',
                 paddingInline: '1rem',
@@ -105,6 +107,10 @@ export function AlertDialog() {
                 justifyContent: 'space-between',
                 outline: 'none',
                 userSelect: 'none',
+
+                border: '1px solid #ECEEF3',
+                boxShadow: '0 8px 24px rgba(16, 24, 40, 0.12), 0 2px 8px rgba(16, 24, 40, 0.06)',
+                gap: '0.5rem',
               }}
             >
               <AlertDialogHeader
@@ -133,8 +139,9 @@ export function AlertDialog() {
                 lockScroll
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
-                  dialog.close();
-                  // window.history.back(); // useModalController에서 처리
+                  if (dialogConfig.overlayClose) {
+                    dialog.close();
+                  }
                 }}
               />
             </motion.div>

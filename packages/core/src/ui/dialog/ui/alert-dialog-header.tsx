@@ -11,10 +11,10 @@ export function AlertDialogHeader({
   return (
     <FlexRow
       style={{
-        justifyContent: 'space-between',
+        gap: '0.25rem',
         width: '100%',
         alignItems: 'center',
-        marginBottom: isEmptyContents ? '0.5rem' : 0,
+        marginBottom: isEmptyContents ? '0.7rem' : 0,
       }}
     >
       <Typography style={{ fontSize: '1rem', fontWeight: 700, whiteSpace: 'pre-line' }}>

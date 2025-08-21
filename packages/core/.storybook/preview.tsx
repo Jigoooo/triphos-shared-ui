@@ -1,13 +1,41 @@
 import type { Preview } from '@storybook/react-vite';
+import { useEffect, useState } from 'react';
 
+import { AlertDialog } from '../src';
 import { ThemeProvider } from '../src/theme';
+
+// 전역 상태로 AlertDialog 렌더링 관리
+const GlobalDialogWrapper = ({ children }: { children: React.ReactNode }) => {
+  const [shouldRenderDialog, setShouldRenderDialog] = useState(false);
+
+  useEffect(() => {
+    // 첫 번째 컴포넌트만 AlertDialog 렌더링
+    const hasDialog = document.querySelector('[data-global-alert-dialog]');
+    if (!hasDialog) {
+      setShouldRenderDialog(true);
+    }
+  }, []);
+
+  return (
+    <>
+      {shouldRenderDialog && (
+        <div data-global-alert-dialog='true' style={{ display: 'none' }}>
+          <AlertDialog />
+        </div>
+      )}
+      {children}
+    </>
+  );
+};
 
 const preview: Preview = {
   decorators: [
     (Story) => {
       return (
         <ThemeProvider>
-          <Story />
+          <GlobalDialogWrapper>
+            <Story />
+          </GlobalDialogWrapper>
         </ThemeProvider>
       );
     },

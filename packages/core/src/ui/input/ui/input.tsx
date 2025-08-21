@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
-import {
-  defaultInputStyle,
-  inputWithTypeStyles,
-  inputDisabledStyles,
-} from '../lib/input-styles.ts';
 import { type InputProps, InputStyle } from '../model/input-type.ts';
 import { OutlinedInput } from '../variant/outlined-input.tsx';
 import { SoftInput } from '../variant/soft-input.tsx';
 import { UnderlineInput } from '../variant/underline-input.tsx';
 import { colors, zIndex } from '@/constants';
 import { useCompositionRef } from '@/hooks';
+import {
+  defaultInputStyle,
+  inputWithTypeStyles,
+  inputDisabledStyles,
+} from '@/ui/input/config/input-styles.ts';
 
 const EXTRA_PADDING = '2rem';
 const DECORATOR_SPACING = '0.5rem';

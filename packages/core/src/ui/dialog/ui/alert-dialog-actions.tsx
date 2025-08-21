@@ -2,7 +2,6 @@ import { type DialogConfig, DialogType } from '../model/dialog-type.ts';
 import { useGetDialogButtonColor } from '../model/use-get-dialog-button-color.ts';
 import { Button } from '@/ui/button';
 import { FlexRow } from '@/ui/layout';
-import { Typography } from '@/ui/typography';
 
 export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfig }) {
   const dialogColor = useGetDialogButtonColor(dialogConfig.dialogType || DialogType.INFO);
@@ -19,28 +18,26 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
       {dialogConfig.withCancel && (
         <Button.Outlined
           style={{
-            minWidth: '4rem',
-            color: '#bbbbbb',
-            borderColor: '#bbbbbb',
+            minWidth: '4.5rem',
+            fontSize: '0.9rem',
+            color: '#333333',
+            borderColor: '#dddddd',
           }}
+          animationBackgroundColor={'#bbbbbb'}
           onClick={() => {
-            // window.history.back();
             dialogConfig?.onCancel?.();
           }}
         >
-          <Typography style={{ color: '#555555', fontSize: '0.9rem' }}>
-            {dialogConfig.cancelText}
-          </Typography>
+          {dialogConfig.cancelText}
         </Button.Outlined>
       )}
       <Button.Solid
         style={{
-          minWidth: '4rem',
+          minWidth: '4.5rem',
           fontSize: '0.9rem',
           backgroundColor: dialogColor,
         }}
         onClick={() => {
-          // window.history.back();
           dialogConfig?.onConfirm?.();
         }}
       >
