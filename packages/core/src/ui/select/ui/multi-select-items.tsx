@@ -107,10 +107,7 @@ export function MultiSelectItems<ValuesType extends (string | number)[]>({
           }}
           whileHover={{ backgroundColor: '#f4f4f4' }}
         >
-          <Checkbox
-            checked={selectedValues.includes(option.value)}
-            onClick={(e) => e.preventDefault()}
-          />
+          <Checkbox checked={selectedValues.includes(option.value)} />
           <Typography
             style={{
               fontSize: '0.94rem',

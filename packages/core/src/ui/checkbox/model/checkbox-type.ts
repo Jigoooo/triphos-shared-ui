@@ -32,7 +32,7 @@ export type CheckboxProps = {
   checkboxCheckedColor?: string;
   checkboxColor?: string;
   isPartial?: boolean;
-  onChange: (checked: boolean) => void;
+  onChange?: (checked: boolean) => void;
   disabled?: boolean;
   isActiveAnimation?: boolean;
   wrapperStyle?: CSSProperties;

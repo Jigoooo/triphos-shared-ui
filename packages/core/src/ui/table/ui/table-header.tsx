@@ -361,8 +361,7 @@ function TableHeaderCell({
   isVisibleHandler: boolean;
   position: 'left' | 'right';
 }) {
-  const { tableStyle, verticalScrollWidth, checkedState, handleCheckAll, handleSort } =
-    useTableContext();
+  const { tableStyle, verticalScrollWidth, checkedState, handleSort } = useTableContext();
 
   if (header.id === 'check' && checkedState === undefined) {
     throw new Error('checkedState is required for check header');
@@ -411,7 +410,7 @@ function TableHeaderCell({
         <Checkbox
           checked={checkedState!.isAllChecked}
           isPartial={checkedState!.isPartiallyChecked}
-          onClick={handleCheckAll}
+          // onChange={handleCheckAll}
         />
       )}
       {header.label && (

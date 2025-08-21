@@ -48,7 +48,7 @@ export function Checkbox({
   const handleToggle = () => {
     if (disabled) return;
 
-    onChange(!checked);
+    onChange?.(!checked);
   };
 
   const checkboxSharedProps = useMemo(

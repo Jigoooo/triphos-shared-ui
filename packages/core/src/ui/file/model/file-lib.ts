@@ -205,6 +205,7 @@ export function base64ToFile(base64String: string, baseFilename: string): File |
     byteArrays.push(byteArray);
   }
 
+  // @ts-ignore
   const blob: Blob = new Blob(byteArrays, { type: mimeType });
 
   return new File([blob], filename, { type: mimeType });

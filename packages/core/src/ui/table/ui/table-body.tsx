@@ -571,10 +571,9 @@ const TableBodyCell = memo(function TableBodyCell<TData extends Record<string, a
         <Checkbox
           isActiveAnimation={false}
           checked={isChecked!(data)}
-          onClick={(e) => {
-            e.stopPropagation();
-            handleCheck(data);
-          }}
+          // onChange={(checked) => {
+          //   handleCheck(data);
+          // }}
         />
       ) : (
         <Typography
