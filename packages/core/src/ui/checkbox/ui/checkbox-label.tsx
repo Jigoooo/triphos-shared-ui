@@ -4,6 +4,7 @@ import { Typography } from '@/ui/typography';
 export function CheckboxLabel({ label, labelStyle, disabled }: CheckboxLabelProps) {
   return (
     <Typography
+      aria-hidden='true'
       style={{
         userSelect: 'none',
         fontSize: '0.9rem',
