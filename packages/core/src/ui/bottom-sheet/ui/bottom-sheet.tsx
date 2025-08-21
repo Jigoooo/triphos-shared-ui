@@ -4,23 +4,21 @@ import { type ReactNode, useEffect, useRef } from 'react';
 import { zIndex } from '@/constants';
 import { useModalHistory } from '@/hooks';
 
-interface BottomSheetProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
-  maxHeight?: string | number;
-  dragThreshold?: string | number;
-}
-
 export function BottomSheet({
   isOpen,
   onClose,
   children,
   maxHeight = 'auto',
   dragThreshold = 80,
-}: BottomSheetProps) {
-  const { safeAreaInsets } = useLayoutContext();
-
+  bottomInset = 0,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+  maxHeight?: string | number;
+  dragThreshold?: string | number;
+  bottomInset?: string | number;
+}) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
 
@@ -156,7 +154,7 @@ export function BottomSheet({
                 flex: 1,
                 overflow: 'hidden',
                 minHeight: 0,
-                paddingBottom: safeAreaInsets.bottom,
+                paddingBottom: bottomInset,
               }}
             >
               {children}
