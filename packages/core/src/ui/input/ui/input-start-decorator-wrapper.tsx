@@ -1,4 +1,4 @@
-import { type ReactNode, type RefObject } from 'react';
+import { type ReactNode } from 'react';
 
 import { zIndex } from '@/constants';
 import { InputType } from '@/ui/input/model/input-type.ts';
@@ -8,7 +8,7 @@ export function InputStartDecoratorWrapper({
   inputType,
   children,
 }: {
-  ref: RefObject<HTMLDivElement | null>;
+  ref: (element: HTMLDivElement | null) => void;
   inputType: InputType;
   children: ReactNode;
 }) {

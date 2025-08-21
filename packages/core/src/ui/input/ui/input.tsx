@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
 
 import { InputEndDecoratorWrapper } from './input-end-decorator-wrapper.tsx';
 import { InputStartDecoratorWrapper } from './input-start-decorator-wrapper.tsx';
 import { defaultInputTransition, getInputStyle } from '../config/input-styles.ts';
 import { type InputProps, InputType } from '../model/input-type.ts';
+import { useElementWidth } from '../model/use-element-width.ts';
 import { OutlinedInput } from '../variant/outlined-input.tsx';
 import { SoftInput } from '../variant/soft-input.tsx';
 import { UnderlineInput } from '../variant/underline-input.tsx';
@@ -31,15 +31,7 @@ export function BaseInput({
 
   const applyFocusColor = focusColor ?? theme.colors.primary[300];
 
-  const startDecoratorRef = useRef<HTMLDivElement>(null);
-  const [startDecoratorWidth, setStartDecoratorWidth] = useState(0);
-
-  useEffect(() => {
-    if (startDecoratorRef.current) {
-      const width = startDecoratorRef.current.offsetWidth;
-      setStartDecoratorWidth(width);
-    }
-  }, [startDecorator]);
+  const [startDecoratorWidth, startDecoratorRef] = useElementWidth();
 
   const applyInputStyle = getInputStyle({
     style,
@@ -71,7 +63,6 @@ export function BaseInput({
             boxShadow: `inset 0 0 0 ${outlinedFocusWidth}px ${applyFocusColor}`,
           },
           focusUnderline: {
-            // borderBottom: `2px solid ${colors.primary[400]}`,
             boxShadow: `inset 0 -${underlineFocusWidth}px 0 0 ${applyFocusColor}`,
           },
           none: {},
