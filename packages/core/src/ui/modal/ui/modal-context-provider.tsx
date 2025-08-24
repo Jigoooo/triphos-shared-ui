@@ -1,9 +1,14 @@
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useCallback, useRef, useState } from 'react';
 
 import { ModalContext } from '../model/modal-context.ts';
-import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
+import type {
+  ModalRenderProps,
+  ModalItem,
+  IsPossibleOverlayClose,
+  ModalContextType,
+} from '../model/modal-type.ts';
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import { FlexRow } from '@/ui/layout';
@@ -11,6 +16,7 @@ import { FlexRow } from '@/ui/layout';
 export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const popWaitersRef = useRef<Array<() => void>>([]);
 
   const [modalList, setModalList] = useState<ModalItem[]>([]);
   const [isPossibleOverlayClose, setIsPossibleOverlayClose] =
@@ -29,8 +35,11 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     setModalList((prevState) => [...prevState, { id, render, order: prevState.length }]);
   };
 
-  const close = useCallback((id: string) => {
-    setModalList((prev) => prev.filter((item) => item.id !== id));
+  const closeAsync = useCallback(() => {
+    return new Promise<void>((resolve) => {
+      popWaitersRef.current.push(resolve);
+      window.history.back();
+    });
   }, []);
 
   const modalIds = modalList.map((modal) => ({ id: modal.id }));
@@ -40,19 +49,25 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     isOpen: modalList.length > 0,
     onClose: () => {
       if (modalList.length > 0) {
-        const findLastOrderModal = modalList.find((modal) => modal.order === modalList.length - 1);
+        const top = modalList.find((m) => m.order === modalList.length - 1);
+        if (top) {
+          setModalList((prev) => prev.filter((item) => item.id !== top.id));
 
-        if (findLastOrderModal) {
-          close(findLastOrderModal.id);
+          queueMicrotask(() => {
+            const resolve = popWaitersRef.current.shift();
+            resolve?.();
+          });
         }
       }
     },
   });
 
-  const contextValue = useMemo(
-    () => ({ modalIds, open, close, handleIsPossibleOverlayClose }),
-    [modalIds, close],
-  );
+  const contextValue: ModalContextType = {
+    modalIds,
+    open,
+    closeAsync,
+    handleIsPossibleOverlayClose,
+  };
 
   return (
     <ModalContext value={contextValue}>
@@ -102,6 +117,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     close: () => {
                       window.history.back();
                     },
+                    closeAsync: () => closeAsync(),
                   })}
                 </FlexRow>
 

@@ -12,6 +12,7 @@ export type ModalRenderProps = {
   overlayRef: RefObject<HTMLDivElement | null>;
   isOpen: boolean;
   close: () => void;
+  closeAsync: () => Promise<void>;
 };
 
 export type IsPossibleOverlayClose = {
@@ -21,7 +22,7 @@ export type IsPossibleOverlayClose = {
 export type ModalContextType = {
   modalIds: { id: string }[];
   open: (id: string, render: (props: ModalRenderProps) => ReactNode) => void;
-  close: (id: string) => void;
+  closeAsync: () => Promise<void>;
   handleIsPossibleOverlayClose: (id: string, possible: boolean) => void;
 };
 

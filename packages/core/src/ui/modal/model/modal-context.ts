@@ -24,8 +24,8 @@ export const useModal = ({
       context.open(id, render);
       return id;
     },
-    close: (id: string) => {
-      context.close(id);
+    close: async () => {
+      await context.closeAsync();
     },
   };
 };
