@@ -15,7 +15,7 @@ export function useModalController({
     const modalId = `modal_${Date.now()}_${Math.random()}`;
 
     const timeoutId = setTimeout(() => {
-      window.history.pushState({ modal: true }, '');
+      window.history.pushState({ modal: true, modalId }, '');
     }, 0);
 
     const handlePopState = () => {
