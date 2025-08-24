@@ -4,21 +4,24 @@ export function useModalController({
   modalRef,
   isOpen,
   onClose,
+  type = 'modal',
 }: {
   modalRef: RefObject<HTMLDivElement | null>;
   isOpen: boolean;
   onClose: () => void;
+  type?: 'modal' | 'dialog';
 }) {
   useEffect(() => {
     if (!isOpen) return;
 
-    // Push history state for modal (for mobile back button support)
-    const modalState = { modal: true, timestamp: Date.now() };
-    window.history.pushState(modalState, '');
+    const state = { [type]: true, timestamp: Date.now(), type };
+    window.history.pushState(state, '');
 
     const handlePopState = (event: PopStateEvent) => {
-      if (!event.state?.modal) {
-        onClose();
+      if (!event.state || event.state.type !== type) {
+        if (!event.state?.[type]) {
+          onClose();
+        }
       }
     };
 
@@ -27,11 +30,12 @@ export function useModalController({
     return () => {
       window.removeEventListener('popstate', handlePopState);
 
-      if (window.history.state?.modal && window.history.state?.timestamp === modalState.timestamp) {
+      // Clean up history state when closing programmatically
+      if (window.history.state?.[type] && window.history.state?.timestamp === state.timestamp) {
         window.history.back();
       }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, type]);
 
   useEffect(() => {
     if (isOpen) {
