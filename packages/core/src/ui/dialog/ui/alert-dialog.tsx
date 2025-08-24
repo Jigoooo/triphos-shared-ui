@@ -23,6 +23,7 @@ export function AlertDialog() {
     modalRef: dialogRef,
     isOpen: dialogOpen,
     onClose: dialog.close,
+    type: 'dialog',
   });
 
   const ignoreEnterRef = useRef(true);
