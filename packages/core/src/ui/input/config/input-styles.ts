@@ -69,14 +69,29 @@ export const getInputStyle = ({
   disabled: boolean;
   disabledStyle?: CSSProperties;
 }): CSSProperties => {
+  // Extract paddingInline from style to handle it separately
+  const {
+    paddingInline,
+    paddingLeft: stylePaddingLeft,
+    paddingRight: stylePaddingRight,
+    ...restStyle
+  } = style || {};
+
+  // Determine left and right padding
+  const leftPadding = hasStartDecorator
+    ? `calc(${startDecoratorWidth}px + ${inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
+    : stylePaddingLeft || paddingInline || defaultInputStyle.paddingInline;
+
+  const rightPadding = hasEndDecorator
+    ? EXTRA_PADDING
+    : stylePaddingRight || paddingInline || defaultInputStyle.paddingInline;
+
   return {
     ...defaultInputStyle,
     ...inputWithTypeStyles[inputType],
-    paddingLeft: hasStartDecorator
-      ? `calc(${startDecoratorWidth}px + ${inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
-      : defaultInputStyle.paddingInline,
-    paddingRight: hasEndDecorator ? EXTRA_PADDING : defaultInputStyle.paddingInline,
-    ...style,
+    paddingLeft: leftPadding,
+    paddingRight: rightPadding,
+    ...restStyle,
     ...(disabled ? { ...inputDisabledStyles[inputType], ...disabledStyle } : {}),
   };
 };
