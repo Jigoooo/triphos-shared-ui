@@ -8,7 +8,7 @@ import { getBottomSheetContainerStyle, getBottomSheetStyle } from '../config/bot
 import { type BottomSheetProps } from '../model/bottom-sheet-type.ts';
 import { useBottomSheetInteraction } from '../model/use-bottom-sheet-interaction.ts';
 import { useThresholdInPixels } from '../model/use-threshold-in-pixels.ts';
-import { useModalHistory } from '@/hooks';
+import { useModalController } from '@/ui/modal';
 
 export function BottomSheet({
   isOpen,
@@ -24,7 +24,11 @@ export function BottomSheet({
   const bottomSheetContainerStyle = getBottomSheetContainerStyle({ maxHeight });
   const bottomSheetStyle = getBottomSheetStyle({ bottomInset });
 
-  useModalHistory(isOpen, onClose);
+  useModalController({
+    modalRef: sheetRef,
+    isOpen,
+    onClose,
+  });
 
   const thresholdPx = useThresholdInPixels(dragThreshold, sheetRef.current);
 
