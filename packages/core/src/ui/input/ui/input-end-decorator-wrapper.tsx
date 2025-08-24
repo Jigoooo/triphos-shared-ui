@@ -1,4 +1,4 @@
-import { type ReactNode, Children, isValidElement } from 'react';
+import { type ReactNode, Children, isValidElement, type CSSProperties } from 'react';
 
 import { zIndex } from '@/constants';
 
@@ -19,7 +19,13 @@ function hasInteractiveChildren(children: ReactNode): boolean {
   });
 }
 
-export function InputEndDecoratorWrapper({ children }: { children: ReactNode }) {
+export function InputEndDecoratorWrapper({
+  children,
+  style,
+}: {
+  children: ReactNode;
+  style?: CSSProperties;
+}) {
   const isInteractive = hasInteractiveChildren(children);
 
   return (
@@ -33,6 +39,7 @@ export function InputEndDecoratorWrapper({ children }: { children: ReactNode }) 
         transform: 'translateY(-50%)',
         pointerEvents: isInteractive ? 'auto' : 'none',
         zIndex: zIndex.base,
+        ...style,
       }}
     >
       {children}

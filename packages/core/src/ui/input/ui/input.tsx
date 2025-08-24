@@ -17,7 +17,9 @@ export function BaseInput({
   inputType = InputType.OUTLINED,
   disabledStyle,
   startDecorator,
+  startDecoratorStyle,
   endDecorator,
+  endDecoratorStyle,
   isFocusEffect = true,
   outlinedFocusWidth = 2.4,
   underlineFocusWidth = 2,
@@ -51,7 +53,11 @@ export function BaseInput({
       }}
     >
       {startDecorator && (
-        <InputStartDecoratorWrapper ref={startDecoratorRef} inputType={inputType}>
+        <InputStartDecoratorWrapper
+          ref={startDecoratorRef}
+          inputType={inputType}
+          style={startDecoratorStyle}
+        >
           {startDecorator}
         </InputStartDecoratorWrapper>
       )}
@@ -78,7 +84,11 @@ export function BaseInput({
         }}
         {...props}
       />
-      {endDecorator && <InputEndDecoratorWrapper>{endDecorator}</InputEndDecoratorWrapper>}
+      {endDecorator && (
+        <InputEndDecoratorWrapper style={endDecoratorStyle}>
+          {endDecorator}
+        </InputEndDecoratorWrapper>
+      )}
     </div>
   );
 }

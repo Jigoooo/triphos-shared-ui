@@ -13,7 +13,9 @@ export type InputProps = MotionProps &
     inputType?: InputType;
     disabledStyle?: CSSProperties;
     startDecorator?: ReactNode;
+    startDecoratorStyle?: CSSProperties;
     endDecorator?: ReactNode;
+    endDecoratorStyle?: CSSProperties;
     isFocusEffect?: boolean;
     outlinedFocusWidth?: number;
     underlineFocusWidth?: number;

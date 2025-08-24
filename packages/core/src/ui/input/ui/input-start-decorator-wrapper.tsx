@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type CSSProperties, type ReactNode } from 'react';
 
 import { zIndex } from '@/constants';
 import { InputType } from '@/ui/input/model/input-type.ts';
@@ -7,10 +7,12 @@ export function InputStartDecoratorWrapper({
   ref,
   inputType,
   children,
+  style,
 }: {
   ref: (element: HTMLDivElement | null) => void;
   inputType: InputType;
   children: ReactNode;
+  style?: CSSProperties;
 }) {
   return (
     <div
@@ -24,6 +26,7 @@ export function InputStartDecoratorWrapper({
         transform: 'translateY(-50%)',
         pointerEvents: 'none',
         zIndex: zIndex.base,
+        ...style,
       }}
     >
       {children}
