@@ -64,9 +64,6 @@ export function AlertDialog() {
     if (!dialogOpen) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        dialog.close();
-      }
       if (e.key === 'Enter' && dialogConfig.onConfirm && !ignoreEnterRef.current) {
         dialogConfig.onConfirm();
       }

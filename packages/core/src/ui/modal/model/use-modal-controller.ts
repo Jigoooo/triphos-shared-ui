@@ -14,15 +14,26 @@ export function useModalController({
   useEffect(() => {
     if (!isOpen) return;
 
-    const state = { [type]: true, timestamp: Date.now(), type };
+    // Store the state with a unique identifier
+    const stateId = `${type}_${Date.now()}`;
+    const state = {
+      [type]: true,
+      stateId,
+      type,
+    };
+    // Push history state for mobile back button support
     window.history.pushState(state, '');
 
-    const handlePopState = (event: PopStateEvent) => {
-      if (!event.state || event.state.type !== type) {
-        if (!event.state?.[type]) {
+    const handlePopState = () => {
+      // Check if we still have our specific state
+      setTimeout(() => {
+        const currentState = window.history.state;
+
+        // Only close if our specific state is gone
+        if (currentState?.stateId !== stateId) {
           onClose();
         }
-      }
+      }, 0);
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -30,8 +41,9 @@ export function useModalController({
     return () => {
       window.removeEventListener('popstate', handlePopState);
 
-      // Clean up history state when closing programmatically
-      if (window.history.state?.[type] && window.history.state?.timestamp === state.timestamp) {
+      // Only go back if our specific state is still current
+      const currentState = window.history.state;
+      if (currentState?.stateId === stateId) {
         window.history.back();
       }
     };
