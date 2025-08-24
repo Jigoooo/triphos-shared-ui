@@ -35,7 +35,7 @@ export type { RadioGroupContextType, RadioGroupProps, RadioProps } from './ui/ra
 export { Textarea } from './ui/textarea';
 export type { TextareaProps } from './ui/textarea';
 
-export { ModalContextProvider, ModalLayout, useModal } from './ui/modal';
+export { ModalContextProvider, ModalLayout, useModal, useModalController } from './ui/modal';
 export type { ModalRenderProps, ModalContextType, ModalLayoutProps } from './ui/modal';
 
 export { FlexRow, FlexColumn } from './ui/layout';
