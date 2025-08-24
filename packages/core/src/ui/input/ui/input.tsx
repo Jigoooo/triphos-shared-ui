@@ -34,6 +34,7 @@ export function BaseInput({
   const applyFocusColor = focusColor ?? theme.colors.primary[300];
 
   const [startDecoratorWidth, startDecoratorRef] = useElementWidth();
+  const [endDecoratorWidth, endDecoratorRef] = useElementWidth();
 
   const applyInputStyle = getInputStyle({
     style,
@@ -41,6 +42,7 @@ export function BaseInput({
     hasStartDecorator: !!startDecorator,
     hasEndDecorator: !!endDecorator,
     startDecoratorWidth,
+    endDecoratorWidth,
     disabled,
     disabledStyle,
   });
@@ -85,7 +87,7 @@ export function BaseInput({
         {...props}
       />
       {endDecorator && (
-        <InputEndDecoratorWrapper style={endDecoratorStyle}>
+        <InputEndDecoratorWrapper ref={endDecoratorRef} style={endDecoratorStyle}>
           {endDecorator}
         </InputEndDecoratorWrapper>
       )}

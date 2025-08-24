@@ -22,14 +22,17 @@ function hasInteractiveChildren(children: ReactNode): boolean {
 export function InputEndDecoratorWrapper({
   children,
   style,
+  ref,
 }: {
   children: ReactNode;
   style?: CSSProperties;
+  ref?: (element: HTMLElement | null) => void;
 }) {
   const isInteractive = hasInteractiveChildren(children);
 
   return (
     <div
+      ref={ref}
       style={{
         position: 'absolute',
         display: 'flex',

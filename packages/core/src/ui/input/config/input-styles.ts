@@ -3,7 +3,6 @@ import type { CSSProperties } from 'react';
 
 import { InputType } from '../model/input-type.ts';
 
-const EXTRA_PADDING = '2rem';
 const DECORATOR_SPACING = '0.5rem';
 
 export const defaultInputStyle: CSSProperties = {
@@ -58,6 +57,7 @@ export const getInputStyle = ({
   hasStartDecorator,
   hasEndDecorator,
   startDecoratorWidth,
+  endDecoratorWidth,
   disabled,
   disabledStyle,
 }: {
@@ -66,6 +66,7 @@ export const getInputStyle = ({
   hasStartDecorator: boolean;
   hasEndDecorator: boolean;
   startDecoratorWidth: number;
+  endDecoratorWidth: number;
   disabled: boolean;
   disabledStyle?: CSSProperties;
 }): CSSProperties => {
@@ -83,7 +84,7 @@ export const getInputStyle = ({
     : stylePaddingLeft || paddingInline || defaultInputStyle.paddingInline;
 
   const rightPadding = hasEndDecorator
-    ? EXTRA_PADDING
+    ? `calc(${endDecoratorWidth}px + ${inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
     : stylePaddingRight || paddingInline || defaultInputStyle.paddingInline;
 
   return {
