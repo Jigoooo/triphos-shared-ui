@@ -14,26 +14,40 @@ export function useModalController({
   useEffect(() => {
     if (!isOpen) return;
 
-    // Store the state with a unique identifier
+    // Store the current state before adding modal/dialog state
+    const previousState = window.history.state || {};
     const stateId = `${type}_${Date.now()}`;
-    const state = {
-      [type]: true,
-      stateId,
-      type,
+
+    // Create new state that includes all existing modals/dialogs
+    const newState = {
+      ...previousState,
+      [stateId]: {
+        type,
+        timestamp: Date.now(),
+      },
+      activeModals: [...(previousState.activeModals || []), stateId],
     };
-    // Push history state for mobile back button support
-    window.history.pushState(state, '');
+
+    // Use replaceState for subsequent modals to avoid stacking history entries
+    if (previousState.activeModals?.length > 0) {
+      // Replace current state if there are already modals open
+      window.history.replaceState(newState, '');
+      console.log(`[${type}] Replaced state:`, newState);
+    } else {
+      // Push new state only for the first modal
+      window.history.pushState(newState, '');
+      console.log(`[${type}] Pushed state:`, newState);
+    }
 
     const handlePopState = () => {
-      // Check if we still have our specific state
-      setTimeout(() => {
-        const currentState = window.history.state;
+      const currentState = window.history.state;
+      console.log(`[${type}] popstate - My stateId: ${stateId}, Current state:`, currentState);
 
-        // Only close if our specific state is gone
-        if (currentState?.stateId !== stateId) {
-          onClose();
-        }
-      }, 0);
+      // Check if this specific modal should close
+      if (!currentState?.activeModals?.includes(stateId)) {
+        console.log(`[${type}] Closing because not in active modals`);
+        onClose();
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -41,11 +55,22 @@ export function useModalController({
     return () => {
       window.removeEventListener('popstate', handlePopState);
 
-      // Only go back if our specific state is still current
+      // Clean up state when closing programmatically
       const currentState = window.history.state;
-      if (currentState?.stateId === stateId) {
-        console.log('currentState: ', currentState);
-        window.history.back();
+      if (currentState && currentState[stateId]) {
+        const updatedActiveModals = (currentState.activeModals || []).filter(
+          (id: string) => id !== stateId,
+        );
+        const { [stateId]: _removed, ...restState } = currentState;
+
+        const updatedState = {
+          ...restState,
+          activeModals: updatedActiveModals,
+        };
+
+        // Use replaceState to update without adding history entry
+        window.history.replaceState(updatedState, '');
+        console.log(`[${type}] Cleaned up state:`, updatedState);
       }
     };
   }, [isOpen, onClose, type]);
