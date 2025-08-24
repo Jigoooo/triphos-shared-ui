@@ -48,27 +48,49 @@ export function useModalController({
       const state = window.history.state;
       console.log(`[${type}] popstate - My stateId: ${stateId}, Current state:`, state);
 
-      // Only close if we're not in the modal history anymore
-      // OR if we're the topmost modal in the stack
+      // If modal history is completely gone, this means we went back to original page
       if (!state?.hasModalHistory) {
         console.log(`[${type}] Closing due to no modal history`);
         onClose();
-      } else {
-        // Check if this modal should close based on stack position
-        const modalStack = state.modalStack || [];
-        const currentIndex = modalStack.indexOf(stateId);
-
-        if (currentIndex === -1) {
-          // Not in stack anymore, should close
-          console.log(`[${type}] Closing - not in stack`);
-          onClose();
-        } else if (currentIndex === modalStack.length - 1) {
-          // This is the topmost modal, should close on back button
-          console.log(`[${type}] Closing - topmost modal`);
-          onClose();
-        }
-        // If not topmost, don't close (let the topmost handle it)
+        return;
       }
+
+      // Get current modal stack
+      const modalStack = state.modalStack || [];
+      const currentIndex = modalStack.indexOf(stateId);
+
+      if (currentIndex === -1) {
+        // Not in stack anymore, should close
+        console.log(`[${type}] Closing - not in stack`);
+        onClose();
+        return;
+      }
+
+      // Only the topmost modal should handle the back button
+      if (currentIndex === modalStack.length - 1) {
+        console.log(`[${type}] I'm topmost, handling back button`);
+
+        // Remove this modal from stack and update history
+        const newStack = modalStack.slice(0, -1);
+
+        if (newStack.length === 0) {
+          // Last modal, go back to original state
+          window.history.back();
+        } else {
+          // Update stack to remove this modal
+          const newState = {
+            ...state,
+            currentModalId: newStack[newStack.length - 1],
+            modalStack: newStack,
+          };
+          window.history.replaceState(newState, '');
+          console.log(`[${type}] Updated stack by removing self:`, newState);
+        }
+
+        // Close this modal
+        onClose();
+      }
+      // If not topmost, don't do anything (let the topmost handle it)
     };
 
     window.addEventListener('popstate', handlePopState);
