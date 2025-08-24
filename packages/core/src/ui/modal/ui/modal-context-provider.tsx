@@ -100,7 +100,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     overlayRef: overlayRef,
                     isOpen: true,
                     close: () => {
-                      close(modal.id);
+                      window.history.back();
                     },
                   })}
                 </FlexRow>
@@ -127,7 +127,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     }}
                     onClick={() => {
                       if (isPossibleOverlayClose !== null && isPossibleOverlayClose[modal.id]) {
-                        close(modal.id);
+                        window.history.back();
                       }
                     }}
                   />

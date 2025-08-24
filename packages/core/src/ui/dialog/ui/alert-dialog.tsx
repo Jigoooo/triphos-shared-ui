@@ -136,7 +136,7 @@ export function AlertDialog() {
                 style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                 onClick={() => {
                   if (dialogConfig.overlayClose) {
-                    dialog.close();
+                    window.history.back();
                   }
                 }}
               />
