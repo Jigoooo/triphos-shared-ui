@@ -1,4 +1,4 @@
-import { type RefObject, useEffect } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
 
 export function useModalController({
   modalRef,
@@ -9,21 +9,31 @@ export function useModalController({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const myIdRef = useRef<string | null>(null);
+
   useEffect(() => {
     if (!isOpen) return;
 
     const modalId = `modal_${Date.now()}_${Math.random()}`;
+    myIdRef.current = modalId;
 
-    window.history.pushState({ modal: true, modalId }, '');
+    const state = { __layer: 'modal', modalId };
+    window.history.pushState(state, '');
 
-    const handlePopState = () => {
-      onClose();
+    const handlePopState = (e: PopStateEvent) => {
+      const active = e.state && e.state.__layer === 'modal' ? e.state : null;
+      const activeId = active?.modalId ?? null;
+
+      if (activeId !== myIdRef.current) {
+        onClose();
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
 
     return () => {
       window.removeEventListener('popstate', handlePopState);
+      if (myIdRef.current === modalId) myIdRef.current = null;
     };
   }, [isOpen, onClose]);
 
