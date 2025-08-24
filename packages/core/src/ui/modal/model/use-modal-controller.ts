@@ -44,6 +44,7 @@ export function useModalController({
       // Only go back if our specific state is still current
       const currentState = window.history.state;
       if (currentState?.stateId === stateId) {
+        console.log('currentState: ', currentState);
         window.history.back();
       }
     };
