@@ -14,7 +14,9 @@ export function useModalController({
 
     const modalId = `modal_${Date.now()}_${Math.random()}`;
 
-    window.history.pushState({ modal: true, modalId }, '');
+    const timeoutId = setTimeout(() => {
+      window.history.pushState({ modal: true }, '');
+    }, 0);
 
     const handlePopState = () => {
       onClose();
@@ -24,6 +26,8 @@ export function useModalController({
 
     return () => {
       window.removeEventListener('popstate', handlePopState);
+      clearTimeout(timeoutId);
+
       if (window.history.state?.modalId === modalId) {
         console.log('모달 닫힘: ', modalId);
         window.history.back();
