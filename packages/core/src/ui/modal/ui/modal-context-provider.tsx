@@ -1,6 +1,6 @@
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { type ReactNode, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 
 import { ModalContext } from '../model/modal-context.ts';
 import type { ModalRenderProps, ModalItem, IsPossibleOverlayClose } from '../model/modal-type.ts';
@@ -29,9 +29,9 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     setModalList((prevState) => [...prevState, { id, render, order: prevState.length }]);
   };
 
-  const close = (id: string) => {
+  const close = useCallback((id: string) => {
     setModalList((prev) => prev.filter((item) => item.id !== id));
-  };
+  }, []);
 
   const modalIds = modalList.map((modal) => ({ id: modal.id }));
 
@@ -51,7 +51,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
 
   const contextValue = useMemo(
     () => ({ modalIds, open, close, handleIsPossibleOverlayClose }),
-    [modalIds],
+    [modalIds, close],
   );
 
   return (
@@ -100,7 +100,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     overlayRef: overlayRef,
                     isOpen: true,
                     close: () => {
-                      window.history.back();
+                      close(modal.id);
                     },
                   })}
                 </FlexRow>
@@ -127,7 +127,7 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
                     }}
                     onClick={() => {
                       if (isPossibleOverlayClose !== null && isPossibleOverlayClose[modal.id]) {
-                        window.history.back();
+                        close(modal.id);
                       }
                     }}
                   />

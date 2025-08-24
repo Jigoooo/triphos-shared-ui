@@ -12,19 +12,24 @@ export function useModalController({
   useEffect(() => {
     if (!isOpen) return;
 
-    const timeoutId = setTimeout(() => {
-      window.history.pushState({ modal: true }, '');
-    }, 0);
+    // Push history state for modal (for mobile back button support)
+    const modalState = { modal: true, timestamp: Date.now() };
+    window.history.pushState(modalState, '');
 
-    const handlePopState = () => {
-      onClose();
+    const handlePopState = (event: PopStateEvent) => {
+      if (!event.state?.modal) {
+        onClose();
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
 
     return () => {
-      clearTimeout(timeoutId);
       window.removeEventListener('popstate', handlePopState);
+
+      if (window.history.state?.modal && window.history.state?.timestamp === modalState.timestamp) {
+        window.history.back();
+      }
     };
   }, [isOpen, onClose]);
 
