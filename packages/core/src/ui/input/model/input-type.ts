@@ -1,5 +1,5 @@
 import type { MotionProps, Transition } from 'framer-motion';
-import type { CSSProperties, InputHTMLAttributes, ReactNode, Ref } from 'react';
+import type { CSSProperties, InputHTMLAttributes, ReactNode, Ref, KeyboardEvent } from 'react';
 
 export enum InputType {
   SOFT = 'SOFT',
@@ -21,4 +21,5 @@ export type InputProps = MotionProps &
     underlineFocusWidth?: number;
     focusColor?: string;
     customTransition?: Transition;
+    onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
   };

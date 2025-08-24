@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import type { KeyboardEvent } from 'react';
 
 import { InputEndDecoratorWrapper } from './input-end-decorator-wrapper.tsx';
 import { InputStartDecoratorWrapper } from './input-start-decorator-wrapper.tsx';
@@ -8,6 +9,7 @@ import { useElementWidth } from '../model/use-element-width.ts';
 import { OutlinedInput } from '../variant/outlined-input.tsx';
 import { SoftInput } from '../variant/soft-input.tsx';
 import { UnderlineInput } from '../variant/underline-input.tsx';
+import { useCompositionRef } from '@/hooks';
 import { useThemeContext } from '@/theme';
 
 export function BaseInput({
@@ -27,9 +29,12 @@ export function BaseInput({
   onClick,
   customTransition,
   disabled = false,
+  onKeyDown,
+  onEnter,
   ...props
 }: InputProps) {
   const { theme } = useThemeContext();
+  const { isComposingRef, handleCompositionStart, handleCompositionEnd } = useCompositionRef();
 
   const applyFocusColor = focusColor ?? theme.colors.primary[300];
 
@@ -46,6 +51,18 @@ export function BaseInput({
     disabled,
     disabledStyle,
   });
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (isComposingRef.current) return;
+      e.preventDefault();
+      onEnter?.(e);
+    }
+
+    if (onKeyDown) {
+      onKeyDown(e);
+    }
+  };
 
   return (
     <div
@@ -80,6 +97,9 @@ export function BaseInput({
         }
         transition={customTransition ?? defaultInputTransition}
         style={applyInputStyle}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
+        onKeyDown={handleKeyDown}
         onClick={(event) => {
           event.stopPropagation();
           onClick?.(event);
