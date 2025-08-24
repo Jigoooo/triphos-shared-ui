@@ -14,38 +14,39 @@ export function useModalController({
   useEffect(() => {
     if (!isOpen) return;
 
-    // Store the current state before adding modal/dialog state
-    const previousState = window.history.state || {};
     const stateId = `${type}_${Date.now()}`;
+    let hasModalHistory = false;
 
-    // Create new state that includes all existing modals/dialogs
-    const newState = {
-      ...previousState,
-      [stateId]: {
-        type,
-        timestamp: Date.now(),
-      },
-      activeModals: [...(previousState.activeModals || []), stateId],
-    };
-
-    // Use replaceState for subsequent modals to avoid stacking history entries
-    if (previousState.activeModals?.length > 0) {
-      // Replace current state if there are already modals open
+    // Check if there's already a modal history state
+    const currentState = window.history.state;
+    if (currentState?.hasModalHistory) {
+      hasModalHistory = true;
+      // Just update the current state to include this modal
+      const newState = {
+        ...currentState,
+        currentModalId: stateId,
+        hasModalHistory: true,
+      };
       window.history.replaceState(newState, '');
-      console.log(`[${type}] Replaced state:`, newState);
+      console.log(`[${type}] Updated existing modal state:`, newState);
     } else {
-      // Push new state only for the first modal
+      // First modal - push a new history entry
+      const newState = {
+        originalState: currentState,
+        currentModalId: stateId,
+        hasModalHistory: true,
+      };
       window.history.pushState(newState, '');
-      console.log(`[${type}] Pushed state:`, newState);
+      console.log(`[${type}] Created new modal history:`, newState);
     }
 
     const handlePopState = () => {
-      const currentState = window.history.state;
-      console.log(`[${type}] popstate - My stateId: ${stateId}, Current state:`, currentState);
+      const state = window.history.state;
+      console.log(`[${type}] popstate - My stateId: ${stateId}, Current state:`, state);
 
-      // Check if this specific modal should close
-      if (!currentState?.activeModals?.includes(stateId)) {
-        console.log(`[${type}] Closing because not in active modals`);
+      // If we don't have modal history anymore, or our modal is not current, close
+      if (!state?.hasModalHistory || state?.currentModalId !== stateId) {
+        console.log(`[${type}] Closing due to popstate`);
         onClose();
       }
     };
@@ -55,22 +56,29 @@ export function useModalController({
     return () => {
       window.removeEventListener('popstate', handlePopState);
 
-      // Clean up state when closing programmatically
-      const currentState = window.history.state;
-      if (currentState && currentState[stateId]) {
-        const updatedActiveModals = (currentState.activeModals || []).filter(
-          (id: string) => id !== stateId,
-        );
-        const { [stateId]: _removed, ...restState } = currentState;
-
-        const updatedState = {
-          ...restState,
-          activeModals: updatedActiveModals,
-        };
-
-        // Use replaceState to update without adding history entry
-        window.history.replaceState(updatedState, '');
-        console.log(`[${type}] Cleaned up state:`, updatedState);
+      // When closing programmatically, check if we need to clean up history
+      const state = window.history.state;
+      if (state?.currentModalId === stateId && state?.hasModalHistory) {
+        // If this is the last modal, restore original state or go back
+        if (hasModalHistory) {
+          // There were other modals, just update the state
+          const updatedState = {
+            ...state,
+            currentModalId: null,
+          };
+          window.history.replaceState(updatedState, '');
+          console.log(`[${type}] Updated state after close:`, updatedState);
+        } else {
+          // This was the first modal, go back to clean up
+          setTimeout(() => {
+            if (
+              window.history.state?.hasModalHistory &&
+              window.history.state?.currentModalId === stateId
+            ) {
+              window.history.back();
+            }
+          }, 0);
+        }
       }
     };
   }, [isOpen, onClose, type]);
