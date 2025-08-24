@@ -1,10 +1,7 @@
-import { type RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { type SimpleScrollbarProps } from '../model/scroll-type.ts';
 import { zIndex } from '@/constants';
-
-interface SimpleScrollbarProps {
-  scrollElementRef: RefObject<HTMLDivElement | null>;
-}
 
 export function SimpleScrollbar({ scrollElementRef }: SimpleScrollbarProps) {
   const [showScrollbar, setShowScrollbar] = useState(false);

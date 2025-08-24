@@ -85,6 +85,9 @@ export { SplashCursor } from './ui/cursor';
 
 export { AccordionItem, AccordionGroup } from './ui/accordion';
 
+export { SimpleScrollbar } from './ui/scroll';
+export type { SimpleScrollbarProps } from './ui/scroll';
+
 /*
  * todo
  * File
