@@ -12,37 +12,62 @@ export function useModalController({
   type?: 'modal' | 'dialog';
 }) {
   useEffect(() => {
+    console.log(`[${type}] useEffect triggered - isOpen:`, isOpen);
     if (!isOpen) return;
 
     const stateId = `${type}_${Date.now()}`;
     let hasModalHistory = false;
 
     const currentState = window.history.state;
+    console.log(`[${type}] Current state:`, currentState);
+
     if (currentState?.hasModalHistory) {
       hasModalHistory = true;
+      // Add to modal stack instead of replacing
+      const modalStack = currentState.modalStack || [];
       const newState = {
         ...currentState,
         currentModalId: stateId,
+        modalStack: [...modalStack, stateId],
         hasModalHistory: true,
       };
       window.history.replaceState(newState, '');
-      console.log(`[${type}] Updated existing modal state:`, newState);
+      console.log(`[${type}] Added to modal stack:`, newState);
     } else {
       const newState = {
         originalState: currentState,
         currentModalId: stateId,
+        modalStack: [stateId],
         hasModalHistory: true,
       };
       window.history.pushState(newState, '');
+      console.log(`[${type}] Created new modal stack:`, newState);
     }
 
     const handlePopState = () => {
       const state = window.history.state;
       console.log(`[${type}] popstate - My stateId: ${stateId}, Current state:`, state);
 
-      if (!state?.hasModalHistory || state?.currentModalId !== stateId) {
-        console.log(`[${type}] Closing due to popstate`);
+      // Only close if we're not in the modal history anymore
+      // OR if we're the topmost modal in the stack
+      if (!state?.hasModalHistory) {
+        console.log(`[${type}] Closing due to no modal history`);
         onClose();
+      } else {
+        // Check if this modal should close based on stack position
+        const modalStack = state.modalStack || [];
+        const currentIndex = modalStack.indexOf(stateId);
+
+        if (currentIndex === -1) {
+          // Not in stack anymore, should close
+          console.log(`[${type}] Closing - not in stack`);
+          onClose();
+        } else if (currentIndex === modalStack.length - 1) {
+          // This is the topmost modal, should close on back button
+          console.log(`[${type}] Closing - topmost modal`);
+          onClose();
+        }
+        // If not topmost, don't close (let the topmost handle it)
       }
     };
 
@@ -52,22 +77,40 @@ export function useModalController({
       window.removeEventListener('popstate', handlePopState);
 
       const state = window.history.state;
-      if (state?.currentModalId === stateId && state?.hasModalHistory) {
-        if (hasModalHistory) {
+      if (state?.hasModalHistory && state.modalStack?.includes(stateId)) {
+        const modalStack = state.modalStack || [];
+        const updatedStack = modalStack.filter((id: string) => id !== stateId);
+
+        if (updatedStack.length === 0) {
+          // Last modal closing
+          if (!hasModalHistory) {
+            // This was the first modal, go back
+            setTimeout(() => {
+              const currentState = window.history.state;
+              if (currentState?.hasModalHistory && currentState.modalStack?.length === 0) {
+                window.history.back();
+              }
+            }, 0);
+          } else {
+            // Clear modal history
+            const updatedState = {
+              ...state,
+              currentModalId: null,
+              modalStack: [],
+              hasModalHistory: false,
+            };
+            window.history.replaceState(updatedState, '');
+          }
+        } else {
+          // Update stack and set new current modal
+          const newCurrentModalId = updatedStack[updatedStack.length - 1];
           const updatedState = {
             ...state,
-            currentModalId: null,
+            currentModalId: newCurrentModalId,
+            modalStack: updatedStack,
           };
           window.history.replaceState(updatedState, '');
-        } else {
-          setTimeout(() => {
-            if (
-              window.history.state?.hasModalHistory &&
-              window.history.state?.currentModalId === stateId
-            ) {
-              window.history.back();
-            }
-          }, 0);
+          console.log(`[${type}] Updated stack after close:`, updatedState);
         }
       }
     };
