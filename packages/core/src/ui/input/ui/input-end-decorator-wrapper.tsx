@@ -23,14 +23,20 @@ export function InputEndDecoratorWrapper({
   children,
   style,
   ref,
-  endDecoratorInteractive,
+  allowFocusLoss,
 }: {
   children: ReactNode;
   style?: CSSProperties;
   ref?: (element: HTMLElement | null) => void;
-  endDecoratorInteractive: boolean;
+  allowFocusLoss: boolean;
 }) {
   const isInteractive = hasInteractiveChildren(children);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!allowFocusLoss && isInteractive) {
+      e.preventDefault();
+    }
+  };
 
   return (
     <div
@@ -42,10 +48,11 @@ export function InputEndDecoratorWrapper({
         right: '0.5rem',
         top: '50%',
         transform: 'translateY(-50%)',
-        pointerEvents: isInteractive && endDecoratorInteractive ? 'auto' : 'none',
+        pointerEvents: isInteractive ? 'auto' : 'none',
         zIndex: zIndex.base,
         ...style,
       }}
+      onMouseDown={handleMouseDown}
     >
       {children}
     </div>

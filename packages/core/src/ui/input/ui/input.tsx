@@ -22,7 +22,7 @@ export function BaseInput({
   startDecoratorStyle,
   endDecorator,
   endDecoratorStyle,
-  endDecoratorInteractive = false,
+  endDecoratorAllowFocusLoss = false,
   isFocusEffect = true,
   outlinedFocusWidth = 2.4,
   underlineFocusWidth = 2,
@@ -111,7 +111,7 @@ export function BaseInput({
         <InputEndDecoratorWrapper
           ref={endDecoratorRef}
           style={endDecoratorStyle}
-          endDecoratorInteractive={endDecoratorInteractive}
+          allowFocusLoss={endDecoratorAllowFocusLoss}
         >
           {endDecorator}
         </InputEndDecoratorWrapper>
