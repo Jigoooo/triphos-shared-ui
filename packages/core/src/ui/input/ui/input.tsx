@@ -22,6 +22,7 @@ export function BaseInput({
   startDecoratorStyle,
   endDecorator,
   endDecoratorStyle,
+  endDecoratorInteractive = false,
   isFocusEffect = true,
   outlinedFocusWidth = 2.4,
   underlineFocusWidth = 2,
@@ -107,7 +108,11 @@ export function BaseInput({
         {...props}
       />
       {endDecorator && (
-        <InputEndDecoratorWrapper ref={endDecoratorRef} style={endDecoratorStyle}>
+        <InputEndDecoratorWrapper
+          ref={endDecoratorRef}
+          style={endDecoratorStyle}
+          endDecoratorInteractive={endDecoratorInteractive}
+        >
           {endDecorator}
         </InputEndDecoratorWrapper>
       )}

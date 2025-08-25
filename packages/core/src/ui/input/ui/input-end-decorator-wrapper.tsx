@@ -23,10 +23,12 @@ export function InputEndDecoratorWrapper({
   children,
   style,
   ref,
+  endDecoratorInteractive,
 }: {
   children: ReactNode;
   style?: CSSProperties;
   ref?: (element: HTMLElement | null) => void;
+  endDecoratorInteractive: boolean;
 }) {
   const isInteractive = hasInteractiveChildren(children);
 
@@ -40,7 +42,7 @@ export function InputEndDecoratorWrapper({
         right: '0.5rem',
         top: '50%',
         transform: 'translateY(-50%)',
-        pointerEvents: isInteractive ? 'auto' : 'none',
+        pointerEvents: isInteractive && endDecoratorInteractive ? 'auto' : 'none',
         zIndex: zIndex.base,
         ...style,
       }}
