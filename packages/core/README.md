@@ -6,6 +6,10 @@
 
 A reusable React component library and design system with TypeScript support.
 
+## 📚 Documentation
+
+View the complete component documentation and live examples in our [Storybook](https://jigoooo.github.io/triphos-shared-ui/)
+
 ## Installation
 
 ```bash
