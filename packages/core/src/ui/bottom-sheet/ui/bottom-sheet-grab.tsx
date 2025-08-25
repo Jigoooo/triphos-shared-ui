@@ -1,11 +1,23 @@
 import { type DragControls } from 'framer-motion';
+import { type CSSProperties } from 'react';
 
 import {
-  bottomSheetGrabContainerStyle,
-  bottomSheetGrabStyle,
+  getBottomSheetGrabContainerStyle,
+  getBottomSheetGrabStyle,
 } from '../config/bottom-sheet-style.ts';
 
-export function BottomSheetGrab({ dragControls }: { dragControls: DragControls }) {
+export function BottomSheetGrab({
+  grabContainerStyle,
+  grabStyle,
+  dragControls,
+}: {
+  grabContainerStyle?: CSSProperties;
+  grabStyle?: CSSProperties;
+  dragControls: DragControls;
+}) {
+  const bottomSheetGrabContainerStyle = getBottomSheetGrabContainerStyle(grabContainerStyle);
+  const bottomSheetGrabStyle = getBottomSheetGrabStyle(grabStyle);
+
   return (
     <div
       role='button'

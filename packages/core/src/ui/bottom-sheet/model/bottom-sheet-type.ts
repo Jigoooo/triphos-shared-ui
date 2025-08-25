@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 
 import type { ButtonProps } from '@/ui/button';
 import { type InputProps } from '@/ui/input';
@@ -11,6 +11,9 @@ export type BottomSheetProps = {
   maxHeight?: string | number;
   dragThreshold?: string | number;
   bottomInset?: string | number;
+  showGrab?: boolean;
+  grabContainerStyle?: CSSProperties;
+  grabStyle?: CSSProperties;
 };
 
 export type BottomSheetDefaultOptionProps<TValue extends string | number> = Omit<

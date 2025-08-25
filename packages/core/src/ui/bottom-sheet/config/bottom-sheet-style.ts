@@ -41,19 +41,25 @@ export const getBottomSheetStyle = ({ bottomInset }: { bottomInset: string | num
   };
 };
 
-export const bottomSheetGrabContainerStyle: CSSProperties = {
-  width: '100%',
-  flexShrink: 0,
-  cursor: 'grab',
-  paddingTop: '0.75rem',
-  paddingBottom: '0.75rem',
-  touchAction: 'none',
+export const getBottomSheetGrabContainerStyle = (style?: CSSProperties): CSSProperties => {
+  return {
+    width: '100%',
+    flexShrink: 0,
+    cursor: 'grab',
+    paddingTop: '0.5rem',
+    paddingBottom: '0.5rem',
+    touchAction: 'none',
+    ...style,
+  };
 };
 
-export const bottomSheetGrabStyle: CSSProperties = {
-  width: '3rem',
-  height: '0.25rem',
-  backgroundColor: '#ddd',
-  borderRadius: '0.125rem',
-  margin: '0 auto',
+export const getBottomSheetGrabStyle = (style?: CSSProperties): CSSProperties => {
+  return {
+    width: '3rem',
+    height: '0.25rem',
+    backgroundColor: '#ddd',
+    borderRadius: '0.125rem',
+    margin: '0 auto',
+    ...style,
+  };
 };

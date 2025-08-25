@@ -17,6 +17,9 @@ export function BottomSheet({
   maxHeight = 'auto',
   dragThreshold = 80,
   bottomInset = 0,
+  showGrab = true,
+  grabContainerStyle,
+  grabStyle,
 }: BottomSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
@@ -82,7 +85,13 @@ export function BottomSheet({
               onDragEnd={handleDragEnd}
               style={bottomSheetContainerStyle}
             >
-              <BottomSheetGrab dragControls={dragControls} />
+              {showGrab && (
+                <BottomSheetGrab
+                  grabContainerStyle={grabContainerStyle}
+                  grabStyle={grabStyle}
+                  dragControls={dragControls}
+                />
+              )}
 
               <div role='document' style={bottomSheetStyle}>
                 {children}
