@@ -14,14 +14,17 @@ export function YearCalendar({
   setFloating,
   floatingStyles,
   getFloatingProps,
-  handleDateClick,
   selectedDate,
   currentDate,
   minDate,
   maxDate,
   setDisplayMode,
+  handleNavigationDateChange,
+  handleSelection,
 }: PickerProps & {
   setDisplayMode: (mode: DatePickerMode) => void;
+  handleNavigationDateChange?: (date: Date) => void;
+  handleSelection?: (date: Date) => void;
 }) {
   const { theme } = useThemeContext();
 
@@ -30,17 +33,24 @@ export function YearCalendar({
 
   const handlePrevYears = () => {
     const newDate = subYears(currentDate, 12);
-    handleDateClick(newDate);
+    if (handleNavigationDateChange) {
+      handleNavigationDateChange(newDate);
+    }
   };
 
   const handleNextYears = () => {
     const newDate = addYears(currentDate, 12);
-    handleDateClick(newDate);
+    if (handleNavigationDateChange) {
+      handleNavigationDateChange(newDate);
+    }
   };
 
   const handleYearClick = (year: number) => {
     const newDate = setYear(currentDate, year);
-    handleDateClick(newDate);
+
+    if (handleSelection) {
+      handleSelection(newDate);
+    }
 
     // Navigate to appropriate view based on external mode
     if (mode === 'day') {
@@ -48,6 +58,7 @@ export function YearCalendar({
     } else if (mode === 'month') {
       setDisplayMode('month');
     }
+    // If mode === 'year', handleSelection will close the picker
   };
 
   let disablePrev = false;
@@ -115,7 +126,12 @@ export function YearCalendar({
           {`${startYear} - ${startYear + 11}`}
         </Typography>
         <Button.Outlined
-          style={{ height: 30, paddingInline: 6, color: '#bbbbbb', borderColor: '#e4e4e4' }}
+          style={{
+            height: '1.875rem',
+            paddingInline: '0.375rem',
+            color: '#bbbbbb',
+            borderColor: '#e4e4e4',
+          }}
           onClick={handleNextYears}
           disabled={disableNext}
         >

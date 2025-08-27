@@ -6,17 +6,40 @@ import { YearCalendar } from './year-calendar.tsx';
 import type { DatePickerMode, PickerProps } from '../model/picker-type.ts';
 
 export function Calendar(props: PickerProps) {
-  const { mode } = props;
+  const { mode, currentDate, handleDateClick } = props;
 
   const [displayMode, setDisplayMode] = useState<DatePickerMode>(mode);
+  const [internalCurrentDate, setInternalCurrentDate] = useState(currentDate);
+
+  const handleNavigationDateChange = (date: Date) => {
+    setInternalCurrentDate(date);
+  };
+
+  const handleSelection = (date: Date) => {
+    setInternalCurrentDate(date);
+
+    const shouldClose = displayMode === mode;
+    if (shouldClose) {
+      handleDateClick(date);
+    }
+  };
+
+  const enhancedProps = {
+    ...props,
+    currentDate: internalCurrentDate,
+    handleNavigationDateChange,
+    handleSelection,
+    displayMode,
+    setDisplayMode,
+  };
 
   switch (displayMode) {
     case 'year':
-      return <YearCalendar setDisplayMode={setDisplayMode} {...props} />;
+      return <YearCalendar {...enhancedProps} />;
     case 'month':
-      return <MonthCalendar setDisplayMode={setDisplayMode} {...props} />;
+      return <MonthCalendar {...enhancedProps} />;
     case 'day':
     default:
-      return <DayCalendar setDisplayMode={setDisplayMode} {...props} />;
+      return <DayCalendar {...enhancedProps} />;
   }
 }

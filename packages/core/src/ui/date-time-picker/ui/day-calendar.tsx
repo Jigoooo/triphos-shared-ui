@@ -37,8 +37,10 @@ export function DayCalendar({
   minDate,
   maxDate,
   setDisplayMode,
+  handleSelection,
 }: PickerProps & {
   setDisplayMode: (mode: DatePickerMode) => void;
+  handleSelection?: (date: Date) => void;
 }) {
   const { theme } = useThemeContext();
 
@@ -115,7 +117,12 @@ export function DayCalendar({
           {format(currentDate, 'yyyy년 MMMM', { locale: ko })}
         </Typography>
         <Button.Outlined
-          style={{ height: 30, paddingInline: 6, color: '#bbbbbb', borderColor: '#e4e4e4' }}
+          style={{
+            height: '1.875rem',
+            paddingInline: '0.375rem',
+            color: '#bbbbbb',
+            borderColor: '#e4e4e4',
+          }}
           onClick={handleNextMonth}
           disabled={disableNext}
         >
@@ -149,7 +156,11 @@ export function DayCalendar({
                 onClick={() => {
                   if (day && !isDisabled) {
                     if (currentMonth) {
-                      handleDateClick(day);
+                      if (handleSelection) {
+                        handleSelection(day);
+                      } else {
+                        handleDateClick(day);
+                      }
                     } else {
                       handlePaddingDateClick(day);
                     }

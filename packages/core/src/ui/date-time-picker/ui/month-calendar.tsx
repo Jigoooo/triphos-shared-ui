@@ -26,14 +26,17 @@ export function MonthCalendar({
   setFloating,
   floatingStyles,
   getFloatingProps,
-  handleDateClick,
   selectedDate,
   currentDate,
   minDate,
   maxDate,
   setDisplayMode,
+  handleNavigationDateChange,
+  handleSelection,
 }: PickerProps & {
   setDisplayMode: (mode: DatePickerMode) => void;
+  handleNavigationDateChange?: (date: Date) => void;
+  handleSelection?: (date: Date) => void;
 }) {
   const { theme } = useThemeContext();
 
@@ -48,22 +51,30 @@ export function MonthCalendar({
 
   const handlePrevYear = () => {
     const newDate = subYears(currentDate, 1);
-    handleDateClick(newDate);
+    if (handleNavigationDateChange) {
+      handleNavigationDateChange(newDate);
+    }
   };
 
   const handleNextYear = () => {
     const newDate = addYears(currentDate, 1);
-    handleDateClick(newDate);
+    if (handleNavigationDateChange) {
+      handleNavigationDateChange(newDate);
+    }
   };
 
   const handleMonthClick = (monthIndex: number) => {
     const newDate = setMonth(currentDate, monthIndex);
-    handleDateClick(newDate);
+
+    if (handleSelection) {
+      handleSelection(newDate);
+    }
 
     // If the external mode is 'day', navigate to day view after selecting month
     if (mode === 'day') {
       setDisplayMode('day');
     }
+    // If mode === 'month', handleSelection will close the picker
   };
 
   let disablePrev = false;
@@ -134,7 +145,12 @@ export function MonthCalendar({
           {format(currentDate, 'yyyy년', { locale: ko })}
         </Typography>
         <Button.Outlined
-          style={{ height: 30, paddingInline: 6, color: '#bbbbbb', borderColor: '#e4e4e4' }}
+          style={{
+            height: '1.875rem',
+            paddingInline: '0.375rem',
+            color: '#bbbbbb',
+            borderColor: '#e4e4e4',
+          }}
           onClick={handleNextYear}
           disabled={disableNext}
         >
