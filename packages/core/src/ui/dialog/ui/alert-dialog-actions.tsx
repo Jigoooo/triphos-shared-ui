@@ -26,9 +26,11 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           animationBackgroundColor={'#bbbbbb'}
           onClick={() => {
             window.history.back();
-            setTimeout(() => {
-              dialogConfig?.onCancel?.();
-            }, 30);
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                dialogConfig?.onCancel?.();
+              });
+            });
           }}
         >
           {dialogConfig.cancelText}
@@ -43,9 +45,11 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
         }}
         onClick={() => {
           window.history.back();
-          setTimeout(() => {
-            dialogConfig?.onConfirm?.();
-          }, 30);
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              dialogConfig?.onConfirm?.();
+            });
+          });
         }}
       >
         {dialogConfig.confirmText}
