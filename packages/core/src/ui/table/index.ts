@@ -3,7 +3,6 @@ export { InputDateEditCell } from './ui/input-date-edit-cell.tsx';
 export { InputNumberEditCell } from './ui/input-number-edit-cell.tsx';
 export { SelectEditCell } from './ui/select-edit-cell.tsx';
 export { VerticalTable } from './ui/vertical-table.tsx';
-export { DateEditCell } from './ui/date-edit-cell.tsx';
 export type {
   TableColumnConfig,
   ColumnValueFunction,
