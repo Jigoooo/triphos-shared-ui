@@ -44,12 +44,12 @@ export function Textarea({
         const maxHeight = typeof autoMaxHeight === 'number' ? `${autoMaxHeight}px` : autoMaxHeight;
         const maxHeightValue = parseFloat(maxHeight);
 
-        if (scrollHeight <= maxHeightValue) {
-          textarea.style.height = `${scrollHeight}px`;
-          textarea.style.overflowY = 'hidden';
-        } else {
+        if (scrollHeight > maxHeightValue) {
           textarea.style.height = maxHeight;
           textarea.style.overflowY = 'auto';
+        } else {
+          textarea.style.height = `${scrollHeight}px`;
+          textarea.style.overflowY = 'hidden';
         }
       } else {
         textarea.style.height = `${scrollHeight}px`;
