@@ -84,11 +84,21 @@ export function DayCalendar({
 
   let disablePrev = false;
   let disableNext = false;
-  if (minDate && isBefore(subMonths(currentDate, 1), minDate)) {
-    disablePrev = true;
+
+  if (minDate) {
+    const prevMonth = subMonths(currentDate, 1);
+    const lastDayOfPrevMonth = new Date(prevMonth.getFullYear(), prevMonth.getMonth() + 1, 0);
+    if (isBefore(lastDayOfPrevMonth, minDate)) {
+      disablePrev = true;
+    }
   }
-  if (maxDate && isAfter(addMonths(currentDate, 1), maxDate)) {
-    disableNext = true;
+
+  if (maxDate) {
+    const nextMonth = addMonths(currentDate, 1);
+    const firstDayOfNextMonth = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1);
+    if (isAfter(firstDayOfNextMonth, maxDate)) {
+      disableNext = true;
+    }
   }
 
   return (
