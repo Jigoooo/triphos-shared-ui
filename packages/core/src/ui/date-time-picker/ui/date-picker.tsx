@@ -335,7 +335,7 @@ export function DatePicker({
         apply({ rects, elements, availableHeight }) {
           Object.assign(elements.floating.style, {
             minWidth: `${Math.min(rects.reference.width, 260)}px`,
-            maxWidth: '350px',
+            maxWidth: `${Math.max(rects.reference.width, 330)}px`,
             maxHeight: `${availableHeight}px`,
           });
         },
