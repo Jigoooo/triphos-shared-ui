@@ -3,6 +3,7 @@ import {
   format,
   isAfter,
   isBefore,
+  isSameDay,
   startOfMonth,
   startOfWeek,
   subMonths,
@@ -139,6 +140,7 @@ export function DayCalendar({
       </FlexRow>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)' }}>
         {days.map((day, index) => {
+          const isSelected = !!selectedDate && isSameDay(day, selectedDate);
           const isDisabled =
             !!day &&
             ((minDate ? isBefore(day, minDate) : false) ||
@@ -180,7 +182,7 @@ export function DayCalendar({
                   color: textColor,
                   position: 'relative',
                   fontSize: '0.9rem',
-                  fontWeight: !isDisabled ? 500 : 400,
+                  fontWeight: isSelected ? 700 : !isDisabled ? 500 : 400,
                 }}
               >
                 {day ? format(day, 'd') : ''}
