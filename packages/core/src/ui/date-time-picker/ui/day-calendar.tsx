@@ -143,20 +143,21 @@ export function DayCalendar({
             !!day &&
             ((minDate ? isBefore(day, minDate) : false) ||
               (maxDate ? isAfter(day, maxDate) : false));
-          const currentMonth = !!day && isSameMonth(day);
+          const isCurrentMonth = !!day && isSameMonth(day);
           const borderRadius = getCellBorderRadius(day, selectedDate);
           const backgroundColor = getCellBackgroundColor(
             day,
             selectedDate,
             theme.colors.primary[500],
           );
-          const textColor = getCellTextColor(day, selectedDate, currentMonth, isDisabled);
+          const textColor = getCellTextColor(day, selectedDate, isCurrentMonth, isDisabled);
+
           return (
             <div key={index} style={{ gridColumn: 'span 1', aspectRatio: '1' }}>
               <div
                 onClick={() => {
                   if (day && !isDisabled) {
-                    if (currentMonth) {
+                    if (isCurrentMonth) {
                       if (handleSelection) {
                         handleSelection(day);
                       } else {
@@ -179,6 +180,7 @@ export function DayCalendar({
                   color: textColor,
                   position: 'relative',
                   fontSize: '0.9rem',
+                  fontWeight: isCurrentMonth ? 600 : 400,
                 }}
               >
                 {day ? format(day, 'd') : ''}
