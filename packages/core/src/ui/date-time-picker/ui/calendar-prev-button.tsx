@@ -15,8 +15,8 @@ export function CalendarPrevButton({
         height: '1.875rem',
         paddingInline: '0.375rem',
         color: '#bbbbbb',
-        borderColor: '#bbbbbb',
-        backgroundColor: '#ffffff',
+        borderColor: disablePrev ? '#efefef' : '#cccccc',
+        backgroundColor: disablePrev ? '#efefef' : '#ffffff',
       }}
       disabledStyle={{
         opacity: 1,

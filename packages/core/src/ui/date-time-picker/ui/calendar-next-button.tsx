@@ -15,8 +15,8 @@ export function CalendarNextButton({
         height: '1.875rem',
         paddingInline: '0.375rem',
         color: '#bbbbbb',
-        borderColor: '#bbbbbb',
-        backgroundColor: '#ffffff',
+        borderColor: disableNext ? '#efefef' : '#cccccc',
+        backgroundColor: disableNext ? '#efefef' : '#ffffff',
       }}
       disabledStyle={{
         opacity: 1,
