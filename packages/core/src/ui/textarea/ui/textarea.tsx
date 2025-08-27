@@ -41,11 +41,25 @@ export function Textarea({
       const scrollHeight = textarea.scrollHeight;
 
       if (autoMaxHeight) {
-        const maxHeight = typeof autoMaxHeight === 'number' ? `${autoMaxHeight}px` : autoMaxHeight;
-        const maxHeightValue = parseFloat(maxHeight);
+        const maxHeightStr =
+          typeof autoMaxHeight === 'number' ? `${autoMaxHeight}px` : autoMaxHeight;
 
-        if (scrollHeight > maxHeightValue) {
-          textarea.style.height = maxHeight;
+        // maxHeight를 픽셀로 변환
+        let maxHeightInPx: number;
+        if (maxHeightStr.includes('rem')) {
+          const remValue = parseFloat(maxHeightStr);
+          const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+          maxHeightInPx = remValue * rootFontSize;
+        } else if (maxHeightStr.includes('em')) {
+          const emValue = parseFloat(maxHeightStr);
+          const elementFontSize = parseFloat(getComputedStyle(textarea).fontSize);
+          maxHeightInPx = emValue * elementFontSize;
+        } else {
+          maxHeightInPx = parseFloat(maxHeightStr);
+        }
+
+        if (scrollHeight > maxHeightInPx) {
+          textarea.style.height = maxHeightStr;
           textarea.style.overflowY = 'auto';
         } else {
           textarea.style.height = `${scrollHeight}px`;
