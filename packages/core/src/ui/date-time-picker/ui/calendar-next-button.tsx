@@ -15,7 +15,8 @@ export function CalendarNextButton({
         height: '1.875rem',
         paddingInline: '0.375rem',
         color: '#bbbbbb',
-        borderColor: '#e4e4e4',
+        borderColor: '#bbbbbb',
+        backgroundColor: '#ffffff',
       }}
       disabledStyle={{
         opacity: 1,
@@ -23,7 +24,7 @@ export function CalendarNextButton({
       onClick={onNext}
       disabled={disableNext}
     >
-      <LuChevronRight style={{ fontSize: '1rem', color: disableNext ? '#bbbbbb' : '#666666' }} />
+      <LuChevronRight style={{ fontSize: '1rem', color: disableNext ? '#bbbbbb' : '#555555' }} />
     </OutlinedButton>
   );
 }
