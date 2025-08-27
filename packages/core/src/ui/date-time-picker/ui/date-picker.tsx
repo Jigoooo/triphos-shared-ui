@@ -316,7 +316,7 @@ export function DatePicker({
     if (openListener) {
       openListener(showDatePicker);
     }
-  }, [showDatePicker]);
+  }, [openListener, showDatePicker]);
 
   const { refs, floatingStyles, context } = useFloating({
     open: showDatePicker,
