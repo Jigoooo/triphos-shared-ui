@@ -12,7 +12,7 @@ export function DateEditCell<TData>({
       width={'100%'}
       dateFormat={'yyyyMMdd'}
       strategy={'fixed'}
-      dateString={cellData ? cellData.toString() : undefined}
+      value={cellData ? cellData.toString() : undefined}
       onChange={(dateString) => {
         setCellData(dateString);
         setTimeout(() => {

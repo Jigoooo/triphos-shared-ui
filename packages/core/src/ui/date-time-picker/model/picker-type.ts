@@ -11,8 +11,8 @@ export type DatePickerProps = {
   placement?: Placement;
   width?: number | string;
   isInputMode?: boolean;
-  dateString?: string;
-  onChange?: (dateString: string) => void;
+  value?: Date;
+  onChange?: (value: Date) => void;
   dateFormat?: string;
   minDate?: Date;
   maxDate?: Date;

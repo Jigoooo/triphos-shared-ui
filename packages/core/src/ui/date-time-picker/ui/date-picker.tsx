@@ -28,7 +28,7 @@ export function DatePicker({
   placement = 'bottom-start',
   width = 'auto',
   isInputMode = false,
-  dateString,
+  value,
   onChange,
   dateFormat,
   minDate,
@@ -59,7 +59,7 @@ export function DatePicker({
   const applyDateFormat = getDefaultDateFormat(dateFormat);
 
   const { selectedDate, showDatePicker, setShowDatePicker, currentDate, handleDateClick } =
-    useDatePicker({ dateString, onChange, dateFormat: applyDateFormat });
+    useDatePicker({ date: value, onChange });
   const datePickerRef = useHandleClickOutsideRef({
     condition: showDatePicker,
     outsideClickAction: () => {

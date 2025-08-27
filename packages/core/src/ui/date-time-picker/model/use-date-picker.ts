@@ -1,28 +1,19 @@
-import { format, isValid, parse } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 export function useDatePicker({
-  dateString,
+  date,
   onChange,
-  dateFormat,
 }: {
-  dateString?: string;
-  onChange?: (dateString: string) => void;
-  dateFormat: string;
+  date?: Date;
+  onChange?: (value: Date) => void;
 }) {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(
-    dateString && isValid(parse(dateString, dateFormat, new Date()))
-      ? parse(dateString, dateFormat, new Date())
-      : null,
-  );
+  const [selectedDate, setSelectedDate] = useState<Date | null>(date ?? null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
-    if (dateString && isValid(parse(dateString, dateFormat, new Date()))) {
-      setSelectedDate(parse(dateString, dateFormat, new Date()));
-    }
-  }, [dateString, dateFormat]);
+    setSelectedDate(date ?? null);
+  }, [date]);
 
   useEffect(() => {
     if (!showDatePicker) {
@@ -33,7 +24,7 @@ export function useDatePicker({
   const handleDateClick = (date: Date) => {
     setShowDatePicker(false);
     if (onChange) {
-      onChange(format(date, dateFormat));
+      onChange(date);
     }
     setSelectedDate(date);
   };
