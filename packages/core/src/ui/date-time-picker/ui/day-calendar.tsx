@@ -10,8 +10,8 @@ import {
 import { ko } from 'date-fns/locale';
 import { useMemo } from 'react';
 
-import { LuMoveLeft, LuMoveRight } from 'react-icons/lu';
-
+import { CalendarNextButton } from './calendar-next-button.tsx';
+import { CalendarPrevButton } from './calendar-prev-button.tsx';
 import {
   getCellBackgroundColor,
   getCellBorderRadius,
@@ -21,7 +21,6 @@ import { generateDaysArray } from '../lib/generate-days-array.ts';
 import type { DatePickerMode, PickerProps } from '../model/picker-type.ts';
 import { zIndex } from '@/constants';
 import { useThemeContext } from '@/theme';
-import { Button } from '@/ui/button';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 
@@ -112,36 +111,14 @@ export function DayCalendar({
       <FlexRow
         style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}
       >
-        <Button.Outlined
-          style={{
-            height: '1.875rem',
-            paddingInline: '0.375rem',
-            color: '#bbbbbb',
-            borderColor: '#e4e4e4',
-          }}
-          onClick={handlePrevMonth}
-          disabled={disablePrev}
-        >
-          <LuMoveLeft style={{ fontSize: '1rem', color: disablePrev ? '#cccccc' : '#666666' }} />
-        </Button.Outlined>
+        <CalendarPrevButton onPrev={handlePrevMonth} disablePrev={disablePrev} />
         <Typography
           style={{ fontSize: '0.96rem', fontWeight: 600, lineHeight: 2, cursor: 'pointer' }}
           onClick={() => setDisplayMode('month')}
         >
           {format(currentDate, 'yyyy년 MMMM', { locale: ko })}
         </Typography>
-        <Button.Outlined
-          style={{
-            height: '1.875rem',
-            paddingInline: '0.375rem',
-            color: '#bbbbbb',
-            borderColor: '#e4e4e4',
-          }}
-          onClick={handleNextMonth}
-          disabled={disableNext}
-        >
-          <LuMoveRight style={{ fontSize: '1rem', color: disableNext ? 'lightgrey' : '#666666' }} />
-        </Button.Outlined>
+        <CalendarNextButton onNext={handleNextMonth} disableNext={disableNext} />
       </FlexRow>
       <FlexRow style={{ width: '100%', justifyContent: 'space-around', marginBottom: '0.5rem' }}>
         {weekDays.map((day, index) => (
