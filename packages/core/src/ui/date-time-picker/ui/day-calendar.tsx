@@ -180,7 +180,7 @@ export function DayCalendar({
                   color: textColor,
                   position: 'relative',
                   fontSize: '0.9rem',
-                  fontWeight: !isDisabled ? 600 : 400,
+                  fontWeight: !isDisabled ? 500 : 400,
                 }}
               >
                 {day ? format(day, 'd') : ''}
