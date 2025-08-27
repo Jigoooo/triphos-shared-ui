@@ -35,8 +35,6 @@ export type PickerProps = {
   floatingStyles: CSSProperties;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   handleDateClick: (date: Date) => void;
-  handlePrevMonth: () => void;
-  handleNextMonth: () => void;
   selectedDate: Date | null;
   currentDate: Date;
   minDate?: Date;

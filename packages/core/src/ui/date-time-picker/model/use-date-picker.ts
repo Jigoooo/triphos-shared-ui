@@ -1,4 +1,4 @@
-import { addMonths, format, isValid, parse, subMonths } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 export function useDatePicker({
@@ -38,21 +38,11 @@ export function useDatePicker({
     setSelectedDate(date);
   };
 
-  const handlePrevMonth = () => {
-    setCurrentDate(subMonths(currentDate, 1));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentDate(addMonths(currentDate, 1));
-  };
-
   return {
     selectedDate,
     showDatePicker,
     setShowDatePicker,
     currentDate,
     handleDateClick,
-    handlePrevMonth,
-    handleNextMonth,
   };
 }

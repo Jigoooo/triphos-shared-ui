@@ -58,15 +58,8 @@ export function DatePicker({
 
   const applyDateFormat = getDefaultDateFormat(dateFormat);
 
-  const {
-    selectedDate,
-    showDatePicker,
-    setShowDatePicker,
-    currentDate,
-    handleDateClick,
-    handlePrevMonth,
-    handleNextMonth,
-  } = useDatePicker({ dateString, onChange, dateFormat: applyDateFormat });
+  const { selectedDate, showDatePicker, setShowDatePicker, currentDate, handleDateClick } =
+    useDatePicker({ dateString, onChange, dateFormat: applyDateFormat });
   const datePickerRef = useHandleClickOutsideRef({
     condition: showDatePicker,
     outsideClickAction: () => {
@@ -166,8 +159,6 @@ export function DatePicker({
               floatingStyles={floatingStyles}
               getFloatingProps={getFloatingProps}
               handleDateClick={handleDateClick}
-              handlePrevMonth={handlePrevMonth}
-              handleNextMonth={handleNextMonth}
               selectedDate={selectedDate}
               currentDate={currentDate}
               minDate={mode === 'day' && minDate ? subDays(minDate, 1) : minDate}
@@ -181,8 +172,6 @@ export function DatePicker({
             floatingStyles={floatingStyles}
             getFloatingProps={getFloatingProps}
             handleDateClick={handleDateClick}
-            handlePrevMonth={handlePrevMonth}
-            handleNextMonth={handleNextMonth}
             selectedDate={selectedDate}
             currentDate={currentDate}
             minDate={mode === 'day' && minDate ? subDays(minDate, 1) : minDate}

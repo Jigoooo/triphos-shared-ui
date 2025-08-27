@@ -30,16 +30,16 @@ export function DayCalendar({
   floatingStyles,
   getFloatingProps,
   handleDateClick,
-  handlePrevMonth,
-  handleNextMonth,
   selectedDate,
   currentDate,
   minDate,
   maxDate,
   setDisplayMode,
+  handleNavigationDateChange,
   handleSelection,
 }: PickerProps & {
   setDisplayMode: (mode: DatePickerMode) => void;
+  handleNavigationDateChange?: (date: Date) => void;
   handleSelection?: (date: Date) => void;
 }) {
   const { theme } = useThemeContext();
@@ -59,6 +59,20 @@ export function DayCalendar({
   const month = currentDate.getMonth();
   const days = generateDaysArray(year, month);
   const isSameMonth = (date: Date) => date.getMonth() === month;
+
+  const handlePrevMonth = () => {
+    const newDate = subMonths(currentDate, 1);
+    if (handleNavigationDateChange) {
+      handleNavigationDateChange(newDate);
+    }
+  };
+
+  const handleNextMonth = () => {
+    const newDate = addMonths(currentDate, 1);
+    if (handleNavigationDateChange) {
+      handleNavigationDateChange(newDate);
+    }
+  };
 
   const handlePaddingDateClick = (date: Date) => {
     if (isBefore(date, startOfMonth(new Date(year, month)))) {
