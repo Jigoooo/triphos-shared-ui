@@ -25,8 +25,10 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           }}
           animationBackgroundColor={'#bbbbbb'}
           onClick={() => {
-            dialogConfig?.onCancel?.();
             window.history.back();
+            setTimeout(() => {
+              dialogConfig?.onCancel?.();
+            }, 30);
           }}
         >
           {dialogConfig.cancelText}
@@ -40,8 +42,10 @@ export function AlertDialogActions({ dialogConfig }: { dialogConfig: DialogConfi
           boxShadow: '0 6px 14px rgba(17, 24, 39, 0.12)',
         }}
         onClick={() => {
-          dialogConfig?.onConfirm?.();
           window.history.back();
+          setTimeout(() => {
+            dialogConfig?.onConfirm?.();
+          }, 30);
         }}
       >
         {dialogConfig.confirmText}
