@@ -20,6 +20,6 @@ export function getCellTextColor(
 ): string {
   if (!day) return 'transparent';
   if (isDisabled) return '#cccccc';
-  if (selectedDate && selectedDate.toDateString() === day.toDateString()) return 'white';
-  return isCurrentMonth ? '#111111' : '#aaaaaa';
+  if (selectedDate && selectedDate.toDateString() === day.toDateString()) return '#ffffff';
+  return isCurrentMonth ? '#111111' : '#888888';
 }
