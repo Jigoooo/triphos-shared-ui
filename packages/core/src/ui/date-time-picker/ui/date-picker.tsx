@@ -170,7 +170,7 @@ export function DatePicker({
               handleNextMonth={handleNextMonth}
               selectedDate={selectedDate}
               currentDate={currentDate}
-              minDate={minDate ? subDays(minDate, 1) : undefined}
+              minDate={mode === 'day' && minDate ? subDays(minDate, 1) : minDate}
               maxDate={maxDate}
             />
           </FloatingPortal>
@@ -185,7 +185,7 @@ export function DatePicker({
             handleNextMonth={handleNextMonth}
             selectedDate={selectedDate}
             currentDate={currentDate}
-            minDate={minDate ? subDays(minDate, 1) : undefined}
+            minDate={mode === 'day' && minDate ? subDays(minDate, 1) : minDate}
             maxDate={maxDate}
           />
         ))}
