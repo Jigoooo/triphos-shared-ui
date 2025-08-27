@@ -11,4 +11,6 @@ export type TextareaProps = MotionProps &
     disabledStyle?: CSSProperties;
     focusWidth?: number;
     focusColor?: string;
+    autoHeight?: boolean;
+    autoMaxHeight?: number | string;
   };

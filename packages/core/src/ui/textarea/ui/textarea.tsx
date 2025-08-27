@@ -1,5 +1,12 @@
 import { motion } from 'framer-motion';
-import type { KeyboardEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  type KeyboardEvent,
+  type RefObject,
+  type ChangeEvent,
+  useCallback,
+} from 'react';
 
 import { getTextareaStyle } from '../lib/textarea-styles.ts';
 import type { TextareaProps } from '../model/textarea-type.ts';
@@ -16,9 +23,44 @@ export function Textarea({
   focusColor,
   disabled,
   disabledStyle,
+  autoHeight = false,
+  autoMaxHeight,
+  value,
+  defaultValue,
+  onChange,
   ...props
 }: TextareaProps) {
   const { isComposingRef, handleCompositionStart, handleCompositionEnd } = useCompositionRef();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const combinedRef = ref || textareaRef;
+
+  const adjustHeight = useCallback(() => {
+    const textarea = ref ? (ref as RefObject<HTMLTextAreaElement>).current : textareaRef.current;
+    if (textarea && autoHeight) {
+      textarea.style.height = 'auto';
+      const scrollHeight = textarea.scrollHeight;
+
+      if (autoMaxHeight) {
+        const maxHeight = typeof autoMaxHeight === 'number' ? `${autoMaxHeight}px` : autoMaxHeight;
+        const maxHeightValue = parseFloat(maxHeight);
+
+        if (scrollHeight <= maxHeightValue) {
+          textarea.style.height = `${scrollHeight}px`;
+          textarea.style.overflowY = 'hidden';
+        } else {
+          textarea.style.height = maxHeight;
+          textarea.style.overflowY = 'auto';
+        }
+      } else {
+        textarea.style.height = `${scrollHeight}px`;
+        textarea.style.overflowY = 'hidden';
+      }
+    }
+  }, [ref, autoHeight, autoMaxHeight]);
+
+  useEffect(() => {
+    adjustHeight();
+  }, [value, defaultValue, adjustHeight]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -32,12 +74,31 @@ export function Textarea({
     }
   };
 
-  const textareaStyle = getTextareaStyle({ style, disabled, disabledStyle });
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange?.(e);
+    adjustHeight();
+  };
+
+  const textareaStyle = getTextareaStyle({
+    style: {
+      ...style,
+      ...(autoHeight && {
+        resize: 'none',
+        overflow: 'hidden',
+        minHeight: style?.minHeight || '6.25rem',
+      }),
+    },
+    disabled,
+    disabledStyle,
+  });
   const applyFocusColor = focusColor ? focusColor : colors.primary[400];
 
   return (
     <motion.textarea
-      ref={ref}
+      ref={combinedRef as any}
+      value={value}
+      defaultValue={defaultValue}
+      onChange={handleChange}
       onKeyDown={handleKeyDown}
       onCompositionStart={handleCompositionStart}
       onCompositionEnd={handleCompositionEnd}
