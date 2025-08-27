@@ -198,7 +198,6 @@ function Picker({
           backgroundColor: '#ffffff',
           borderRadius: 10,
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-          width: 250,
           zIndex: zIndex.datePicker,
         },
         ...floatingStyles,
@@ -231,7 +230,7 @@ function Picker({
           </div>
         ))}
       </FlexRow>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', rowGap: 8 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 8 }}>
         {days.map((day, index) => {
           const isDisabled =
             !!day &&
@@ -246,7 +245,7 @@ function Picker({
           );
           const textColor = getCellTextColor(day, selectedDate, currentMonth, isDisabled);
           return (
-            <div key={index} style={{ gridColumn: 'span 1' }}>
+            <div key={index} style={{ gridColumn: 'span 1', aspectRatio: '1' }}>
               <div
                 onClick={() => {
                   if (day && !isDisabled) {
@@ -258,9 +257,12 @@ function Picker({
                   }
                 }}
                 style={{
-                  textAlign: 'center',
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   cursor: day && !isDisabled ? 'pointer' : undefined,
-                  paddingBlock: 4,
                   borderRadius,
                   backgroundColor,
                   color: textColor,
@@ -332,9 +334,9 @@ export function DatePicker({
       size({
         apply({ rects, elements, availableHeight }) {
           Object.assign(elements.floating.style, {
-            minWidth: `${rects.reference.width}px`,
+            minWidth: `${Math.min(rects.reference.width, 260)}px`,
+            maxWidth: '350px',
             maxHeight: `${availableHeight}px`,
-            // maxWidth: `${rects.reference.width}px`,
           });
         },
         padding: 10,
