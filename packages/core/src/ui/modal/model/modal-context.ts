@@ -1,7 +1,7 @@
 import { type ReactNode, createContext, useContext } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
-import type { ModalContextType, ModalRenderProps } from './modal-type.ts';
+import type { ModalConfig, ModalContextType, ModalRenderProps } from './modal-type.ts';
 
 export const ModalContext = createContext<ModalContextType | null>(null);
 
@@ -18,10 +18,10 @@ export const useModal = ({
 
   return {
     ...context,
-    open: (render: (props: ModalRenderProps) => ReactNode) => {
+    open: (render: (props: ModalRenderProps) => ReactNode, config: ModalConfig) => {
       const id = uuidV4();
       context.handleIsPossibleOverlayClose(id, isPossibleOverlayClose);
-      context.open(id, render);
+      context.open(id, render, config);
       return id;
     },
     close: async () => {

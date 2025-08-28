@@ -1,17 +1,61 @@
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, type Transition, type TargetAndTransition } from 'framer-motion';
 import { type ReactNode, useCallback, useRef, useState } from 'react';
 
 import { ModalContext } from '../model/modal-context.ts';
-import type {
-  ModalRenderProps,
-  ModalItem,
-  IsPossibleOverlayClose,
-  ModalContextType,
+import {
+  type ModalRenderProps,
+  type ModalItem,
+  type IsPossibleOverlayClose,
+  type ModalContextType,
+  type ModalConfig,
+  type AnimationType,
 } from '../model/modal-type.ts';
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import { FlexRow } from '@/ui/layout';
+
+const modalAnimation: Record<
+  AnimationType,
+  {
+    initial: TargetAndTransition;
+    animate: TargetAndTransition;
+    exit: TargetAndTransition;
+    transition: Transition;
+    style: any;
+  }
+> = {
+  'slide-up': {
+    initial: { opacity: 0, x: '-50%', y: '-45%' },
+    animate: { opacity: 1, x: '-50%', y: '-50%' },
+    exit: { opacity: 0, x: '-50%', y: '-45%' },
+    transition: { duration: 0.1 },
+    style: {
+      top: '50%',
+      left: '50%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  },
+  'slide-right': {
+    initial: { x: '100%' },
+    animate: { x: 0 },
+    exit: { x: '100%' },
+    transition: {
+      type: 'tween',
+      duration: 0.3,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+    style: {
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: '#ffffff',
+      overflow: 'hidden',
+    },
+  },
+};
 
 export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -31,8 +75,12 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const open = (id: string, render: (props: ModalRenderProps) => ReactNode) => {
-    setModalList((prevState) => [...prevState, { id, render, order: prevState.length }]);
+  const open = (
+    id: string,
+    render: (props: ModalRenderProps) => ReactNode,
+    config?: ModalConfig,
+  ) => {
+    setModalList((prevState) => [...prevState, { id, render, order: prevState.length, config }]);
   };
 
   const closeAsync = useCallback(() => {
@@ -84,25 +132,24 @@ export function ModalContextProvider({ children }: { children: ReactNode }) {
 
         <AnimatePresence initial={false}>
           {modalList.map((modal, index) => {
+            const animationConfig = modal.config?.animation
+              ? modalAnimation[modal.config.animation]
+              : modalAnimation['slide-up'];
+
             return (
               <div key={modal.id}>
                 <FlexRow
                   as={motion.div}
-                  initial={{ opacity: 0, x: '-50%', y: '-45%' }}
-                  animate={{ opacity: 1, x: '-50%', y: '-50%' }}
-                  exit={{ opacity: 0, x: '-50%', y: '-45%' }}
-                  transition={{
-                    duration: 0.1,
-                  }}
+                  initial={animationConfig.initial}
+                  animate={animationConfig.animate}
+                  exit={animationConfig.exit}
+                  transition={animationConfig.transition}
                   style={{
-                    userSelect: 'none',
                     position: 'fixed',
-                    top: '50%',
-                    left: '50%',
+                    userSelect: 'none',
                     display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
                     zIndex: zIndex.modal + index,
+                    ...animationConfig.style,
                   }}
                   onClick={(e) => e.stopPropagation()}
                   data-modal-content

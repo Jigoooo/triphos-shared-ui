@@ -2,10 +2,19 @@ import type { CSSProperties, ReactNode, RefObject } from 'react';
 
 import type { CloseIconButtonProps } from '@/ui/icon';
 
+export type ModalConfig = {
+  animation: 'slide-up' | 'slide-right';
+};
+
+export type AnimationType = 'slide-up' | 'slide-right';
+
 export type ModalItem = {
   id: string;
   render: (props: ModalRenderProps) => ReactNode;
   order: number;
+  config?: {
+    animation: AnimationType;
+  };
 };
 
 export type ModalRenderProps = {
@@ -21,7 +30,7 @@ export type IsPossibleOverlayClose = {
 
 export type ModalContextType = {
   modalIds: { id: string }[];
-  open: (id: string, render: (props: ModalRenderProps) => ReactNode) => void;
+  open: (id: string, render: (props: ModalRenderProps) => ReactNode, config?: ModalConfig) => void;
   closeAsync: () => Promise<void>;
   handleIsPossibleOverlayClose: (id: string, possible: boolean) => void;
 };
