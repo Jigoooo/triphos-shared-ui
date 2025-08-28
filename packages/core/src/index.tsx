@@ -7,7 +7,12 @@ export { zIndex } from './constants/z-index';
 export { Button, SolidButton, OutlinedButton, ButtonType } from './ui/button';
 export type { ButtonProps } from './ui/button';
 
-export { BottomSheet, BottomSheetWithInput } from './ui/bottom-sheet';
+export {
+  BottomSheet,
+  BottomSheetProvider,
+  BottomSheetWithInput,
+  useBottomSheet,
+} from './ui/bottom-sheet';
 export type { BottomSheetProps, BottomSheetWithInputProps } from './ui/bottom-sheet';
 
 export { CloseIconButton } from './ui/icon';

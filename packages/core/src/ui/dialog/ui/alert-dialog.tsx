@@ -64,7 +64,13 @@ export function AlertDialog() {
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && dialogConfig.onConfirm && !ignoreEnterRef.current) {
-        dialogConfig.onConfirm();
+        window.history.back();
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            dialogConfig.onConfirm?.();
+          });
+        });
       }
     };
 
