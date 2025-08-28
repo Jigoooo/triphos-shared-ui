@@ -18,7 +18,7 @@ export const useModal = ({
 
   return {
     ...context,
-    open: (render: (props: ModalRenderProps) => ReactNode, config: ModalConfig) => {
+    open: (render: (props: ModalRenderProps) => ReactNode, config?: ModalConfig) => {
       const id = uuidV4();
       context.handleIsPossibleOverlayClose(id, isPossibleOverlayClose);
       context.open(id, render, config);
