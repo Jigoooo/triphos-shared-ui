@@ -38,7 +38,9 @@ export function BottomSheet({
   useBottomSheetInteraction({
     sheetRef,
     isOpen,
-    onClose,
+    onClose: () => {
+      window.history.back();
+    },
   });
 
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
