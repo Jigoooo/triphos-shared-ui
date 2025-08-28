@@ -14,7 +14,13 @@ export function BottomSheetOverlay() {
       transition={{ duration: 0.2 }}
       style={bottomSheetOverlayStyle}
     >
-      <FloatingOverlay lockScroll style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} />
+      <FloatingOverlay
+        lockScroll
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+        onClick={() => {
+          window.history.back();
+        }}
+      />
     </motion.div>
   );
 }

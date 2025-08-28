@@ -6,7 +6,6 @@ import { BottomSheetGrab } from './bottom-sheet-grab.tsx';
 import { BottomSheetOverlay } from './bottom-sheet-overlay.tsx';
 import { getBottomSheetContainerStyle, getBottomSheetStyle } from '../config/bottom-sheet-style.ts';
 import { type BottomSheetProps } from '../model/bottom-sheet-type.ts';
-import { useBottomSheetInteraction } from '../model/use-bottom-sheet-interaction.ts';
 import { useThresholdInPixels } from '../model/use-threshold-in-pixels.ts';
 import { useModalController } from '@/ui/modal';
 
@@ -35,17 +34,9 @@ export function BottomSheet({
 
   const thresholdPx = useThresholdInPixels(dragThreshold, sheetRef.current);
 
-  useBottomSheetInteraction({
-    sheetRef,
-    isOpen,
-    onClose: () => {
-      window.history.back();
-    },
-  });
-
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.y > thresholdPx) {
-      onClose();
+      window.history.back();
     }
   };
 
