@@ -29,7 +29,7 @@ export function InputEndDecoratorWrapper({
   children: ReactNode;
   style?: CSSProperties;
   ref?: (element: HTMLElement | null) => void;
-  offset: string;
+  offset: string | number;
   allowFocusLoss: boolean;
 }) {
   const isInteractive = hasInteractiveChildren(children);

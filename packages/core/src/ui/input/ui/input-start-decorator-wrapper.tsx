@@ -14,7 +14,7 @@ export function InputStartDecoratorWrapper({
   inputType: InputType;
   children: ReactNode;
   style?: CSSProperties;
-  offset: string;
+  offset: string | number;
 }) {
   return (
     <div

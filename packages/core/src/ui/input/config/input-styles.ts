@@ -71,8 +71,8 @@ export const getInputStyle = ({
   endDecoratorWidth: number;
   disabled: boolean;
   disabledStyle?: CSSProperties;
-  startDecoratorOffset?: string;
-  endDecoratorOffset?: string;
+  startDecoratorOffset?: string | number;
+  endDecoratorOffset?: string | number;
 }): CSSProperties => {
   // Extract paddingInline from style to handle it separately
   const {
@@ -84,11 +84,11 @@ export const getInputStyle = ({
 
   // Determine left and right padding
   const leftPadding = hasStartDecorator
-    ? `calc(${startDecoratorWidth}px + ${startDecoratorOffset} + ${DEFAULT_DECORATOR_SPACING})`
+    ? `calc(${startDecoratorWidth}px + ${typeof startDecoratorOffset === 'string' ? startDecoratorOffset : `${startDecoratorOffset}px`} + ${DEFAULT_DECORATOR_SPACING})`
     : stylePaddingLeft || paddingInline || defaultInputStyle.paddingInline;
 
   const rightPadding = hasEndDecorator
-    ? `calc(${endDecoratorWidth}px + ${endDecoratorOffset} + ${DEFAULT_DECORATOR_SPACING})`
+    ? `calc(${endDecoratorWidth}px + ${typeof endDecoratorOffset === 'string' ? endDecoratorOffset : `${endDecoratorOffset}px`} + ${DEFAULT_DECORATOR_SPACING})`
     : stylePaddingRight || paddingInline || defaultInputStyle.paddingInline;
 
   return {

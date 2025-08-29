@@ -14,10 +14,10 @@ export type InputProps = MotionProps &
     disabledStyle?: CSSProperties;
     startDecorator?: ReactNode;
     startDecoratorStyle?: CSSProperties;
-    startDecoratorOffset?: string;
+    startDecoratorOffset?: string | number;
     endDecorator?: ReactNode;
     endDecoratorStyle?: CSSProperties;
-    endDecoratorOffset?: string;
+    endDecoratorOffset?: string | number;
     endDecoratorAllowFocusLoss?: boolean;
     isFocusEffect?: boolean;
     outlinedFocusWidth?: number;
