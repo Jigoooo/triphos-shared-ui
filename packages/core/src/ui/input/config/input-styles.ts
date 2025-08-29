@@ -88,7 +88,7 @@ export const getInputStyle = ({
     : stylePaddingLeft || paddingInline || defaultInputStyle.paddingInline;
 
   const rightPadding = hasEndDecorator
-    ? `calc(${endDecoratorWidth}px + ${endDecoratorOffset}} + ${DEFAULT_DECORATOR_SPACING})`
+    ? `calc(${endDecoratorWidth}px + ${endDecoratorOffset} + ${DEFAULT_DECORATOR_SPACING})`
     : stylePaddingRight || paddingInline || defaultInputStyle.paddingInline;
 
   return {

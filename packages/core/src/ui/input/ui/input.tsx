@@ -23,7 +23,7 @@ export function BaseInput({
   startDecoratorOffset = '0.5rem',
   endDecorator,
   endDecoratorStyle,
-  endDecoratorOffset = '0.5rem',
+  endDecoratorOffset = '0.8rem',
   endDecoratorAllowFocusLoss = false,
   isFocusEffect = true,
   outlinedFocusWidth = 2.4,
