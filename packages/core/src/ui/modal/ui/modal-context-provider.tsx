@@ -1,7 +1,8 @@
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
-import { AnimatePresence, motion, type Transition, type TargetAndTransition } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { type ReactNode, useCallback, useRef, useState } from 'react';
 
+import { getModalAnimation } from '../config/modal-animation.ts';
 import { ModalContext } from '../model/modal-context.ts';
 import {
   type ModalRenderProps,
@@ -9,55 +10,26 @@ import {
   type IsPossibleOverlayClose,
   type ModalContextType,
   type ModalConfig,
-  type AnimationType,
 } from '../model/modal-type.ts';
 import { useModalController } from '../model/use-modal-controller.ts';
 import { zIndex } from '@/constants';
 import { FlexRow } from '@/ui/layout';
 
-const modalAnimation: Record<
-  AnimationType,
-  {
-    initial: TargetAndTransition;
-    animate: TargetAndTransition;
-    exit: TargetAndTransition;
-    transition: Transition;
-    style: any;
-  }
-> = {
-  'slide-up': {
-    initial: { opacity: 0, x: '-50%', y: '-45%' },
-    animate: { opacity: 1, x: '-50%', y: '-50%' },
-    exit: { opacity: 0, x: '-50%', y: '-45%' },
-    transition: { duration: 0.1 },
-    style: {
-      top: '50%',
-      left: '50%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
+export function ModalContextProvider({
+  safeAreaInsets = {
+    top: 0,
+    bottom: 0,
   },
-  'slide-right': {
-    initial: { x: '100%' },
-    animate: { x: 0 },
-    exit: { x: '100%' },
-    transition: {
-      type: 'tween',
-      duration: 0.3,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-    style: {
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      backgroundColor: '#ffffff',
-      overflow: 'hidden',
-    },
-  },
-};
+  children,
+}: {
+  safeAreaInsets?: {
+    top: number;
+    bottom: number;
+  };
+  children: ReactNode;
+}) {
+  const modalAnimation = getModalAnimation(safeAreaInsets);
 
-export function ModalContextProvider({ children }: { children: ReactNode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const popWaitersRef = useRef<Array<() => void>>([]);

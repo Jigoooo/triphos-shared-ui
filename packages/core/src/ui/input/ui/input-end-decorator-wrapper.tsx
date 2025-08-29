@@ -23,11 +23,13 @@ export function InputEndDecoratorWrapper({
   children,
   style,
   ref,
+  offset,
   allowFocusLoss,
 }: {
   children: ReactNode;
   style?: CSSProperties;
   ref?: (element: HTMLElement | null) => void;
+  offset: string;
   allowFocusLoss: boolean;
 }) {
   const isInteractive = hasInteractiveChildren(children);
@@ -45,7 +47,7 @@ export function InputEndDecoratorWrapper({
         position: 'absolute',
         display: 'flex',
         alignItems: 'center',
-        right: '0.5rem',
+        right: offset,
         top: '50%',
         transform: 'translateY(-50%)',
         pointerEvents: isInteractive ? 'auto' : 'none',

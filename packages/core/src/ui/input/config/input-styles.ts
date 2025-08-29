@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 
 import { InputType } from '../model/input-type.ts';
 
-const DECORATOR_SPACING = '0.5rem';
+const DEFAULT_DECORATOR_SPACING = '0.3rem';
 
 export const defaultInputStyle: CSSProperties = {
   width: '100%',
@@ -60,6 +60,8 @@ export const getInputStyle = ({
   endDecoratorWidth,
   disabled,
   disabledStyle,
+  startDecoratorOffset,
+  endDecoratorOffset,
 }: {
   style?: CSSProperties;
   inputType: InputType;
@@ -69,6 +71,8 @@ export const getInputStyle = ({
   endDecoratorWidth: number;
   disabled: boolean;
   disabledStyle?: CSSProperties;
+  startDecoratorOffset?: string;
+  endDecoratorOffset?: string;
 }): CSSProperties => {
   // Extract paddingInline from style to handle it separately
   const {
@@ -80,11 +84,11 @@ export const getInputStyle = ({
 
   // Determine left and right padding
   const leftPadding = hasStartDecorator
-    ? `calc(${startDecoratorWidth}px + ${inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
+    ? `calc(${startDecoratorWidth}px + ${startDecoratorOffset} + ${DEFAULT_DECORATOR_SPACING})`
     : stylePaddingLeft || paddingInline || defaultInputStyle.paddingInline;
 
   const rightPadding = hasEndDecorator
-    ? `calc(${endDecoratorWidth}px + ${inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem'} + ${DECORATOR_SPACING})`
+    ? `calc(${endDecoratorWidth}px + ${endDecoratorOffset}} + ${DEFAULT_DECORATOR_SPACING})`
     : stylePaddingRight || paddingInline || defaultInputStyle.paddingInline;
 
   return {

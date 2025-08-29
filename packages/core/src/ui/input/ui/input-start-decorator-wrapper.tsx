@@ -8,11 +8,13 @@ export function InputStartDecoratorWrapper({
   inputType,
   children,
   style,
+  offset,
 }: {
   ref: (element: HTMLDivElement | null) => void;
   inputType: InputType;
   children: ReactNode;
   style?: CSSProperties;
+  offset: string;
 }) {
   return (
     <div
@@ -21,7 +23,7 @@ export function InputStartDecoratorWrapper({
         position: 'absolute',
         display: 'flex',
         alignItems: 'center',
-        left: inputType === InputType.UNDERLINE ? '0.375rem' : '0.5rem',
+        left: inputType === InputType.UNDERLINE ? offset : offset,
         top: inputType === InputType.UNDERLINE ? '40%' : '50%',
         transform: 'translateY(-50%)',
         pointerEvents: 'none',

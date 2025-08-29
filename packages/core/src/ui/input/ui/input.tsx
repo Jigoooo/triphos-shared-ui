@@ -20,8 +20,10 @@ export function BaseInput({
   disabledStyle,
   startDecorator,
   startDecoratorStyle,
+  startDecoratorOffset = '0.5rem',
   endDecorator,
   endDecoratorStyle,
+  endDecoratorOffset = '0.5rem',
   endDecoratorAllowFocusLoss = false,
   isFocusEffect = true,
   outlinedFocusWidth = 2.4,
@@ -51,6 +53,8 @@ export function BaseInput({
     endDecoratorWidth,
     disabled,
     disabledStyle,
+    startDecoratorOffset,
+    endDecoratorOffset,
   });
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -77,6 +81,7 @@ export function BaseInput({
           ref={startDecoratorRef}
           inputType={inputType}
           style={startDecoratorStyle}
+          offset={startDecoratorOffset}
         >
           {startDecorator}
         </InputStartDecoratorWrapper>
@@ -111,6 +116,7 @@ export function BaseInput({
         <InputEndDecoratorWrapper
           ref={endDecoratorRef}
           style={endDecoratorStyle}
+          offset={endDecoratorOffset}
           allowFocusLoss={endDecoratorAllowFocusLoss}
         >
           {endDecorator}
