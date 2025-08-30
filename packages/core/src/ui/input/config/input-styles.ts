@@ -86,41 +86,70 @@ export const getInputStyle = ({
     ...restStyle
   } = style || {};
 
-  // Handle shorthand padding if provided
+  // Check if user provided padding shorthand - if so, we should respect it
+  const hasPaddingShorthand = padding !== undefined;
+
+  // If user provided padding shorthand, use it as-is to avoid React warnings
+  if (hasPaddingShorthand) {
+    // When decorators are present, we need to adjust padding but avoid mixing shorthand with individual properties
+    if (hasStartDecorator || hasEndDecorator) {
+      // Parse the padding shorthand to get individual values
+      const paddingValues = String(padding).split(' ').filter(Boolean);
+      let left, right, top, bottom;
+
+      if (paddingValues.length === 1) {
+        left = right = top = bottom = paddingValues[0];
+      } else if (paddingValues.length === 2) {
+        top = bottom = paddingValues[0];
+        left = right = paddingValues[1];
+      } else if (paddingValues.length === 3) {
+        top = paddingValues[0];
+        left = right = paddingValues[1];
+        bottom = paddingValues[2];
+      } else if (paddingValues.length === 4) {
+        top = paddingValues[0];
+        right = paddingValues[1];
+        bottom = paddingValues[2];
+        left = paddingValues[3];
+      }
+
+      // Apply decorator offsets to individual properties
+      const leftPadding = hasStartDecorator
+        ? `calc(${startDecoratorWidth}px + ${typeof startDecoratorOffset === 'string' ? startDecoratorOffset : `${startDecoratorOffset}px`} + ${DEFAULT_DECORATOR_SPACING})`
+        : left;
+
+      const rightPadding = hasEndDecorator
+        ? `calc(${endDecoratorWidth}px + ${typeof endDecoratorOffset === 'string' ? endDecoratorOffset : `${endDecoratorOffset}px`} + ${DEFAULT_DECORATOR_SPACING})`
+        : right;
+
+      // Return with individual properties (no shorthand to avoid React warning)
+      return {
+        ...defaultInputStyle,
+        ...inputWithTypeStyles[inputType],
+        ...restStyle,
+        paddingTop: top,
+        paddingBottom: bottom,
+        paddingLeft: leftPadding,
+        paddingRight: rightPadding,
+        ...(disabled ? { ...inputDisabledStyles[inputType], ...disabledStyle } : {}),
+      };
+    } else {
+      // No decorators, just use the padding shorthand as-is
+      return {
+        ...defaultInputStyle,
+        ...inputWithTypeStyles[inputType],
+        ...restStyle,
+        padding, // Use shorthand as provided
+        ...(disabled ? { ...inputDisabledStyles[inputType], ...disabledStyle } : {}),
+      };
+    }
+  }
+
+  // No padding shorthand provided, handle individual properties
   let resolvedPaddingLeft = stylePaddingLeft;
   let resolvedPaddingRight = stylePaddingRight;
   let resolvedPaddingTop = paddingTop;
   let resolvedPaddingBottom = paddingBottom;
-
-  // If padding shorthand is provided, expand it to individual properties
-  if (padding !== undefined) {
-    const paddingValues = String(padding).split(' ').filter(Boolean);
-    if (paddingValues.length === 1) {
-      // padding: value -> all sides
-      resolvedPaddingLeft = resolvedPaddingLeft ?? paddingValues[0];
-      resolvedPaddingRight = resolvedPaddingRight ?? paddingValues[0];
-      resolvedPaddingTop = resolvedPaddingTop ?? paddingValues[0];
-      resolvedPaddingBottom = resolvedPaddingBottom ?? paddingValues[0];
-    } else if (paddingValues.length === 2) {
-      // padding: vertical horizontal
-      resolvedPaddingLeft = resolvedPaddingLeft ?? paddingValues[1];
-      resolvedPaddingRight = resolvedPaddingRight ?? paddingValues[1];
-      resolvedPaddingTop = resolvedPaddingTop ?? paddingValues[0];
-      resolvedPaddingBottom = resolvedPaddingBottom ?? paddingValues[0];
-    } else if (paddingValues.length === 3) {
-      // padding: top horizontal bottom
-      resolvedPaddingLeft = resolvedPaddingLeft ?? paddingValues[1];
-      resolvedPaddingRight = resolvedPaddingRight ?? paddingValues[1];
-      resolvedPaddingTop = resolvedPaddingTop ?? paddingValues[0];
-      resolvedPaddingBottom = resolvedPaddingBottom ?? paddingValues[2];
-    } else if (paddingValues.length === 4) {
-      // padding: top right bottom left
-      resolvedPaddingLeft = resolvedPaddingLeft ?? paddingValues[3];
-      resolvedPaddingRight = resolvedPaddingRight ?? paddingValues[1];
-      resolvedPaddingTop = resolvedPaddingTop ?? paddingValues[0];
-      resolvedPaddingBottom = resolvedPaddingBottom ?? paddingValues[2];
-    }
-  }
 
   // Handle paddingInline and paddingBlock
   if (paddingInline !== undefined) {
@@ -145,11 +174,11 @@ export const getInputStyle = ({
   const finalStyle: CSSProperties = {
     ...defaultInputStyle,
     ...inputWithTypeStyles[inputType],
+    ...restStyle,
     paddingLeft: leftPadding,
     paddingRight: rightPadding,
     paddingTop: resolvedPaddingTop || defaultInputStyle.paddingBlock,
     paddingBottom: resolvedPaddingBottom || defaultInputStyle.paddingBlock,
-    ...restStyle,
     ...(disabled ? { ...inputDisabledStyles[inputType], ...disabledStyle } : {}),
   };
 
