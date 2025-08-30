@@ -45,7 +45,7 @@ export function BottomSheet({
       <AnimatePresence>
         {isOpen && (
           <>
-            <BottomSheetOverlay />
+            <BottomSheetOverlay isClosing={!isOpen} />
 
             <motion.div
               ref={sheetRef}
@@ -56,7 +56,7 @@ export function BottomSheet({
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{
-                duration: 0.6,
+                duration: 0.54,
                 ease: [0.32, 0.72, 0, 1],
               }}
               drag='y'

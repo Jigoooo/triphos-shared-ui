@@ -139,9 +139,12 @@ export function AlertDialog() {
             >
               <FloatingOverlay
                 lockScroll
-                style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+                style={{
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  pointerEvents: dialogOpen ? 'auto' : 'none',
+                }}
                 onClick={() => {
-                  if (dialogConfig.overlayClose) {
+                  if (dialogOpen && dialogConfig.overlayClose) {
                     window.history.back();
                   }
                 }}
