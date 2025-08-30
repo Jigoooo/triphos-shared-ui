@@ -73,7 +73,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
       <AnimatePresence>
         {!!activeSheet && (
           <FloatingPortal>
-            <BottomSheetOverlay />
+            <BottomSheetOverlay isClosing={!activeSheet} />
 
             <motion.div
               ref={sheetRef}
