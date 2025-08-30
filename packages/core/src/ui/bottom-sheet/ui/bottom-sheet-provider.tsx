@@ -85,7 +85,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
                 animate={{ y: 0 }}
                 exit={{ y: '100%' }}
                 transition={{
-                  duration: 0.6,
+                  duration: 0.5,
                   ease: [0.32, 0.72, 0, 1],
                 }}
                 drag='y'
