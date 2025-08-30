@@ -42,11 +42,13 @@ export function BottomSheet({
 
   return (
     <FloatingPortal>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
+        {isOpen && <BottomSheetOverlay isClosing={!isOpen} />}
+      </AnimatePresence>
+
+      <AnimatePresence initial={false}>
         {isOpen && (
           <>
-            <BottomSheetOverlay isClosing={!isOpen} />
-
             <motion.div
               ref={sheetRef}
               role='dialog'
