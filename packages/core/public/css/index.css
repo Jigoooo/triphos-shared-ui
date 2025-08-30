@@ -25,6 +25,9 @@ div {
 
 html {
   font-size: clamp(16px, 1.2vw, 16px);
+  font-synthesis: none;
+  font-synthesis-weight: none;
+  -webkit-text-size-adjust: 100%;
 }
 
 html, body {
