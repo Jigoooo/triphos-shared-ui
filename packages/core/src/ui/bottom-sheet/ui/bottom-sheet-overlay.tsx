@@ -21,6 +21,7 @@ export function BottomSheetOverlay({ isClosing }: { isClosing: boolean }) {
         lockScroll
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          pointerEvents: isClosing ? 'none' : 'auto',
         }}
         onClick={() => {
           if (!isClosing) {
