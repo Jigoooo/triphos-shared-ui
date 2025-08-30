@@ -29,6 +29,7 @@ export const getBottomSheetContainerStyle = ({
     zIndex: zIndex.anchor,
     display: 'flex',
     flexDirection: 'column',
+    willChange: 'transform',
   };
 };
 
