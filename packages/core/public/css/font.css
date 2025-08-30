@@ -106,13 +106,13 @@
         }
 
         /* 숫자 관련 요소는 더 강력한 처리 */
-        [class*="number"], [class*="price"], [class*="amount"], [class*="count"],
-        .numeric, .money, .currency, .total, .sum, .quantity, .score {
-            font-family: -apple-system-monospaced-numbers, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace !important;
-            font-variant-numeric: tabular-nums !important;
-            -webkit-font-feature-settings: "tnum" 1 !important;
-            font-feature-settings: "tnum" 1 !important;
-        }
+        /*[class*="number"], [class*="price"], [class*="amount"], [class*="count"],*/
+        /*.numeric, .money, .currency, .total, .sum, .quantity, .score {*/
+        /*    font-family: -apple-system-monospaced-numbers, 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace !important;*/
+        /*    font-variant-numeric: tabular-nums !important;*/
+        /*    -webkit-font-feature-settings: "tnum" 1 !important;*/
+        /*    font-feature-settings: "tnum" 1 !important;*/
+        /*}*/
 
         /* iOS WebView 텍스트 렌더링 최적화 */
         * {
