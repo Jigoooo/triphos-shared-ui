@@ -35,6 +35,7 @@ export function ModalContextProvider({
   const popWaitersRef = useRef<Array<() => void>>([]);
 
   const [modalList, setModalList] = useState<ModalItem[]>([]);
+  const [closingModalIds, setClosingModalIds] = useState<Set<string>>(new Set());
   const [isPossibleOverlayClose, setIsPossibleOverlayClose] =
     useState<IsPossibleOverlayClose | null>(null);
 
@@ -71,12 +72,24 @@ export function ModalContextProvider({
       if (modalList.length > 0) {
         const top = modalList.find((m) => m.order === modalList.length - 1);
         if (top) {
-          setModalList((prev) => prev.filter((item) => item.id !== top.id));
+          setClosingModalIds((prev) => new Set(prev).add(top.id));
 
-          queueMicrotask(() => {
-            const resolve = popWaitersRef.current.shift();
-            resolve?.();
-          });
+          setTimeout(() => {
+            setModalList((prev) => prev.filter((item) => item.id !== top.id));
+
+            queueMicrotask(() => {
+              const resolve = popWaitersRef.current.shift();
+              resolve?.();
+            });
+          }, 50);
+
+          setTimeout(() => {
+            setClosingModalIds((prev) => {
+              const newSet = new Set(prev);
+              newSet.delete(top.id);
+              return newSet;
+            });
+          }, 1000);
         }
       }
     },
@@ -152,6 +165,7 @@ export function ModalContextProvider({
                     left: 0,
                     right: 0,
                     bottom: 0,
+                    pointerEvents: closingModalIds.has(modal.id) ? 'none' : 'auto',
                   }}
                   className='modal-overlay'
                 >
@@ -161,7 +175,11 @@ export function ModalContextProvider({
                       backgroundColor: 'rgba(0, 0, 0, 0.5)',
                     }}
                     onClick={() => {
-                      if (isPossibleOverlayClose !== null && isPossibleOverlayClose[modal.id]) {
+                      if (
+                        !closingModalIds.has(modal.id) &&
+                        isPossibleOverlayClose !== null &&
+                        isPossibleOverlayClose[modal.id]
+                      ) {
                         window.history.back();
                       }
                     }}
