@@ -70,13 +70,11 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     <BottomSheetContext value={contextValue}>
       {children}
 
-      <FloatingPortal>
-        <AnimatePresence>
-          {!!activeSheet && <BottomSheetOverlay isClosing={!activeSheet} />}
-        </AnimatePresence>
+      <AnimatePresence>
+        {!!activeSheet && (
+          <FloatingPortal>
+            <BottomSheetOverlay />
 
-        <AnimatePresence>
-          {!!activeSheet && (
             <motion.div
               ref={sheetRef}
               role='dialog'
@@ -86,8 +84,9 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{
-                duration: 0.54,
-                ease: [0.32, 0.72, 0, 1],
+                type: 'spring',
+                damping: 25,
+                stiffness: 300,
               }}
               drag='y'
               dragControls={dragControls}
@@ -125,9 +124,9 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
                 })}
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </FloatingPortal>
+          </FloatingPortal>
+        )}
+      </AnimatePresence>
     </BottomSheetContext>
   );
 }

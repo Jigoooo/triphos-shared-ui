@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import { bottomSheetOverlayStyle } from '../config/bottom-sheet-style.ts';
 
-export function BottomSheetOverlay({ isClosing = false }: { isClosing?: boolean }) {
+export function BottomSheetOverlay() {
   return (
     <motion.div
       role='presentation'
@@ -11,19 +11,19 @@ export function BottomSheetOverlay({ isClosing = false }: { isClosing?: boolean 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.1 }}
+      transition={{
+        type: 'tween',
+        duration: 0.2,
+      }}
       style={bottomSheetOverlayStyle}
     >
       <FloatingOverlay
         lockScroll
         style={{
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          pointerEvents: isClosing ? 'none' : 'auto',
         }}
         onClick={() => {
-          if (!isClosing) {
-            window.history.back();
-          }
+          window.history.back();
         }}
       />
     </motion.div>
