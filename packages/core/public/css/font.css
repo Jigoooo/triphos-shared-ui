@@ -63,42 +63,42 @@
     src: url('../fonts/Pretendard/PretendardVariable.woff2') format('woff2-variations');
 }
 
-@supports (font-variant-numeric: tabular-nums) {
-    * {
-        font-variant-numeric: tabular-nums;
-        -webkit-font-feature-settings: "tnum" 1;
-        font-feature-settings: "tnum" 1;
-    }
-}
+/*@supports (font-variant-numeric: tabular-nums) {*/
+/*    * {*/
+/*        font-variant-numeric: tabular-nums;*/
+/*        -webkit-font-feature-settings: "tnum" 1;*/
+/*        font-feature-settings: "tnum" 1;*/
+/*    }*/
+/*}*/
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
     @supports (-webkit-touch-callout: none) {
         /* iOS Safari/WebView만 감지 */
 
         /* Pretendard Variable Font를 위한 iOS 전용 fallback */
-        @font-face {
-            font-family: 'Pretendard-iOS-Fix';
-            src: local('Pretendard Variable'), local('Pretendard');
-            font-weight: 400;
-            font-feature-settings: "tnum" 1, "lnum" 1;
-            font-display: swap;
-        }
+        /*@font-face {*/
+        /*    font-family: 'Pretendard-iOS-Fix';*/
+        /*    src: local('Pretendard Variable'), local('Pretendard');*/
+        /*    font-weight: 400;*/
+        /*    font-feature-settings: "tnum" 1, "lnum" 1;*/
+        /*    font-display: swap;*/
+        /*}*/
 
-        @font-face {
-            font-family: 'Pretendard-iOS-Fix';
-            src: local('Pretendard Variable'), local('Pretendard');
-            font-weight: 500;
-            font-feature-settings: "tnum" 1, "lnum" 1;
-            font-display: swap;
-        }
+        /*@font-face {*/
+        /*    font-family: 'Pretendard-iOS-Fix';*/
+        /*    src: local('Pretendard Variable'), local('Pretendard');*/
+        /*    font-weight: 500;*/
+        /*    font-feature-settings: "tnum" 1, "lnum" 1;*/
+        /*    font-display: swap;*/
+        /*}*/
 
-        @font-face {
-            font-family: 'Pretendard-iOS-Fix';
-            src: local('Pretendard Variable'), local('Pretendard');
-            font-weight: 600;
-            font-feature-settings: "tnum" 1, "lnum" 1;
-            font-display: swap;
-        }
+        /*@font-face {*/
+        /*    font-family: 'Pretendard-iOS-Fix';*/
+        /*    src: local('Pretendard Variable'), local('Pretendard');*/
+        /*    font-weight: 600;*/
+        /*    font-feature-settings: "tnum" 1, "lnum" 1;*/
+        /*    font-display: swap;*/
+        /*}*/
 
         /* iOS에서 Pretendard Variable 대신 고정 폰트 사용 */
         body, * {
@@ -113,12 +113,5 @@
         /*    -webkit-font-feature-settings: "tnum" 1 !important;*/
         /*    font-feature-settings: "tnum" 1 !important;*/
         /*}*/
-
-        /* iOS WebView 텍스트 렌더링 최적화 */
-        * {
-            -webkit-text-size-adjust: 100% !important;
-            -webkit-font-smoothing: antialiased !important;
-            text-rendering: optimizeLegibility !important;
-        }
     }
 }
