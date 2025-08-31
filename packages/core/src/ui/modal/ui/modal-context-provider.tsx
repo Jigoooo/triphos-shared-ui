@@ -75,11 +75,25 @@ export function ModalContextProvider({
           setClosingModalIds((prev) => new Set(prev).add(top.id));
 
           setTimeout(() => {
-            setModalList((prev) => prev.filter((item) => item.id !== top.id));
+            // ✅ 최상단 모달 제거 + 남아있으면 센티넬 재무장
+            setModalList((prev) => {
+              const next = prev.filter((item) => item.id !== top.id);
 
-            queueMicrotask(() => {
-              const resolve = popWaitersRef.current.shift();
-              resolve?.();
+              queueMicrotask(() => {
+                const resolve = popWaitersRef.current.shift();
+                resolve?.();
+
+                // 남은 모달이 있으면 popstate 한 번 더에 대비해 센티넬 재삽입
+                if (next.length > 0) {
+                  const state = {
+                    __layer: 'modal',
+                    modalId: `modal_${Date.now()}_${Math.random()}`,
+                  };
+                  window.history.pushState(state, '');
+                }
+              });
+
+              return next;
             });
           }, 50);
 
