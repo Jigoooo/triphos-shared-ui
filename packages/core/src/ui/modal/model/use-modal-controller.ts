@@ -2,50 +2,30 @@ import { type RefObject, useEffect, useRef } from 'react';
 
 export function useModalController({
   modalRef,
-  modalIds,
+  isOpen,
   onClose,
 }: {
   modalRef: RefObject<HTMLDivElement | null>;
-  modalIds: string[];
-  onClose: (id: string) => void;
+  isOpen: boolean;
+  onClose: () => void;
 }) {
-  const modalStackRef = useRef<string[]>([]);
-  const hasHistoryStateRef = useRef(false);
+  const myIdRef = useRef<string | null>(null);
 
   useEffect(() => {
-    // 모달이 모두 닫힌 경우
-    if (modalIds.length === 0) {
-      modalStackRef.current = [];
-      hasHistoryStateRef.current = false;
-      return;
-    }
+    if (!isOpen) return;
 
-    // 첫 모달이 열릴 때만 history state 추가
-    if (modalIds.length === 1 && !hasHistoryStateRef.current) {
-      window.history.pushState({ __layer: 'modal' }, '');
-      hasHistoryStateRef.current = true;
-    }
+    const modalId = `modal_${Date.now()}_${Math.random()}`;
+    myIdRef.current = modalId;
 
-    // 내부 스택을 현재 모달들과 동기화
-    modalStackRef.current = [...modalIds];
+    const state = { __layer: 'modal', modalId };
+    window.history.pushState(state, '');
 
     const handlePopState = (e: PopStateEvent) => {
-      const currentState = e.state;
+      const active = e.state && e.state.__layer === 'modal' ? e.state : null;
+      const activeId = active?.modalId ?? null;
 
-      // 모달 상태가 아닌 곳으로 돌아간 경우 (뒤로가기)
-      if (!currentState || currentState.__layer !== 'modal') {
-        // 가장 최근 모달부터 하나씩 닫기
-        if (modalStackRef.current.length > 0) {
-          const lastModalId = modalStackRef.current[modalStackRef.current.length - 1];
-          modalStackRef.current.pop();
-
-          // 마지막 모달이면 history state도 제거
-          if (modalStackRef.current.length === 0) {
-            hasHistoryStateRef.current = false;
-          }
-
-          onClose(lastModalId);
-        }
+      if (activeId !== myIdRef.current) {
+        onClose();
       }
     };
 
@@ -53,11 +33,12 @@ export function useModalController({
 
     return () => {
       window.removeEventListener('popstate', handlePopState);
+      if (myIdRef.current === modalId) myIdRef.current = null;
     };
-  }, [modalIds, onClose]);
+  }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (modalIds.length > 0) {
+    if (isOpen) {
       setTimeout(() => {
         modalRef.current?.focus();
       }, 50);
@@ -72,11 +53,7 @@ export function useModalController({
           if (isModalFocused) {
             event.preventDefault();
             event.stopPropagation();
-            // 가장 최근 모달 닫기
-            const lastModalId = modalIds[modalIds.length - 1];
-            if (lastModalId) {
-              window.history.back();
-            }
+            onClose();
           }
         }
       };
@@ -89,5 +66,5 @@ export function useModalController({
         document.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [modalIds, modalRef]);
+  }, [isOpen, modalRef, onClose]);
 }
