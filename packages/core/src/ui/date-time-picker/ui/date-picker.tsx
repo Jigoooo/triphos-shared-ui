@@ -16,6 +16,7 @@ import { LuCalendar } from 'react-icons/lu';
 
 import { Calendar } from './calendar.tsx';
 import { DateInputField } from './date-input-field.tsx';
+import { getDefaultDateFormat } from '../lib/get-default-date-format.ts';
 import type { DatePickerProps } from '../model/picker-type.ts';
 import { useDatePicker } from '../model/use-date-picker.ts';
 import { zIndex } from '@/constants';
@@ -33,30 +34,13 @@ export function DatePicker({
   dateFormat,
   minDate,
   maxDate,
-  openListener,
+  onOpen,
   InputComponent,
   endDecorator,
   containerStyle,
-  inputStyle,
+  style,
 }: DatePickerProps) {
-  const getDefaultDateFormat = (inputDateFormat?: string) => {
-    if (inputDateFormat) {
-      return inputDateFormat;
-    }
-
-    switch (mode) {
-      case 'day':
-        return 'yyyy-MM-dd';
-      case 'month':
-        return 'yyyy-MM';
-      case 'year':
-        return 'yyyy';
-      default:
-        return 'yyyy-MM-dd';
-    }
-  };
-
-  const applyDateFormat = getDefaultDateFormat(dateFormat);
+  const applyDateFormat = getDefaultDateFormat(mode, dateFormat);
 
   const { selectedDate, showDatePicker, setShowDatePicker, currentDate, handleDateClick } =
     useDatePicker({ date: value, onChange });
@@ -70,10 +54,10 @@ export function DatePicker({
   });
 
   useEffect(() => {
-    if (openListener) {
-      openListener(showDatePicker);
+    if (onOpen) {
+      onOpen(showDatePicker);
     }
-  }, [openListener, showDatePicker]);
+  }, [onOpen, showDatePicker]);
 
   const { refs, floatingStyles, context } = useFloating({
     open: showDatePicker,
@@ -117,7 +101,7 @@ export function DatePicker({
               style={{
                 width: width !== 'auto' ? width : '10rem',
                 cursor: 'pointer',
-                ...inputStyle,
+                ...style,
               }}
               value={inputSelectedDateString}
               onClick={handleInputClick}

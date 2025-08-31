@@ -80,7 +80,7 @@ export type {
   CustomContainerRendererProps,
   CustomOptionRendererProps,
 } from './ui/select';
-export { DatePicker, DateFromToPicker, TimePicker } from './ui/date-time-picker';
+export { DatePicker, DateFromToPicker, TimePicker, MobileDatePicker } from './ui/date-time-picker';
 export type { DatePickerProps } from './ui/date-time-picker';
 
 export { SplashCursor } from './ui/cursor';

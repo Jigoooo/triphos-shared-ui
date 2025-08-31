@@ -1,25 +1,30 @@
 import type { Placement, Strategy } from '@floating-ui/react';
 import type { CSSProperties, HTMLProps, ReactNode } from 'react';
 
+import { type InputProps } from '@/ui/input';
+
 export type TimePart = 'hours' | 'minutes' | 'seconds';
 
 export type DatePickerMode = 'year' | 'month' | 'day';
 
-export type DatePickerProps = {
+type BaseDatePickerProps = {
   mode?: DatePickerMode;
-  strategy?: Strategy;
-  placement?: Placement;
-  width?: number | string;
-  isInputMode?: boolean;
   value?: Date;
   onChange?: (value: Date) => void;
   dateFormat?: string;
   minDate?: Date;
   maxDate?: Date;
-  openListener?: (isShowDatePicker: boolean) => void;
+};
+
+export type DatePickerProps = BaseDatePickerProps & {
+  style?: CSSProperties;
+  strategy?: Strategy;
+  placement?: Placement;
+  width?: number | string;
+  isInputMode?: boolean;
+  onOpen?: (isShowDatePicker: boolean) => void;
   endDecorator?: ReactNode;
   containerStyle?: CSSProperties;
-  inputStyle?: CSSProperties;
   InputComponent?: ({
     dateString,
     openDatePicker,
@@ -29,16 +34,27 @@ export type DatePickerProps = {
   }) => ReactNode;
 };
 
-export type PickerProps = {
+export type MobileDatePickerProps = InputProps & BaseDatePickerProps;
+
+type BasePickerProps = {
   mode: DatePickerMode;
+  minDate?: Date;
+  maxDate?: Date;
+};
+
+export type PickerProps = BasePickerProps & {
   setFloating: (node: HTMLElement | null) => void;
   floatingStyles: CSSProperties;
   getFloatingProps: (userProps?: HTMLProps<HTMLElement>) => Record<string, unknown>;
   handleDateClick: (date: Date) => void;
   selectedDate: Date | null;
   currentDate: Date;
-  minDate?: Date;
-  maxDate?: Date;
+};
+
+export type MobilePickerProps = BasePickerProps & {
+  value?: Date;
+  onChange?: (value: Date) => void;
+  closeDatePicker: () => void;
 };
 
 export type CalendarProps = Omit<
