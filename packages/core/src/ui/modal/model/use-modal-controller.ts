@@ -21,13 +21,15 @@ export function useModalController({
       historyStackRef.current.push(id);
     });
 
-    // 제거된 모달 처리 (내부적으로 닫힌 경우)
-    const removedIds = historyStackRef.current.filter((id) => !modalIds.includes(id));
-    if (removedIds.length > 0 && !isInternalCloseRef.current) {
-      // X 버튼으로 닫은 경우 history stack 업데이트
-      historyStackRef.current = historyStackRef.current.filter((id) => modalIds.includes(id));
+    // 제거된 모달 처리
+    if (!isInternalCloseRef.current) {
+      // X 버튼 등으로 닫은 경우 - history.back()이 이미 호출됨
+      // historyStackRef를 modalIds와 동기화
+      historyStackRef.current = [...modalIds];
+    } else {
+      // popstate로 인한 닫기 - isInternalCloseRef가 true
+      isInternalCloseRef.current = false;
     }
-    isInternalCloseRef.current = false;
 
     if (modalIds.length === 0) {
       historyStackRef.current = [];
