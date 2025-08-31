@@ -1,8 +1,6 @@
 import type { Placement, Strategy } from '@floating-ui/react';
 import type { CSSProperties, HTMLProps, ReactNode } from 'react';
 
-import { type InputProps } from '@/ui/input';
-
 export type TimePart = 'hours' | 'minutes' | 'seconds';
 
 export type DatePickerMode = 'year' | 'month' | 'day';
@@ -14,17 +12,6 @@ type BaseDatePickerProps = {
   dateFormat?: string;
   minDate?: Date;
   maxDate?: Date;
-};
-
-export type DatePickerProps = BaseDatePickerProps & {
-  style?: CSSProperties;
-  strategy?: Strategy;
-  placement?: Placement;
-  width?: number | string;
-  isInputMode?: boolean;
-  onOpen?: (isShowDatePicker: boolean) => void;
-  endDecorator?: ReactNode;
-  containerStyle?: CSSProperties;
   InputComponent?: ({
     dateString,
     openDatePicker,
@@ -32,9 +19,19 @@ export type DatePickerProps = BaseDatePickerProps & {
     dateString: string;
     openDatePicker: () => void;
   }) => ReactNode;
+  inputStyle?: CSSProperties;
+  endDecorator?: ReactNode;
 };
 
-export type MobileDatePickerProps = InputProps & BaseDatePickerProps;
+export type DatePickerProps = BaseDatePickerProps & {
+  strategy?: Strategy;
+  placement?: Placement;
+  isInputMode?: boolean;
+  onOpen?: (isShowDatePicker: boolean) => void;
+  containerStyle?: CSSProperties;
+};
+
+export type MobileDatePickerProps = BaseDatePickerProps;
 
 type BasePickerProps = {
   mode: DatePickerMode;

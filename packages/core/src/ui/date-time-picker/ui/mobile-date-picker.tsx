@@ -16,9 +16,9 @@ export function MobileDatePicker({
   dateFormat,
   minDate,
   maxDate,
-  style,
+  InputComponent,
+  inputStyle,
   endDecorator,
-  ...props
 }: MobileDatePickerProps) {
   const applyDateFormat = getDefaultDateFormat(mode, dateFormat);
   const inputSelectedDateString = value ? format(value, applyDateFormat) : '';
@@ -41,25 +41,31 @@ export function MobileDatePicker({
 
   return (
     <FlexColumn>
-      <OutlinedInput
-        style={{
-          cursor: 'pointer',
-          ...style,
-        }}
-        value={inputSelectedDateString}
-        onClick={openMobileDatePickerBottomSheet}
-        readOnly
-        endDecorator={
-          !endDecorator ? (
-            <FlexRow style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-              <LuCalendar style={{ fontSize: '1.1rem' }} />
-            </FlexRow>
-          ) : (
-            endDecorator
-          )
-        }
-        {...props}
-      />
+      {InputComponent ? (
+        InputComponent({
+          dateString: inputSelectedDateString,
+          openDatePicker: openMobileDatePickerBottomSheet,
+        })
+      ) : (
+        <OutlinedInput
+          style={{
+            cursor: 'pointer',
+            ...inputStyle,
+          }}
+          value={inputSelectedDateString}
+          onClick={openMobileDatePickerBottomSheet}
+          readOnly
+          endDecorator={
+            !endDecorator ? (
+              <FlexRow style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                <LuCalendar style={{ fontSize: '1.1rem' }} />
+              </FlexRow>
+            ) : (
+              endDecorator
+            )
+          }
+        />
+      )}
     </FlexColumn>
   );
 }

@@ -27,7 +27,6 @@ export function DatePicker({
   mode = 'day',
   strategy = 'absolute',
   placement = 'bottom-start',
-  width = 'auto',
   isInputMode = false,
   value,
   onChange,
@@ -38,7 +37,7 @@ export function DatePicker({
   InputComponent,
   endDecorator,
   containerStyle,
-  style,
+  inputStyle,
 }: DatePickerProps) {
   const applyDateFormat = getDefaultDateFormat(mode, dateFormat);
 
@@ -88,7 +87,7 @@ export function DatePicker({
   const inputSelectedDateString = selectedDate ? format(selectedDate, applyDateFormat) : '';
 
   return (
-    <FlexColumn ref={datePickerRef} style={{ position: 'relative', width, ...containerStyle }}>
+    <FlexColumn ref={datePickerRef} style={{ position: 'relative', ...containerStyle }}>
       <div ref={refs.setReference} {...getReferenceProps()}>
         {!isInputMode ? (
           InputComponent ? (
@@ -99,9 +98,8 @@ export function DatePicker({
           ) : (
             <OutlinedInput
               style={{
-                width: width !== 'auto' ? width : '10rem',
                 cursor: 'pointer',
-                ...style,
+                ...inputStyle,
               }}
               value={inputSelectedDateString}
               onClick={handleInputClick}
