@@ -1,6 +1,5 @@
 * {
   -webkit-touch-callout: none;
-  font-family: Pretendard;
 }
 
 *,
@@ -31,6 +30,15 @@ html {
 }
 
 html, body {
+  font-family:
+    -apple-system, /* iOS Safari / macOS */
+    BlinkMacSystemFont, /* Chrome on macOS */
+    "Segoe UI", /* Windows */
+    Roboto, /* Android (AOS) */
+    "Helvetica Neue", Helvetica, Arial, /* 추가 서체 */
+    "Noto Sans KR", "Apple SD Gothic Neo", /* 한글 fallback */
+    sans-serif; /* 최종 fallback */
+
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
