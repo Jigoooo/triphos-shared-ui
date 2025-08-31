@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { DayCalendar } from './day-calendar.tsx';
 import { MonthCalendar } from './month-calendar.tsx';
 import { YearCalendar } from './year-calendar.tsx';
-import { type DatePickerMode, type MobilePickerProps } from '../model/picker-type.ts';
+import {
+  type CalendarProps,
+  type DatePickerMode,
+  type MobilePickerProps,
+} from '../model/picker-type.ts';
 
 export function MobileCalendar({
   mode,
@@ -55,13 +59,24 @@ export function MobileCalendar({
     setDisplayMode,
   };
 
+  return (
+    <div style={{ padding: '1.2rem' }}>
+      <SwitchCalendar {...enhancedProps} />
+    </div>
+  );
+}
+
+function SwitchCalendar({
+  displayMode,
+  ...props
+}: CalendarProps & { displayMode: DatePickerMode }) {
   switch (displayMode) {
     case 'year':
-      return <YearCalendar {...enhancedProps} />;
+      return <YearCalendar {...props} />;
     case 'month':
-      return <MonthCalendar {...enhancedProps} />;
+      return <MonthCalendar {...props} />;
     case 'day':
     default:
-      return <DayCalendar {...enhancedProps} />;
+      return <DayCalendar {...props} />;
   }
 }
