@@ -63,49 +63,38 @@ export function ModalContextProvider({
     });
   }, []);
 
+  // 컨텍스트 소비자에게 노출할 id 목록은 그대로 유지
   const modalIds = modalList.map((modal) => ({ id: modal.id }));
+  const modalIdList = modalList.map((m) => m.id); // ✅ 훅에 넘길 순수 id 배열
 
   useModalController({
     modalRef,
-    isOpen: modalList.length > 0,
-    onClose: () => {
-      if (modalList.length > 0) {
-        const top = modalList.find((m) => m.order === modalList.length - 1);
-        if (top) {
-          setClosingModalIds((prev) => new Set(prev).add(top.id));
+    modalIds: modalIdList, // ✅ 변경된 시그니처
+    onClose: (modalId: string) => {
+      // ✅ 어떤 모달을 닫을지 id가 들어옴
+      const modalToClose = modalList.find((m) => m.id === modalId);
+      if (!modalToClose) return;
 
-          setTimeout(() => {
-            // ✅ 최상단 모달 제거 + 남아있으면 센티넬 재무장
-            setModalList((prev) => {
-              const next = prev.filter((item) => item.id !== top.id);
+      setClosingModalIds((prev) => new Set(prev).add(modalId));
 
-              queueMicrotask(() => {
-                const resolve = popWaitersRef.current.shift();
-                resolve?.();
+      // 살짝의 애니메이션/정리 대기
+      setTimeout(() => {
+        setModalList((prev) => prev.filter((item) => item.id !== modalId));
 
-                // 남은 모달이 있으면 popstate 한 번 더에 대비해 센티넬 재삽입
-                if (next.length > 0) {
-                  const state = {
-                    __layer: 'modal',
-                    modalId: `modal_${Date.now()}_${Math.random()}`,
-                  };
-                  window.history.pushState(state, '');
-                }
-              });
+        queueMicrotask(() => {
+          const resolve = popWaitersRef.current.shift();
+          resolve?.();
+        });
+      }, 50);
 
-              return next;
-            });
-          }, 50);
-
-          setTimeout(() => {
-            setClosingModalIds((prev) => {
-              const newSet = new Set(prev);
-              newSet.delete(top.id);
-              return newSet;
-            });
-          }, 1000);
-        }
-      }
+      // overlay pointer events 복구 타이밍
+      setTimeout(() => {
+        setClosingModalIds((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(modalId);
+          return newSet;
+        });
+      }, 1000);
     },
   });
 
@@ -161,7 +150,7 @@ export function ModalContextProvider({
                     overlayRef: overlayRef,
                     isOpen: true,
                     close: () => {
-                      window.history.back();
+                      window.history.back(); // 항상 popstate 경유
                     },
                     closeAsync: () => closeAsync(),
                   })}
@@ -185,16 +174,14 @@ export function ModalContextProvider({
                 >
                   <FloatingOverlay
                     lockScroll
-                    style={{
-                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    }}
+                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
                     onClick={() => {
                       if (
                         !closingModalIds.has(modal.id) &&
                         isPossibleOverlayClose !== null &&
                         isPossibleOverlayClose[modal.id]
                       ) {
-                        window.history.back();
+                        window.history.back(); // overlay로도 popstate 경유
                       }
                     }}
                   />
