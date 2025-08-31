@@ -64,33 +64,32 @@ export function ModalContextProvider({
   }, []);
 
   const modalIds = modalList.map((modal) => ({ id: modal.id }));
+  const modalIdList = modalList.map((modal) => modal.id);
 
   useModalController({
     modalRef,
-    isOpen: modalList.length > 0,
-    onClose: () => {
-      if (modalList.length > 0) {
-        const top = modalList.find((m) => m.order === modalList.length - 1);
-        if (top) {
-          setClosingModalIds((prev) => new Set(prev).add(top.id));
+    modalIds: modalIdList,
+    onClose: (modalId: string) => {
+      const modalToClose = modalList.find((m) => m.id === modalId);
+      if (modalToClose) {
+        setClosingModalIds((prev) => new Set(prev).add(modalId));
 
-          setTimeout(() => {
-            setModalList((prev) => prev.filter((item) => item.id !== top.id));
+        setTimeout(() => {
+          setModalList((prev) => prev.filter((item) => item.id !== modalId));
 
-            queueMicrotask(() => {
-              const resolve = popWaitersRef.current.shift();
-              resolve?.();
-            });
-          }, 50);
+          queueMicrotask(() => {
+            const resolve = popWaitersRef.current.shift();
+            resolve?.();
+          });
+        }, 50);
 
-          setTimeout(() => {
-            setClosingModalIds((prev) => {
-              const newSet = new Set(prev);
-              newSet.delete(top.id);
-              return newSet;
-            });
-          }, 1000);
-        }
+        setTimeout(() => {
+          setClosingModalIds((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(modalId);
+            return newSet;
+          });
+        }, 1000);
       }
     },
   });

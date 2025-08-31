@@ -11,8 +11,8 @@ import {
   type BottomSheetItem,
   type BottomSheetRenderProps,
 } from '../model/bottom-sheet-type.ts';
+import { useBottomSheetController } from '../model/use-bottom-sheet-controller.ts';
 import { useThresholdInPixels } from '../model/use-threshold-in-pixels.ts';
-import { useModalController } from '@/ui/modal';
 
 export function BottomSheetProvider({ children }: { children: ReactNode }) {
   const [activeSheet, setActiveSheet] = useState<BottomSheetItem | null>(null);
@@ -55,7 +55,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     setActiveSheet(null);
   };
 
-  useModalController({
+  useBottomSheetController({
     modalRef: sheetRef,
     isOpen: !!activeSheet,
     onClose: close,

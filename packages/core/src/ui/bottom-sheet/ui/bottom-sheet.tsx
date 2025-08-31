@@ -6,8 +6,8 @@ import { BottomSheetGrab } from './bottom-sheet-grab.tsx';
 import { BottomSheetOverlay } from './bottom-sheet-overlay.tsx';
 import { getBottomSheetContainerStyle, getBottomSheetStyle } from '../config/bottom-sheet-style.ts';
 import { type BottomSheetProps } from '../model/bottom-sheet-type.ts';
+import { useBottomSheetController } from '../model/use-bottom-sheet-controller.ts';
 import { useThresholdInPixels } from '../model/use-threshold-in-pixels.ts';
-import { useModalController } from '@/ui/modal';
 
 export function BottomSheet({
   isOpen,
@@ -26,7 +26,7 @@ export function BottomSheet({
   const bottomSheetContainerStyle = getBottomSheetContainerStyle({ maxHeight });
   const bottomSheetStyle = getBottomSheetStyle({ bottomInset });
 
-  useModalController({
+  useBottomSheetController({
     modalRef: sheetRef,
     isOpen,
     onClose,

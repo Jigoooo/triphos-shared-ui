@@ -7,10 +7,10 @@ import { AlertDialogActions } from './alert-dialog-actions.tsx';
 import { AlertDialogContents } from './alert-dialog-contents.tsx';
 import { AlertDialogHeader } from './alert-dialog-header.tsx';
 import { dialog, useDialogStore } from '../model/dialog-store.ts';
+import { useDialogController } from '../model/use-dialog-controller.ts';
 import { zIndex } from '@/constants';
 import { detectDeviceTypeAndOS } from '@/lib';
 import { FlexColumn } from '@/ui/layout';
-import { useModalController } from '@/ui/modal';
 
 const { isMobile } = detectDeviceTypeAndOS();
 
@@ -19,7 +19,7 @@ export function AlertDialog() {
   const dialogConfig = useDialogStore(useShallow((state) => state.dialogConfig));
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
-  useModalController({
+  useDialogController({
     modalRef: dialogRef,
     isOpen: dialogOpen,
     onClose: dialog.close,
