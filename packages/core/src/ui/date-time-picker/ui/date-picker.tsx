@@ -21,7 +21,7 @@ import type { DatePickerProps } from '../model/picker-type.ts';
 import { useDatePicker } from '../model/use-date-picker.ts';
 import { zIndex } from '@/constants';
 import { OutlinedInput } from '@/ui/input';
-import { FlexColumn, FlexRow } from '@/ui/layout';
+import { FlexColumn } from '@/ui/layout';
 
 export function DatePicker({
   mode = 'day',
@@ -104,17 +104,7 @@ export function DatePicker({
               value={inputSelectedDateString}
               onClick={handleInputClick}
               readOnly
-              endDecorator={
-                !endDecorator ? (
-                  <FlexRow
-                    style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}
-                  >
-                    <LuCalendar style={{ fontSize: '1.1rem' }} />
-                  </FlexRow>
-                ) : (
-                  endDecorator
-                )
-              }
+              endDecorator={!endDecorator ? <LuCalendar /> : endDecorator}
             />
           )
         ) : (

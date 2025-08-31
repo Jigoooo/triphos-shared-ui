@@ -7,7 +7,7 @@ import { getDefaultDateFormat } from '../lib/get-default-date-format.ts';
 import { type MobileDatePickerProps } from '../model/picker-type.ts';
 import { useBottomSheet } from '@/ui/bottom-sheet';
 import { OutlinedInput } from '@/ui/input';
-import { FlexColumn, FlexRow } from '@/ui/layout';
+import { FlexColumn } from '@/ui/layout';
 
 export function MobileDatePicker({
   mode = 'day',
@@ -49,21 +49,14 @@ export function MobileDatePicker({
       ) : (
         <OutlinedInput
           style={{
+            color: '#111111',
             cursor: 'pointer',
             ...inputStyle,
           }}
           value={inputSelectedDateString}
           onClick={openMobileDatePickerBottomSheet}
           readOnly
-          endDecorator={
-            !endDecorator ? (
-              <FlexRow style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                <LuCalendar style={{ fontSize: '1.1rem' }} />
-              </FlexRow>
-            ) : (
-              endDecorator
-            )
-          }
+          endDecorator={!endDecorator ? <LuCalendar /> : endDecorator}
         />
       )}
     </FlexColumn>
