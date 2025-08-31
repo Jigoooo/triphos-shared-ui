@@ -70,9 +70,6 @@ export type { LinearProgressProps } from './ui/progress';
 export { LoaderProvider, DeferredWrapper, Skeleton, loader, useLoaderStore } from './ui/loader';
 export type { DeferredWrapperProps, SkeletonProps, LoaderStates, LoaderStore } from './ui/loader';
 
-export { ComponentErrorProvider } from './ui/error';
-export type { ComponentErrorProviderProps } from './ui/error';
-
 export { AnchorWithoutAction, AnchorPicker } from './ui/picker';
 export type { AnchorWithoutActionProps, AnchorPickerProps } from './ui/picker';
 
