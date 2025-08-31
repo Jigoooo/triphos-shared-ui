@@ -1,3 +1,4 @@
+// use-modal-controller.ts
 import { type RefObject, useEffect, useRef } from 'react';
 
 export function useModalController({
@@ -6,76 +7,48 @@ export function useModalController({
   onClose,
 }: {
   modalRef: RefObject<HTMLDivElement | null>;
-  modalIds: string[]; // ✅ 모달 id 배열로 변경
-  onClose: (id: string) => void; // ✅ 어떤 모달을 닫을지 id 전달
+  modalIds: string[];
+  onClose: (id: string) => void;
 }) {
-  // 히스토리에 쌓아둔 모달 id 스택(가장 끝이 top)
   const historyStackRef = useRef<string[]>([]);
+  const isClosingRef = useRef(false);
 
-  // 새로 열린 모달에 대해 history state 푸시
+  // 모달 오픈 시마다 pushState
   useEffect(() => {
-    // 새로 추가된 ids
+    // 새로 추가된 모달들만 감지
     const newIds = modalIds.filter((id) => !historyStackRef.current.includes(id));
     newIds.forEach((id) => {
-      window.history.pushState({ __layer: 'modal', modalId: id }, '');
+      const state = { __layer: 'modal', modalId: id };
+      window.history.pushState(state, '');
       historyStackRef.current.push(id);
     });
 
-    // (방어) 외부에서 강제 제거된 경우 스택도 동기화
-    historyStackRef.current = historyStackRef.current.filter((id) => modalIds.includes(id));
+    // 모달이 모두 닫힘 → 스택 초기화
+    if (modalIds.length === 0) {
+      historyStackRef.current = [];
+    }
   }, [modalIds]);
 
+  // popstate로 닫기(뒤로가기/overlay 등)
   useEffect(() => {
-    if (modalIds.length === 0) {
-      // 모든 모달 닫힘 → 스택 초기화
-      historyStackRef.current = [];
-      return;
-    }
+    if (modalIds.length === 0) return;
 
     const handlePopState = (e: PopStateEvent) => {
+      if (isClosingRef.current) return;
+
       const state = e.state;
-      const isModalState = state && state.__layer === 'modal';
+      const topId = historyStackRef.current[historyStackRef.current.length - 1];
 
-      // 현재 열린 모달이 하나도 없으면(안전망)
-      if (historyStackRef.current.length === 0) return;
-
-      if (!isModalState) {
-        // 브라우저가 모달 state가 아닌 곳으로 이동하려 함 → 우리가 top 하나 닫아서 가로챔
-        const toClose = historyStackRef.current.pop();
-        if (toClose) onClose(toClose);
-
-        // 아직 모달 남았으면 센티넬 재무장
-        const top = historyStackRef.current[historyStackRef.current.length - 1];
-        if (top) {
-          window.history.pushState({ __layer: 'modal', modalId: top }, '');
+      // state가 모달이 아니거나, 현재 topId와 불일치면 "가장 최근 모달 하나" 닫기
+      if (!state || state.__layer !== 'modal' || state.modalId !== topId) {
+        if (topId) {
+          isClosingRef.current = true;
+          onClose(topId);
+          // onClose가 모달을 실제로 제거하면, 다음 렌더에서 스택이 sync됨
+          queueMicrotask(() => {
+            isClosingRef.current = false;
+          });
         }
-        return;
-      }
-
-      // modal state로 이동한 경우: targetId 이후의 모달들만 정리
-      const targetId: string = state.modalId;
-      const idx = historyStackRef.current.indexOf(targetId);
-
-      if (idx === -1) {
-        // 모르는 state면 동일하게 top 하나 닫고 재무장
-        const toClose = historyStackRef.current.pop();
-        if (toClose) onClose(toClose);
-        const top = historyStackRef.current[historyStackRef.current.length - 1];
-        if (top) {
-          window.history.pushState({ __layer: 'modal', modalId: top }, '');
-        }
-        return;
-      }
-
-      // target 위에 쌓인 것들만 닫기 (역순으로)
-      const toCloseList = historyStackRef.current.slice(idx + 1).reverse();
-      historyStackRef.current = historyStackRef.current.slice(0, idx + 1);
-      toCloseList.forEach((id) => onClose(id));
-
-      // target(=새 top) 위로 센티넬 재무장
-      const top = historyStackRef.current[historyStackRef.current.length - 1];
-      if (top) {
-        window.history.pushState({ __layer: 'modal', modalId: top }, '');
       }
     };
 
@@ -83,11 +56,10 @@ export function useModalController({
     return () => window.removeEventListener('popstate', handlePopState);
   }, [modalIds, onClose]);
 
-  // ESC로 top 모달 닫기 + 포커스
+  // ESC로 top 모달 닫기
   useEffect(() => {
     if (modalIds.length === 0) return;
 
-    // 포커스(약간의 레이턴시 허용)
     setTimeout(() => {
       modalRef.current?.focus();
     }, 50);
@@ -102,14 +74,13 @@ export function useModalController({
         if (isModalFocused) {
           event.preventDefault();
           event.stopPropagation();
-
-          // top 하나 닫고, 남아있으면 센티넬 재무장
-          const toClose = historyStackRef.current.pop();
-          if (toClose) onClose(toClose);
-
-          const top = historyStackRef.current[historyStackRef.current.length - 1];
-          if (top) {
-            window.history.pushState({ __layer: 'modal', modalId: top }, '');
+          const topId = historyStackRef.current[historyStackRef.current.length - 1];
+          if (topId) {
+            isClosingRef.current = true;
+            onClose(topId);
+            queueMicrotask(() => {
+              isClosingRef.current = false;
+            });
           }
         }
       }

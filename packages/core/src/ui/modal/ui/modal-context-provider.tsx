@@ -1,3 +1,4 @@
+// ModalContextProvider.tsx
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { type ReactNode, useCallback, useRef, useState } from 'react';
@@ -63,21 +64,17 @@ export function ModalContextProvider({
     });
   }, []);
 
-  // 컨텍스트 소비자에게 노출할 id 목록은 그대로 유지
-  const modalIds = modalList.map((modal) => ({ id: modal.id }));
-  const modalIdList = modalList.map((m) => m.id); // ✅ 훅에 넘길 순수 id 배열
+  const modalIds = modalList.map((m) => m.id);
 
   useModalController({
     modalRef,
-    modalIds: modalIdList, // ✅ 변경된 시그니처
+    modalIds,
     onClose: (modalId: string) => {
-      // ✅ 어떤 모달을 닫을지 id가 들어옴
       const modalToClose = modalList.find((m) => m.id === modalId);
       if (!modalToClose) return;
 
       setClosingModalIds((prev) => new Set(prev).add(modalId));
 
-      // 살짝의 애니메이션/정리 대기
       setTimeout(() => {
         setModalList((prev) => prev.filter((item) => item.id !== modalId));
 
@@ -87,7 +84,6 @@ export function ModalContextProvider({
         });
       }, 50);
 
-      // overlay pointer events 복구 타이밍
       setTimeout(() => {
         setClosingModalIds((prev) => {
           const newSet = new Set(prev);
@@ -99,7 +95,7 @@ export function ModalContextProvider({
   });
 
   const contextValue: ModalContextType = {
-    modalIds,
+    modalIds: modalList.map((m) => ({ id: m.id })), // 기존 타입 유지
     open,
     closeAsync,
     handleIsPossibleOverlayClose,
@@ -150,7 +146,7 @@ export function ModalContextProvider({
                     overlayRef: overlayRef,
                     isOpen: true,
                     close: () => {
-                      window.history.back(); // 항상 popstate 경유
+                      window.history.back();
                     },
                     closeAsync: () => closeAsync(),
                   })}
@@ -181,7 +177,7 @@ export function ModalContextProvider({
                         isPossibleOverlayClose !== null &&
                         isPossibleOverlayClose[modal.id]
                       ) {
-                        window.history.back(); // overlay로도 popstate 경유
+                        window.history.back();
                       }
                     }}
                   />
