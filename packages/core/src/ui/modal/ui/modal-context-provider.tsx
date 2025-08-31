@@ -1,4 +1,3 @@
-// ModalContextProvider.tsx
 import { FloatingOverlay, FloatingPortal } from '@floating-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { type ReactNode, useCallback, useRef, useState } from 'react';
@@ -64,38 +63,40 @@ export function ModalContextProvider({
     });
   }, []);
 
-  const modalIds = modalList.map((m) => m.id);
+  const modalIds = modalList.map((modal) => ({ id: modal.id }));
 
   useModalController({
     modalRef,
-    modalIds,
-    onClose: (modalId: string) => {
-      const modalToClose = modalList.find((m) => m.id === modalId);
-      if (!modalToClose) return;
+    isOpen: modalList.length > 0,
+    onClose: () => {
+      if (modalList.length > 0) {
+        const top = modalList.find((m) => m.order === modalList.length - 1);
+        if (top) {
+          setClosingModalIds((prev) => new Set(prev).add(top.id));
 
-      setClosingModalIds((prev) => new Set(prev).add(modalId));
+          setTimeout(() => {
+            setModalList((prev) => prev.filter((item) => item.id !== top.id));
 
-      setTimeout(() => {
-        setModalList((prev) => prev.filter((item) => item.id !== modalId));
+            queueMicrotask(() => {
+              const resolve = popWaitersRef.current.shift();
+              resolve?.();
+            });
+          }, 50);
 
-        queueMicrotask(() => {
-          const resolve = popWaitersRef.current.shift();
-          resolve?.();
-        });
-      }, 50);
-
-      setTimeout(() => {
-        setClosingModalIds((prev) => {
-          const newSet = new Set(prev);
-          newSet.delete(modalId);
-          return newSet;
-        });
-      }, 1000);
+          setTimeout(() => {
+            setClosingModalIds((prev) => {
+              const newSet = new Set(prev);
+              newSet.delete(top.id);
+              return newSet;
+            });
+          }, 1000);
+        }
+      }
     },
   });
 
   const contextValue: ModalContextType = {
-    modalIds: modalList.map((m) => ({ id: m.id })), // 기존 타입 유지
+    modalIds,
     open,
     closeAsync,
     handleIsPossibleOverlayClose,
@@ -170,7 +171,9 @@ export function ModalContextProvider({
                 >
                   <FloatingOverlay
                     lockScroll
-                    style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+                    style={{
+                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    }}
                     onClick={() => {
                       if (
                         !closingModalIds.has(modal.id) &&

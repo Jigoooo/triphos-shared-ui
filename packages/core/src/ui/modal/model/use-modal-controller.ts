@@ -1,92 +1,70 @@
-// use-modal-controller.ts
 import { type RefObject, useEffect, useRef } from 'react';
 
 export function useModalController({
   modalRef,
-  modalIds,
+  isOpen,
   onClose,
 }: {
   modalRef: RefObject<HTMLDivElement | null>;
-  modalIds: string[];
-  onClose: (id: string) => void;
+  isOpen: boolean;
+  onClose: () => void;
 }) {
-  const historyStackRef = useRef<string[]>([]);
-  const isClosingRef = useRef(false);
+  const myIdRef = useRef<string | null>(null);
 
-  // 모달 오픈 시마다 pushState
   useEffect(() => {
-    // 새로 추가된 모달들만 감지
-    const newIds = modalIds.filter((id) => !historyStackRef.current.includes(id));
-    newIds.forEach((id) => {
-      const state = { __layer: 'modal', modalId: id };
-      window.history.pushState(state, '');
-      historyStackRef.current.push(id);
-    });
+    if (!isOpen) return;
 
-    // 모달이 모두 닫힘 → 스택 초기화
-    if (modalIds.length === 0) {
-      historyStackRef.current = [];
-    }
-  }, [modalIds]);
+    const modalId = `modal_${Date.now()}_${Math.random()}`;
+    myIdRef.current = modalId;
 
-  // popstate로 닫기(뒤로가기/overlay 등)
-  useEffect(() => {
-    if (modalIds.length === 0) return;
+    const state = { __layer: 'modal', modalId };
+    window.history.pushState(state, '');
 
     const handlePopState = (e: PopStateEvent) => {
-      if (isClosingRef.current) return;
+      const active = e.state && e.state.__layer === 'modal' ? e.state : null;
+      const activeId = active?.modalId ?? null;
 
-      const state = e.state;
-      const topId = historyStackRef.current[historyStackRef.current.length - 1];
-
-      // state가 모달이 아니거나, 현재 topId와 불일치면 "가장 최근 모달 하나" 닫기
-      if (!state || state.__layer !== 'modal' || state.modalId !== topId) {
-        if (topId) {
-          isClosingRef.current = true;
-          onClose(topId);
-          // onClose가 모달을 실제로 제거하면, 다음 렌더에서 스택이 sync됨
-          queueMicrotask(() => {
-            isClosingRef.current = false;
-          });
-        }
+      if (activeId !== myIdRef.current) {
+        onClose();
       }
     };
 
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [modalIds, onClose]);
 
-  // ESC로 top 모달 닫기
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      if (myIdRef.current === modalId) myIdRef.current = null;
+    };
+  }, [isOpen, onClose]);
+
   useEffect(() => {
-    if (modalIds.length === 0) return;
+    if (isOpen) {
+      setTimeout(() => {
+        modalRef.current?.focus();
+      }, 50);
 
-    setTimeout(() => {
-      modalRef.current?.focus();
-    }, 50);
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          const isModalFocused =
+            modalRef.current?.contains(document.activeElement as Node) ||
+            !document.activeElement ||
+            document.activeElement === document.body;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        const isModalFocused =
-          modalRef.current?.contains(document.activeElement as Node) ||
-          !document.activeElement ||
-          document.activeElement === document.body;
-
-        if (isModalFocused) {
-          event.preventDefault();
-          event.stopPropagation();
-          const topId = historyStackRef.current[historyStackRef.current.length - 1];
-          if (topId) {
-            isClosingRef.current = true;
-            onClose(topId);
-            queueMicrotask(() => {
-              isClosingRef.current = false;
-            });
+          if (isModalFocused) {
+            event.preventDefault();
+            event.stopPropagation();
+            onClose();
           }
         }
-      }
-    };
+      };
 
-    document.addEventListener('keydown', handleKeyDown, { capture: true, passive: false });
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [modalIds, modalRef, onClose]);
+      document.addEventListener('keydown', handleKeyDown, {
+        capture: true,
+        passive: false,
+      });
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isOpen, modalRef, onClose]);
 }
