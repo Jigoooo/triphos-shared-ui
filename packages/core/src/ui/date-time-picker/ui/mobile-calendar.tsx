@@ -11,27 +11,22 @@ import {
 
 export function MobileCalendar({
   mode,
-  value,
+  initialValue,
   onChange,
   minDate,
   maxDate,
-  closeDatePicker,
 }: MobilePickerProps) {
   const [displayMode, setDisplayMode] = useState<DatePickerMode>(mode);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
-  const [internalCurrentDate, setInternalCurrentDate] = useState<Date>(value ?? new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(initialValue ?? null);
+  const [internalCurrentDate, setInternalCurrentDate] = useState<Date>(initialValue ?? new Date());
 
   useEffect(() => {
     setInternalCurrentDate(selectedDate ?? new Date());
   }, [selectedDate]);
 
   const handleDateClick = (date: Date) => {
-    closeDatePicker();
-
-    if (onChange) {
-      onChange(date);
-    }
     setSelectedDate(date);
+    onChange?.(date);
   };
 
   const handleNavigationDateChange = (date: Date) => {

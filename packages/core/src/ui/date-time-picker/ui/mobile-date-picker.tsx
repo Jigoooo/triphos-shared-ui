@@ -29,11 +29,13 @@ export function MobileDatePicker({
       return (
         <MobileCalendar
           mode={mode}
-          value={value}
-          onChange={onChange}
+          initialValue={value}
+          onChange={(date) => {
+            onChange?.(date);
+            close();
+          }}
           minDate={mode === 'day' && minDate ? subDays(minDate, 1) : minDate}
           maxDate={maxDate}
-          closeDatePicker={close}
         />
       );
     });

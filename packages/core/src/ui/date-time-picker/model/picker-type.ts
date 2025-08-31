@@ -49,9 +49,8 @@ export type PickerProps = BasePickerProps & {
 };
 
 export type MobilePickerProps = BasePickerProps & {
-  value?: Date;
   onChange?: (value: Date) => void;
-  closeDatePicker: () => void;
+  initialValue?: Date | null;
 };
 
 export type CalendarProps = Omit<
