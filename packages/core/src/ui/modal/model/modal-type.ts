@@ -22,6 +22,7 @@ export type ModalRenderProps = {
   isOpen: boolean;
   close: () => void;
   closeAsync: () => Promise<void>;
+  closeWithoutHistory?: () => void;
 };
 
 export type IsPossibleOverlayClose = {

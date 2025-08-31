@@ -9,61 +9,63 @@ export function useModalController({
   modalIds: string[];
   onClose: (id: string) => void;
 }) {
-  const pushedStatesRef = useRef<Map<string, boolean>>(new Map());
+  const historyStackRef = useRef<string[]>([]);
+  const isInternalCloseRef = useRef(false);
 
   useEffect(() => {
-    // 새로 추가된 모달에 대해 history state 추가
-    modalIds.forEach((id) => {
-      if (!pushedStatesRef.current.has(id)) {
-        const state = { __layer: 'modal', modalId: id };
-        window.history.pushState(state, '');
-        pushedStatesRef.current.set(id, true);
-      }
+    // 새로 추가된 모달 처리
+    const newModalIds = modalIds.filter((id) => !historyStackRef.current.includes(id));
+    newModalIds.forEach((id) => {
+      const state = { __layer: 'modal', modalId: id };
+      window.history.pushState(state, '');
+      historyStackRef.current.push(id);
     });
 
-    // 제거된 모달 추적 정리
-    const currentIds = new Set(modalIds);
-    Array.from(pushedStatesRef.current.keys()).forEach((id) => {
-      if (!currentIds.has(id)) {
-        pushedStatesRef.current.delete(id);
-      }
-    });
+    // 제거된 모달 처리 (내부적으로 닫힌 경우)
+    const removedIds = historyStackRef.current.filter((id) => !modalIds.includes(id));
+    if (removedIds.length > 0 && !isInternalCloseRef.current) {
+      // X 버튼으로 닫은 경우 history stack 업데이트
+      historyStackRef.current = historyStackRef.current.filter((id) => modalIds.includes(id));
+    }
+    isInternalCloseRef.current = false;
 
     if (modalIds.length === 0) {
-      pushedStatesRef.current.clear();
+      historyStackRef.current = [];
       return;
     }
 
     const handlePopState = (e: PopStateEvent) => {
       const currentState = e.state;
 
-      // 현재 state가 modal이 아니거나, 우리가 추적하는 모달이 아닌 경우
       if (!currentState || currentState.__layer !== 'modal') {
-        // 가장 최근 모달 닫기
-        const lastModalId = modalIds[modalIds.length - 1];
-        if (lastModalId && pushedStatesRef.current.has(lastModalId)) {
-          pushedStatesRef.current.delete(lastModalId);
+        // modal이 아닌 state로 돌아간 경우
+        if (historyStackRef.current.length > 0) {
+          const lastModalId = historyStackRef.current[historyStackRef.current.length - 1];
+          historyStackRef.current.pop();
+          isInternalCloseRef.current = true;
           onClose(lastModalId);
         }
       } else {
-        // 특정 모달 state로 돌아간 경우, 그 이후의 모달들 닫기
+        // 특정 modal state로 돌아간 경우
         const targetId = currentState.modalId;
-        const targetIndex = modalIds.indexOf(targetId);
+        const currentIndex = historyStackRef.current.indexOf(targetId);
 
-        if (targetIndex >= 0) {
-          // targetIndex 이후의 모든 모달 닫기
-          for (let i = modalIds.length - 1; i > targetIndex; i--) {
-            const modalId = modalIds[i];
-            if (pushedStatesRef.current.has(modalId)) {
-              pushedStatesRef.current.delete(modalId);
-              onClose(modalId);
-            }
-          }
+        if (currentIndex >= 0) {
+          // 해당 모달 이후의 모든 모달 닫기
+          const modalsToClose = historyStackRef.current.slice(currentIndex + 1);
+          historyStackRef.current = historyStackRef.current.slice(0, currentIndex + 1);
+
+          // 역순으로 닫기 (가장 최근 것부터)
+          modalsToClose.reverse().forEach((id) => {
+            isInternalCloseRef.current = true;
+            onClose(id);
+          });
         } else {
-          // 추적하지 않는 state인 경우 가장 최근 모달 닫기
-          const lastModalId = modalIds[modalIds.length - 1];
-          if (lastModalId && pushedStatesRef.current.has(lastModalId)) {
-            pushedStatesRef.current.delete(lastModalId);
+          // 알 수 없는 modal state인 경우 가장 최근 모달 닫기
+          if (historyStackRef.current.length > 0) {
+            const lastModalId = historyStackRef.current[historyStackRef.current.length - 1];
+            historyStackRef.current.pop();
+            isInternalCloseRef.current = true;
             onClose(lastModalId);
           }
         }

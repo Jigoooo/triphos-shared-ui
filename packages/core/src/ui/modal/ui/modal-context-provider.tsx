@@ -63,6 +63,32 @@ export function ModalContextProvider({
     });
   }, []);
 
+  const closeWithoutHistory = useCallback((id: string) => {
+    // 현재 history state 확인
+    const currentState = window.history.state;
+
+    // 해당 모달의 history state가 있다면 제거
+    if (currentState && currentState.__layer === 'modal' && currentState.modalId === id) {
+      // 현재 state가 닫으려는 모달의 state라면 뒤로가기
+      window.history.back();
+    } else {
+      // 그렇지 않다면 모달만 닫기 (history는 나중에 정리됨)
+      setClosingModalIds((prev) => new Set(prev).add(id));
+
+      setTimeout(() => {
+        setModalList((prev) => prev.filter((item) => item.id !== id));
+      }, 50);
+
+      setTimeout(() => {
+        setClosingModalIds((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(id);
+          return newSet;
+        });
+      }, 1000);
+    }
+  }, []);
+
   const modalIds = modalList.map((modal) => ({ id: modal.id }));
   const modalIdList = modalList.map((modal) => modal.id);
 
@@ -149,6 +175,7 @@ export function ModalContextProvider({
                       window.history.back();
                     },
                     closeAsync: () => closeAsync(),
+                    closeWithoutHistory: () => closeWithoutHistory(modal.id),
                   })}
                 </FlexRow>
 
