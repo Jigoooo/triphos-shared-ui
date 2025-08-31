@@ -14,17 +14,13 @@ import { useMemo } from 'react';
 
 import { CalendarNextButton } from './calendar-next-button.tsx';
 import { CalendarPrevButton } from './calendar-prev-button.tsx';
-import type { DatePickerMode, PickerProps } from '../model/picker-type.ts';
-import { zIndex } from '@/constants';
+import { type CalendarProps } from '../model/picker-type.ts';
 import { useThemeContext } from '@/theme';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 
 export function MonthCalendar({
   mode,
-  setFloating,
-  floatingStyles,
-  getFloatingProps,
   selectedDate,
   currentDate,
   minDate,
@@ -32,11 +28,7 @@ export function MonthCalendar({
   setDisplayMode,
   handleNavigationDateChange,
   handleSelection,
-}: PickerProps & {
-  setDisplayMode: (mode: DatePickerMode) => void;
-  handleNavigationDateChange?: (date: Date) => void;
-  handleSelection?: (date: Date) => void;
-}) {
+}: CalendarProps) {
   const { theme } = useThemeContext();
 
   const months = useMemo(() => {
@@ -65,9 +57,7 @@ export function MonthCalendar({
   const handleMonthClick = (monthIndex: number) => {
     const newDate = setMonth(currentDate, monthIndex);
 
-    if (handleSelection) {
-      handleSelection(newDate);
-    }
+    handleSelection(newDate);
 
     // If the external mode is 'day', navigate to day view after selecting month
     if (mode === 'day') {
@@ -105,23 +95,7 @@ export function MonthCalendar({
   };
 
   return (
-    <div
-      ref={setFloating}
-      style={{
-        ...{
-          marginTop: '0.5rem',
-          paddingBlock: '0.75rem',
-          paddingInline: '0.625rem',
-          backgroundColor: '#ffffff',
-          borderRadius: '0.625rem',
-          boxShadow: '0 0.125rem 0.625rem rgba(0, 0, 0, 0.2)',
-          zIndex: zIndex.datePicker,
-          minWidth: '17.5rem',
-        },
-        ...floatingStyles,
-      }}
-      {...getFloatingProps()}
-    >
+    <>
       <FlexRow
         style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}
       >
@@ -179,6 +153,6 @@ export function MonthCalendar({
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

@@ -2,17 +2,13 @@ import { addYears, getYear, isSameYear, setYear, subYears } from 'date-fns';
 
 import { CalendarNextButton } from './calendar-next-button.tsx';
 import { CalendarPrevButton } from './calendar-prev-button.tsx';
-import type { DatePickerMode, PickerProps } from '../model/picker-type.ts';
-import { zIndex } from '@/constants';
+import { type CalendarProps } from '../model/picker-type.ts';
 import { useThemeContext } from '@/theme';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 
 export function YearCalendar({
   mode,
-  setFloating,
-  floatingStyles,
-  getFloatingProps,
   selectedDate,
   currentDate,
   minDate,
@@ -20,11 +16,7 @@ export function YearCalendar({
   setDisplayMode,
   handleNavigationDateChange,
   handleSelection,
-}: PickerProps & {
-  setDisplayMode: (mode: DatePickerMode) => void;
-  handleNavigationDateChange?: (date: Date) => void;
-  handleSelection?: (date: Date) => void;
-}) {
+}: CalendarProps) {
   const { theme } = useThemeContext();
 
   const currentYear = currentDate.getFullYear();
@@ -47,17 +39,13 @@ export function YearCalendar({
   const handleYearClick = (year: number) => {
     const newDate = setYear(currentDate, year);
 
-    if (handleSelection) {
-      handleSelection(newDate);
-    }
+    handleSelection(newDate);
 
-    // Navigate to appropriate view based on external mode
     if (mode === 'day') {
       setDisplayMode('month');
     } else if (mode === 'month') {
       setDisplayMode('month');
     }
-    // If mode === 'year', handleSelection will close the picker
   };
 
   let disablePrev = false;
@@ -89,23 +77,7 @@ export function YearCalendar({
   const years = Array.from({ length: 12 }, (_, i) => startYear + i);
 
   return (
-    <div
-      ref={setFloating}
-      style={{
-        ...{
-          marginTop: '0.5rem',
-          paddingBlock: '0.75rem',
-          paddingInline: '0.625rem',
-          backgroundColor: '#ffffff',
-          borderRadius: '0.625rem',
-          boxShadow: '0 0.125rem 0.625rem rgba(0, 0, 0, 0.2)',
-          zIndex: zIndex.datePicker,
-          minWidth: '17.5rem',
-        },
-        ...floatingStyles,
-      }}
-      {...getFloatingProps()}
-    >
+    <>
       <FlexRow
         style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}
       >
@@ -161,6 +133,6 @@ export function YearCalendar({
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

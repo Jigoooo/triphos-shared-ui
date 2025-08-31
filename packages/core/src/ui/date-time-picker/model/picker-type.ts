@@ -40,3 +40,12 @@ export type PickerProps = {
   minDate?: Date;
   maxDate?: Date;
 };
+
+export type CalendarProps = Omit<
+  PickerProps,
+  'setFloating' | 'floatingStyles' | 'getFloatingProps' | 'handleDateClick'
+> & {
+  setDisplayMode: (mode: DatePickerMode) => void;
+  handleNavigationDateChange?: (date: Date) => void;
+  handleSelection: (date: Date) => void;
+};

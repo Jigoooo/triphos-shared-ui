@@ -19,17 +19,12 @@ import {
   getCellTextColor,
 } from '../config/date-picker-style.ts';
 import { generateDaysArray } from '../lib/generate-days-array.ts';
-import type { DatePickerMode, PickerProps } from '../model/picker-type.ts';
-import { zIndex } from '@/constants';
+import { type CalendarProps } from '../model/picker-type.ts';
 import { useThemeContext } from '@/theme';
 import { FlexRow } from '@/ui/layout';
 import { Typography } from '@/ui/typography';
 
 export function DayCalendar({
-  setFloating,
-  floatingStyles,
-  getFloatingProps,
-  handleDateClick,
   selectedDate,
   currentDate,
   minDate,
@@ -37,11 +32,7 @@ export function DayCalendar({
   setDisplayMode,
   handleNavigationDateChange,
   handleSelection,
-}: PickerProps & {
-  setDisplayMode: (mode: DatePickerMode) => void;
-  handleNavigationDateChange?: (date: Date) => void;
-  handleSelection?: (date: Date) => void;
-}) {
+}: CalendarProps) {
   const { theme } = useThemeContext();
 
   const weekDays = useMemo(() => {
@@ -80,7 +71,7 @@ export function DayCalendar({
     } else {
       handleNextMonth();
     }
-    handleDateClick(date);
+    handleSelection(date);
   };
 
   let disablePrev = false;
@@ -103,22 +94,7 @@ export function DayCalendar({
   }
 
   return (
-    <div
-      ref={setFloating}
-      style={{
-        ...{
-          marginTop: '0.5rem',
-          paddingBlock: '0.75rem',
-          paddingInline: '0.625rem',
-          backgroundColor: '#ffffff',
-          borderRadius: '0.625rem',
-          boxShadow: '0 0.125rem 0.625rem rgba(0, 0, 0, 0.2)',
-          zIndex: zIndex.datePicker,
-        },
-        ...floatingStyles,
-      }}
-      {...getFloatingProps()}
-    >
+    <>
       <FlexRow
         style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}
       >
@@ -160,11 +136,7 @@ export function DayCalendar({
                 onClick={() => {
                   if (day && !isDisabled) {
                     if (isCurrentMonth) {
-                      if (handleSelection) {
-                        handleSelection(day);
-                      } else {
-                        handleDateClick(day);
-                      }
+                      handleSelection(day);
                     } else {
                       handlePaddingDateClick(day);
                     }
@@ -191,6 +163,6 @@ export function DayCalendar({
           );
         })}
       </div>
-    </div>
+    </>
   );
 }
