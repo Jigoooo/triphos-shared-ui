@@ -21,6 +21,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     dragThreshold: 80,
     bottomInset: 0,
     showGrab: true,
+    closeAsyncTimeout: 350,
   });
 
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -77,7 +78,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
             popWaiterRef.current = null;
           }
         });
-      }, 540);
+      }, sheetConfig.closeAsyncTimeout);
     },
   });
 

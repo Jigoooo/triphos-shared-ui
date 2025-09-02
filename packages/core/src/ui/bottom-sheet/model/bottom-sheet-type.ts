@@ -17,6 +17,7 @@ export type BottomSheetConfig = {
   showGrab?: boolean;
   grabContainerStyle?: CSSProperties;
   grabStyle?: CSSProperties;
+  closeAsyncTimeout?: number;
 };
 
 export interface BottomSheetItem {
