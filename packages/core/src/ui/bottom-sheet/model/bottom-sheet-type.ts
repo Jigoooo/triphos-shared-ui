@@ -7,6 +7,7 @@ import type { SelectOption } from '@/ui/select';
 export interface BottomSheetRenderProps {
   isOpen: boolean;
   close: () => void;
+  closeAsync: () => Promise<void>;
 }
 
 export type BottomSheetConfig = {

@@ -24,6 +24,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
   });
 
   const sheetRef = useRef<HTMLDivElement>(null);
+  const popWaiterRef = useRef<() => void | null>(null);
   const dragControls = useDragControls();
 
   const bottomSheetContainerStyle = getBottomSheetContainerStyle({
@@ -55,10 +56,27 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     setActiveSheet(null);
   };
 
+  const closeAsync = useCallback(() => {
+    return new Promise<void>((resolve) => {
+      popWaiterRef.current = resolve;
+      window.history.back();
+    });
+  }, []);
+
   useBottomSheetController({
     modalRef: sheetRef,
     isOpen: !!activeSheet,
-    onClose: close,
+    onClose: () => {
+      close();
+
+      queueMicrotask(() => {
+        const resolve = popWaiterRef.current;
+        if (resolve) {
+          resolve();
+          popWaiterRef.current = null;
+        }
+      });
+    },
   });
 
   const contextValue = {
@@ -122,6 +140,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
                   close: () => {
                     window.history.back();
                   },
+                  closeAsync,
                 })}
               </div>
             </motion.div>
