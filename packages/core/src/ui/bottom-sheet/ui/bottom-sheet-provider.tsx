@@ -60,6 +60,13 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     return new Promise<void>((resolve) => {
       popWaiterRef.current = resolve;
       window.history.back();
+
+      setTimeout(() => {
+        if (popWaiterRef.current === resolve) {
+          resolve();
+          popWaiterRef.current = null;
+        }
+      }, 540);
     });
   }, []);
 
