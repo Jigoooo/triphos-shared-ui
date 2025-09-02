@@ -60,13 +60,6 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     return new Promise<void>((resolve) => {
       popWaiterRef.current = resolve;
       window.history.back();
-
-      setTimeout(() => {
-        if (popWaiterRef.current === resolve) {
-          resolve();
-          popWaiterRef.current = null;
-        }
-      }, 540);
     });
   }, []);
 
@@ -76,13 +69,15 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     onClose: () => {
       close();
 
-      queueMicrotask(() => {
-        const resolve = popWaiterRef.current;
-        if (resolve) {
-          resolve();
-          popWaiterRef.current = null;
-        }
-      });
+      setTimeout(() => {
+        queueMicrotask(() => {
+          const resolve = popWaiterRef.current;
+          if (resolve) {
+            resolve();
+            popWaiterRef.current = null;
+          }
+        });
+      }, 540);
     },
   });
 
