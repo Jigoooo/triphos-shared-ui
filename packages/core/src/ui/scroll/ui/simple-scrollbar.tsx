@@ -3,12 +3,17 @@ import { useEffect, useRef, useState } from 'react';
 import { type SimpleScrollbarProps } from '../model/scroll-type.ts';
 import { zIndex } from '@/constants';
 
-export function SimpleScrollbar({ scrollElementRef }: SimpleScrollbarProps) {
+export function SimpleScrollbar({
+  scrollElementRef,
+  containerRef,
+  useAbsolute = false,
+}: SimpleScrollbarProps) {
   const [showScrollbar, setShowScrollbar] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [thumbHeight, setThumbHeight] = useState(0);
   const [thumbTop, setThumbTop] = useState(0);
   const [scrollOffset, setScrollOffset] = useState(0);
+  const [containerOffset, setContainerOffset] = useState({ top: 0, right: 0 });
   const initialScrollTop = useRef(0);
   const isDragging = useRef(false);
   const hideTimer = useRef<NodeJS.Timeout | null>(null);
@@ -34,7 +39,17 @@ export function SimpleScrollbar({ scrollElementRef }: SimpleScrollbarProps) {
 
       // 스크롤바 위치 offset 계산
       const rect = scrollElement.getBoundingClientRect();
-      setScrollOffset(rect.top);
+
+      if (useAbsolute && containerRef?.current) {
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const scrollElementRect = scrollElement.getBoundingClientRect();
+        setContainerOffset({
+          top: scrollElementRect.top - containerRect.top,
+          right: containerRect.right - scrollElementRect.right,
+        });
+      } else {
+        setScrollOffset(rect.top);
+      }
 
       if (contentHeight <= containerHeight) {
         setShowScrollbar(false);
@@ -99,7 +114,7 @@ export function SimpleScrollbar({ scrollElementRef }: SimpleScrollbarProps) {
         clearTimeout(hideTimer.current);
       }
     };
-  }, [scrollElementRef]);
+  }, [containerRef, scrollElementRef, useAbsolute]);
 
   const handleThumbMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -165,9 +180,9 @@ export function SimpleScrollbar({ scrollElementRef }: SimpleScrollbarProps) {
   return (
     <div
       style={{
-        position: 'fixed',
-        right: 0,
-        top: scrollOffset,
+        position: useAbsolute ? 'absolute' : 'fixed',
+        right: useAbsolute ? containerOffset.right : 0,
+        top: useAbsolute ? containerOffset.top : scrollOffset,
         width: 8,
         height: containerHeight,
         backgroundColor: 'transparent',
