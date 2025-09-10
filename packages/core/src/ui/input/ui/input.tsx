@@ -110,6 +110,7 @@ export function BaseInput({
           event.stopPropagation();
           onClick?.(event);
         }}
+        disabled={disabled}
         {...props}
       />
       {endDecorator && (
