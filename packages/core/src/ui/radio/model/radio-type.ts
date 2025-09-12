@@ -1,24 +1,26 @@
 import type { ReactNode, CSSProperties } from 'react';
 
-export type RadioGroupContextType = {
+export type ExtendedValue = string | number;
+
+export type RadioGroupContextType<Value extends ExtendedValue> = {
   name: string;
-  selectedRadio: string;
-  handleSelectedRadio: (value: string) => void;
+  selectedRadio?: Value;
+  handleSelectedRadio?: (value: Value) => void;
   groupDisabled: boolean;
 };
 
-export type RadioGroupProps = {
+export type RadioGroupProps<Value extends ExtendedValue> = {
   children: ReactNode;
-  defaultValue?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  defaultValue?: Value;
+  value?: Value;
+  onChange?: (value: Value) => void;
   disabled?: boolean;
   style?: CSSProperties;
 };
 
-export type RadioProps = {
+export type RadioProps<Value extends ExtendedValue> = {
   label: string;
-  value: string;
+  value: Value;
   disabled?: boolean;
   size?: number;
   radioColor?: string;

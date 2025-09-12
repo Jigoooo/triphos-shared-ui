@@ -11,11 +11,11 @@ import {
   getRadioLabelTextStyle,
 } from '../config/radio-style.ts';
 import { useRadioGroupContext } from '../model/radio-group-context.ts';
-import type { RadioProps } from '../model/radio-type.ts';
+import type { ExtendedValue, RadioProps } from '../model/radio-type.ts';
 import { useThemeContext } from '@/theme';
 import { Typography } from '@/ui/typography';
 
-export function Radio({
+export function Radio<Value extends ExtendedValue>({
   label,
   value,
   disabled = false,
@@ -25,11 +25,11 @@ export function Radio({
   style,
   iconStyle,
   dotStyle,
-}: RadioProps) {
+}: RadioProps<Value>) {
   const { theme } = useThemeContext();
 
   const effectiveColor = radioColor || theme.colors.primaryColor;
-  const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext();
+  const { name, selectedRadio, handleSelectedRadio, groupDisabled } = useRadioGroupContext<Value>();
 
   const disabledValue = disabled || groupDisabled;
   const isSelected = selectedRadio === value;
@@ -73,7 +73,7 @@ export function Radio({
         name={name}
         value={value}
         checked={isSelected}
-        onChange={() => handleSelectedRadio(value)}
+        onChange={() => handleSelectedRadio?.(value)}
         disabled={disabledValue}
         style={inputStyle}
       />
