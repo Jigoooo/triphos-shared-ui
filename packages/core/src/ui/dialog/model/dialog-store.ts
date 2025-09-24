@@ -10,7 +10,7 @@ const dialogInitialState: DialogStates = {
     confirmText: '확인',
     cancelText: '취소',
     withCancel: false,
-    overlayClose: false,
+    overlayClose: true,
     dialogType: DialogType.INFO,
     onConfirm: () => {},
     onCancel: () => {},
