@@ -22,7 +22,11 @@ export function AlertDialog() {
   useDialogController({
     modalRef: dialogRef,
     isOpen: dialogOpen,
-    onClose: dialog.close,
+    onClose: () => {
+      if (dialogConfig.overlayClose) {
+        dialog.close();
+      }
+    },
   });
 
   const ignoreEnterRef = useRef(true);
