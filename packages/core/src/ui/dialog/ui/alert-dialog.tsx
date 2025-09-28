@@ -23,9 +23,7 @@ export function AlertDialog() {
     modalRef: dialogRef,
     isOpen: dialogOpen,
     onClose: () => {
-      if (dialogConfig.overlayClose) {
-        dialog.close();
-      }
+      dialog.close();
     },
   });
 
