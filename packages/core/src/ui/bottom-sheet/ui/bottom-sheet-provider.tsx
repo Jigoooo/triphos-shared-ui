@@ -47,10 +47,15 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
       render: (props: BottomSheetRenderProps) => ReactNode,
       config?: BottomSheetConfig,
     ) => {
+      // 기존 시트가 열려있으면 먼저 닫기
+      if (activeSheet) {
+        window.history.back();
+      }
+
       setActiveSheet({ id, render });
       setSheetConfig((prevState) => ({ ...prevState, ...config }));
     },
-    [],
+    [activeSheet],
   );
 
   const close = () => {
