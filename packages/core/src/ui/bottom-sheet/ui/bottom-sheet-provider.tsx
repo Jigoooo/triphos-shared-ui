@@ -41,23 +41,6 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const open = useCallback(
-    (
-      id: string,
-      render: (props: BottomSheetRenderProps) => ReactNode,
-      config?: BottomSheetConfig,
-    ) => {
-      // 기존 시트가 열려있으면 먼저 닫기
-      if (activeSheet) {
-        window.history.back();
-      }
-
-      setActiveSheet({ id, render });
-      setSheetConfig((prevState) => ({ ...prevState, ...config }));
-    },
-    [activeSheet],
-  );
-
   const close = () => {
     setActiveSheet(null);
   };
@@ -68,6 +51,22 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
       window.history.back();
     });
   }, []);
+
+  const open = useCallback(
+    async (
+      id: string,
+      render: (props: BottomSheetRenderProps) => ReactNode,
+      config?: BottomSheetConfig,
+    ) => {
+      if (activeSheet) {
+        await closeAsync();
+      }
+
+      setActiveSheet({ id, render });
+      setSheetConfig((prevState) => ({ ...prevState, ...config }));
+    },
+    [activeSheet, closeAsync],
+  );
 
   useBottomSheetController({
     modalRef: sheetRef,
