@@ -32,6 +32,8 @@ export interface BottomSheetContextType {
     config?: BottomSheetConfig,
   ) => void;
   close: () => void;
+  isOpen: boolean;
+  activeSheetId: string | null;
 }
 
 export type BottomSheetProps = BottomSheetConfig & {

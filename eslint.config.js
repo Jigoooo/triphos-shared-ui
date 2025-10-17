@@ -20,12 +20,12 @@ export default [
   // ...tseslint.configs.strict,
   // ...tseslint.configs.stylistic,
   pluginReact.configs.flat.recommended,
-  reactHooks.configs['recommended-latest'],
   eslintConfigPrettier,
   eslintPluginPrettierRecommended,
   {
     plugins: {
       'react-compiler': reactCompiler,
+      'react-hooks': reactHooks,
       import: importPlugin,
     },
     rules: {

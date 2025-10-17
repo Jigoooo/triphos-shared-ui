@@ -89,6 +89,8 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
   const contextValue = {
     open,
     close,
+    isOpen: !!activeSheet,
+    activeSheetId: activeSheet?.id ?? null,
   };
 
   return (
