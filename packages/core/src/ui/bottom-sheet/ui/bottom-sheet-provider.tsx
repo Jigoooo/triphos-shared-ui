@@ -14,15 +14,17 @@ import {
 import { useBottomSheetController } from '../model/use-bottom-sheet-controller.ts';
 import { useThresholdInPixels } from '../model/use-threshold-in-pixels.ts';
 
+const initialConfig: BottomSheetConfig = {
+  maxHeight: 'auto',
+  dragThreshold: 80,
+  bottomInset: 0,
+  showGrab: true,
+  closeAsyncTimeout: 350,
+};
+
 export function BottomSheetProvider({ children }: { children: ReactNode }) {
   const [activeSheet, setActiveSheet] = useState<BottomSheetItem | null>(null);
-  const [sheetConfig, setSheetConfig] = useState<BottomSheetConfig>({
-    maxHeight: 'auto',
-    dragThreshold: 80,
-    bottomInset: 0,
-    showGrab: true,
-    closeAsyncTimeout: 350,
-  });
+  const [sheetConfig, setSheetConfig] = useState<BottomSheetConfig>(initialConfig);
 
   const sheetRef = useRef<HTMLDivElement>(null);
   const popWaiterRef = useRef<() => void | null>(null);
@@ -63,7 +65,7 @@ export function BottomSheetProvider({ children }: { children: ReactNode }) {
       }
 
       setActiveSheet({ id, render });
-      setSheetConfig((prevState) => ({ ...prevState, ...config }));
+      setSheetConfig(() => ({ ...initialConfig, ...config }));
     },
     [activeSheet, closeAsync],
   );
