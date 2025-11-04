@@ -7,6 +7,10 @@ export function SimpleScrollbar({
   scrollElementRef,
   containerRef,
   useAbsolute = false,
+  offset = {
+    top: 0,
+    right: 0,
+  },
 }: SimpleScrollbarProps) {
   const [showScrollbar, setShowScrollbar] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -181,8 +185,8 @@ export function SimpleScrollbar({
     <div
       style={{
         position: useAbsolute ? 'absolute' : 'fixed',
-        right: useAbsolute ? containerOffset.right : 0,
-        top: useAbsolute ? containerOffset.top : scrollOffset,
+        right: (useAbsolute ? containerOffset.right : 0) + (offset?.right ?? 0),
+        top: (useAbsolute ? containerOffset.top : scrollOffset) + (offset?.top ?? 0),
         width: 8,
         height: containerHeight,
         backgroundColor: 'transparent',
