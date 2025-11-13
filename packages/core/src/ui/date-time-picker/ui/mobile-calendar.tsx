@@ -58,7 +58,7 @@ export function MobileCalendar({
     <div
       style={{
         padding: '1.2rem',
-        maxWidth: '32rem',
+        maxWidth: '28rem',
         maxHeight: 'calc(100vh - 6.25rem)',
         margin: '0 auto',
         overflow: 'auto',
