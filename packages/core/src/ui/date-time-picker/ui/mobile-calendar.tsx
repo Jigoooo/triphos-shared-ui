@@ -55,7 +55,16 @@ export function MobileCalendar({
   };
 
   return (
-    <div style={{ padding: '1.2rem' }}>
+    <div
+      style={{
+        padding: '1.2rem',
+        maxWidth: '25rem',
+        maxHeight: 'calc(100vh - 6.25rem)',
+        margin: '0 auto',
+        overflow: 'auto',
+        boxSizing: 'border-box',
+      }}
+    >
       <SwitchCalendar {...enhancedProps} />
     </div>
   );

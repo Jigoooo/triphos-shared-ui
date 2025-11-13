@@ -114,7 +114,7 @@ export function DayCalendar({
           </div>
         ))}
       </FlexRow>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.25rem' }}>
         {days.map((day, index) => {
           const isSelected = !!selectedDate && isSameDay(day, selectedDate);
           const isDisabled =
@@ -131,34 +131,32 @@ export function DayCalendar({
           const textColor = getCellTextColor(day, selectedDate, isCurrentMonth, isDisabled);
 
           return (
-            <div key={index} style={{ gridColumn: 'span 1', aspectRatio: '1' }}>
-              <div
-                onClick={() => {
-                  if (day && !isDisabled) {
-                    if (isCurrentMonth) {
-                      handleSelection(day);
-                    } else {
-                      handlePaddingDateClick(day);
-                    }
+            <div
+              key={index}
+              onClick={() => {
+                if (day && !isDisabled) {
+                  if (isCurrentMonth) {
+                    handleSelection(day);
+                  } else {
+                    handlePaddingDateClick(day);
                   }
-                }}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: day && !isDisabled ? 'pointer' : undefined,
-                  borderRadius,
-                  backgroundColor,
-                  color: textColor,
-                  position: 'relative',
-                  fontSize: '0.9rem',
-                  fontWeight: isSelected ? 700 : !isDisabled ? 500 : 400,
-                }}
-              >
-                {day ? format(day, 'd') : ''}
-              </div>
+                }
+              }}
+              style={{
+                minHeight: '2.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: day && !isDisabled ? 'pointer' : undefined,
+                borderRadius,
+                backgroundColor,
+                color: textColor,
+                position: 'relative',
+                fontSize: '0.9rem',
+                fontWeight: isSelected ? 700 : !isDisabled ? 500 : 400,
+              }}
+            >
+              {day ? format(day, 'd') : ''}
             </div>
           );
         })}
