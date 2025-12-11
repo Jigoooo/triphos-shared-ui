@@ -18,6 +18,12 @@ export type BottomSheetConfig = {
   grabContainerStyle?: CSSProperties;
   grabStyle?: CSSProperties;
   closeAsyncTimeout?: number;
+  /**
+   * Whether to use browser history for back button support.
+   * Set to false for nested bottom sheets to avoid history conflicts.
+   * @default true
+   */
+  useHistory?: boolean;
 };
 
 export interface BottomSheetItem {

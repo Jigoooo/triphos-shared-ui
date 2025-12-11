@@ -19,6 +19,7 @@ export function BottomSheet({
   showGrab = true,
   grabContainerStyle,
   grabStyle,
+  useHistory = true,
 }: BottomSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
@@ -30,13 +31,18 @@ export function BottomSheet({
     modalRef: sheetRef,
     isOpen,
     onClose,
+    useHistory,
   });
 
   const thresholdPx = useThresholdInPixels(dragThreshold, sheetRef.current);
 
   const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     if (info.offset.y > thresholdPx) {
-      window.history.back();
+      if (useHistory) {
+        window.history.back();
+      } else {
+        onClose();
+      }
     }
   };
 

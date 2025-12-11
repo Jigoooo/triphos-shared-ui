@@ -4,15 +4,17 @@ export function useBottomSheetController({
   modalRef,
   isOpen,
   onClose,
+  useHistory = true,
 }: {
   modalRef: RefObject<HTMLDivElement | null>;
   isOpen: boolean;
   onClose: () => void;
+  useHistory?: boolean;
 }) {
   const myIdRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !useHistory) return;
 
     const modalId = `modal_${Date.now()}_${Math.random()}`;
     myIdRef.current = modalId;
@@ -35,7 +37,7 @@ export function useBottomSheetController({
       window.removeEventListener('popstate', handlePopState);
       if (myIdRef.current === modalId) myIdRef.current = null;
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, useHistory]);
 
   useEffect(() => {
     if (isOpen) {
